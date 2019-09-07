@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer application="StiReport" version="1.02" type="Flex">
+  <Dictionary isKey="true" Ref="1" type="Dictionary">
+    <Databases isList="true" count="1">
+      <Localhost isKey="true" Ref="2" type="Stimulsoft.Report.Dictionary.StiMySqlDatabase">
+        <Alias>Localhost</Alias>
+        <ConnectionStringEncrypted>49J1CWELSx1rGqHMakxiXots84nlTNPNYkehzE54Yj/gatnrxghDWe8T/Y3oPSFzxFb1iUhMu8Vs
+E6GY4XhlG8N498LkBVq84VvtlGQ=</ConnectionStringEncrypted>
+        <Name>Localhost</Name>
+      </Localhost>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Event isKey="true" Ref="3" type="Stimulsoft.Report.Dictionary.StiMySqlSource">
+        <Alias>Event</Alias>
+        <Columns isList="true" count="8">
+          <value>rhq,System.String</value>
+          <value>zone,System.String</value>
+          <value>chapter,System.String</value>
+          <value>district,System.String</value>
+          <value>pending,System.String</value>
+          <value>confirmed,System.String</value>
+          <value>delay,System.String</value>
+          <value>withdrawn,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1"/>
+        <Name>Event</Name>
+        <NameInSource>Localhost</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>param1,,0,25</value>
+          <value>param3,,254,0</value>
+        </Parameters>
+        <SqlCommand>SELECT mo.rhq, mo.zone, mo.chapter, mo.district, SUM(er.Pending) as pending, SUM(er.Confirmed) as confirmed, SUM(er.Delay) as delay, SUM(er.Withdrawn) as withdrawn
+FROM Members_z_OrgChart mo
+LEFT OUTER JOIN 
+(SELECT er.rhq, er.zone, er.chapter, er.district, 
+CASE
+WHEN (er.gohonzonstatus = 'Pending') THEN 1 ELSE NULL
+END as Pending,
+CASE
+WHEN (er.gohonzonstatus = 'Confirmed') THEN 1 ELSE NULL
+END as Confirmed,
+CASE
+WHEN (er.gohonzonstatus = 'Delayed') THEN 1 ELSE NULL
+END as Delay,
+CASE
+WHEN (er.gohonzonstatus = 'Withdrawn') THEN 1 ELSE NULL
+END as Withdrawn
+FROM Event_m_Event ee 
+LEFT JOIN Event_m_Registration er on ee.id = er.eventid 
+WHERE ee.uniquecode = {param1} and er.division = '{param3}' and er.deleted_at IS NULL) er on mo.rhqabbv = er.rhq and mo.zoneabbv = er.zone and mo.chapabbv = er.chapter and mo.district = er.district
+WHERE mo.zoneabbv NOT IN ('UNK')
+GROUP BY mo.rhqabbv, mo.zoneabbv, mo.chapabbv, mo.district
+ORDER BY mo.rhqabbv, mo.zoneabbv, mo.chapabbv, mo.district;</SqlCommand>
+      </Event>
+    </DataSources>
+    <Relations isList="true" count="0"/>
+    <Report isRef="0"/>
+    <Variables isList="true" count="0"/>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0"/>
+  <MetaTags isList="true" count="0"/>
+  <Pages isList="true" count="1">
+    <Page1 isKey="true" Ref="4" type="Page">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="13">
+        <PageHeaderBand1 isKey="true" Ref="5" type="PageHeaderBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,7.49,0.4</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text30 isKey="true" Ref="6" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,3.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,12</Font>
+              <Guid>ffcc62e62d7ef162271d6c6d5f748c81</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text30>
+            <Text26 isKey="true" Ref="7" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.7,0,3.8,0.3</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,12</Font>
+              <Guid>6f9145e535d7aa93fcba6c6d5f749497</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Gohonzon Statistic By Division</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text26>
+            <HorizontalLinePrimitive6 isKey="true" Ref="8" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.3,7.5,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="9" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive6</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Size>2</Size>
+              <StartCap isKey="true" Ref="10" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive6>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </PageHeaderBand1>
+        <PageFooterBand3 isKey="true" Ref="11" type="PageFooterBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,10.61,7.49,0.3</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text22 isKey="true" Ref="12" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.1,3.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>3f6de635350980d42f3f6c64423e49f5</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="4"/>
+              <Parent isRef="11"/>
+              <Text>Printed On - {Today.ToString("dd-MMM-yyyy")} {Time.ToString("HH:mm:ss")}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text18 isKey="true" Ref="13" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.8,0.09,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>76ac4230b49c78186eda6c64423e8565</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="4"/>
+              <Parent isRef="11"/>
+              <Text>{PageNofM}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <HorizontalLinePrimitive5 isKey="true" Ref="14" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.09,7.5,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="15" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>fb9ee33d1faeb30019836c64423ef717</Guid>
+              <Name>HorizontalLinePrimitive5</Name>
+              <Page isRef="4"/>
+              <Parent isRef="11"/>
+              <Size>2</Size>
+              <StartCap isKey="true" Ref="16" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive5>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Guid>f9f52ae2f4e771b205036c64423ea39d</Guid>
+          <Name>PageFooterBand3</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </PageFooterBand3>
+        <Text32 isKey="true" Ref="17" type="Text">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>12.9,0.2,2.6,0.2</ClientRectangle>
+          <Conditions isList="true" count="0"/>
+          <Font>Arial,8</Font>
+          <Guid>efcda857c72609384836e1aa39c087d5</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text32</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+          <Text>Remarks</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text32>
+        <Text27 isKey="true" Ref="18" type="Text">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <CanShrink>True</CanShrink>
+          <ClientRectangle>12.9,1.5,2.6,0.1</ClientRectangle>
+          <Conditions isList="true" count="0"/>
+          <Font>Arial,5</Font>
+          <Guid>073221872f3bc0f3f56ee1aa39c0965e</Guid>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text27</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+          <ShrinkFontToFit>True</ShrinkFontToFit>
+          <Text>{Event.otherremarks}</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>DataColumn</Type>
+          <VertAlignment>Center</VertAlignment>
+        </Text27>
+        <GroupHeaderBand2 isKey="true" Ref="19" type="GroupHeaderBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1,7.49,0</ClientRectangle>
+          <Components isList="true" count="0"/>
+          <Condition>{Event.rhq}</Condition>
+          <Conditions isList="true" count="0"/>
+          <Name>GroupHeaderBand2</Name>
+          <NewPageBefore>True</NewPageBefore>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </GroupHeaderBand2>
+        <GroupHeaderBand3 isKey="true" Ref="20" type="GroupHeaderBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.4,7.49,0.1</ClientRectangle>
+          <Components isList="true" count="0"/>
+          <Condition>{Event.zone}</Condition>
+          <Conditions isList="true" count="0"/>
+          <Name>GroupHeaderBand3</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </GroupHeaderBand3>
+        <GroupHeaderBand1 isKey="true" Ref="21" type="GroupHeaderBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.9,7.49,0.2</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text7 isKey="true" Ref="22" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>1.9,0,2,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>34eb6cac593c365a8577a519da912ad8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4"/>
+              <Parent isRef="21"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.chapter}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text3 isKey="true" Ref="23" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3.9,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>f01ad1f313ba097cf563a519da91cf4e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4"/>
+              <Parent isRef="21"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Sum(Event.pending)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text9 isKey="true" Ref="24" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>4.8,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>544abeccde7fe0312d6ba519da91267a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4"/>
+              <Parent isRef="21"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Sum(Event.confirmed)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text10 isKey="true" Ref="25" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>5.7,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>759df893f5a742b1143aa519da91b914</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4"/>
+              <Parent isRef="21"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Sum(Event.delay)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 isKey="true" Ref="26" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>6.6,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>518236364cbd78775935a519da91cfa6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4"/>
+              <Parent isRef="21"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Sum(Event.withdrawn)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text12 isKey="true" Ref="27" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0,1.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>0d487d6396c5220cd065a519da91405f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="4"/>
+              <Parent isRef="21"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.zone}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat isKey="true" Ref="28" type="CustomFormat">
+                <StringFormat>dd-MMM-yyyy</StringFormat>
+              </TextFormat>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <HorizontalLinePrimitive4 isKey="true" Ref="29" type="HorizontalLinePrimitive">
+              <ClientRectangle>0.1,0.2,7.5,0.01</ClientRectangle>
+              <Color>Gainsboro</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="30" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive4</Name>
+              <Page isRef="4"/>
+              <Parent isRef="21"/>
+              <StartCap isKey="true" Ref="31" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+              <Style>Dot</Style>
+            </HorizontalLinePrimitive4>
+          </Components>
+          <Condition>{Event.chapter}</Condition>
+          <Conditions isList="true" count="0"/>
+          <Name>GroupHeaderBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </GroupHeaderBand1>
+        <HeaderBand1 isKey="true" Ref="32" type="HeaderBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,2.5,7.49,0.3</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text1 isKey="true" Ref="33" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.9,0,2,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>c68555b438c2d22041fa6c60c6e5403c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="32"/>
+              <Text>Chapter</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text17 isKey="true" Ref="34" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.9,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>836a14b36bbc16d0605e6c60c6e5e391</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="4"/>
+              <Parent isRef="32"/>
+              <Text>Pending</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text2 isKey="true" Ref="35" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.8,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>bbde11078266dc2e104e6c60c6e5ad36</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="32"/>
+              <Text>Confirmed</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text4 isKey="true" Ref="36" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5.7,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>785dd3b686cdc847c2af6c60c6e52af3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4"/>
+              <Parent isRef="32"/>
+              <Text>Delayed</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text5 isKey="true" Ref="37" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.6,0,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>3d5a3911dae1ece7e5196c60c6e527bf</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4"/>
+              <Parent isRef="32"/>
+              <Text>Withdrawn</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text16 isKey="true" Ref="38" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>2558604ceee87430bcc66c60c6e6f002</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="4"/>
+              <Parent isRef="32"/>
+              <Text>Zone</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <HorizontalLinePrimitive3 isKey="true" Ref="39" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.2,7.5,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="40" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive3</Name>
+              <Page isRef="4"/>
+              <Parent isRef="32"/>
+              <StartCap isKey="true" Ref="41" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive3>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>HeaderBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </HeaderBand1>
+        <DataBand1 isKey="true" Ref="42" type="DataBand">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <ClientRectangle>0,3.2,7.49,0</ClientRectangle>
+          <Components isList="true" count="0"/>
+          <Conditions isList="true" count="0"/>
+          <DataSourceName>Event</DataSourceName>
+          <Filters isList="true" count="0"/>
+          <Name>DataBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+          <Sort isList="true" count="14">
+            <value>ASC</value>
+            <value>rhq</value>
+            <value>ASC</value>
+            <value>zone</value>
+            <value>ASC</value>
+            <value>chapter</value>
+            <value>ASC</value>
+            <value>district</value>
+            <value>ASC</value>
+            <value>division</value>
+            <value>ASC</value>
+            <value>position</value>
+            <value>ASC</value>
+            <value>name</value>
+          </Sort>
+        </DataBand1>
+        <GroupFooterBand3 isKey="true" Ref="43" type="GroupFooterBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,3.6,7.49,0</ClientRectangle>
+          <Components isList="true" count="0"/>
+          <Conditions isList="true" count="0"/>
+          <Name>GroupFooterBand3</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </GroupFooterBand3>
+        <GroupFooterBand2 isKey="true" Ref="44" type="GroupFooterBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,4,7.49,0.4</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text8 isKey="true" Ref="45" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>3.9,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>90d6bfd63b113d97e20ea517feeae1ed</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4"/>
+              <Parent isRef="44"/>
+              <Text>{Sum(Event.pending)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text6 isKey="true" Ref="46" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>2.1,0.1,1.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>24da66ae07e5e33e43e4a517feeaf593</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4"/>
+              <Parent isRef="44"/>
+              <Text>Total ({Event.zone})</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text14 isKey="true" Ref="47" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>4.8,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>93c592c7ee733d825432a5235140e315</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4"/>
+              <Parent isRef="44"/>
+              <Text>{Sum(Event.confirmed)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text15 isKey="true" Ref="48" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>5.7,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>6b2669d38c919e5b55f7a5235d986bf7</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="4"/>
+              <Parent isRef="44"/>
+              <Text>{Sum(Event.delay)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text19 isKey="true" Ref="49" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>6.6,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>5420278553864ca944a0a52368d0d6f8</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="4"/>
+              <Parent isRef="44"/>
+              <Text>{Sum(Event.withdrawn)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <HorizontalLinePrimitive9 isKey="true" Ref="50" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.1,7.5,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="51" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>3fa5705d40504c55e609a517feeadee3</Guid>
+              <Name>HorizontalLinePrimitive9</Name>
+              <Page isRef="4"/>
+              <Parent isRef="44"/>
+              <StartCap isKey="true" Ref="52" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive9>
+            <HorizontalLinePrimitive1 isKey="true" Ref="53" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.3,7.5,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="54" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>05f0c731b76448c82b69a517feeab4f4</Guid>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="44"/>
+              <StartCap isKey="true" Ref="55" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>GroupFooterBand2</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </GroupFooterBand2>
+        <GroupFooterBand1 isKey="true" Ref="56" type="GroupFooterBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,4.8,7.49,0.4</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text28 isKey="true" Ref="57" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>3.9,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>89c4800b14768f751cbb77b19db0cc3e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="4"/>
+              <Parent isRef="56"/>
+              <Text>{Sum(Event.pending)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <Text24 isKey="true" Ref="58" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>2.1,0.1,1.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>f9a1d86fa3945cbe87a477b19db017bd</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="4"/>
+              <Parent isRef="56"/>
+              <Text>Total ({Event.rhq})</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text23 isKey="true" Ref="59" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>4.8,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>bbe2471fd5d2f2d05982a524352616f2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="4"/>
+              <Parent isRef="56"/>
+              <Text>{Sum(Event.confirmed)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text13 isKey="true" Ref="60" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>5.7,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>803193bce1d5307d9c7ca52435263279</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="4"/>
+              <Parent isRef="56"/>
+              <Text>{Sum(Event.delay)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text20 isKey="true" Ref="61" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>6.6,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>95af7b656f8cccd17638a5243527ce35</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="4"/>
+              <Parent isRef="56"/>
+              <Text>{Sum(Event.withdrawn)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <HorizontalLinePrimitive7 isKey="true" Ref="62" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.1,7.5,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="63" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>c552661e0331e607b36377b19db0d23d</Guid>
+              <Name>HorizontalLinePrimitive7</Name>
+              <Page isRef="4"/>
+              <Parent isRef="56"/>
+              <StartCap isKey="true" Ref="64" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive7>
+            <HorizontalLinePrimitive8 isKey="true" Ref="65" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.3,7.5,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="66" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>5cc81ad2afd86d02918777b1dbfad793</Guid>
+              <Name>HorizontalLinePrimitive8</Name>
+              <Page isRef="4"/>
+              <Parent isRef="56"/>
+              <StartCap isKey="true" Ref="67" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive8>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>GroupFooterBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </GroupFooterBand1>
+        <ReportSummaryBand1 isKey="true" Ref="68" type="ReportSummaryBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,5.6,7.49,0.6</ClientRectangle>
+          <Components isList="true" count="7">
+            <Text33 isKey="true" Ref="69" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>3.9,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>63d28a622ce54a5f63d0c9d0736b94e1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="4"/>
+              <Parent isRef="68"/>
+              <Text>{Sum(Event.pending)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text33>
+            <Text21 isKey="true" Ref="70" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>2.1,0.1,1.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>dd9b84daec5d04b54706c9d0736b1f3d</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="4"/>
+              <Parent isRef="68"/>
+              <Text>Grand Total</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text25 isKey="true" Ref="71" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>5.7,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>c4a25d2d899f052a554cc9d0736b0df5</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="4"/>
+              <Parent isRef="68"/>
+              <Text>{Sum(Event.delay)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text29 isKey="true" Ref="72" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>6.6,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>7f6f5c70cce2828d34efc9d0736b806b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="4"/>
+              <Parent isRef="68"/>
+              <Text>{Sum(Event.withdrawn)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text34 isKey="true" Ref="73" type="Text">
+              <Brush>[184:184:184]</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>4.8,0.1,0.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>4eb07b94662fe6401e75c9d0a388c9e2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="4"/>
+              <Parent isRef="68"/>
+              <Text>{Sum(Event.confirmed)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text34>
+            <HorizontalLinePrimitive11 isKey="true" Ref="74" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.1,7.5,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="75" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>981c8b26504007f6025ac9d0736b37ff</Guid>
+              <Name>HorizontalLinePrimitive11</Name>
+              <Page isRef="4"/>
+              <Parent isRef="68"/>
+              <StartCap isKey="true" Ref="76" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+              <Style>Double</Style>
+            </HorizontalLinePrimitive11>
+            <HorizontalLinePrimitive2 isKey="true" Ref="77" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.3,7.5,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="78" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Guid>ddfdc600508324c53054c9d0736ba2f6</Guid>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="68"/>
+              <StartCap isKey="true" Ref="79" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+              <Style>Double</Style>
+            </HorizontalLinePrimitive2>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>ReportSummaryBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </ReportSummaryBand1>
+      </Components>
+      <Conditions isList="true" count="0"/>
+      <Guid>ff5f2cd6829aceba2e8086f9ff0ce2e2</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11.69</PageHeight>
+      <PageWidth>8.27</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0"/>
+      <Watermark isKey="true" Ref="80" type="Stimulsoft.Report.Components.StiWatermark">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings isKey="true" Ref="81" type="Stimulsoft.Report.Print.StiPrinterSettings"/>
+  <ReportAlias>Event Gohonzon Statistic By Division Report</ReportAlias>
+  <ReportChanged>02/10/2016 02:12:01 PM</ReportChanged>
+  <ReportCreated>03/03/2014 04:05:34 PM</ReportCreated>
+  <ReportFile>EventListingGohonzonStatisticByDiv.mrt</ReportFile>
+  <ReportGuid>fbdf3c9de57b818243fdc9ced39053f5</ReportGuid>
+  <ReportName>Event Gohonzon Statistic By Division Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2013.3.1800</ReportVersion>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0"/>
+</StiSerializer>

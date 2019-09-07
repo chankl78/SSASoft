@@ -1,0 +1,396 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the Closure to execute when that URI is requested.
+|
+*/
+
+// Login
+Route::get('/', array('before' => 'installadmin', 'uses' => 'LoginController@getIndex'));
+Route::get('/Login', array('before' => 'installadmin', 'uses' => 'LoginController@getIndex'));
+Route::get('/getLogout', 'LoginController@getLogout');
+Route::get('/public/getLogout', 'LoginController@getLogout');
+Route::controller('Login', 'LoginController');
+
+// Security Login
+Route::get('/securitylogin', array('before' => 'installadmin', 'uses' => 'SecurityLoginController@getIndex'));
+
+
+// Retrieve Password
+Route::controller('password', 'RemindersController');
+
+// Install Admin
+Route::get('/installadmin', 'InstallAdminController@getIndex');
+Route::post('/installadmin', 'InstallAdminController@postSetup');
+
+// Dashboard
+Route::get('/Dashboard', array('before' => 'auth', 'uses' => 'DashboardController@getIndex'));
+Route::get('/Dashboard/userlogs', 'DashboardController@userlogs');
+
+// User Profile
+Route::get('/UserProfile', array('before' => 'auth', 'uses' => 'UserController@getIndex'));
+Route::post('/UserProfile', 'UserController@postUser');
+Route::post('/UserProfile/postPassword', 'UserController@postPassword');
+Route::get('/UserProfile/getUserLogs', 'UserController@getUserLogs');
+
+// Access Rights
+Route::get('/AccessRights', array('before' => 'auth', 'uses' => 'AccessRightsController@getIndex'));
+Route::get('/AccessRights/User/{id}', array('before' => 'auth', 'uses' => 'AccessRightsController@getUser'));
+Route::get('/AccessRights/User/getUserAccessRightsListing/{id}', 'AccessRightsController@getUserAccessRightsListing');
+Route::post('/AccessRights/User/putUserACDetail/{id}', 'AccessRightsController@putUserACDetail');
+Route::post('/AccessRights/User/ResetPassword/{id}', 'AccessRightsController@putUserResetPassword');
+Route::post('/AccessRights/User/postAccessRightsAdd', 'AccessRightsController@postAccessRightsAdd');
+Route::post('/AccessRights/User/postAccessRightsUpdate', 'AccessRightsController@postAccessRightsUpdate');
+Route::post('/AccessRights/User/deleteRights/{id}', 'AccessRightsController@deleteAccessRights');
+Route::get('/AccessRights/getUsersListing', 'AccessRightsController@getUsersListing');
+Route::post('/AccessRights/User/deleteUser/{id}', 'AccessRightsController@deleteUser');
+
+Route::get('/AccessRights/Roles', array('before' => 'auth', 'uses' => 'AccessRightsController@getRolesIndex'));
+Route::post('/AccessRights/postRoles', 'AccessRightsController@postRole');
+Route::post('/AccessRights/putRoles', 'AccessRightsController@putRole');
+Route::post('/AccessRights/deleteRoles/{id}', 'AccessRightsController@deleteRole');
+Route::get('/AccessRights/getRolesListing', 'AccessRightsController@getRolesListing');
+
+Route::get('/AccessRights/AccessTypes', array('before' => 'auth', 'uses' => 'AccessRightsController@getAccessTypesIndex'));
+Route::get('/AccessRights/getAccessTypesListing', 'AccessRightsController@getAccessTypesListing');
+Route::post('/AccessRights/postAccessType', 'AccessRightsController@postAccessType');
+Route::post('/AccessRights/deleteAccessType/{id}', 'AccessRightsController@deleteAccessType');
+Route::post('/AccessRights/putAccessType/{id}', 'AccessRightsController@putAccessType');
+
+Route::get('/AccessRights/Status', array('before' => 'auth', 'uses' => 'AccessRightsController@getStatusIndex'));
+Route::get('/AccessRights/getStatusListing', 'AccessRightsController@getStatusListing');
+Route::post('/AccessRights/postStatus', 'AccessRightsController@postStatus');
+Route::post('/AccessRights/deleteStatus/{id}', 'AccessRightsController@deleteStatus');
+Route::post('/AccessRights/putStatus/{id}', 'AccessRightsController@putStatus');
+
+// Common Setup
+Route::get('/Common/StaffListing', array('before' => 'auth', 'uses' => 'StaffController@getIndex'));
+Route::get('/Common/getStaffListing', 'StaffController@getStaffListing');
+Route::post('/Common/postStaff', 'StaffController@postStaff');
+Route::post('/Common/deleteStaff/{id}', 'StaffController@deleteStaff');
+Route::post('/Common/putStaff', 'StaffController@putStaff');
+
+// Vehicle
+Route::get('/VehicleBooking', array('before' => 'auth', 'uses' => 'VehicleController@getIndex'));
+Route::get('/Vehicle/CashCard', array('before' => 'auth', 'uses' => 'VehicleController@getCashCardIndex'));
+Route::get('/Vehicle/getCashCardListing', 'VehicleController@getCashCardListing');
+Route::get('/Vehicle/BookingStatus', array('before' => 'auth', 'uses' => 'VehicleController@getBookingStatusIndex'));
+Route::get('/Vehicle/getBookingStatusListing', 'VehicleController@getBookingStatusListing');
+Route::get('/Vehicle/MaintenanceType', array('before' => 'auth', 'uses' => 'VehicleController@getMaintenanceTypeIndex'));
+Route::get('/Vehicle/getMaintenanceTypeListing', 'VehicleController@getMaintenanceTypeListing');
+Route::get('/Vehicle/Drivers', array('before' => 'auth', 'uses' => 'VehicleController@getDriversIndex'));
+Route::get('/Vehicle/getDriversListing', 'VehicleController@getDriversListing');
+Route::get('/Vehicle/Vehicle', array('before' => 'auth', 'uses' => 'VehicleController@getVehiclesIndex'));
+Route::get('/Vehicle/getVehiclesListing', 'VehicleController@getVehiclesListing');
+
+// Attendance
+Route::get('/Attendance', array('before' => 'auth', 'uses' => 'AttendanceController@getIndex'));
+Route::get('/Attendance/getAttendanceListing', 'AttendanceController@getAttendanceListing');
+Route::post('/Attendance/deleteAttendance/{id}', 'AttendanceController@deleteAttendance');
+Route::post('/Attendance/postAttendanceACCheck/{id}', 'AttendanceController@postAttendanceACCheck');
+
+// Event Registration By Members
+Route::get('/eventregistration', 'EventMemRegistrationController@getIndex');
+Route::post('/eventregistration/postNricSearch/{id}', 'EventMemRegistrationController@postNricSearch');
+Route::post('/eventregistration/postAddMember/{id}', 'EventMemRegistrationController@postAddMember');
+
+// Event
+Route::get('/Event', array('before' => 'auth', 'uses' => 'EventController@getIndex'));
+Route::get('/Event/getEventListing', 'EventController@getEventListing');
+Route::post('/Event/postEvent', 'EventController@postEvent');
+Route::post('/Event/postEventACCheck/{id}', 'EventController@postEventACCheck');
+Route::post('/Event/deleteEvent/{id}', 'EventController@deleteEvent');
+Route::post('/Event/Detail/putEvent/{id}', 'EventController@putEvent');
+
+// Event Detail
+Route::get('/Event/Detail/{id}', array('before' => 'auth', 'uses' => 'EventDetailController@getIndex'));
+Route::get('/Event/Detail/getParticipantListing/{id}', 'EventDetailController@getParticipantListing');
+Route::get('/Event/Detail/getSecurityPassListing/{id}', 'EventDetailController@getSecurityPassListing');
+Route::post('/Event/Detail/deleteParticipant/{id}', 'EventDetailController@deleteParticipant');
+Route::post('/Event/Detail/SecurityPass/{id}', 'EventDetailController@postSecurityPass');
+Route::post('/Event/Detail/deleteSecurityPass/{id}', 'EventDetailController@deleteSecurityPass');
+Route::post('/Event/Detail/deleteAllSecurityPass/{id}', 'EventDetailController@deleteAllSecurityPass');
+Route::get('/Event/Detail/getAccessRightsCheck/', 'EventDetailController@AccessRightsCheck');
+
+// Event Card
+Route::get('/Event/Detail/getEventCardListing/{id}', 'EventDetailController@getEventCardListing');
+Route::post('/Event/Detail/postEventCardAssign/{id}', 'EventDetailController@postEventCardAssign');
+Route::post('/Event/Detail/postEventCardByBarcodeReturn/{id}', 'EventDetailController@postEventCardByBarcodeReturn');
+Route::post('/Event/Detail/postEventCardReturn/{id}', 'EventDetailController@postEventCardReturn');
+Route::post('/Event/Detail/deleteEventCard/{id}', 'EventDetailController@deleteEventCard');
+Route::post('/Event/Detail/deleteEventCardWithdrawn/{id}', 'EventDetailController@deleteEventCardWithdrawn');
+Route::post('/Event/Detail/deleteEventCardLost/{id}', 'EventDetailController@deleteEventCardLost');
+Route::get('/Event/getEventCardNameSearch', 'EventDetailController@getEventCardNameSearch');
+Route::post('/Event/Detail/postAddEventCard/{id}', 'EventDetailController@postAddEventCard');
+
+// Event Item
+Route::get('/Event/Detail/getEventItemListing/{id}', 'EventDetailController@getEventItemListing');
+Route::post('/Event/Detail/postEventItem', 'EventDetailController@postEventItem');
+Route::post('/Event/Detail/deleteEventItem/{id}', 'EventDetailController@deleteEventItem');
+Route::post('/Event/Detail/putEventItem/{id}', 'EventDetailController@putEventItem');
+
+// Event Group
+Route::get('/Event/Detail/getEventGroupListing/{id}', 'EventDetailController@getEventGroupListing');
+Route::post('/Event/Detail/postEventGroup', 'EventDetailController@postEventGroup');
+Route::post('/Event/Detail/deleteEventGroup/{id}', 'EventDetailController@deleteEventGroup');
+Route::post('/Event/Detail/putEventGroup/{id}', 'EventDetailController@putEventGroup');
+
+// Event Attendance
+Route::post('/Event/Detail/postAccessRightsTrainer/{id}', 'EventDetailController@postAccessRightsTrainer');
+Route::get('/Event/Detail/getEventAttendanceListing/{id}', 'EventDetailController@getEventAttendanceListing');
+Route::post('/Event/Detail/postEventAttendance/{id}', 'EventDetailController@postEventAttendance');
+Route::post('/Event/Detail/deleteEventAttendance/{id}', 'EventDetailController@deleteEventAttendance');
+
+Route::get('/Event/Detail/EventAttendance/{id}', array('before' => 'auth', 'uses' => 'EventAttendanceController@getIndex'));
+Route::get('/Event/Detail/EventAttendance/getAttendeesListing/{id}', 'EventAttendanceController@getAttendeesListing');
+
+Route::get('/Event/Detail/EventAttendance/getParticipantListing/{id}', 'EventAttendanceController@getParticipantListing');
+Route::post('/Event/Detail/EventAttendance/postAttendedAttendee/{id}', 'EventAttendanceController@postAttendedAttendee');
+Route::post('/Event/Detail/EventAttendance/postAbsentAttendee/{id}', 'EventAttendanceController@postAbsentAttendee');
+
+Route::post('/Event/Detail/EventAttendance/putAttendance/{id}', 'EventAttendanceController@putAttendance');
+Route::post('/Event/Detail/EventAttendance/postNricSearch/{id}', 'EventAttendanceController@postNricSearch');
+Route::post('/Event/Detail/EventAttendance/postSPSearch/{id}', 'EventAttendanceController@postSPSearch');
+Route::post('/Event/Detail/EventAttendance/postAddMember/{id}', 'EventAttendanceController@postAddMember');
+Route::post('/Event/Detail/EventAttendance/postAddMember/{id}', 'EventAttendanceController@postAddMember');
+Route::post('/Event/Detail/EventAttendance/postAddMember/{id}', 'EventAttendanceController@postAddMember');
+Route::post('/Event/Detail/EventAttendance/deleteAttendee/{id}', 'EventAttendanceController@deleteAttendee');
+Route::post('/Event/Detail/EventAttendance/putAttendedAttendee/{id}', 'EventAttendanceController@putAttendedAttendee');
+Route::post('/Event/Detail/EventAttendance/putAbsentAttendee/{id}', 'EventAttendanceController@putAbsentAttendee');
+Route::post('/Event/Detail/EventAttendance/postEventAttended/{id}', 'EventAttendanceController@postEventAttended');
+Route::post('/Event/Detail/EventAttendance/postEventAbsent/{id}', 'EventAttendanceController@postEventAbsent');
+Route::post('/Event/Detail/EventAttendance/postEventItemAttended/{id}', 'EventAttendanceController@postEventItemAttended');
+Route::post('/Event/Detail/EventAttendance/postEventItemAbsent/{id}', 'EventAttendanceController@postEventItemAbsent');
+Route::post('/Event/Detail/EventAttendance/deleteAllAttendee/{id}', 'EventAttendanceController@deleteAllAttendee');
+Route::post('/Event/Detail/EventAttendance/PrintAttendancePrint/{id}', 'EventAttendanceController@postAttendancePrint');
+Route::post('/Event/Detail/EventAttendance/PrintAttendanceByPerformerPrint/{id}', 'EventAttendanceController@postAttendanceByPerformerPrint');
+
+// Event Add Member
+Route::post('/Event/Detail/postNricSearch/{id}', 'EventDetailController@postNricSearch');
+Route::get('/Event/getNameSearch', 'EventDetailController@getNameSearch');
+Route::post('/Event/Detail/postAddMember/{id}', 'EventDetailController@postAddMember');
+Route::post('/Event/Detail/postAllLeaders/{id}', 'EventDetailController@postAllLeaders');
+Route::post('/Event/Detail/postforwardparticipanttoevent/{id}', 'EventDetailController@postforwardparticipanttoevent');
+
+// Event Print
+Route::post('/Event/Detail/PrintEventListingByItemWithContacts/{id}', 'EventDetailController@postEventListingByItemWithContactsPrint');
+Route::post('/Event/Detail/PrintEventListingByStatusWithContacts/{id}', 'EventDetailController@postEventListingByStatusWithContactsPrint');
+Route::post('/Event/Detail/PrintEventListingByItem/{id}', 'EventDetailController@postEventListingByItemPrint');
+Route::post('/Event/Detail/PrintEventListingByGroup/{id}', 'EventDetailController@postEventListingByGroupPrint');
+Route::post('/Event/Detail/PrintCostumeListingByGroup/{id}', 'EventDetailController@postCostumeListingByGroupPrint');
+Route::post('/Event/Detail/PrintEventListingAttendancePerformerByGroup/{id}', 'EventDetailController@postEventListingByGroupAttendancePerformerPrint');
+Route::post('/Event/Detail/PrintEventListingAttendanceByGroup/{id}', 'EventDetailController@postEventListingByGroupAttendancePrint');
+Route::post('/Event/Detail/PrintApplicationHC/{id}', 'EventDetailController@getApplicationPrint');
+Route::post('/Event/Detail/PrintRoleListing/{id}', 'EventDetailController@getRoleListingPrint');
+Route::post('/Event/Detail/PrintRoleListingByDivision/{id}', 'EventDetailController@getRoleListingByDivisionPrint');
+Route::post('/Event/Detail/PrintRoleStatictis/{id}', 'EventDetailController@getRoleStatictisPrint');
+Route::post('/Event/Detail/PrintRoleContacts/{id}', 'EventDetailController@postContactByDivisionPrint');
+Route::post('/Event/Detail/PrintSecurityPasses/{id}', 'EventDetailController@postSecurityPassesByDivisionPrint');
+Route::post('/Event/Detail/PrintSecurityPassesIndividual/{id}', 'EventDetailController@postSecurityPassesByIndividualPrint');
+Route::post('/Event/Detail/PrintTemporanyPasses/{id}', 'EventDetailController@postTemporanyPassPrint');
+Route::post('/Event/Detail/PrintTemporanyPassesNoLogo/{id}', 'EventDetailController@postTemporanyPassNoLogoPrint');
+Route::post('/Event/Detail/PrintCostumesSlip/{id}', 'EventDetailController@postCostumesSlipPrint');
+Route::post('/Event/Detail/PrintGroups/{id}', 'EventDetailController@postGroupsPrint');
+Route::post('/Event/Detail/AcceptedNoGroupCode/{id}', 'EventDetailController@postAcceptedNoGroupCodePrint');
+Route::post('/Event/Detail/PrintCostumeListing/{id}', 'EventDetailController@postCostumeListingPrint');
+Route::post('/Event/Detail/PrintContactsAll/{id}', 'EventDetailController@postContactByAllPrint');
+Route::post('/Event/Detail/PrintGohonzonStatistic/{id}', 'EventDetailController@postGohonzonStatisticPrint');
+Route::post('/Event/Detail/PrintGohonzonStatisticByDivision/{id}', 'EventDetailController@postGohonzonStatisticByDivisionPrint');
+Route::post('/Event/Detail/PrintContactsAllNoSensitive/{id}', 'EventDetailController@postContactByAllPrintNoSensitive');
+Route::post('/Event/Detail/postNewFriendContactByDivision/{id}', 'EventDetailController@postNewFriendContactByDivisionPrint');
+
+// Event New Friend Subscriber
+Route::post('/EventSubscription/EventSTSubscriptionMailer/{id}', 'EventSubscriptionController@postEventSTSubscriptionMailer');
+Route::post('/EventSubscription/EventSTSubscriptionMailerExcel', 'EventSubscriptionController@postEventSTSubscriptionMailerExcel');
+
+// Event Participant
+Route::get('/Event/Detail/Participant/{id}', array('before' => 'auth', 'uses' => 'EventDetailParticipantController@getIndex'));
+Route::post('/Event/Detail/Participant/{id}', 'EventDetailParticipantController@putParticipantDetail');
+Route::get('/Event/Detail/Participant/getMemberEventParticipationInfo/{id}', 'EventDetailParticipantController@getMemberEventParticipationInfo');
+Route::get('/Event/Detail/Participant/getMemberGroupInfo/{id}', 'EventDetailParticipantController@getMemberGroupInfo');
+Route::get('/Event/Detail/Participant/getMemberEventMedicalInfo/{id}', 'EventDetailParticipantController@getMemberEventMedicalInfo');
+Route::get('/Event/Detail/Participant/getMemberEventAllergyInfo/{id}', 'EventDetailParticipantController@getMemberEventAllergyInfo');
+
+// Event New Participant
+Route::get('/Event/Detail/ParticipantNew/{id}', array('before' => 'auth', 'uses' => 'EventDetailParticipantNewController@getIndex'));
+Route::post('/Event/Detail/ParticipantNew/{id}', 'EventDetailParticipantNewController@postParticipantDetail');
+
+// Event Search Members
+Route::get('/Event/Registration/Search', array('before' => 'auth', 'uses' => 'EventRegistrationSearchController@getIndex'));
+Route::post('/Event/Registration/Search', 'EventRegistrationSearchController@postSearch');
+Route::get('/Event/Registration/SearchName', 'EventRegistrationSearchController@getSSAMembersListing');
+
+Route::get('/Event/Registration/Result/{id}', array('before' => 'auth', 'uses' => 'EventRegistrationController@getIndex'));
+Route::post('/Event/Registration/Result/RegPrint/{id}', 'EventRegistrationController@PostRegPrint');
+Route::post('/Event/Registration/Result/{id}', 'EventRegistrationController@PostRegistration');
+Route::get('/Event/Registration/Print/{id}', array('before' => 'auth', 'uses' => 'EventRegistrationController@getRegistrationPrint'));
+
+// Event Subscription
+Route::get('/EventSubscription', array('before' => 'auth', 'uses' => 'EventSubscriptionController@getIndex'));
+Route::get('/EventSubscription/getListing', 'EventSubscriptionController@getListing');
+
+// Event PreKenshu
+Route::get('/EventPreKenshu', array('before' => 'auth', 'uses' => 'EventPreKenshuController@getIndex'));
+Route::get('/EventPreKenshu/getListing', 'EventPreKenshuController@getListing');
+
+// Event zTables
+Route::get('/Event/RegistrationStatus', array('before' => 'auth', 'uses' => 'EventzRegistrationStatusController@getIndex'));
+Route::get('/Event/getRegistrationStatusListing', 'EventzRegistrationStatusController@getListing');
+Route::post('/Event/postRegistrationStatus', 'EventzRegistrationStatusController@postRegistrationStatus');
+Route::post('/Event/putRegistrationStatus/{id}', 'EventzRegistrationStatusController@putRegistrationStatus');
+Route::post('/Event/deleteRegistrationStatus/{id}', 'EventzRegistrationStatusController@deleteRegistrationStatus');
+
+Route::get('/Event/EventType', array('before' => 'auth', 'uses' => 'EventzEventTypeController@getIndex'));
+Route::get('/Event/getEventTypeListing', 'EventzEventTypeController@getListing');
+Route::post('/Event/postEventType', 'EventzEventTypeController@postEventType');
+Route::post('/Event/putEventType/{id}', 'EventzEventTypeController@putEventType');
+Route::post('/Event/deleteEventType/{id}', 'EventzEventTypeController@deleteEventType');
+
+Route::get('/Event/Role', array('before' => 'auth', 'uses' => 'EventzRoleController@getIndex'));
+Route::get('/Event/getRoleListing', 'EventzRoleController@getRoleListing');
+Route::post('/Event/postRole', 'EventzRoleController@postRole');
+Route::post('/Event/putRole', 'EventzRoleController@putRole');
+Route::post('/Event/deleteRole/{id}', 'EventzRoleController@deleteRole');
+
+// Group Registration By Members (Soka Volunteer Group only)
+Route::get('/svgregistration', 'GroupMemSVGRegistrationController@getIndex');
+Route::post('/svgregistration/postNricSearch/{id}', 'GroupMemSVGRegistrationController@postNricSearch');
+Route::post('/svgregistration/postAddMember/{id}', 'GroupMemSVGRegistrationController@postAddMember');
+
+// Group
+Route::get('/Group', array('before' => 'auth', 'uses' => 'GroupController@getIndex'));
+Route::get('/Group/getGroupListing', 'GroupController@getGroupListing');
+Route::post('/Group/postGroup', 'GroupController@postGroup');
+Route::post('/Group/deleteGroup/{id}', 'GroupController@deleteGroup');
+Route::post('/Group/Detail/putGroup/{id}', 'GroupController@putGroup');
+
+// Group Detail
+Route::get('/Group/Detail/{id}', array('before' => 'auth', 'uses' => 'GroupDetailController@getIndex'));
+Route::get('/Group/Detail/getMemberListing/{id}', 'GroupDetailController@getMemberListing');
+Route::get('/Group/Detail/getMemberListingOthers/{id}', 'GroupDetailController@getMemberListingOthers');
+Route::post('/Group/Detail/getMemberInfo/{id}', 'GroupDetailController@getMemberInfo');
+Route::post('/Group/Detail/putMemberInfo/{id}', 'GroupDetailController@putMemberInfo');
+Route::get('/Group/Detail/getMemberGroupInfo/{id}', 'GroupDetailController@getMemberGroupInfo');
+Route::get('/Group/Detail/getMemberEventMedicalInfo/{id}', 'GroupDetailController@getMemberEventMedicalInfo');
+Route::get('/Group/Detail/getMemberEventAllergyInfo/{id}', 'GroupDetailController@getMemberEventAllergyInfo');
+Route::get('/Group/Detail/getMemberGroupPositionHistory/{id}', 'GroupDetailController@getMemberGroupPositionHistory');
+Route::get('/Group/Detail/getGroupEventListing/{id}', 'GroupDetailController@getGroupEventListing');
+Route::post('/Group/Detail/postNricSearch/{id}', 'GroupDetailController@postNricSearch');
+Route::get('/Group/getNameSearch', 'GroupDetailController@getNameSearch');
+Route::post('/Group/Detail/postAddMember/{id}', 'GroupDetailController@postAddMember');
+Route::post('/Group/Detail/putGroupMember/{id}', 'GroupDetailController@putGroupMember');
+Route::post('/Group/Detail/putGroupMemberOthers/{id}', 'GroupDetailController@putGroupMemberOthers');
+Route::post('/Group/Detail/deleteGroupMember/{id}', 'GroupDetailController@deleteMember');
+Route::post('/Group/Detail/postforwardparticipanttoevent/{id}', 'GroupDetailController@postforwardparticipanttoevent');
+Route::post('/Group/Detail/PrintApplicationHC/{id}', 'GroupDetailController@getApplicationPrint');
+Route::post('/Group/Detail/PrintGroupMembersRegistrationFormActive/{id}', 'GroupDetailController@postGroupMembersRegistrationFormActivePrint');
+
+Route::get('/Group/Detail/getMemberPositionListing/{id}', 'GroupDetailController@getMemberPositionListing');
+
+Route::post('/Group/Detail/PrintGroupMemberslisting/{id}', 'GroupDetailController@postGroupMembersListingPrint');
+Route::post('/Group/Detail/PrintGroupMembersWithContactslisting/{id}', 'GroupDetailController@postGroupMembersListingWithContactsPrint');
+Route::post('/Group/Detail/PrintGroupMembersListingWithSensitiveData/{id}', 'GroupDetailController@postGroupMembersListingWithSensitiveDataPrint');
+
+Route::get('/Group/Detail/getPositionListing/{id}', 'GroupzPositionController@getListing');
+Route::post('/Group/Detail/postPosition/{id}', 'GroupzPositionController@postPosition');
+Route::post('/Group/Detail/putPosition/{id}', 'GroupzPositionController@putPosition');
+Route::post('/Group/Detail/deletePosition/{id}', 'GroupzPositionController@deletePosition');
+
+Route::get('/Group/Detail/getContactGroupListing/{id}', 'GroupzContactGroupController@getListing');
+Route::post('/Group/Detail/postContactGroup/{id}', 'GroupzContactGroupController@postContactGroup');
+Route::post('/Group/Detail/putContactGroup/{id}', 'GroupzContactGroupController@putContactGroup');
+Route::post('/Group/Detail/deleteContactGroup/{id}', 'GroupzContactGroupController@deleteContactGroup');
+
+// Group zTables
+Route::get('/Group/GroupType', array('before' => 'auth', 'uses' => 'GroupzGroupTypeController@getIndex'));
+Route::get('/Group/getGroupTypeListing', 'GroupzGroupTypeController@getListing');
+Route::post('/Group/postGroupType', 'GroupzGroupTypeController@postGroupType');
+Route::post('/Group/putGroupType/{id}', 'GroupzGroupTypeController@putGroupType');
+Route::post('/Group/deleteGroupType/{id}', 'GroupzGroupTypeController@deleteGroupType');
+
+Route::get('/Group/MemberStatus', array('before' => 'auth', 'uses' => 'GroupzMemberStatusController@getIndex'));
+Route::get('/Group/getMemberStatusListing', 'GroupzMemberStatusController@getListing');
+Route::post('/Group/postMemberStatus', 'GroupzMemberStatusController@postMemberStatus');
+Route::post('/Group/putMemberStatus/{id}', 'GroupzMemberStatusController@putMemberStatus');
+Route::post('/Group/deleteMemberStatus/{id}', 'GroupzMemberStatusController@deleteMemberStatus');
+
+Route::get('/Group/Status', array('before' => 'auth', 'uses' => 'GroupzStatusController@getIndex'));
+Route::get('/Group/getStatusListing', 'GroupzStatusController@getListing');
+Route::post('/Group/postStatus', 'GroupzStatusController@postStatus');
+Route::post('/Group/putStatus/{id}', 'GroupzStatusController@putStatus');
+Route::post('/Group/deleteStatus/{id}', 'GroupzStatusController@deleteStatus');
+
+Route::get('/Group/DivisionType', array('before' => 'auth', 'uses' => 'GroupzDivisionTypeController@getIndex'));
+Route::get('/Group/getDivisionTypeListing', 'GroupzDivisionTypeController@getListing');
+Route::post('/Group/postDivisionType', 'GroupzDivisionTypeController@postDivisionType');
+Route::post('/Group/putDivisionType/{id}', 'GroupzDivisionTypeController@putDivisionType');
+Route::post('/Group/deleteDivisionType/{id}', 'GroupzDivisionTypeController@deleteDivisionType');
+
+// Member
+Route::get('/Members', array('before' => 'auth', 'uses' => 'MemberController@getIndex'));
+Route::get('/Members/getMemberListing', 'MemberController@getMemberListing');
+Route::post('/Members/getMemberInfo/{id}', 'MemberController@getMemberInfo');
+Route::post('/Members/postNricSearch/{id}', 'MemberController@postNricSearch');
+Route::post('/Members/postPrintLeadersAttendanceByRegion', 'MemberController@postPrintLeadersAttendanceByRegion');
+
+Route::get('/Members/convert', 'MemberController@getConvert');
+Route::post('/Members/postConvert', 'MemberController@postConvert');
+Route::post('/Members/postConvertFront/{id}', 'MemberController@postConvertFront');
+Route::post('/Members/putCNameDOB', 'MemberController@putCNameDOB');
+Route::post('/Members/DatabaseUpdate', 'MemberController@DatabaseUpdate');
+Route::post('/Members/AddressUpdate', 'MemberController@putEncryptAddress');
+Route::post('/Members/NricSearchCode', 'MemberController@putNricSearchCode');
+Route::post('/Members/EventDetailInsert', 'MemberController@posteventdetail');
+Route::post('/Members/EventFDDetailInsert', 'MemberController@posteventfddetail');
+Route::post('/Members/EventPDDetailInsert', 'MemberController@posteventpddetail');
+Route::post('/Members/EventKnightDetailInsert', 'MemberController@posteventknightdetail');
+Route::post('/Members/EventANCInsert', 'MemberController@posteventancdetail');
+
+// Award / Gifts / Certificates
+Route::get('/Award', array('before' => 'auth', 'uses' => 'AwardController@getIndex'));
+Route::get('/Award/getAwardListing', 'AwardController@getAwardListing');
+Route::post('/Award/postAward', 'AwardController@postAward');
+Route::post('/Award/deleteAward/{id}', 'AwardController@deleteAward');
+Route::post('/Award/Detail/putAward/{id}', 'AwardController@putAward');
+
+// Award / Gifts / Certificates zTables
+Route::get('/Award/Type', array('before' => 'auth', 'uses' => 'AwardzTypeController@getIndex'));
+Route::get('/Award/getTypeListing', 'AwardzTypeController@getListing');
+Route::post('/Award/postType', 'AwardzTypeController@postType');
+Route::post('/Award/putType/{id}', 'AwardzTypeController@putType');
+Route::post('/Award/deleteType/{id}', 'AwardzTypeController@deleteType');
+
+// Award / Gifts / Certificates Detail
+Route::get('/Award/Detail/{id}', array('before' => 'auth', 'uses' => 'AwardDetailController@getIndex'));
+Route::get('/Award/Detail/getDetailListing/{id}', 'AwardDetailController@getDetailListing');
+Route::post('/Award/Detail/postNricSearch/{id}', 'AwardDetailController@postNricSearch');
+Route::post('/Award/Detail/postAddMember/{id}', 'AwardDetailController@postAddMember');
+Route::post('/Award/Detail/deleteGroupMember/{id}', 'AwardDetailController@deleteMember');
+
+// Security
+Route::get('/Security', 'SecurityDashboardController@getIndex');
+<<<<<<< HEAD
+Route::post('/Security/postNricSearch', 'SecurityDashboardController@postNricSearch');
+Route::get('/Security/getSecurityAttendanceListing', 'SecurityDashboardController@getSecurityAttendanceListing');
+Route::post('/Security/postOccurance', 'SecurityDashboardController@postOccurance');
+Route::post('/Security/deleteSecurityAttendance/{id}', 'SecurityDashboardController@deleteSecurityAttendance');
+Route::post('/Security/postlogout/{id}', 'SecurityDashboardController@postlogout');
+Route::get('/Security/getSecurityOccuranceListing', 'SecurityDashboardController@getSecurityOccuranceListing');
+=======
+// Security Attendance
+Route::get('/Security/Attendance', 'SecurityAttendanceController@getIndex');
+Route::post('/Security/postSignIn', 'SecurityAttendanceController@postSignIn');
+Route::post('/Security/postSignOut/{id}', 'SecurityAttendanceController@postSignOut');
+Route::get('/Security/getSecurityAttendanceListing', 'SecurityAttendanceController@getSecurityAttendanceListing');
+Route::post('/Security/deleteSecurityAttendance/{id}', 'SecurityAttendanceController@deleteSecurityAttendance');
+// Security Occurrence
+Route::post('/Security/postOccurance', 'SecurityDashboardController@postOccurance');
+Route::get('/Security/getSecurityOccuranceListing', 'SecurityDashboardController@getSecurityOccuranceListing');
+Route::post('/Security/deleteSecurityOccurance/{id}', 'SecurityDashboardController@deleteSecurityOccurance');
+>>>>>>> f6e3cdcd05ecb482975d9bd8d728d3b0c1204639

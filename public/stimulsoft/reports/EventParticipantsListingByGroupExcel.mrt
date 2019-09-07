@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Flex" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <Databases isList="true" count="1">
+      <Localhost Ref="2" type="Stimulsoft.Report.Dictionary.StiMySqlDatabase" isKey="true">
+        <Alias>Localhost</Alias>
+        <ConnectionStringEncrypted>49J1CWELSx1rGqHMakxiXots84nlTNPNYkehzE54Yj/gatnrxghDWe8T/Y3oPSFzxFb1iUhMu8Vs
+E6GY4XhlG8N498LkBVq84VvtlGQ=</ConnectionStringEncrypted>
+        <Name>Localhost</Name>
+      </Localhost>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Event Ref="3" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>Event</Alias>
+        <Columns isList="true" count="23">
+          <value>description,System.String</value>
+          <value>name,System.String</value>
+          <value>rhq,System.String</value>
+          <value>zone,System.String</value>
+          <value>chapter,System.String</value>
+          <value>district,System.String</value>
+          <value>position,System.String</value>
+          <value>division,System.String</value>
+          <value>status,System.String</value>
+          <value>coname,System.String</value>
+          <value>uniquecode,System.String</value>
+          <value>ssagroup,System.String</value>
+          <value>eventitem,System.String</value>
+          <value>institution,System.String</value>
+          <value>role,System.String</value>
+          <value>groupcode,System.String</value>
+          <value>created_at,System.String</value>
+          <value>updated_at,System.String</value>
+          <value>costume1,System.String</value>
+          <value>costume2,System.String</value>
+          <value>costume4,System.String</value>
+          <value>costume5,System.String</value>
+          <value>shoes,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1"/>
+        <Name>Event</Name>
+        <NameInSource>Localhost</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>param1,,0,0</value>
+          <value>param2,,254,0</value>
+        </Parameters>
+        <SqlCommand>SELECT er.name, er.rhq, er.zone, er.chapter, er.district, er.division, er.position, er.ssagroup, er.eventitem,  er.role, er.groupcode, er.costume9 as institution, er.status, er.created_at, er.updated_at, er.costume1, er.costume2, er.costume4, er.costume5, er.shoes
+FROM Event_m_Event ee 
+LEFT JOIN Event_m_Registration er on ee.id = er.eventid
+WHERE ee.uniquecode = {param1} and er.ssagroup IN ("{param2}") and er.deleted_at is null
+ORDER BY er.eventitem,er.rhq, er.zone, er.chapter, er.district, er.division</SqlCommand>
+      </Event>
+    </DataSources>
+    <Relations isList="true" count="0"/>
+    <Report isRef="0"/>
+    <Variables isList="true" count="0"/>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0"/>
+  <MetaTags isList="true" count="0"/>
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <PageHeaderBand1 Ref="5" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,15.76,0.2</ClientRectangle>
+          <Components isList="true" count="20">
+            <Text28 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.1,0,1.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>2598a04d8331bbcc45f6a769cd4a17a2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text28</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Name</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text28>
+            <Text2 Ref="7" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>7.6,0,0.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>42e9b6556c15a7dce9f8a769cd4a04e3</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>RHQ</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text4 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.1,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>cbd35dc2d1cdbbd5f244a769cd4a2229</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Zone</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text5 Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.8,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>121e931082e3f59bac17a769cd4a64cc</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Chapter</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text5>
+            <Text6 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.5,0,0.4,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>77d55e17f734bcb71105a769cd4ae669</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Dist</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text6>
+            <Text7 Ref="11" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>5dbe241069ac20056930a769cd4ad579</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Status</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text7>
+            <Text8 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.9,0,0.4,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>2ea6bc04574310de357ca769cd4a4334</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Div</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text8>
+            <Text16 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.3,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>c01a31d0e11df6df0654a769cd4a6abb</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Position</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text16>
+            <Text18 Ref="14" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.5,0,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>de501d78b6b80785a18aa769cd4a6d31</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>SSA Group</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text18>
+            <Text20 Ref="15" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3,0,1.3,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>ec76f3dd8c6114800310a769cd4a0d04</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Item</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text20>
+            <Text22 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.3,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>1dafb58dcdaf13e56e0ea769cd4a0802</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Institution</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text22>
+            <Text24 Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>5,0,1.1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>43e3bc57e5fc2a8e2309a769cd4a711f</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Role</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text24>
+            <Text29 Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4.3,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>d208971b6221877c4ba9a76be4eebf27</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text29</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Code</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text29>
+            <Text39 Ref="19" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>bc6f406e6f62c9173269b7dd526ee7e1</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text39</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Create Date</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text39>
+            <Text38 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.7,0,0.8,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>604414db7759ea14856fb7de50c56509</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text38</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Updated Date</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text38>
+            <Text30 Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.7,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>dbad7dd1f035b0da0957c4c8eecc392c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text30</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Cap</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text30>
+            <Text32 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.4,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>664a9fa444feeb519a33c4c962136e9b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text32</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Shirt</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text32>
+            <Text34 Ref="23" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.1,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>c74e9c6372f6179341d3c4c9c43165a9</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text34</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Pants (Waist)</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text34>
+            <Text36 Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>13.8,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>9e87aefcc1f7c5ae769cc4ca20d9328c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text36</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>MTM</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text36>
+            <Text41 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.5,0,0.7,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>13a0d431b0edff658befc4ca5e49cebb</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text41</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Shoes</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text41>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </PageHeaderBand1>
+        <DataBand1 Ref="26" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <ClientRectangle>0,0.8,15.76,0.1</ClientRectangle>
+          <Components isList="true" count="20">
+            <Text3 Ref="27" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>6.1,0,1.5,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.name}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text10 Ref="28" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>7.6,0,0.5,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>96194b492e2a1c349cf8870f05c2e94a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.rhq}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <Text11 Ref="29" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>8.1,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>3372dbac276f2e805adf870f49b35ecd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.zone}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text12 Ref="30" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>8.8,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>1ad5b424c6b76bb5049b870f6fa3a7bd</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.chapter}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text12>
+            <Text13 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>9.5,0,0.4,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>4623b9314428f7bae9c2870f963b7e94</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.district}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text14 Ref="32" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>11,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>80972c93758acb11805c870fdc7667e6</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.status}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text14>
+            <Text9 Ref="33" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>9.9,0,0.4,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>4c8b42fc7839f16f8e0e8710396076b7</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.division}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text9>
+            <Text15 Ref="34" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>10.3,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>81b5befd52beeba2705a8711aaace1c2</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.position}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text15>
+            <Text17 Ref="35" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>1.5,0,0.8,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>a78dfec9f93387097179a19e1f1a321f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.ssagroup}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text17>
+            <Text19 Ref="36" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>3,0,1.3,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>2cf97c82cc9cf1c72f4da19fd6b678a3</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.eventitem}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text19>
+            <Text21 Ref="37" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>2.3,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>b0dd9f09e1b2a7718598a1a7bfd1720c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text21</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.institution}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text21>
+            <Text23 Ref="38" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>5,0,1.1,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>46d36efc2dfc9eaee05da315380bd79c</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.role}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text23>
+            <Text1 Ref="39" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>4.3,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>c2e680d86c2146c77042a4c6d2bf2eaa</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.groupcode}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text25 Ref="40" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0.7,0,0.8,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>109983f6259d2345d6e8a55561603bdb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text25</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.updated_at}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text25>
+            <Text40 Ref="41" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>f46cfae9149d15e020d3b9c39e6c4dbd</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text40</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.created_at}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text40>
+            <Text26 Ref="42" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>11.7,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>7e415c892598f1ab6adec4c8eecc9ebb</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text26</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.costume1}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text26>
+            <Text27 Ref="43" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>12.4,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>dc83bb27be9e223736a1c4c9621345fc</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text27</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.costume2}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text27>
+            <Text31 Ref="44" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>13.1,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>1fe6ce3935256537e1a5c4c9c4312c88</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text31</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.costume4}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text31>
+            <Text33 Ref="45" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>13.8,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>2123c766f8346e4b6092c4ca20d9554c</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text33</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.costume5}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text33>
+            <Text35 Ref="46" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>14.5,0,0.7,0.1</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,5</Font>
+              <Guid>facb87854a1c8efb3543c4ca5e49564b</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text35</Name>
+              <Page isRef="4"/>
+              <Parent isRef="26"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.shoes}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text35>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <DataSourceName>Event</DataSourceName>
+          <Filters isList="true" count="0"/>
+          <Name>DataBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+          <Sort isList="true" count="20">
+            <value>ASC</value>
+            <value>eventitem</value>
+            <value>ASC</value>
+            <value>role</value>
+            <value>ASC</value>
+            <value>groupcode</value>
+            <value>ASC</value>
+            <value>ssagroup</value>
+            <value>ASC</value>
+            <value>institution</value>
+            <value>ASC</value>
+            <value>rhq</value>
+            <value>ASC</value>
+            <value>zone</value>
+            <value>ASC</value>
+            <value>chapter</value>
+            <value>ASC</value>
+            <value>division</value>
+            <value>ASC</value>
+            <value>name</value>
+          </Sort>
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0"/>
+      <Guid>ff5f2cd6829aceba2e8086f9ff0ce2e2</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>11.69</PageHeight>
+      <PageWidth>16.54</PageWidth>
+      <PaperSize>A3</PaperSize>
+      <Report isRef="0"/>
+      <Watermark Ref="47" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="48" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true"/>
+  <ReportAlias>Event Listing By SSA Group</ReportAlias>
+  <ReportChanged>09/30/2014 06:43:23 PM</ReportChanged>
+  <ReportCreated>03/03/2014 04:05:34 PM</ReportCreated>
+  <ReportFile>EventParticipantsListingByGroupExcel.mrt</ReportFile>
+  <ReportGuid>3a60bc306c55c7d5587ec62850afe564</ReportGuid>
+  <ReportName>Event Listing By SSA Group</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2013.3.1800</ReportVersion>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0"/>
+</StiSerializer>

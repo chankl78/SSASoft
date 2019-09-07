@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer application="StiReport" version="1.02" type="Flex">
+  <Dictionary isKey="true" Ref="1" type="Dictionary">
+    <Databases isList="true" count="1">
+      <Localhost isKey="true" Ref="2" type="Stimulsoft.Report.Dictionary.StiMySqlDatabase">
+        <Alias>Localhost</Alias>
+        <ConnectionStringEncrypted>49J1CWELSx1rGqHMakxiXots84nlTNPNYkehzE54Yj/gatnrxghDWe8T/Y3oPSFzxFb1iUhMu8Vs
+E6GY4XhlG8N498LkBVq84VvtlGQ=</ConnectionStringEncrypted>
+        <Name>Localhost</Name>
+      </Localhost>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <EventRegistration isKey="true" Ref="3" type="Stimulsoft.Report.Dictionary.StiMySqlSource">
+        <Alias>EventRegistration</Alias>
+        <Columns isList="true" count="39">
+          <value>description,System.String</value>
+          <value>name,System.String</value>
+          <value>chinesename,System.String</value>
+          <value>dateofbirth,System.Nullable`1[System.DateTime]</value>
+          <value>bloodgroup,System.String</value>
+          <value>nationality,System.String</value>
+          <value>countryofbirth,System.String</value>
+          <value>race,System.String</value>
+          <value>occupation,System.String</value>
+          <value>rhq,System.String</value>
+          <value>zone,System.String</value>
+          <value>chapter,System.String</value>
+          <value>district,System.String</value>
+          <value>position,System.String</value>
+          <value>division,System.String</value>
+          <value>emergencyname,System.String</value>
+          <value>emergencyrelationship,System.String</value>
+          <value>drugallergy,System.String</value>
+          <value>medicalhistory,System.String</value>
+          <value>nric,System.String</value>
+          <value>tel,System.String</value>
+          <value>mobile,System.String</value>
+          <value>email,System.String</value>
+          <value>emergencytel,System.String</value>
+          <value>emergencymobile,System.String</value>
+          <value>address,System.String</value>
+          <value>buildingname,System.String</value>
+          <value>unitno,System.String</value>
+          <value>postalcode,System.String</value>
+          <value>introducermobile,System.String</value>
+          <value>dateofbirth,System.String</value>
+          <value>discussionmeetingday,System.String</value>
+          <value>subscriptionref,System.String</value>
+          <value>ststartdate,System.String</value>
+          <value>stenddate,System.DateTime</value>
+          <value>clstartdate,System.String</value>
+          <value>clenddate,System.String</value>
+          <value>stenddate,System.String</value>
+          <value>expirydate,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1"/>
+        <Name>EventRegistration</Name>
+        <NameInSource>Localhost</NameInSource>
+        <Parameters isList="true" count="3">
+          <value>param1,,2,0</value>
+          <value>param2,,254,0</value>
+          <value>param3,,254,0</value>
+        </Parameters>
+        <SqlCommand>SELECT er.name, er.chinesename, er.dateofbirth, er.bloodgroup, er.nationality, er.countryofbirth, er.race, er.occupation, er.rhq, er.zone, er.chapter, er.district, er.position, er.division, er.emergencyname, er.emergencyrelationship, er.drugallergy, er.medicalhistory, pp.string4 as 'nric', pp.string1 as 'tel', pp.string2 as 'mobile', pp.string3 as 'email', pp.string5 as 'emergencytel', pp.string6 as 'emergencymobile', pp.string7 as 'introducermobile', pp.string7 as 'nric', pp.string8 as 'address', pp.string9 as 'buildingname', pp.string10 as 'unitno', pp.string11 as 'postalcode', er.subscriptionref, er.ststartdate, er.stenddate,  er.clstartdate, er.clenddate, DATE_FORMAT(er.stenddate, '%d-%M-%Y') as expirydate
+FROM Event_m_Registration er 
+	left join Print_m_Print pp on pp.resourcecodeid = er.id
+WHERE pp.userid = {param1} and er.subscriptionst = 1 and er.ststartdate &lt;= '{param2}' and er.stenddate &gt;= '{param3}';</SqlCommand>
+      </EventRegistration>
+    </DataSources>
+    <Relations isList="true" count="0"/>
+    <Report isRef="0"/>
+    <Variables isList="true" count="0"/>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0"/>
+  <MetaTags isList="true" count="0"/>
+  <Pages isList="true" count="1">
+    <Page1 isKey="true" Ref="4" type="Page">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand1 isKey="true" Ref="5" type="DataBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,11.49,8.1</ClientRectangle>
+          <Components isList="true" count="10">
+            <BarCode1 isKey="true" Ref="6" type="Stimulsoft.Report.BarCodes.StiBarCode">
+              <AutoScale>True</AutoScale>
+              <BackColor>White</BackColor>
+              <BarCodeType isKey="true" Ref="7" type="Stimulsoft.Report.BarCodes.StiRoyalMail4StateBarCodeType">
+                <CheckSum>No</CheckSum>
+              </BarCodeType>
+              <ClientRectangle>3.9,5.1,1.5,0.4</ClientRectangle>
+              <Code>{EventRegistration.postalcode}</Code>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Name>BarCode1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <ShowLabelText>False</ShowLabelText>
+            </BarCode1>
+            <Text2 isKey="true" Ref="8" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>10.7,7.1,0.8,0.5</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,26</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>{PageNumber}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>SystemVariables</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+            <Text6 isKey="true" Ref="9" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>4,2.8,3.7,0.9</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,16</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Serial No: {EventRegistration.subscriptionref}
+Expiry: {EventRegistration.expirydate}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text6>
+            <Text11 isKey="true" Ref="10" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>4.1,6.2,3.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,16</Font>
+              <Guid>d47030e029494c626c0c6290cd2efdd8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text11>
+            <Text13 isKey="true" Ref="11" type="Text">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>4,1.9,3.7,0.6</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,22,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Complimentary Copy</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text13>
+            <Text1 isKey="true" Ref="12" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>0.2,7,4.3,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>If undelivered please return to:</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Bottom</VertAlignment>
+            </Text1>
+            <Text4 isKey="true" Ref="13" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>0.2,7.2,4.3,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10,Bold</Font>
+              <Guid>fce9bdd595ec833c7887f893a8a5c454</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>Singapore Soka Association</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <Text5 isKey="true" Ref="14" type="Text">
+              <Border>Bottom;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>0.2,7.4,8.4,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>7322ad5d1e3a9dcc1c64f89414f3be32</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>10 Tampines St 81 Singapore 529014 Tel: 6787 3255 Fax: 6787 3281</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text5>
+            <Text7 isKey="true" Ref="15" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>0.2,7.6,8.4,0.3</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial Unicode MS,8</Font>
+              <Guid>0f537b9ef0d0aea3165df895660986a7</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>If there is any change of address, please indicate on this mailer and return to the above address.  Kindly give us one month for the change to be effective.
+若您的地址有所更换, 请在这纸上注明, 然后寄到以上地址, 更换将在一个月后生效。</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text7>
+            <Text14 isKey="true" Ref="16" type="Text">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>4,3.8,3.7,1.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,16</Font>
+              <Guid>e7458e397088eca81ab762919e0d7e9b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>{EventRegistration.name}
+{EventRegistration.buildingname}
+{EventRegistration.address}
+{EventRegistration.unitno}
+Singapore {EventRegistration.postalcode}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+            </Text14>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <DataSourceName>EventRegistration</DataSourceName>
+          <Filters isList="true" count="0"/>
+          <Name>DataBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+          <Sort isList="true" count="0"/>
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0"/>
+      <Guid>a53fa254a3c37731e6bf81cd250b9327</Guid>
+      <Margins>0,0.2,0,0</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>8.27</PageHeight>
+      <PageWidth>11.69</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0"/>
+      <ResetPageNumber>True</ResetPageNumber>
+      <Watermark isKey="true" Ref="17" type="Stimulsoft.Report.Components.StiWatermark">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings isKey="true" Ref="18" type="Stimulsoft.Report.Print.StiPrinterSettings"/>
+  <ReportAlias>STMailHC</ReportAlias>
+  <ReportChanged>02/18/2016 02:56:39 PM</ReportChanged>
+  <ReportCreated>03/02/2014 03:58:29 PM</ReportCreated>
+  <ReportFile>STMailHC.pdf</ReportFile>
+  <ReportGuid>bb9b3125273c61ec34d2f32a942cb28d</ReportGuid>
+  <ReportName>STMailHC</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2013.3.1800</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+
+    public class Report : Stimulsoft.Report.StiReport
+
+    {
+        
+        public Report()
+        {
+            this.InitializeComponent();
+        }
+        #region StiReport Designer generated code - do not modify#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0"/>
+</StiSerializer>

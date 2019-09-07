@@ -1,0 +1,2 @@
+tar cf - *|docker cp - ssa-run:/var/www/laravel/
+docker exec -i ssa-run bash -c "chown -R www-data:www-data /var/www/laravel/app/storage"

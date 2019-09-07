@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - ssaportal@localhost" uuid="e3a9ca21-9cee-453e-a48c-0f98b030ea21">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>ssaportal.*</schema-pattern>
+      <default-schemas>ssaportal.*</default-schemas>
+    </data-source>
+  </component>
+</project>

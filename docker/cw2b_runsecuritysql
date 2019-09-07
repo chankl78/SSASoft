@@ -1,0 +1,1 @@
+cat docker/Security.sql | docker exec -i ssa-run mysql -u root -pWorldsoft10! SSAPortal

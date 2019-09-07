@@ -1,0 +1,1026 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - ssaportal@localhost" uuid="e3a9ca21-9cee-453e-a48c-0f98b030ea21">
+    <database-info product="MySQL" version="5.5.5-10.0.15-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="ssaportal"/>
+    <table name="Access_m_AccessRights" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="userid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="resourcegroup" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="resourcecode" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="resourceid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="groupid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="eventid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="eventitem" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="accesstypeid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="startdate" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="enddate" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="starttime" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="endtime" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="create" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="read" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="update" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="delete" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="void" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="unvoid" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="print" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Access_m_Users" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="username" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="roleid" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="tel" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="mobile" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="email" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="firstlogin" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="remember_token" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="access_m_users_username_unique" unique="true" columns="username"/>
+      <index name="access_m_users_username_index" unique="false" columns="username"/>
+    </table>
+    <table name="Access_z_AccessTypes" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Access_z_Roles" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Access_z_Status" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Attendance_m_Attendance" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="attendancedate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="attendancetime" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="createbyname" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="eventid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="event" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="eventitem" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="attendancetype" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdHVhbCc="/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="attendance_m_attendance_attendancedate_index" unique="false" columns="attendancedate"/>
+      <index name="attendance_m_attendance_attendancetime_index" unique="false" columns="attendancetime"/>
+    </table>
+    <table name="Attendance_m_Person" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="attendanceid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="eventregid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="rhq" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="district" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="division" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="attendancestatus" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12" def="JzAn"/>
+      <column name="remarks" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Attendance_z_Status" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Attendance_z_Type" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Award_m_Award" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="awardtitle" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="awardtype" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="awardby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="country" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="eventid" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="awarddate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="award_m_award_uniquecode_unique" unique="true" columns="uniquecode"/>
+    </table>
+    <table name="Award_m_Detail" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="awardid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="awarddate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="rhq" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="district" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="division" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="remarks" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="award_m_detail_uniquecode_unique" unique="true" columns="uniquecode"/>
+    </table>
+    <table name="Award_z_Type" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Card_m_Card" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cardno" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="cardname" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Card_m_CardDetail" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cardid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="cardno" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="cardname" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="eventid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="eventname" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="eventdetailid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="groupid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="groupname" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="groupdetailid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="returndatetime" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="status" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Card_z_CardDetailStatus" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Card_z_CardStatus" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Common_z_Status" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Configuration_m_Branch" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="prefix" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="postfix" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="code" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="postalcode" sqlType="VARCHAR" precision="6" scale="0" nullable="true" jdbcType="12"/>
+      <column name="country" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tel" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fax" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="website" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="googlemap" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="configuration_m_branch_name_index" unique="false" columns="name"/>
+    </table>
+    <table name="Configuration_m_Company" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="postalcode" sqlType="VARCHAR" precision="6" scale="0" nullable="true" jdbcType="12"/>
+      <column name="country" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tel" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fax" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="website" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="uenno" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="gstno" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="logo" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="googlemap" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="configuration_m_company_name_index" unique="false" columns="name"/>
+    </table>
+    <table name="Configuration_m_Default" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="description" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="value" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="key" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Configuration_m_License" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="company" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="licenseno" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="noofusers" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="noofbranches" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="trial" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="trialstartdate" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="trialenddate" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Configuration_m_Migrations" schema="" catalog="ssaportal" type="TABLE">
+      <column name="migration" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="batch" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="Configuration_m_Password_Reminders" schema="" catalog="ssaportal" type="TABLE">
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="token" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <index name="configuration_m_password_reminders_email_index" unique="false" columns="email"/>
+      <index name="configuration_m_password_reminders_token_index" unique="false" columns="token"/>
+    </table>
+    <table name="Configuration_m_Resource" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="resourcegroupcode" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="code" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="resource" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="configuration_m_resource_code_unique" unique="true" columns="code"/>
+      <index name="configuration_m_resource_resource_index" unique="false" columns="resource"/>
+    </table>
+    <table name="Configuration_m_ResourceGroup" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="prefix" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="postfix" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="code" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="resourcegroup" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="enabled" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="trial" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="trialstartdate" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="trialenddate" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="applicationversion" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="databaseversion" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="configuration_m_resourcegroup_code_unique" unique="true" columns="code"/>
+      <index name="configuration_m_resourcegroup_resourcegroup_index" unique="false" columns="resourcegroup"/>
+    </table>
+    <table name="Event_m_Event" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="eventdate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="location" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="eventtype" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="createby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pdpanric" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="pdpaaddress" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="pdpatelmobileemail" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="memregistration" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="event_m_event_eventdate_index" unique="false" columns="eventdate"/>
+    </table>
+    <table name="Event_m_EventGroupCode" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="eventid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="groupcodeprefix" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="groupcode" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+    </table>
+    <table name="Event_m_EventItem" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="eventid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Event_m_Group" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="eventid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="groupid" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Event_m_Letter" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="eventid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="eventregid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="name" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="rhq" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="dist" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="division" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="printed_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Event_m_Registration" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="eventid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="eventregidforward" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ssagroup" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="eventitem" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="cardno" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="auditioncode" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="chinesename" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="gender" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rhq" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="district" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="division" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="discussionmeetingday" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="role" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nric" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="dateofbirth" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="tel" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="mobile" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="email" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="address" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="buildingname" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="unitno" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="postalcode" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="groupcodeprefix" sqlType="VARCHAR" precision="11" scale="0" nullable="true" jdbcType="12"/>
+      <column name="groupcode" sqlType="VARCHAR" precision="11" scale="0" nullable="true" jdbcType="12"/>
+      <column name="language" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J1Byb2Nlc3Npbmcn"/>
+      <column name="occupation" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="countryofbirth" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nationality" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="race" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="bloodgroup" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="height" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="commitwedsat" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="studentexamperiod" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="drugallergy" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="medicalhistory" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="travelperiod" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="emergencyname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emergencyrelationship" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emergencytel" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="emergencymobile" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="hypertension" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="heartdisease" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="longtermmedication" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="goodhealth" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="menstrual" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="BPReading1" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="BPReading2" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="BPReading3" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="medicalstatus" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12" def="J05vdCBNZWFzdXJlJw=="/>
+      <column name="medicalofficer" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="medicalremarks" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="auditionstatus" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12" def="J05vdCBBdWRpdCc="/>
+      <column name="trainer" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="auditionremarks" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="costume1" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="costume2" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="costume3" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="costume4" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="costume5" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="costume6" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="costume7" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="costume8" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="costume9" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="shoes" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="otherremarks" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="committeemember" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="introducer" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="introducermobile" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Event_m_SeaGames2015" schema="" catalog="ssaportal" type="TABLE">
+      <column name="No." sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="groupcodeprefix" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="groupcode" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="passcode" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NRIC" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Mobile" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="Event_z_EventType" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Event_z_Language" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Event_z_RegistrationStatus" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Event_z_Role" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="abbv" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="value" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Group_m_Group" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="grouptype" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="groupformed" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="groupceased" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="group_m_group_uniquecode_unique" unique="true" columns="uniquecode"/>
+    </table>
+    <table name="Group_m_Member" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="groupid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="rhq" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="district" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="positionorg" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="division" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="enrolleddate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="graduationdate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="position" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="J01lbWJlcic="/>
+      <column name="remark" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="group_m_member_uniquecode_unique" unique="true" columns="uniquecode"/>
+      <index name="group_m_member_personid_index" unique="false" columns="personid"/>
+    </table>
+    <table name="Group_m_MemberPosition" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="groupmemberid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="appointeddate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="graduateddate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="position" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" def="J01lbWJlcic="/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="group_m_memberposition_uniquecode_unique" unique="true" columns="uniquecode"/>
+    </table>
+    <table name="Group_z_GroupType" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Group_z_MemberStatus" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Group_z_Position" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="groupid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lineno" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Group_z_Status" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Logs_m_Logs" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="userid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="logtype" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="resourceid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="resourcecode" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="From" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="To" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="ipaddress" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="session" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Logs_z_LogType" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Logs_z_Status" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Members_m_ImportSSA" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="searchcode" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nric" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chinese_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="alias" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="gender" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="citizenship" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="country_of_birth" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date_of_birth" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tel_home" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tel_mobile" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="tel_office" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="converted_on" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="classification" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="appointed_date" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="hq" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="dist" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="division" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address1" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="poBox" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="address2" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="buildingName" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="postalcode" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="addressType" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="language_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="language_code" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="Members_m_MedicalHistory" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="event" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="action" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Remark" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="createby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="handleby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Members_m_Request" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="rhq" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="district" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="division" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nric" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="tel" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="mobile" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="email" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="address" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="postalcode" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="createby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="handleby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Remark" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="members_m_request_personid_index" unique="false" columns="personid"/>
+    </table>
+    <table name="Members_m_SSA" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="searchcode" sqlType="VARCHAR" precision="3" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="chinesename" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="dateofbirth" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="rhq" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="district" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="division" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nric" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="tel" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="mobile" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="email" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="address" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="buildingname" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="unitno" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="postalcode" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="lengthofpractise" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="language" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="occupation" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="countryofbirth" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nationality" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="race" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="bloodgroup" sqlType="VARCHAR" precision="3" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nodrugallergy" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="drugallergy" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="introducer" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="introducermobile" sqlType="BLOB" precision="65535" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="emergencyname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emergencyrelationship" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="emergencytel" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="emergencymobile" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="gender" sqlType="VARCHAR" precision="6" scale="0" nullable="true" jdbcType="12"/>
+      <column name="classification" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="members_m_ssa_personid_unique" unique="true" columns="personid"/>
+      <index name="members_m_ssa_personid_index" unique="false" columns="personid"/>
+    </table>
+    <table name="Members_z_OrgChart" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="rhq" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="rhqabbv" sqlType="VARCHAR" precision="3" scale="0" nullable="false" jdbcType="12"/>
+      <column name="zoneabbv" sqlType="VARCHAR" precision="4" scale="0" nullable="false" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="chapabbv" sqlType="VARCHAR" precision="4" scale="0" nullable="false" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="district" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="day" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="language" sqlType="VARCHAR" precision="1" scale="0" nullable="true" jdbcType="12"/>
+      <column name="time" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Members_z_Position" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="code" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="level" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Members_z_Status" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Print_m_Print" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="userid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="resourceid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="resourcecodeid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string1" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string2" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string3" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string4" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string5" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string6" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string7" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string8" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string9" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string10" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string11" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string12" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string13" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string14" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="string15" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Print_m_SecurityPass" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="userid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="eventid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="eventdetailid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rhq" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="zone" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="chapter" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="district" sqlType="VARCHAR" precision="2" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Staff_m_Staff" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uniquecode" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="postalcode" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="tel" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="teloffice" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mobile" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="email" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="stafftype" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0Z1bGwtVGltZSc="/>
+      <column name="department" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0dlbmVyYWwgQWRtaW4n"/>
+      <column name="position" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J1N0YWZmJw=="/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J0FjdGl2ZSc="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="staff_m_staff_name_index" unique="false" columns="name"/>
+    </table>
+    <table name="Staff_z_Department" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Staff_z_Position" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Staff_z_Status" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Staff_z_Type" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="TABLE 61" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rhq" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="zone" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="division" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ssagroup" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="eventitem" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="memberid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="personid" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+    </table>
+    <table name="Vehicle_m_Booking" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="bookingdate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="starttime" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="endtime" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="vehicleno" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="bookbyname" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="drivebyname" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="event" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="route" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="approvedby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="approveddatetime" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Overnight" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="Overnightapprovedby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="J1Byb2Nlc3Npbmcn"/>
+      <column name="remark" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="vehiclecheckout" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="vehiclecheckin" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="previousmilage" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="lastmilage" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="cashcardvalue" sqlType="DECIMAL" precision="8" scale="2" nullable="false" jdbcType="3" def="MC4wMA=="/>
+      <column name="lowparkingcoupons" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="lowfuel" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="vehicle_m_booking_bookingdate_index" unique="false" columns="bookingdate"/>
+      <index name="vehicle_m_booking_endtime_index" unique="false" columns="endtime"/>
+      <index name="vehicle_m_booking_starttime_index" unique="false" columns="starttime"/>
+    </table>
+    <table name="Vehicle_m_CashCard" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="description" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Vehicle_m_CashCard_Topup" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="topupdate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="topupvalue" sqlType="DECIMAL" precision="8" scale="2" nullable="false" jdbcType="3"/>
+      <column name="finalbalance" sqlType="DECIMAL" precision="8" scale="2" nullable="false" jdbcType="3"/>
+      <column name="topupby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Vehicle_m_Vehicle" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="vehicleno" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Vehicle_m_VehicleMaintenance" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="vehicleno" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="maintenancedate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="maintenancetype" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="cost" sqlType="DECIMAL" precision="8" scale="2" nullable="false" jdbcType="3"/>
+      <column name="sendby" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Vehicle_z_BookingStatus" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Vehicle_z_Driver" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vehicleno" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="Vehicle_z_MaintenanceType" schema="" catalog="ssaportal" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="value" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="deleted_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+  </data-source>
+</component>

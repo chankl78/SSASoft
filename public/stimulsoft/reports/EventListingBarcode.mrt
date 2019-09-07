@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer application="StiReport" version="1.02" type="Flex">
+  <Dictionary type="Dictionary" isKey="true" Ref="1">
+    <Databases isList="true" count="1">
+      <Localhost type="Stimulsoft.Report.Dictionary.StiMySqlDatabase" isKey="true" Ref="2">
+        <Alias>Localhost</Alias>
+        <ConnectionStringEncrypted>49J1CWELSx1rGqHMakxiXots84nlTNPNYkehzE54Yj/gatnrxghDWe8T/Y3oPSFzxFb1iUhMu8Vs
+E6GY4XhlG8N498LkBVq84VvtlGQ=</ConnectionStringEncrypted>
+        <Name>Localhost</Name>
+      </Localhost>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Event type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true" Ref="3">
+        <Alias>Event</Alias>
+        <Columns isList="true" count="26">
+          <value>name,System.String</value>
+          <value>rhq,System.String</value>
+          <value>zone,System.String</value>
+          <value>chapter,System.String</value>
+          <value>district,System.String</value>
+          <value>position,System.String</value>
+          <value>division,System.String</value>
+          <value>status,System.String</value>
+          <value>coname,System.String</value>
+          <value>uniquecode,System.String</value>
+          <value>ssagroup,System.String</value>
+          <value>eventitem,System.String</value>
+          <value>institution,System.String</value>
+          <value>role,System.String</value>
+          <value>groupcode,System.String</value>
+          <value>created_at,System.String</value>
+          <value>introducer,System.String</value>
+          <value>updated_at,System.String</value>
+          <value>dateofbirth,System.String</value>
+          <value>emergencyname,System.String</value>
+          <value>emergencyrelationship,System.String</value>
+          <value>auditioncode,System.String</value>
+          <value>otherremarks,System.String</value>
+          <value>cardno,System.String</value>
+          <value>cdcardno,System.String</value>
+          <value>cardname,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1"/>
+        <Name>Event</Name>
+        <NameInSource>Localhost</NameInSource>
+        <Parameters isList="true" count="1">
+          <value>param1,,0,25</value>
+        </Parameters>
+        <SqlCommand>SELECT er.name, er.rhq, er.zone, er.chapter, er.district, er.division, er.position, er.ssagroup, er.eventitem,  er.role, er.auditioncode, er.groupcode, er.costume9 as institution, er.introducer, er.dateofbirth, er.emergencyname, er.emergencyrelationship, er.created_at, er.updated_at, er.status, er.otherremarks, er.cardno, cd.cardno as cdcardno, cd.cardname
+FROM Event_m_Event ee 
+LEFT JOIN Event_m_Registration er on ee.id = er.eventid
+LEFT JOIN Card_m_CardDetail cd on er.cardno = cd.cardno
+WHERE er.deleted_at is null and ee.uniquecode = {param1} and role="Performer"
+ORDER BY er.eventitem,er.rhq, er.zone, er.chapter, er.district, er.division</SqlCommand>
+      </Event>
+    </DataSources>
+    <Relations isList="true" count="0"/>
+    <Report isRef="0"/>
+    <Variables isList="true" count="0"/>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0"/>
+  <MetaTags isList="true" count="0"/>
+  <Pages isList="true" count="1">
+    <Page1 type="Page" isKey="true" Ref="4">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand1 type="DataBand" isKey="true" Ref="5">
+          <Brush>Transparent</Brush>
+          <CanBreak>True</CanBreak>
+          <ClientRectangle>0,0.2,7.49,0.5</ClientRectangle>
+          <Columns>3</Columns>
+          <Components isList="true" count="3">
+            <Text3 type="Text" isKey="true" Ref="6">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0,0,1.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.name}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text10 type="Text" isKey="true" Ref="7">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>1.5,0,0.5,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>96194b492e2a1c349cf8870f05c2e94a</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <ShrinkFontToFit>True</ShrinkFontToFit>
+              <Text>{Event.rhq}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>DataColumn</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text10>
+            <BarCode1 type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true" Ref="8">
+              <AutoScale>True</AutoScale>
+              <BackColor>White</BackColor>
+              <BarCodeType type="Stimulsoft.Report.BarCodes.StiCode128aBarCodeType" isKey="true" Ref="9"/>
+              <ClientRectangle>0,0.2,2.4,0.3</ClientRectangle>
+              <Code>{Event.cardname}</Code>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <VertAlignment>Center</VertAlignment>
+            </BarCode1>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <DataSourceName>Event</DataSourceName>
+          <Filters isList="true" count="0"/>
+          <Name>DataBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+          <Sort isList="true" count="20">
+            <value>ASC</value>
+            <value>eventitem</value>
+            <value>ASC</value>
+            <value>role</value>
+            <value>ASC</value>
+            <value>groupcode</value>
+            <value>ASC</value>
+            <value>ssagroup</value>
+            <value>ASC</value>
+            <value>institution</value>
+            <value>ASC</value>
+            <value>rhq</value>
+            <value>ASC</value>
+            <value>zone</value>
+            <value>ASC</value>
+            <value>chapter</value>
+            <value>ASC</value>
+            <value>division</value>
+            <value>ASC</value>
+            <value>name</value>
+          </Sort>
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0"/>
+      <Guid>ff5f2cd6829aceba2e8086f9ff0ce2e2</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11.69</PageHeight>
+      <PageWidth>8.27</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0"/>
+      <Watermark type="Stimulsoft.Report.Components.StiWatermark" isKey="true" Ref="10">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" Ref="11"/>
+  <ReportAlias>Event Listing By All</ReportAlias>
+  <ReportChanged>01/16/2015 03:48:24 PM</ReportChanged>
+  <ReportCreated>03/03/2014 04:05:34 PM</ReportCreated>
+  <ReportFile>EventListingContactsByAll.mrt</ReportFile>
+  <ReportGuid>345d4addaf205bc8b051f1b6e9b5cb08</ReportGuid>
+  <ReportName>Event Listing By All</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2013.3.1800</ReportVersion>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0"/>
+</StiSerializer>

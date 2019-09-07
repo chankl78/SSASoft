@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer application="StiReport" type="Flex" version="1.02">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <Databases isList="true" count="1">
+      <Localhost Ref="2" type="Stimulsoft.Report.Dictionary.StiMySqlDatabase" isKey="true">
+        <Alias>Localhost</Alias>
+        <ConnectionStringEncrypted>49BzCUQL+4XiXNmNagTgXotWu4lvBdNNYlqh2Hl4YhfRbPfrYQ7zWe94/YnoACFnxFq1icVMu8Vs
+E9WYTVBtRsN49a9iC6O8Rl/t9GQ=</ConnectionStringEncrypted>
+        <Name>Localhost</Name>
+      </Localhost>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Event Ref="3" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>Event</Alias>
+        <Columns isList="true" count="10">
+          <value>name,System.String</value>
+          <value>description,System.String</value>
+          <value>rhq,System.String</value>
+          <value>zone,System.String</value>
+          <value>chapter,System.String</value>
+          <value>district,System.String</value>
+          <value>position,System.String</value>
+          <value>division,System.String</value>
+          <value>status,System.String</value>
+          <value>coname,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1"/>
+        <Name>Event</Name>
+        <NameInSource>Localhost</NameInSource>
+        <Parameters isList="true" count="0"/>
+        <SqlCommand>SELECT cc.name as coname, ee.description, er.name, er.rhq, er.zone, er.chapter, er.district, er.position, er.division, er.status
+FROM Event_m_Event ee 
+left join Event_m_Registration er on ee.id = er.eventid 
+cross join Configuration_m_Company cc 
+WHERE ee.id = 1 and er.role="Performer" and er.deleted_at is null
+Order By er.status, er.division, er.rhq, er.zone, er.chapter, er.district, er.position;</SqlCommand>
+      </Event>
+    </DataSources>
+    <Relations isList="true" count="0"/>
+    <Report isRef="0"/>
+    <Variables isList="true" count="0"/>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0"/>
+  <MetaTags isList="true" count="0"/>
+  <Pages isList="true" count="1">
+    <Page1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <PageHeaderBand1 Ref="5" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,1</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text1 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,13,0.6</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,14</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>{Event.coname} - {Event.description}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <HorizontalLinePrimitive1 Ref="7" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0.8,19,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap Ref="8" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Size>3</Size>
+              <StartCap Ref="9" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </PageHeaderBand1>
+        <PageFooterBand1 Ref="10" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,26.9,19,0.8</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text3 Ref="11" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.3,5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>6e23ed3aa28ea2e771f18f6b661838bb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4"/>
+              <Parent isRef="10"/>
+              <Text>Printed on - {ReportCreated}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text4 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14,0.3,5,0.4</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>ca73b74560731523193c8f6c90211a25</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4"/>
+              <Parent isRef="10"/>
+              <Text>{PageNofM}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <HorizontalLinePrimitive2 Ref="13" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,0.3,19,0.0254</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap Ref="14" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="10"/>
+              <Size>3</Size>
+              <StartCap Ref="15" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>PageFooterBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </PageFooterBand1>
+      </Components>
+      <Conditions isList="true" count="0"/>
+      <Guid>01195a3684f57f1b902f8f5f61b994a9</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0"/>
+      <Watermark Ref="16" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="17" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true"/>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>03/05/2014 07:21:40 AM</ReportChanged>
+  <ReportCreated>03/05/2014 07:13:16 AM</ReportCreated>
+  <ReportFile/>
+  <ReportGuid>c355ee29acc5ef7234288f671251dd20</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2013.3.1800</ReportVersion>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0"/>
+</StiSerializer>

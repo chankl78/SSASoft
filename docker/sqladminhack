@@ -1,0 +1,1 @@
+echo 'update Access_m_Users set roleid="eyJpdiI6InA5WFhwbnlSd1F2d3UreWwzaXlmNTVDZWV3Rlg1NmVMR0V1cnlNNThJeTQ9IiwidmFsdWUiOiI2MzVqZG00bFBnN0ZFR2Zyam9iRENYZ29BeHI4VU5TMGtNZU5OWVZxeTBjPSIsIm1hYyI6IjcwZGVjY2YxYjM0NDdjMWRjMmRkNTI4MjgzY2MxZTEyZWEyYTg4NmMyMmNmNzkzZmU4NjI3NGQ3NmRiZTgzMjIifQ==" where username="testing";'|docker exec -i ssa-run mysql -u root -pWorldsoft10! SSAPortal

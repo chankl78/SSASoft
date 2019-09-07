@@ -1,0 +1,6 @@
+tar cf - *|docker cp - ssa-run:/var/www/laravel/
+docker exec ssa-run mysql -u root -pWorldsoft10! -e "CREATE DATABASE SSAPortal"
+cat docker/DatabaseScript.sql | docker exec -i ssa-run mysql -u root -pWorldsoft10! SSAPortal
+cat docker/Security.sql | docker exec -i ssa-run mysql -u root -pWorldsoft10! SSAPortal
+docker exec ssa-run bash -c "cd /var/www/laravel;composer install"
+docker exec ssa-run bash -c "chown -R www-data:www-data /var/www/laravel/app/storage"

@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer application="StiReport" version="1.02" type="Flex">
+  <Dictionary isKey="true" Ref="1" type="Dictionary">
+    <Databases isList="true" count="1">
+      <Localhost isKey="true" Ref="2" type="Stimulsoft.Report.Dictionary.StiMySqlDatabase">
+        <Alias>Localhost</Alias>
+        <ConnectionStringEncrypted>49J1CWELSx1rGqHMakxiXots84nlTNPNYkehzE54Yj/gatnrxghDWe8T/Y3oPSFzxFb1iUhMu8Vs
+E6GY4XhlG8N498LkBVq84VvtlGQ=</ConnectionStringEncrypted>
+        <Name>Localhost</Name>
+      </Localhost>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <Event isKey="true" Ref="3" type="Stimulsoft.Report.Dictionary.StiMySqlSource">
+        <Alias>Event</Alias>
+        <Columns isList="true" count="10">
+          <value>name,System.String</value>
+          <value>description,System.String</value>
+          <value>rhq,System.String</value>
+          <value>zone,System.String</value>
+          <value>chapter,System.String</value>
+          <value>district,System.String</value>
+          <value>position,System.String</value>
+          <value>division,System.String</value>
+          <value>status,System.String</value>
+          <value>coname,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1"/>
+        <Name>Event</Name>
+        <NameInSource>Localhost</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>param1,,2,0</value>
+          <value>param2,,254,0</value>
+        </Parameters>
+        <SqlCommand>SELECT cc.name as coname, ee.description, er.name, er.rhq, er.zone, er.chapter, er.district, er.position, er.division, er.status
+FROM Event_m_Event ee 
+left join Event_m_Registration er on ee.id = er.eventid 
+cross join Configuration_m_Company cc 
+WHERE ee.uniquecode = {param1} and er.role="{param2}" and er.deleted_at is null
+Order By er.status, er.division, er.rhq, er.zone, er.chapter, er.district, er.position;</SqlCommand>
+      </Event>
+    </DataSources>
+    <Relations isList="true" count="0"/>
+    <Report isRef="0"/>
+    <Variables isList="true" count="0"/>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0"/>
+  <MetaTags isList="true" count="0"/>
+  <Pages isList="true" count="1">
+    <Page1 isKey="true" Ref="4" type="Page">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="3">
+        <PageHeaderBand1 isKey="true" Ref="5" type="PageHeaderBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,10.91,0.39</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text1 isKey="true" Ref="6" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,9.42,0.24</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,14</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Text>{Event.coname} - {Event.description}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <HorizontalLinePrimitive1 isKey="true" Ref="7" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.3,10.9,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="8" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="5"/>
+              <Size>3</Size>
+              <StartCap isKey="true" Ref="9" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </PageHeaderBand1>
+        <PageFooterBand1 isKey="true" Ref="10" type="PageFooterBand">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,7.18,10.91,0.31</ClientRectangle>
+          <Components isList="true" count="3">
+            <Text3 isKey="true" Ref="11" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.12,3.87,0.16</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>6e23ed3aa28ea2e771f18f6b661838bb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="4"/>
+              <Parent isRef="10"/>
+              <Text>Printed On - {Today.ToString("dd-MMM-yyyy")} {Time.ToString("HH:mm:ss")}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+            <Text4 isKey="true" Ref="12" type="Text">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8,0.12,2.9,0.2</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,8</Font>
+              <Guid>ca73b74560731523193c8f6c90211a25</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="4"/>
+              <Parent isRef="10"/>
+              <Text>{PageNofM}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text4>
+            <HorizontalLinePrimitive2 isKey="true" Ref="13" type="HorizontalLinePrimitive">
+              <ClientRectangle>0,0.12,10.9,0.01</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0"/>
+              <EndCap isKey="true" Ref="14" type="Cap">
+                <Color>Black</Color>
+              </EndCap>
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="10"/>
+              <Size>3</Size>
+              <StartCap isKey="true" Ref="15" type="Cap">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <Name>PageFooterBand1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+        </PageFooterBand1>
+        <CrossTab1 isKey="true" Ref="16" type="Stimulsoft.Report.CrossTab.StiCrossTab">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.7,10.9,1.8</ClientRectangle>
+          <Components isList="true" count="13">
+            <CrossTab1_RowTotal1 isKey="true" Ref="17" type="CrossRowTotal">
+              <Border>All;[140:130:40];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:190]</Brush>
+              <ClientRectangle>0,1.22,0.63,0.24</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>1823e4d027d6044546f58f74df94e5e6</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_RowTotal1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>Total</Text>
+              <TextBrush>Black</TextBrush>
+            </CrossTab1_RowTotal1>
+            <CrossTab1_Row1_Title isKey="true" Ref="18" type="CrossTitle">
+              <Border>All;[140:130:40];1;Solid;False;4;Black</Border>
+              <Brush>Khaki</Brush>
+              <ClientRectangle>0,0.26,0.24,0.47</ClientRectangle>
+              <Font>Arial,10</Font>
+              <Guid>e7bd89714de3544b07038f74df95fc33</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_Row1_Title</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>rhq</Text>
+              <TextBrush>[90:80:0]</TextBrush>
+              <TypeOfComponent>Row:CrossTab1_Row1</TypeOfComponent>
+            </CrossTab1_Row1_Title>
+            <CrossTab1_RowTotal2 isKey="true" Ref="19" type="CrossRowTotal">
+              <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>0.24,0.98,0.39,0.24</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>315c29dab3ead2214e128f76dbb3fc2b</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_RowTotal2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>Total</Text>
+              <TextBrush>Black</TextBrush>
+            </CrossTab1_RowTotal2>
+            <CrossTab1_Row2_Title isKey="true" Ref="20" type="CrossTitle">
+              <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.24,0.26,0.39,0.47</ClientRectangle>
+              <Font>Arial,10</Font>
+              <Guid>d787f4f516ec151a981a8f76dbb3810d</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_Row2_Title</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>zone</Text>
+              <TextBrush>[105:105:105]</TextBrush>
+              <TypeOfComponent>Row:CrossTab1_Row2</TypeOfComponent>
+            </CrossTab1_Row2_Title>
+            <CrossTab1_ColTotal1 isKey="true" Ref="21" type="CrossColumnTotal">
+              <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>1.36,0.26,0.31,0.47</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>9f7ac235d26c2426e3f392991ee785a2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_ColTotal1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>Total</Text>
+              <TextBrush>Black</TextBrush>
+            </CrossTab1_ColTotal1>
+            <CrossTab1_LeftTitle isKey="true" Ref="22" type="CrossTitle">
+              <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,0.63,0.24</ClientRectangle>
+              <Font>Arial,10</Font>
+              <Guid>e3577e8b53c591469fa892991ee84d54</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_LeftTitle</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>Event</Text>
+              <TextBrush>[105:105:105]</TextBrush>
+              <TypeOfComponent>LeftTitle</TypeOfComponent>
+            </CrossTab1_LeftTitle>
+            <CrossTab1_ColTotal2 isKey="true" Ref="23" type="CrossColumnTotal">
+              <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:255]</Brush>
+              <ClientRectangle>1.04,0.49,0.31,0.24</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>ba360e16c3b9fe40b58d92992bce9419</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_ColTotal2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>Total</Text>
+              <TextBrush>Black</TextBrush>
+            </CrossTab1_ColTotal2>
+            <CrossTab1_Row1 isKey="true" Ref="24" type="CrossRow">
+              <Alias>rhq</Alias>
+              <Border>All;[140:130:40];1;Solid;False;4;Black</Border>
+              <Brush>Khaki</Brush>
+              <ClientRectangle>0,0.75,0.24,0.47</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <DisplayValue>{Event.rhq}</DisplayValue>
+              <Font>Arial,10</Font>
+              <Guid>148dd67bb02ce109a5058f74df929b1e</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_Row1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>rhq</Text>
+              <TextBrush>[90:80:0]</TextBrush>
+              <TotalGuid>1823e4d027d6044546f58f74df94e5e6</TotalGuid>
+              <Value>{Event.rhq}</Value>
+            </CrossTab1_Row1>
+            <CrossTab1_Row2 isKey="true" Ref="25" type="CrossRow">
+              <Alias>zone</Alias>
+              <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.24,0.75,0.39,0.24</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <DisplayValue>{Event.zone}</DisplayValue>
+              <Font>Arial,10</Font>
+              <Guid>cf8e00f40497743d5c8e8f76dbb0d38f</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_Row2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>zone</Text>
+              <TextBrush>[105:105:105]</TextBrush>
+              <TotalGuid>315c29dab3ead2214e128f76dbb3fc2b</TotalGuid>
+              <Value>{Event.zone}</Value>
+            </CrossTab1_Row2>
+            <CrossTab1_Column1 isKey="true" Ref="26" type="CrossColumn">
+              <Alias>division</Alias>
+              <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.65,0.26,0.71,0.24</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <DisplayValue>{Event.division}</DisplayValue>
+              <Font>Arial,10</Font>
+              <Guid>050ca39d45f2af74fc9192991ee338f2</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_Column1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>division</Text>
+              <TextBrush>[105:105:105]</TextBrush>
+              <TotalGuid>9f7ac235d26c2426e3f392991ee785a2</TotalGuid>
+              <Value>{Event.division}</Value>
+            </CrossTab1_Column1>
+            <CrossTab1_Column2 isKey="true" Ref="27" type="CrossColumn">
+              <Alias>status</Alias>
+              <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.65,0.49,0.39,0.24</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <DisplayValue>{Event.status}</DisplayValue>
+              <Font>Arial,10</Font>
+              <Guid>1aaca4ef32909704ad4092992bcb03f8</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_Column2</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <ShowTotal>False</ShowTotal>
+              <Text>status</Text>
+              <TextBrush>[105:105:105]</TextBrush>
+              <TotalGuid>ba360e16c3b9fe40b58d92992bce9419</TotalGuid>
+              <Value>{Event.status}</Value>
+            </CrossTab1_Column2>
+            <CrossTab1_Sum1 isKey="true" Ref="28" type="CrossSummary">
+              <Alias>name</Alias>
+              <Border>All;[140:130:40];1;Solid;False;4;Black</Border>
+              <Brush>[255:255:240]</Brush>
+              <ClientRectangle>0.65,0.75,0.39,0.24</ClientRectangle>
+              <Conditions isList="true" count="0"/>
+              <Font>Arial,10</Font>
+              <Guid>5268d0bdcf964b77c2a98f7529ede443</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_Sum1</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Summary>Count</Summary>
+              <Text>0</Text>
+              <TextBrush>Black</TextBrush>
+              <Value>{Event.name}</Value>
+            </CrossTab1_Sum1>
+            <CrossTab1_RightTitle isKey="true" Ref="29" type="CrossTitle">
+              <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.65,0,1.02,0.24</ClientRectangle>
+              <Font>Arial,10</Font>
+              <Guid>044b40a785aa1a0e402392992bce2b13</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>CrossTab1_RightTitle</Name>
+              <Page isRef="4"/>
+              <Parent isRef="16"/>
+              <Restrictions>AllowMove, AllowResize, AllowSelect, AllowChange</Restrictions>
+              <Text>division, status</Text>
+              <TextBrush>[105:105:105]</TextBrush>
+              <TypeOfComponent>RightTitle</TypeOfComponent>
+            </CrossTab1_RightTitle>
+          </Components>
+          <Conditions isList="true" count="0"/>
+          <DataRelationName/>
+          <DataSourceName>Event</DataSourceName>
+          <EmptyValue/>
+          <Filters isList="true" count="0"/>
+          <Name>CrossTab1</Name>
+          <Page isRef="4"/>
+          <Parent isRef="4"/>
+          <Sort isList="true" count="0"/>
+        </CrossTab1>
+      </Components>
+      <Conditions isList="true" count="0"/>
+      <Guid>01195a3684f57f1b902f8f5f61b994a9</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>8.27</PageHeight>
+      <PageWidth>11.69</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0"/>
+      <UnlimitedBreakable>False</UnlimitedBreakable>
+      <Watermark isKey="true" Ref="30" type="Stimulsoft.Report.Components.StiWatermark">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings isKey="true" Ref="31" type="Stimulsoft.Report.Print.StiPrinterSettings"/>
+  <ReportAlias>Event Statistic</ReportAlias>
+  <ReportChanged>02/20/2016 10:53:51 AM</ReportChanged>
+  <ReportCreated>03/05/2014 07:13:16 AM</ReportCreated>
+  <ReportFile>EventStatictis.mrt</ReportFile>
+  <ReportGuid>46cc6e58a96601da2312fc9901c762eb</ReportGuid>
+  <ReportName>Event Statistic</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2013.3.1800</ReportVersion>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0"/>
+</StiSerializer>
