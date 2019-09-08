@@ -25,15 +25,15 @@ class DefaultValueSeeder extends Seeder {
 		AccesszStatus::create(array('value' => 'Banned'));
 
 		DB::table('Access_m_Users')->delete();
-        AccessmUsers::create(array('name' => 'SSASoft Administrator', 'username' => 'ssasoft', 'uniquecode' => date('YmdHis') - 453679, 
-        	'password' => Hash::make('ssasoft529014'), 'roleid' => 'System Administrator', 'tel' => '1234 5678', 
-        	'mobile' => '1234 5678', 'email' => 'kuanleang@ssabuddhist.org', 'firstlogin' => 0));
+        AccessmUsers::create(array('name' => 'SSASoft Administrator', 'username' => 'ssasoft', 'uniquecode' => date('YmdHis') - 239042, 
+        	'password' => Hash::make('123456789'), 'roleid' => 'System Administrator', 'tel' => '1234 5678', 
+        	'mobile' => '1234 5678', 'email' => 'c@c.abc', 'firstlogin' => 0));
 
         DB::table('Access_m_AccessRights')->delete();
         AccessmAccessRights::create(array('userid' => 1, 'resourcegroup' => 'SYSA', 'resourcecode' => 'SYSA', 
         	'accesstypeid' => 0, 'startdate' => '0000-00-00', 'enddate' => '0000-00-00', 'starttime' => '00:00:00', 
         	'endtime' => '00:00:00', 'create' => true, 'read' => true, 'update' => true, 'delete' => true, 'void' => true, 
-        	'unvoid' => true, 'print' => true, 'uniquecode' => date('YmdHis') - 7483905));
+        	'unvoid' => true, 'print' => true, 'uniquecode' => date('YmdHis') - 345678));
 
 		// Staffs
 		DB::table('Staff_z_Department')->delete();
