@@ -26,7 +26,7 @@ class LeadersPortalEventController extends BaseController
 		$zone_options = array('' => 'Please Select a Zone') + MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
 		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
 		$memposition_options = MemberszPosition::Role()->whereIn('name', array('Believer', 'New Friend', 'Member'))->orderBy('name', 'ASC')->lists('name', 'code');
-		if ($studyeventtype == true){ LogsfLogs::postLogs('Read', 34, 0, ' - Leaders Portal - true ' . $studyeventtype, NULL, NULL, 'Failed'); $language_options = array('' => 'Please Select a Language') + EventzLanguage::Role()->where('studyexam', 1)->lists('value', 'value'); }
+		if ($studyeventtype == true){ $language_options = array('' => 'Please Select a Language') + EventzLanguage::Role()->where('studyexam', 1)->lists('value', 'value'); }
 		else { $language_options = array('' => 'Please Select a Language') + EventzLanguage::Role()->where('studyexam', 0)->lists('value', 'value'); }
 		$country_options = array('' => 'Please Select a Country') + EventzCountry::Role()->lists('value', 'value');
 		$position_options = MemberszPosition::Role()->whereIn('level', array('bel', 'nf', 'mem', 'district'))->orderBy('name', 'ASC')->lists('name', 'code');
