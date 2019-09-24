@@ -268,7 +268,7 @@
 									<div class="widget-header widget-header-small">
 										<h6 class="widget-title">
 											<i class="icon-sort"></i>
-											Register Member By NRIC (Express Edition)
+											Register Member By MMS UUID
 										</h6>
 										<div class="widget-toolbar">
 											<a href="#" data-action="fullscreen" class="orange2">
@@ -287,7 +287,7 @@
 											{{ Form::open(array('action' => 'EventAttendanceController@postNricSearchExpress', 'id' => 'resourcenricesearchexpress', 'class' => 'form-horizontal')) }}
 												<br />
 												<div class="form-group">
-													{{ Form::label('nricsearchexpress', 'Search (NRIC):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+													{{ Form::label('nricsearchexpress', 'Search (MMS UUID):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 													<div class="col-xs-12 col-sm-9">
 														<div class="clearfix">
 															{{ Form::text('nricsearchexpress', '', array('class' => 'col-xs-12 col-sm-9', 'id' => 'nricsearchexpress'));}}

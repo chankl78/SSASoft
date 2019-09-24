@@ -62,7 +62,7 @@ class EventAttendanceController extends BaseController
 		// Step 1 - Search membership
 		try
 		{
-			$memberid = MembersmSSA::getidbynrichash(Input::get('nricsearch'));
+			$memberid = MembersmSSA::getidbymmsuuid(Input::get('nricsearch'));
 		}
 		catch(\Exception $e) { $memberid = 0; }
 		
