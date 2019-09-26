@@ -71,6 +71,18 @@ class AccessmUsers extends Eloquent implements UserInterface, RemindableInterfac
         return $mid;
     }
 
+    public static function getusermemberid($value)
+    {
+        $mid = DB::table('Access_m_Users')->where('username', $value)->pluck('memberid');
+        return $mid;
+    }
+
+    public static function getcheckmemberid($value)
+    {
+        if(AccessmUsers::where('username', $value)->pluck('memberid') == 0) { return true; }
+        else { return false; }
+    }
+
 	public static function boot()
     {
         parent::boot();

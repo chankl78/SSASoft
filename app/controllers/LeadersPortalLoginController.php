@@ -20,20 +20,9 @@ class LeadersPortalLoginController extends BaseController {
 		try
 		{
 			if (Auth::attempt($credentials, $remember)) {
-				try
+				if (AccessmUsers::getcheckmemberid(Input::get('username')) == false)
 				{
-					if (MembersmSSA::getidbyemailhashboelogin(Input::get('username')) == "")
-					{
-						if (Cache::has('alerts_message_Failed_Login')) { Cache::put('alerts_message_Failed_Login', 'true', 1); }
-						else { Cache::add('alerts_message_Failed_Login', 'true', 1); }
-	
-						Cache::put('alerts_message', 'Failed to Login!  Please verify your Username or Password!', 1);
-	
-						LogsfLogs::postLogs('Login', 3, 0, ' Failed to Login - Wrong Username or Password -> Stuck in Login', NULL, NULL, 'Failed');
-						return Redirect::back()->withInput();
-					}
-	
-					$member = MembersmSSA::findorfail(MembersmSSA::getidbyemailhashboelogin(Input::get('username')), array('uniquecode', 'name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position'));
+					$member = MembersmSSA::findorfail(AccessmUsers::getusermemberid(Input::get('username')), array('uniquecode', 'name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position'));
 					Session::put('gakkaiuser',  md5(Input::get('username')));
 					Session::put('gakkaiusername',  $member['name']);
 					Session::put('gakkaiuserrhq',  $member['rhq']);
@@ -45,18 +34,18 @@ class LeadersPortalLoginController extends BaseController {
 					Session::put('gakkaiuserpositionlevel',  MemberszPosition::getPositionLevel($member['position']));
 					Session::put('gakkaiuseruc',  $member['uniquecode']);
 					Session::put('gakkaiuserboe',  true);
-	
+
 					LogsfLogs::postLogs('Login', 3, 0, ' Name: ' . $member['name'] . ' RHQ: ' . $member['rhq'] . ' Zone: ' . $member['zone'] . ' Chapter: ' . $member['chapter'] . ' District: ' . $member['district'] . ' Division: ' . $member['division'] . ' Position: ' . $member['position'] . ' - ' . MemberszPosition::getPositionLevel($member['position']) . ' - Signed In -> Dashboard', NULL, NULL, 'Success');
-					return Redirect::action('LeadersPortalDashboardController@getIndex');	
+					return Redirect::action('LeadersPortalDashboardController@getIndex');
 				}
-				catch(\Exception $e)
+				else
 				{
 					if (Cache::has('alerts_message_Failed_Login')) { Cache::put('alerts_message_Failed_Login', 'true', 1); }
 					else { Cache::add('alerts_message_Failed_Login', 'true', 1); }
-	
-					Cache::put('alerts_message', 'Failed to Login!  Please verify your Email or Password!', 1);
-	
-					LogsfLogs::postLogs('Login', 3, 0, ' Failed to Login - Wrong Email or Password -> Stuck in Login ' . Input::get('username'), NULL, NULL, 'Failed');
+		
+					Cache::put('alerts_message', 'Failed to Login!  Please verify your username & password!', 1);
+		
+					LogsfLogs::postLogs('Login', 3, 0, ' Failed to Login - ' . Input::get('username') . ' - ' . ' -> Stuck in Login', NULL, NULL, 'Failed');
 					return Redirect::back()->withInput();
 				}
 			}
