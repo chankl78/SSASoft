@@ -142,9 +142,21 @@ class MembersmSSA extends Eloquent {
         return $mid;
     }
 
+    public static function getcheckuniquecode($value)
+    {
+        if(MembersmSSA::where('uniquecode', $value)->count() == 1) { return true; }
+        else { return false; }
+	}
+
+	public static function getcheckmmsuuid($value)
+    {
+        if(MembersmSSA::where('mmsuuid', $value)->count() == 1) { return true; }
+        else { return false; }
+	}
+
     public static function getidbymmsuuid($value)
     {
-        $mid = DB::table('Members_m_SSA')->where('pdpa', 0)->where('deleted_at', NULL)->where('mmsuuid', $value)->pluck('id');
+        $mid = DB::table('Members_m_SSA')->where('deleted_at', NULL)->where('mmsuuid', $value)->pluck('id');
         return $mid;
     }
 

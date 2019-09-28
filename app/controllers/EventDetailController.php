@@ -184,14 +184,26 @@ class EventDetailController extends BaseController
 		// Search membership
 		try
 		{
-			$searchresult = MembersmSSA::findorfail(MembersmSSA::getidbynrichash(Input::get('nricsearch')), array('uniquecode', 'name', 'rhq', 'zone', 'chapter', 'district', 'nric', 'division', 'position'));
-		    
-		    LogsfLogs::postLogs('Read', 28, $id, ' - Event - NRIC Search - ' . md5(Input::get('nricsearch')), NULL, NULL, 'Success');
+			if (MembersmSSA::getcheckuniquecode(Input::get('nricsearch')) == true)
+			{
+				$searchresult = MembersmSSA::findorfail(MembersmSSA::getid1(Input::get('nricsearch')), array('uniquecode', 'name', 'rhq', 'zone', 'chapter', 'district', 'nric', 'division', 'position', 'mmsuuid'));
+			}
+			elseif (MembersmSSA::getcheckmmsuuid(Input::get('nricsearch')) == true)
+			{
+				$searchresult = MembersmSSA::findorfail(MembersmSSA::getid1(Input::get('nricsearch')), array('uniquecode', 'name', 'rhq', 'zone', 'chapter', 'district', 'nric', 'division', 'position', 'mmsuuid'));
+			}
+			else 
+			{ 
+				LogsfLogs::postLogs('Read', 28, $id, ' - Event - uniquecode / uuid Search - ' . Input::get('nricsearch'), NULL, NULL, 'Failed');
+				return Response::json(array('info' => 'Failed', 'ErrType' => 'Does Not Exist'), 400);
+			}
+			
+		    LogsfLogs::postLogs('Read', 28, $id, ' - Event - uniquecode / uuid Search - ' . Input::get('nricsearch'), NULL, NULL, 'Success');
 			return Response::json($searchresult, 200);
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Read', 28, $id, ' - Event - NRIC Search - ' . Input::get('nricsearch'). ' ' . $e, NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Read', 28, $id, ' - Event - uniquecode / uuid Search - ' . Input::get('nricsearch'). ' ' . $e, NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed', 'ErrType' => 'Does Not Exist'), 400);
 		}
 	}
@@ -205,10 +217,10 @@ class EventDetailController extends BaseController
 	public function getNameSearch()
 	{
 		$membercode = Input::get('term');
-		$member = MembersmSSA::where('name','LIKE','%'. $membercode .'%')->orwhere('nric', 'Like', '%'. $membercode .'%')->orderBy('name', 'ASC')->get(array('id', 'nric', 'name'))->take(10)->toarray();
+		$member = MembersmSSA::where('name','LIKE','%'. $membercode .'%')->orwhere('alias','LIKE','%'. $membercode .'%')->orwhere('uniquecode', 'Like', '%'. $membercode .'%')->orwhere('mmsuuid', 'Like', '%'. $membercode .'%')->orderBy('name', 'ASC')->get(array('id', 'uniquecode', 'name', 'alias', 'mmsuuid', 'mobile', 'tel', 'rhq', 'zone', 'chapter', 'district', 'division', 'position'))->take(10)->toarray();
 		$memberlist = array();
 		foreach($member as $member){
-			$memberlist[] = array('id'=>$member['nric'], 'label'=>$member['name'].' - '.$member['nric'], 'value' => $member['nric']);
+			$memberlist[] = array('id'=>$member['uniquecode'], 'label'=>$member['name'].' - '.$member['alias'].' - '.$member['rhq'].' - '.$member['zone'].' - '.$member['chapter'].' - '.$member['district'].' - '.$member['division'].' - '.$member['position'].' - '.$member['mobile'].' - '.$member['tel'].' - '.$member['uniquecode'], 'value' => $member['uniquecode']);
 		}
 		return Response::json($memberlist);
 	}

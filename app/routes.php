@@ -226,6 +226,7 @@ Route::post('/Event/Detail/EventAttendance/postAbsentAttendee/{id}', 'EventAtten
 
 Route::post('/Event/Detail/EventAttendance/putAttendance/{id}', 'EventAttendanceController@putAttendance');
 Route::post('/Event/Detail/EventAttendance/postNricSearch/{id}', 'EventAttendanceController@postNricSearch');
+// Route::get('/Event/Detail/EventAttendance/getEventAttendanceNameSearch', 'EventAttendanceController@getEventAttendanceNameSearch');
 Route::post('/Event/Detail/EventAttendance/postNricSearchExpress/{id}', 'EventAttendanceController@postNricSearchExpress');
 Route::post('/Event/Detail/EventAttendance/postSPSearch/{id}', 'EventAttendanceController@postSPSearch');
 Route::post('/Event/Detail/EventAttendance/postAddMember/{id}', 'EventAttendanceController@postAddMember');
@@ -248,6 +249,7 @@ Route::get('/Event/Detail/EventAttendance/getChapter/{id}','EventAttendanceContr
 // Event Add Member
 Route::post('/Event/Detail/postNricSearch/{id}', 'EventDetailController@postNricSearch');
 Route::get('/Event/getNameSearch', 'EventDetailController@getNameSearch');
+// Route::get('/Event/Detail/getEventAttendanceNameSearch', 'EventAttendanceController@getEventAttendanceNameSearch');
 Route::post('/Event/Detail/postAddMember/{id}', 'EventDetailController@postAddMember');
 Route::post('/Event/Detail/postAllLeaders/{id}', 'EventDetailController@postAllLeaders');
 Route::post('/Event/Detail/postYouthLeaders/{id}', 'EventDetailController@postYouthLeaders');

@@ -218,7 +218,7 @@
 										</div>
 									</div>
 								</div>
-							</div> <!-- Register Member By NRIC -->
+							</div> <!-- Register Member By Name -->
 							<div class="col-xs-12 col-sm-6 widget-container-span ui-sortable">
 								<div class="widget-box collapsed widget-color-green">
 									<div class="widget-header widget-header-small">
@@ -268,7 +268,7 @@
 									<div class="widget-header widget-header-small">
 										<h6 class="widget-title">
 											<i class="icon-sort"></i>
-											Register Member By MMS UUID
+											Register Member By NAME/UUID
 										</h6>
 										<div class="widget-toolbar">
 											<a href="#" data-action="fullscreen" class="orange2">
@@ -287,10 +287,10 @@
 											{{ Form::open(array('action' => 'EventAttendanceController@postNricSearchExpress', 'id' => 'resourcenricesearchexpress', 'class' => 'form-horizontal')) }}
 												<br />
 												<div class="form-group">
-													{{ Form::label('nricsearchexpress', 'Search (MMS UUID):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+													{{ Form::label('nricsearchexpress', 'Search (Name / UUID):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 													<div class="col-xs-12 col-sm-9">
 														<div class="clearfix">
-															{{ Form::text('nricsearchexpress', '', array('class' => 'col-xs-12 col-sm-9', 'id' => 'nricsearchexpress'));}}
+															{{ Form::text('nricsearchexpress', '', array('class' => 'ui-autocomplete-input col-xs-12 col-sm-9 ', 'id' => 'nricsearchexpress', 'autocomplete' => 'off'));}}
 														</div>
 													</div>
 												</div>
@@ -634,7 +634,7 @@
 															{{ Form::label('nfdivision', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">
-																	{{ Form::select('nfdivision', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), $result->division, array('class' => 'col-xs-12 col-sm-11', 'id' => 'nfdivision'));}}
+																	{{ Form::select('nfdivision', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'nfdivision'));}}
 																</div>
 															</div>
 														</div>
@@ -947,6 +947,7 @@
 @stop
 @section('js')
 	<script type="text/javascript" src="{{{ asset('assets/js/jquery.validate.min.js') }}}"></script>
+	<script type="text/javascript" src="{{{ asset('assets/js/jquery-ui.min.js') }}}"></script>
 	<script type="text/javascript">
 		function absentrow(submit){ 
 			noty({
@@ -1555,6 +1556,11 @@
 	        			}
 	        		});
 	        	});
+			});
+
+			$('#nricsearchexpress').autocomplete({
+				source: "../EventAttendance/getEventAttendanceNameSearch",
+				minLength: 3	
 			});
 			
 			$('#addnewfriend').click(function(){

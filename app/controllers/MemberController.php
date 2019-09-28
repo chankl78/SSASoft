@@ -33,7 +33,7 @@ class MemberController extends BaseController
 		    $iTotalDisplayRecords = MembersmSSA::Role()->Search('%'.$sSearch.'%')->count();
 		    $default = MembersmSSA::Role()->Search('%'.$sSearch.'%')
 				->take($iDisplayLength)->skip($iDisplayStart)
-				->orderBy($sOrderBy, $sOrderdir)->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'chinesename', 'classification', 'created_at', 'alias', 'email', 'mobile', 'division'))->toarray();
+				->orderBy($sOrderBy, $sOrderdir)->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'chinesename', 'classification', 'created_at', 'alias', 'email', 'mobile', 'division', 'dateofbirth'))->toarray();
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $default));
 		}
@@ -87,6 +87,7 @@ class MemberController extends BaseController
 				'position' => $member['position'], 
 				'division' => $member['division'],
 				'nric' => $member['nric'],
+				'dateofbirth' => $member['dateofbirth'],
 				'mobile' => $member['mobile'],
 				'tel' => $member['tel'],
 				'email' => $member['email'],

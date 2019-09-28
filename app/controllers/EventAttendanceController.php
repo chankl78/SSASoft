@@ -39,6 +39,19 @@ class EventAttendanceController extends BaseController
 		return $view;
 	}
 
+	public function getEventAttendanceNameSearch()
+	{
+		LogsfLogs::postLogs('Read', 28, $id, ' - Event - NRIC Search - Step 1 ', NULL, NULL, 'Failed');
+		
+		$membercode = Input::get('term');
+		$member = MembersmSSA::where('name','LIKE','%'. $membercode .'%')->orwhere('alias','LIKE','%'. $membercode .'%')->orwhere('uniquecode', 'Like', '%'. $membercode .'%')->orwhere('mmsuuid', 'Like', '%'. $membercode .'%')->orderBy('name', 'ASC')->get(array('id', 'uniquecode', 'name', 'alias', 'mmsuuid', 'mobile', 'tel', 'rhq', 'zone', 'chapter', 'district', 'division', 'position'))->take(10)->toarray();
+		$memberlist = array();
+		foreach($member as $member){
+			$memberlist[] = array('id'=>$member['uniquecode'], 'label'=>$member['name'].' - '.$member['alias'].' - '.$member['rhq'].' - '.$member['zone'].' - '.$member['chapter'].' - '.$member['district'].' - '.$member['division'].' - '.$member['position'].' - '.$member['mobile'].' - '.$member['tel'].' - '.$member['uniquecode'], 'value' => $member['uniquecode']);
+		}
+		return Response::json($memberlist);
+	}
+
 	public function postNricSearch($id)
 	{
 		// Search membership
@@ -62,14 +75,25 @@ class EventAttendanceController extends BaseController
 		// Step 1 - Search membership
 		try
 		{
-			$memberid = MembersmSSA::getidbymmsuuid(Input::get('nricsearch'));
+			if (MembersmSSA::getcheckuniquecode(Input::get('nricsearch')) == true)
+			{
+				$memberid = MembersmSSA::getid1(Input::get('nricsearch'));
+			}
+			elseif (MembersmSSA::getcheckmmsuuid(Input::get('nricsearch')) == true)
+			{
+				$memberid = MembersmSSA::getidbymmsuuid(Input::get('nricsearch'));
+			}
+			else 
+			{ 
+				$memberid = 0;
+			}
 		}
 		catch(\Exception $e) { $memberid = 0; }
 		
 		// Step 2 - Check if member exist in event or not
 		try
 		{
-			$eventregid = EventmRegistration::getregidbynric(AttendancemAttendance::geteventid(Input::get('attendanceid')), Input::get('nricsearch'));
+			$eventregid = EventmRegistration::getregidbymemberid(AttendancemAttendance::geteventid(Input::get('attendanceid')), $memberid);
 		}
 		catch(\Exception $e){ $eventregid = 0; }
 

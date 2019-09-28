@@ -280,7 +280,16 @@ class EventmRegistration extends Eloquent {
             if($mid == "") { $mid = 0; }
             return $mid;
         } catch(\Exception $e) { $mid = 0; } 
-        
+    }
+
+    public static function getregidbymemberid($value, $value2)
+    {
+        try
+        {
+            $mid = DB::table('Event_m_Registration')->where('eventid', $value)->where('memberid', $value2)->where('deleted_at', NULL)->pluck('id');
+            if($mid == "") { $mid = 0; }
+            return $mid;
+        } catch(\Exception $e) { $mid = 0; } 
     }
 
     public static function getattendanceventid($value)

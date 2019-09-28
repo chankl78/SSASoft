@@ -359,7 +359,7 @@
 											{{ Form::open(array('action' => 'EventDetailController@postNricSearch', 'id' => 'resourcenricesearch', 'class' => 'form-horizontal')) }}
 												<br />
 												<div class="form-group">
-													{{ Form::label('nricsearch', 'Search (NRIC):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+													{{ Form::label('nricsearch', 'Search (UUID):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 													<div class="col-xs-12 col-sm-9">
 														<div class="clearfix">
 															{{ Form::text('nricsearch', '', array('class' => 'col-xs-12 col-sm-9', 'id' => 'nricsearch'));}}
@@ -615,7 +615,7 @@
 										<div class="widget-header widget-header-small">
 											<h6 class="widget-title">
 												<i class="icon-sort"></i>
-												Register Member By Name and NRIC
+												Register Member By Name and UUID
 											</h6>
 											<div class="widget-toolbar">
 												<a href="#" data-action="fullscreen" class="orange2">
@@ -634,7 +634,7 @@
 												{{ Form::open(array('action' => 'EventDetailController@postNricSearch', 'id' => 'resourcenamesearch', 'class' => 'form-horizontal')) }}
 													<br />
 													<div class="form-group">
-														{{ Form::label('namesearch', 'Search (Name / NRIC):', array('class' => 'control-label col-xs-12 col-sm-4 no-padding-right')); }}
+														{{ Form::label('namesearch', 'Search (Name / UUID):', array('class' => 'control-label col-xs-12 col-sm-4 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-8">
 															<div class="clearfix">
 																{{ Form::text('namesearch', '', array('class' => 'ui-autocomplete-input col-xs-12 col-sm-9 ', 'id' => 'namesearch', 'autocomplete' => 'off'));}}

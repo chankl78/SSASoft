@@ -176,6 +176,14 @@
 												</div>
 											</div>
 											<div class="form-group">
+												{{ Form::label('dateofbirth', 'DOB:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+												<div class="col-xs-12 col-sm-8">
+													<div class="clearfix">
+														{{ Form::text('dateofbirth', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'dateofbirth'));}}
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
 												{{ Form::label('position', 'Position:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 												<div class="col-xs-12 col-sm-8">
 													<div class="clearfix">
@@ -316,6 +324,7 @@
 		        		$("#district").val(data.district);
 		        		$("#position").val(data.position);
 		        		$("#nric").val(data.nric);
+						$("#dateofbirth").val(data.dateofbirth);
 		        		$("#mobile").val(data.mobile);
 		        		$("#tel").val(data.tel);
 		        		$("#email").val(data.email);
