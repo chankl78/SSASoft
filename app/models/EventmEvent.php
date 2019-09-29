@@ -226,6 +226,12 @@ class EventmEvent extends Eloquent {
         return $mid;
     }
 
+    public static function getmoredetailselect($value)
+    {
+        $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('moredetailselect');
+        return $mid;
+    }
+
     public static function getaddnontokang($value)
     {
         $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('addnontokang');

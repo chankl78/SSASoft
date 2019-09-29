@@ -19,6 +19,7 @@ class LeadersPortalEventController extends BaseController
 		$sessionselect = EventmEvent::getsessionselect($id);
 		$languageselect = EventmEvent::getlanguageselect($id);
 		$nationalityselect = EventmEvent::getnationalityselect($id);
+		$moredetailselect = EventmEvent::getmoredetailselect($id);
 		$readonly = EventmEvent::getreadonly($id);
 		$addnontokang = EventmEvent::getaddnontokang($id);
 		$directaccept = EventmEvent::getdirectaccept($id);
@@ -115,7 +116,8 @@ class LeadersPortalEventController extends BaseController
 			->with('rsvpeventtypeaccepted', $rsvpeventtypeaccepted)->with('sessionselect', $sessionselect)
 			->with('youthsummittickets', $youthsummittickets)->with('youthsummit', $youthsummit)
 			->with('languageselect', $languageselect)->with('nationalityselect', $nationalityselect)
-			->with('addnontokang', $addnontokang)->with('directaccept', $directaccept);
+			->with('addnontokang', $addnontokang)->with('directaccept', $directaccept)
+			->with('moredetailselect', $moredetailselect);
 	}
 
 	public function getZone($id)
@@ -158,7 +160,7 @@ class LeadersPortalEventController extends BaseController
 			}
 			else 
 			{
-				$result = MembersmSSA::Role()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
+				$result = MembersmSSA::Role()->EventType(EventmEvent::getdivisiontype($id))->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
 				return Response::json(array('data' => $result));
 			}
 		}

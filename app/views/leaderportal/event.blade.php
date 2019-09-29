@@ -4173,7 +4173,7 @@
 	    }
 
 	    function insertrow(submit){ 
-			@if ($studyeventtype == false)
+			@if ($studyeventtype == false and $moredetailselect == 0)
 				$.ajax({
 					url: 'postEventParticipant/' + submit,
 					type: 'POST',
