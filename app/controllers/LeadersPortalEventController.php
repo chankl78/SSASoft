@@ -19,7 +19,7 @@ class LeadersPortalEventController extends BaseController
 		$sessionselect = EventmEvent::getsessionselect($id);
 		$languageselect = EventmEvent::getlanguageselect($id);
 		$nationalityselect = EventmEvent::getnationalityselect($id);
-		$moredetailselect = EventmEvent::getmoredetailselect($id);
+		$moredetailselect = EventmEvent::getmoredetailselect($id); 
 		$readonly = EventmEvent::getreadonly($id);
 		$addnontokang = EventmEvent::getaddnontokang($id);
 		$directaccept = EventmEvent::getdirectaccept($id);
