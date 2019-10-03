@@ -501,66 +501,31 @@ class MembersmSSA extends Eloquent {
     public function scopeBelieversShq($query)
     {
         return $query->where('position', 'BEL')
-            ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, 
-                Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, 
-                Members_m_SSA.uniquecode, Members_m_SSA.believersigned, Members_m_SSA.chanting, 
-                (SELECT count(Attendance_m_Person.memberid) FROM Attendance_m_Person 
-                    LEFT JOIN Attendance_m_Attendance on Attendance_m_Attendance.id = Attendance_m_Person.attendanceid 
-                    WHERE Attendance_m_Person.memberid = Members_m_SSA.id and Attendance_m_Person.attendancestatus IN ("Attended") 
-                    and Attendance_m_Attendance.attendancetype IN ("Discussion Meeting", "District Study Meeting") 
-                    and Attendance_m_Person.deleted_at is null) as noofmtg'))->orderby('rhq','zone','chapter','district','division','position');
+            ->orderby('rhq','zone','chapter','district','division','position');
     }
 
     public function scopeBelieversRhq($query)
     {
         return $query->where('rhq', Session::get('gakkaiuserrhq'))->where('position', 'BEL')
-            ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, 
-                Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, 
-                Members_m_SSA.uniquecode, Members_m_SSA.believersigned, Members_m_SSA.chanting, 
-                (SELECT count(Attendance_m_Person.memberid) FROM Attendance_m_Person 
-                    LEFT JOIN Attendance_m_Attendance on Attendance_m_Attendance.id = Attendance_m_Person.attendanceid 
-                    WHERE Attendance_m_Person.memberid = Members_m_SSA.id and Attendance_m_Person.attendancestatus IN ("Attended") 
-                    and Attendance_m_Attendance.attendancetype IN ("Discussion Meeting", "District Study Meeting") 
-                    and Attendance_m_Person.deleted_at is null) as noofmtg'))->orderby('rhq','zone','chapter','district','division','position');
+            ->orderby('rhq','zone','chapter','district','division','position');
     }
 
     public function scopeBelieversZone($query)
     {
         return $query->where('zone', Session::get('gakkaiuserzone'))->where('position', 'BEL')
-            ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, 
-                Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, 
-                Members_m_SSA.uniquecode, Members_m_SSA.believersigned, Members_m_SSA.chanting, 
-                (SELECT count(Attendance_m_Person.memberid) FROM Attendance_m_Person 
-                    LEFT JOIN Attendance_m_Attendance on Attendance_m_Attendance.id = Attendance_m_Person.attendanceid 
-                    WHERE Attendance_m_Person.memberid = Members_m_SSA.id and Attendance_m_Person.attendancestatus IN ("Attended") 
-                    and Attendance_m_Attendance.attendancetype IN ("Discussion Meeting", "District Study Meeting") 
-                    and Attendance_m_Person.deleted_at is null) as noofmtg'))->orderby('rhq','zone','chapter','district','division','position');
+            ->orderby('rhq','zone','chapter','district','division','position');
     }
 
     public function scopeBelieversChapter($query)
     {
         return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('position', 'BEL')
-            ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, 
-                Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, 
-                Members_m_SSA.uniquecode, Members_m_SSA.believersigned, Members_m_SSA.chanting, 
-                (SELECT count(Attendance_m_Person.memberid) FROM Attendance_m_Person 
-                    LEFT JOIN Attendance_m_Attendance on Attendance_m_Attendance.id = Attendance_m_Person.attendanceid 
-                    WHERE Attendance_m_Person.memberid = Members_m_SSA.id and Attendance_m_Person.attendancestatus IN ("Attended") 
-                    and Attendance_m_Attendance.attendancetype IN ("Discussion Meeting", "District Study Meeting") 
-                    and Attendance_m_Person.deleted_at is null) as noofmtg'))->orderby('rhq','zone','chapter','district','division','position');
+            ->orderby('rhq','zone','chapter','district','division','position');
     }
 
     public function scopeBelieversDistrict($query)
     {
         return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->where('position', 'BEL')
-            ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, 
-                Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, 
-                Members_m_SSA.uniquecode, Members_m_SSA.believersigned, Members_m_SSA.chanting, 
-                (SELECT count(Attendance_m_Person.memberid) FROM Attendance_m_Person 
-                    LEFT JOIN Attendance_m_Attendance on Attendance_m_Attendance.id = Attendance_m_Person.attendanceid 
-                    WHERE Attendance_m_Person.memberid = Members_m_SSA.id and Attendance_m_Person.attendancestatus IN ("Attended") 
-                    and Attendance_m_Attendance.attendancetype IN ("Discussion Meeting", "District Study Meeting") 
-                    and Attendance_m_Person.deleted_at is null) as noofmtg'))->orderby('rhq','zone','chapter','district','division','position');
+            ->orderby('rhq','zone','chapter','district','division','position');
     }
 
     public function scopeNewFriendsShq($query)

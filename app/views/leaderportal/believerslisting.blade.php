@@ -47,7 +47,6 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>B.Signed</th>
-												<th>No of Mtg</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -91,7 +90,6 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>B.Signed</th>
-												<th>No of Mtg</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -101,6 +99,7 @@
 								</div>
 								<div class="widget-toolbox padding-8 clearfix">
 									<div class="col-xs-12">
+											<a href="#btnresourceadd" role="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add New Record</a>
 									</div>
 								</div>
 							</div>
@@ -135,7 +134,6 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>B.Signed</th>
-												<th>No of Mtg</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -145,6 +143,7 @@
 								</div>
 								<div class="widget-toolbox padding-8 clearfix">
 									<div class="col-xs-12">
+											<a href="#btnresourceadd" role="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add New Record</a>
 									</div>
 								</div>
 							</div>
@@ -179,7 +178,6 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>B.Signed</th>
-												<th>No of Mtg</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -189,6 +187,7 @@
 								</div>
 								<div class="widget-toolbox padding-8 clearfix">
 									<div class="col-xs-12">
+											<a href="#btnresourceadd" role="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add New Record</a>
 									</div>
 								</div>
 							</div>
@@ -223,7 +222,6 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>B.Signed</th>
-												<th>No of Mtg</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -314,6 +312,38 @@
 												<div class="col-xs-12 col-sm-8">
 													<div class="clearfix">
 														{{ Form::text('name', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'name'));}}
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												{{ Form::label('cbrhq', 'RHQ:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+												<div class="col-xs-12 col-sm-8">
+													<div class="clearfix">
+														{{ Form::select('cbrhq', $rhq_options, $rhq, array('class' => 'col-xs-12 col-sm-11', 'id' => 'cbrhq'));}}
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												{{ Form::label('cbzone', 'Zone:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+												<div class="col-xs-12 col-sm-8">
+													<div class="clearfix" id="zonediv">
+														{{ Form::select('cbzone', $zone_options, $zone, array('class' => 'col-xs-12 col-sm-11', 'id' => 'cbzone'));}}
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												{{ Form::label('cbchapter', 'Chapter:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+												<div class="col-xs-12 col-sm-8">
+													<div class="clearfix" id="chapterdiv">
+														{{ Form::select('cbchapter', $chapter_options, $chapter, array('class' => 'col-xs-12 col-sm-11', 'id' => 'cbchapter'));}}
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												{{ Form::label('district', 'District:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+												<div class="col-xs-12 col-sm-8">
+													<div class="clearfix">
+														{{ Form::select('division', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'district'));}}
 													</div>
 												</div>
 											</div>
@@ -419,9 +449,8 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 9 ], "data": "noofmtg", "searchable": "true" },
-					    	{
-						    	"targets": [ 10 ], "data": "uniquecode",
+				    		{
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -464,9 +493,8 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 9 ], "data": "noofmtg", "searchable": "true" },
-					    	{
-						    	"targets": [ 10 ], "data": "uniquecode",
+				    		{
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -510,9 +538,8 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 9 ], "data": "noofmtg", "searchable": "true" },
-					    	{
-						    	"targets": [ 10 ], "data": "uniquecode",
+				    		{
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -556,9 +583,8 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 9 ], "data": "noofmtg", "searchable": "true" },
-					    	{
-						    	"targets": [ 10 ], "data": "uniquecode",
+				    		{
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -602,9 +628,8 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 9 ], "data": "noofmtg", "searchable": "true" },
-					    	{
-						    	"targets": [ 10 ], "data": "uniquecode",
+				    		{
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button>'
 							    }
@@ -612,6 +637,64 @@
 					    ]
 				    });
 				@endif
+
+				$('#cbrhq').change(function(){
+					$.ajax({
+						url: '../BOEPortalBelievers/getZone/' + $('#cbrhq').val(),
+						type: 'get',
+						dataType: 'html',
+						statusCode: { 
+							200:function(data){
+								$('#zonediv').html(data);
+								$('#cbchapter').val('');
+							}
+						}
+					});
+				});
+
+				$("body").delegate('#cbzone','change',function(){
+					$.ajax({
+						url: '../BOEPortalEvent/getChapter/' + $('#cbzone').val(),
+						type: 'get',
+						dataType: 'html',
+						statusCode: { 
+							200:function(data){
+								$('#chapterdiv').html(data);
+							}
+						}
+					});
+				});
+
+				$('#resourceadd').validate({
+					errorElement: 'div',
+					errorClass: 'help-block',
+					focusInvalid: false,
+					rules: {
+						name: { required: true, minlength: 3 },
+						cbrhq: { required: true },
+						cbzone: { required: true },
+						cbchapter: { required: true },
+						district: { required: true },
+						position: { required: true },
+						division: { required: true }
+					},
+					messages: { },
+					invalidHandler: function (event, validator) { ('.alert-danger', $('.resourceaddothers')).show(); },
+					highlight: function (e) { $(e).closest('.form-group').removeClass('has-info').addClass('has-error'); },
+					success: function (e) { $(e).closest('.form-group').removeClass('has-error').addClass('has-info'); $(e).remove(); },
+					errorPlacement: function (error, element) 
+					{
+						if(element.is(':checkbox') || element.is(':radio'))
+						{
+							var controls = element.closest('div[class*="col-"]');
+							if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+							else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+						}
+						else if(element.is('.select2')) { error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)')); }
+						else if(element.is('.chosen-select')) { error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)')); }
+						else error.insertAfter(element.parent());
+					}
+				});
 			});
 		});
 		
@@ -710,15 +793,34 @@
 								timeout: 4000
 							});
 					    	$.ajax({
-						        url: '/BOEPortalNewFriends/postNewAttendee',
+						        url: '/BOEPortalBelievers/postNewAttendee',
 						        type: 'POST',
-						        data: { name: $("#name").val(), position: $("#position").val(), division: $("#division").val(), introducer: $("#introducer").val(), remarks: $("#remarks").val()},
+						        data: { name: $("#name").val(), position: $("#position").val(), division: $("#division").val(), introducer: $("#introducer").val(), remarks: $("#remarks").val(), rhq: $("#cbrhq").val(), zone: $("#cbzone").val(), chapter: $("#cbchapter").val(), district: $("#district").val()},
 						        dataType: 'json',
 						        statusCode: { 
 						        	200:function(){
-						        		var oDistrictTable = $('#tdistrict').DataTable();
-					        			oDistrictTable.ajax.reload(null, false);
-						        		$("#name").val(''); $("#position").val(''); $("#division").val('');
+										@if ($gakkaishq == 't')
+											var oTable = $('#tshq').DataTable();
+											oTable.ajax.reload(null, false);
+										@endif
+										@if ($gakkairegion == 't')
+											var oTable = $('#trhq').DataTable();
+											oTable.ajax.reload(null, false);
+										@endif
+										@if ($gakkaizone == 't')
+											var oTable = $('#tzone').DataTable();
+											oTable.ajax.reload(null, false);
+										@endif
+										@if ($gakkaichapter == 't')
+											var oTable = $('#tchapter').DataTable();
+											oTable.ajax.reload(null, false);
+										@endif
+										@if ($gakkaidistrict == 't')
+											var oTable = $('#tdistrict').DataTable();
+											oTable.ajax.reload(null, false);
+										@endif
+
+						        		$("#name").val(''); $("#position").val(''); $("#division").val(''); $("#cbrhq").val(); $("#cbzone").val(); $("#cbchapter").val(); $("#district").val(); $("#remarks").val(); $("#introducer").val();
 						        		$("#btnresourceadd").modal('hide');
 				            			noty({
 											layout: 'topRight', type: 'success', text: 'Record Created!!',

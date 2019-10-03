@@ -11,10 +11,19 @@ class LeadersPortalBelieversController extends BaseController
 		$gakkaichapter = AccessfCheck::getChapterUser();
 		$gakkaidistrict = AccessfCheck::getDistrictUser();
 		$memposition_options = MemberszPosition::Role()->whereIn('name', array('Believer', 'New Friend'))->orderBy('name', 'ASC')->lists('name', 'code');
+		$rhq = Session::get('gakkaiuserrhq');
+		$zone = Session::get('gakkaiuserzone');
+		$chapter = Session::get('gakkaiuserchapter');
+		$district = Session::get('gakkaiuserdistrict');
+		$rhq_options = MemberszOrgChart::Rhq()->lists('rhq', 'rhqabbv');
+		$zone_options = array('' => 'Please Select a Zone') + MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
+		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
 		$view = View::make('leaderportal/believerslisting');
 		$view->title = 'BOE Portal - Believers Listing';
 		return $view->with('gakkaishq', $gakkaishq)->with('gakkairegion', $gakkairegion)->with('gakkaizone', $gakkaizone)->with('gakkaichapter', $gakkaichapter)
-			->with('gakkaidistrict', $gakkaidistrict)->with('memposition_options', $memposition_options);
+			->with('gakkaidistrict', $gakkaidistrict)->with('memposition_options', $memposition_options)->with('rhq_options', $rhq_options)
+			->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)
+			->with('rhq', $rhq)->with('zone', $zone)->with('chapter', $chapter);
 	}
 
 	public function getBelieversListingSHQ() // Server-Side Datatable
@@ -121,10 +130,10 @@ class LeadersPortalBelieversController extends BaseController
 				$mssa->nrichash = md5(Input::get('name'));
 				$mssa->searchcode = '000';
 				$mssa->personid = 0;
-				$mssa->rhq = Session::get('gakkaiuserrhq');
-				$mssa->zone = Session::get('gakkaiuserzone');
-				$mssa->chapter = Session::get('gakkaiuserchapter');
-				$mssa->district = Session::get('gakkaiuserdistrict');
+				$mssa->rhq = Input::get('rhq');
+				$mssa->zone = Input::get('zone');
+				$mssa->chapter = Input::get('chapter');
+				$mssa->district = Input::get('district');
 				$mssa->position = Input::get('position');
 				$mssa->division = Input::get('division');
 				$mssa->uniquecode = uniqid('',TRUE);
@@ -167,6 +176,22 @@ class LeadersPortalBelieversController extends BaseController
 			LogsfLogs::postLogs('Update', 53, 0, ' - Believers - Update Attendee - ' . $e, NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown', 'value' => $id), 400);
 		}
+	}
+
+	public function getZone($id)
+	{
+		$zone_options = array('' => 'Please Select a Zone') +  MemberszOrgChart::Zone()->where('rhqabbv', $id)->lists('zone', 'zoneabbv');
+		$view = View::make('leaderportal/getzone');
+		$view->with('zone_options', $zone_options);	
+		return $view;
+	}
+
+	public function getChapter($id)
+	{
+		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->where('zoneabbv', $id)->lists('chapter', 'chapabbv');
+		$view = View::make('leaderportal/getchapter');
+		$view->with('chapter_options', $chapter_options);	
+		return $view;
 	}
 
 	public function deleteBeliever($id)

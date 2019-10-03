@@ -591,6 +591,8 @@ Route::get('/BOEPortalBelievers/getBelieversListingDistrict', 'LeadersPortalBeli
 Route::get('/BOEPortalBelievers/getBelieversInfo/{id}', 'LeadersPortalBelieversController@getBelieversInfo');
 Route::post('/BOEPortalBelievers/deleteBeliever/{id}', 'LeadersPortalBelieversController@deleteBeliever');
 Route::post('/BOEPortalBelievers/postNewAttendee', 'LeadersPortalBelieversController@postNewAttendee');
+Route::get('/BOEPortalBelievers/getZone/{id}','LeadersPortalBelieversController@getZone');
+Route::get('/BOEPortalBelievers/getChapter/{id}','LeadersPortalBelieversController@getChapter');
 
 // Leaders Portal New Friends
 Route::get('/BOEPortalNewFriends', array('before' => 'auth', 'uses' => 'LeadersPortalNewFriendsController@getIndex'));
