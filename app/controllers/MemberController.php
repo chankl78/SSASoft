@@ -222,7 +222,7 @@ class MemberController extends BaseController
 	public function postConvert()
 	{
 		$convertcount = DB::table('Members_m_ImportSSA')->count();
-		for($i = 1; $i <= 52257; $i++)
+		for($i = 1; $i <= 52326; $i++)
 		{
 			try
 			{
