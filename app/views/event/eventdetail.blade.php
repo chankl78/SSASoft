@@ -246,6 +246,15 @@
 													</div>
 													<div class="space-2"></div>
 													<div class="form-group" @if ($REEVGKA == 'f') hidden @endif>
+														{{ Form::label('addonly', 'Add Only', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-9">
+															<div class="clearfix">
+																{{ Form::checkbox('addonly', 'false', $result->addonly, array('id' => 'addonly'));}}
+															</div>
+														</div>
+													</div>
+													<div class="space-2"></div>
+													<div class="form-group" @if ($REEVGKA == 'f') hidden @endif>
 														{{ Form::label('editonly', 'Edit Only', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-9">
 															<div class="clearfix">
@@ -5325,6 +5334,7 @@
 			if ($("#allowdistrictregistration").is(':checked')) { $("#allowdistrictregistration").val('1'); } else {$("#allowdistrictregistration").val('0'); }
 			if ($("#allowspecialregistration").is(':checked')) { $("#allowspecialregistration").val('1'); } else {$("#allowspecialregistration").val('0'); }
 			if ($("#readonly").is(':checked')) { $("#readonly").val('1'); } else {$("#readonly").val('0'); }
+			if ($("#addonly").is(':checked')) { $("#addonly").val('1'); } else {$("#addonly").val('0'); }
 			if ($("#editonly").is(':checked')) { $("#editonly").val('1'); } else {$("#editonly").val('0'); }
 			if ($("#deleteonly").is(':checked')) { $("#deleteonly").val('1'); } else {$("#deleteonly").val('0'); }
 			if ($("#viewattendance").is(':checked')) { $("#viewattendance").val('1'); } else {$("#viewattendance").val('0'); }
@@ -5341,7 +5351,7 @@
 			$.ajax({
 		        url: 'putEvent/' + $("#eventid").val(),
 		        type: 'POST',
-		        data: { eventdate: $("#eventdate").val(), description: $("#description").val(), location: $("#location").val(), divisiontype: $("#divisiontype").val(), eventtype: $("#eventtype").val(), status: $("#status").val(), allowshqregistration: $("#allowshqregistration").val(), allowmemregistration: $("#allowmemregistration").val(), allowregionregistration: $("#allowregionregistration").val(), allowzoneregistration: $("#allowzoneregistration").val(), allowchapterregistration: $("#allowchapterregistration").val(), allowdistrictregistration: $("#allowdistrictregistration").val(), special: $("#allowspecialregistration").val(), readonly: $("#readonly").val(), editonly: $("#editonly").val(), deleteonly: $("#deleteonly").val(), viewattendance: $("#viewattendance").val(), sessionselect: $("#sessionselect").val(), languageselect: $("#languageselect").val(), addnontokang: $("#addnontokang").val(), directaccept: $("#directaccept").val() },
+		        data: { eventdate: $("#eventdate").val(), description: $("#description").val(), location: $("#location").val(), divisiontype: $("#divisiontype").val(), eventtype: $("#eventtype").val(), status: $("#status").val(), allowshqregistration: $("#allowshqregistration").val(), allowmemregistration: $("#allowmemregistration").val(), allowregionregistration: $("#allowregionregistration").val(), allowzoneregistration: $("#allowzoneregistration").val(), allowchapterregistration: $("#allowchapterregistration").val(), allowdistrictregistration: $("#allowdistrictregistration").val(), special: $("#allowspecialregistration").val(), readonly: $("#readonly").val(), addonly: $("#addonly").val(), editonly: $("#editonly").val(), deleteonly: $("#deleteonly").val(), viewattendance: $("#viewattendance").val(), sessionselect: $("#sessionselect").val(), languageselect: $("#languageselect").val(), addnontokang: $("#addnontokang").val(), directaccept: $("#directaccept").val() },
 		        dataType: 'json',
 		        statusCode: { 
 		        	200:function(){

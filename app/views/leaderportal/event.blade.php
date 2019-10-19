@@ -1006,9 +1006,11 @@
 													<div class="widget-toolbox padding-8 clearfix pull-right"></div> <!-- For Blank Space -->
 													<a href="#btnyouthsummityonsha" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal" hidden><i class="fa fa-plus add bigger-120"></i> Adult Division</a>
 												@elseif ($readonly == 0) <!-- Disable Write Feature in Database -->
-													<a href="#btnresourceadd" role="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add New Record</a> 
-													<div class="widget-toolbox padding-8 clearfix pull-right"></div> <!-- For Blank Space -->
-													@if ($addnontokang == true)<a href="#btnresourceaddothers" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add Others</a>@endif
+													@if ($addonly == 1)
+														<a href="#btnresourceadd" role="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add New Record</a> 
+														<div class="widget-toolbox padding-8 clearfix pull-right"></div> <!-- For Blank Space -->
+														@if ($addnontokang == true)<a href="#btnresourceaddothers" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add Others</a>@endif
+													@endif
 												@endif
 											@else <!-- Normal Usage -->
 												<a href="#btnresourcemdadd" role="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add Record</a> 
@@ -1085,9 +1087,11 @@
 												<a href="#btnyouthsummityonsha" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Adult Division</a>
 											@elseif ($eventtype == FALSE)
 												@if ($readonly == 0) <!-- Disable Write Feature in Database -->
-													<a href="#btnresourceadd" role="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add New Record</a> 
-													<div class="widget-toolbox padding-8 clearfix pull-right"></div> <!-- For Blank Space -->
-													@if ($addnontokang == true)<a href="#btnresourceaddothers" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add Others</a>@endif
+													@if ($addonly == 1)
+														<a href="#btnresourceadd" role="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add New Record</a> 
+														<div class="widget-toolbox padding-8 clearfix pull-right"></div> <!-- For Blank Space -->
+														@if ($addnontokang == true)<a href="#btnresourceaddothers" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add Others</a>@endif
+													@endif
 												@endif
 											@else <!-- Normal Usage -->
 												<a href="#btnresourcemdadd" role="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add Record</a> 
@@ -1139,6 +1143,14 @@
 																<div class="col-xs-12 col-sm-9">
 																	<div class="clearfix">
 																		{{ Form::text('eName', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eName'));}}
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																{{ Form::label('eDateofBirth', 'Date of Birth:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																<div class="col-xs-12 col-sm-9">
+																	<div class="clearfix">
+																		{{ Form::text('eDateofBirth', '', array('class' => 'col-xs-12 col-sm-11 date-picker', 'id' => 'eDateofBirth'));}}
 																	</div>
 																</div>
 															</div>
@@ -2263,6 +2275,13 @@
 				        }
 				        return a + b;
 				    }, 0 );
+				});
+
+				$.fn.datepicker.defaults.format = "yyyy-mm-dd";
+				$('#eDateofBirth').datepicker({
+					currentText: "Now",
+					dateFormat: "yyyy-mm-dd",
+					gotoCurrent: true
 				});
 
 				@if ($special == 0)
@@ -3981,7 +4000,7 @@
 					$.ajax({
 				        url: 'putEventAddInfo/' + $("#euniquecode").val(),
 				        type: 'POST',
-				        data: { uniquecode: $("#euniquecode").val(), costume6: $("#eCostume6").val(), costume7: $("#eCostume7").val(), name: $("#eName").val(), costume9: $("#eCostume9").val(), country: $("#ecountry").val(), language: $("#elanguage").val(), session: $("#esession").val() },
+				        data: { uniquecode: $("#euniquecode").val(), costume6: $("#eCostume6").val(), costume7: $("#eCostume7").val(), name: $("#eName").val(), costume9: $("#eCostume9").val(), country: $("#ecountry").val(), language: $("#elanguage").val(), session: $("#esession").val(), dateofbirth: $("#eDateofBirth").val() },
 				        dataType: 'json',
 				        statusCode: { 
 				        	200:function(){
@@ -4422,7 +4441,8 @@
 				        		$("#eCostume6").val(data.costume6); $("#eCostume7").val(data.costume7);
 				        		$("#eName").val(data.name); $("#eCostume9").val(data.costume9);
 								$("#ecountry").val(data.countryofbirth); $("#elanguage").val(data.language);
-								$("#esession").val(data.session);
+								$("#esession").val(data.session); $("#eDateofBirth").val(data.dateofbirth);
+								$("#eDateofBirth").datepicker('setDate', data.dateofbirth);
 				        	},
 				        	400:function(data){ 
 				        		var txtMessage;

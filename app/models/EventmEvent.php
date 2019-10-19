@@ -202,6 +202,24 @@ class EventmEvent extends Eloquent {
         return $mid;
     }
 
+    public static function getaddonly($value)
+    {
+        $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('addonly');
+        return $mid;
+    }
+
+    public static function geteditonly($value)
+    {
+        $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('editonly');
+        return $mid;
+    }
+
+    public static function getdeleteonly($value)
+    {
+        $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('deleteonly');
+        return $mid;
+    }
+
     public static function getviewattendance($value)
     {
         $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('viewattendance');

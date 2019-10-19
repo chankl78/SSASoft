@@ -21,6 +21,9 @@ class LeadersPortalEventController extends BaseController
 		$nationalityselect = EventmEvent::getnationalityselect($id);
 		$moredetailselect = EventmEvent::getmoredetailselect($id); 
 		$readonly = EventmEvent::getreadonly($id);
+		$addonly = EventmEvent::getaddonly($id);
+		$editonly = EventmEvent::geteditonly($id);
+		$deleteonly = EventmEvent::getdeleteonly($id);
 		$addnontokang = EventmEvent::getaddnontokang($id);
 		$directaccept = EventmEvent::getdirectaccept($id);
 		$rhq_options = MemberszOrgChart::Rhq()->lists('rhq', 'rhqabbv');
@@ -107,7 +110,8 @@ class LeadersPortalEventController extends BaseController
 			->with('position_options', $position_options)->with('rhq_options', $rhq_options)
 			->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)
 			->with('rhq', $rhq)->with('zone', $zone)->with('chapter', $chapter)
-			->with('special', $special)->with('readonly', $readonly)
+			->with('special', $special)->with('readonly', $readonly)->with('addonly', $addonly)
+			->with('editonly', $editonly)->with('deleteonly', $deleteonly)
 			->with('viewattendance', $viewattendance)->with('rsvpeventtype', $rsvpeventtype)
 			->with('language_options', $language_options)->with('studyeventtype', $studyeventtype)
 			->with('country_options', $country_options)->with('tried', $tried)
@@ -140,7 +144,7 @@ class LeadersPortalEventController extends BaseController
 	{
 		try
 		{ // Have included the role, t-shirt size for event participation, Introducer
-			$result = EventmRegistration::where('eventid', EventmEvent::getid($id))->Role()->get(array('name', 'chinesename','division','rhq','zone','chapter','district', 'position', 'status', 'uniquecode', 'created_at', 'check1', 'check2', 'check3', 'role', DB::raw('CONCAT(groupcodeprefix, "-", groupcode) AS groupcode'), 'costume3', 'costume9', 'Introducer', 'language', 'nationality', 'session', 'countryofbirth'));
+			$result = EventmRegistration::where('eventid', EventmEvent::getid($id))->Role()->get(array('name', 'chinesename','division','rhq','zone','chapter','district', 'position', 'status', 'uniquecode', 'created_at', 'check1', 'check2', 'check3', 'role', DB::raw('CONCAT(groupcodeprefix, "-", groupcode) AS groupcode'), 'costume3', 'costume9', 'Introducer', 'language', 'nationality', 'session', 'countryofbirth', 'dateofbirth'));
 			return Response::json(array('data' => $result));
 		}
 		catch(\Exception $e)
@@ -893,6 +897,7 @@ class LeadersPortalEventController extends BaseController
 			$post->language = Input::get('language');
 			$post->nationality = Input::get('country');
 			$post->session = Input::get('session');
+			$post->dateofbirth = Input::get('dateofbirth');
 
 			$post->save();
 

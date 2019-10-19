@@ -158,6 +158,7 @@ class EventController extends BaseController
 				$post->districtregistration = Input::get('allowdistrictregistration');
 				$post->special = Input::get('special');
 				$post->readonly = Input::get('readonly');
+				$post->addonly = Input::get('addonly');
 				$post->editonly = Input::get('editonly');
 				$post->deleteonly = Input::get('deleteonly');
 				$post->viewattendance = Input::get('viewattendance');
