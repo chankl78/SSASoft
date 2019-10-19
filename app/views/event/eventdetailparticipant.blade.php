@@ -149,7 +149,7 @@
 											{{ Form::label('nationality', 'Nationality:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::text('nationality', $result->nationality, array('class' => 'col-xs-12 col-sm-9'));}}
+														{{ Form::select('nationality', $country_options, $result->nationality, array('class' => 'col-xs-12 col-sm-9', 'id' => 'nationality'));}}
 												</div>
 											</div>
 										</div>
@@ -158,7 +158,7 @@
 											{{ Form::label('countryofbirth', 'Country of Birth:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::text('countryofbirth', $result->countryofbirth, array('class' => 'col-xs-12 col-sm-9'));}}
+														{{ Form::select('countryofbirth', $country_options, $result->countryofbirth, array('class' => 'col-xs-12 col-sm-9', 'id' => 'countryofbirth'));}}
 												</div>
 											</div>
 										</div>
@@ -185,6 +185,15 @@
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
 													{{ Form::select('language', $language_options, $result->language, array('class' => 'col-xs-12 col-sm-9', 'id' => 'language'));}}
+												</div>
+											</div>
+										</div>
+										<div class="hr hr-dotted"></div>
+										<div class="form-group">
+											{{ Form::label('session', 'Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::select('session', $session_options, $result->session, array('class' => 'col-xs-12 col-sm-9', 'id' => 'session'));}}
 												</div>
 											</div>
 										</div>
@@ -1480,6 +1489,7 @@
 		        	race: $('#race').val(), 
 		        	occupation: $('#occupation').val(),
 		        	language: $('#language').val(), 
+					session: $('#session').val(), 
 
 		        	buildingname: $('#buildingname').val(), 
 		        	address: $('#address').val(), 

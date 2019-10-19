@@ -25,6 +25,7 @@ class EventDetailParticipantController extends BaseController
 		$eventitem_options = array('' => 'Please Select an Item') + EventmEventItem::Role()->where('eventid', EventmEvent::geteventid($id))->orderBy('name', 'ASC')->lists('name', 'name');
 		$country_options = array('' => 'Please Select a Country') + EventzCountry::Role()->lists('value', 'value');
 		$language_options = array('' => 'Please Select a Language') + EventzLanguage::Role()->lists('value', 'value');
+		$session_options = array('' => 'Please Select a Session') + EventmEventShow::Role()->where('eventid', EventmEvent::geteventid($id))->lists('value', 'value');
 		$view = View::make('event/eventdetailparticipant');
 		$view->title = 'Participant Detail';
 		$view->with('REEV03A', $REEV03A)->with('rid', $id)->with('result', $query)
@@ -34,7 +35,7 @@ class EventDetailParticipantController extends BaseController
 			->with('ssagroup_options', $ssagroup_options)->with('eventitem_options', $eventitem_options)
 			->with('memposition_options', $memposition_options)->with('REEVGKA', $REEVGKA)->with('event_options', $event_options)
 			->with('gohonzonstatus_options', $gohonzonstatus_options)->with('gohonzontype_options', $gohonzontype_options)
-			->with('language_options', $language_options)->with('country_options', $country_options);
+			->with('language_options', $language_options)->with('country_options', $country_options)->with('session_options', $session_options);
 		return $view;
 	}
 
@@ -64,6 +65,7 @@ class EventDetailParticipantController extends BaseController
 						$post->race = Input::get('race');
 						$post->occupation = Input::get('occupation');
 						$post->language = Input::get('language');
+						$post->session = Input::get('session');
 						
 						if(Input::get('buildingname') == ''){$post->buildingname = 'NIL';} else {$post->buildingname = Input::get('buildingname');}
 						if(Input::get('address') == ''){$post->address = 'NIL';} else {$post->address = Input::get('address');}
@@ -196,6 +198,7 @@ class EventDetailParticipantController extends BaseController
 					$post->race = Input::get('race');
 					$post->occupation = Input::get('occupation');
 					$post->language = Input::get('language');
+					$post->session = Input::get('session');
 					
 					if(Input::get('buildingname') == ''){$post->buildingname = 'NIL';} else {$post->buildingname = Input::get('buildingname');}
 					if(Input::get('address') == ''){$post->address = 'NIL';} else {$post->address = Input::get('address');}
