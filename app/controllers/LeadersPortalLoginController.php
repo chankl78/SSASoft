@@ -62,7 +62,7 @@ class LeadersPortalLoginController extends BaseController {
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Read', 1, 0, ' - Leaders Portal - ' . $e, NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Login', 3, 0, ' - Leaders Portal - ' . Input::get('username') . ' - ' . $e, NULL, NULL, 'Failed');
 		}
 	}
 
