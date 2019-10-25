@@ -304,6 +304,11 @@
 							<i class="menu-icon fa fa-double-angle-right"></i> Study Exam (Passed)
 						</a>
 					</li>
+					@if (Session::get('current_page') == 'event/20194objects' )<li class="active"> @else <li> @endif
+						<a href="{{{ URL::action('Event20194ObjectsController@getIndex') }}}">
+							<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
+						</a>
+					</li>
 					@if (Session::get('current_page') == 'event/subscription' )<li class="active"> @else <li> @endif
 						<a href="{{{ URL::action('EventSubscriptionController@getIndex') }}}">
 							<i class="menu-icon fa fa-double-angle-right"></i> New Friend Subscription

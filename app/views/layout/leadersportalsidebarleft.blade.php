@@ -35,6 +35,11 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
 					</a>
 				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
+					</a>
+				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/NewFriend' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalNewFriendsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> New Friends List
@@ -104,6 +109,11 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
 					</a>
 				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
+					</a>
+				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/NewFriend' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalNewFriendsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> New Friends List
@@ -171,6 +181,11 @@
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalPreMADEligibleListingController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
+					</a>
+				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/NewFriend' )<li class="active"> @else <li> @endif
@@ -247,6 +262,11 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
 					</a>
 				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
+					</a>
+				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/NewFriend' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalNewFriendsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> New Friends List
@@ -319,6 +339,11 @@
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalPreMADEligibleListingController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
+					</a>
+				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/NewFriend' )<li class="active"> @else <li> @endif

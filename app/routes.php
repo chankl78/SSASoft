@@ -335,6 +335,11 @@ Route::get('/EventPreKenshuEligible/getListing', 'EventPreKenshuEligibleControll
 Route::get('/EventStudyExam', array('before' => 'auth', 'uses' => 'EventStudyExamController@getIndex'));
 Route::get( '/EventStudyExam/getListing', 'EventStudyExamController@getListing');
 
+// Event 2019 4 Objectives
+Route::get('/Event20194Objects', array('before' => 'auth', 'uses' => 'Event20194ObjectsController@getIndex'));
+Route::get('/Event20194Objects/getListing', 'Event20194ObjectsController@getListing');
+Route::post('/Event20194Objects/postStatistic', 'Event20194ObjectsController@postStatistic');
+
 // Event zTables
 Route::get('/Event/RegistrationStatus', array('before' => 'auth', 'uses' => 'EventzRegistrationStatusController@getIndex'));
 Route::get('/Event/getRegistrationStatusListing', 'EventzRegistrationStatusController@getListing');
@@ -748,6 +753,10 @@ Route::get('/BOEPortalPastPreMADTrainingListing/getListing', 'LeadersPortalPastP
 // Leaders Portal Pre MAD Kenshu Eligible Listing
 Route::get('/BOEPortalPreMADEligibleListing', array('before' => 'auth', 'uses' => 'LeadersPortalPreMADEligibleListingController@getIndex'));
 Route::get('/BOEPortalPreMADEligibleListing/getListing', 'LeadersPortalPreMADEligibleListingController@getListing');
+
+// Leaders Portal 2019 4 Objectives
+Route::get('/BOEPortal20194Objects', array('before' => 'auth', 'uses' => 'LeadersPortal20194ObjectsController@getIndex'));
+Route::get('/BOEPortal20194Objects/getListing', 'LeadersPortal20194ObjectsController@getListing');
 
 // Campaign
 Route::get('/Campaign', array('before' => 'auth', 'uses' => 'CampaignController@getIndex'));
