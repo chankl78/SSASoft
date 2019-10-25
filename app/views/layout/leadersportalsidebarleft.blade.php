@@ -35,7 +35,7 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
 					</a>
@@ -109,7 +109,7 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
 					</a>
@@ -183,7 +183,7 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
 					</a>
@@ -262,7 +262,7 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
 					</a>
@@ -341,7 +341,7 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortal20194ObjectsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> 2019 4 Objectives
 					</a>

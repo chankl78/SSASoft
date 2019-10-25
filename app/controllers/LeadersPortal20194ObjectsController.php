@@ -6,7 +6,7 @@ class LeadersPortal20194ObjectsController extends BaseController
 	public function getIndex()
 	{
 		Session::put('lp_current_page', 'LeadersPortal');
-		Session::put('lp_current_resource', 'LeadersPortal/20194Objects');
+		Session::put('lp_current_resource', 'LeadersPortal/20194objects');
 		$gakkaishq = AccessfCheck::getSHQUser();
 		$gakkairegion = AccessfCheck::getRegionUser();
 		$gakkaizone = AccessfCheck::getZoneUser();
