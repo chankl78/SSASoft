@@ -1348,24 +1348,12 @@ class EventDetailController extends BaseController
 	{
 		try
 		{
-			$sEcho = (int)$_GET['draw'];
-			$iTotalRecords = EventmRegistration::Event(EventmEvent::getid($id))->count();
-	 		$iDisplayLength = (int)$_GET['length'];
-		    $iDisplayStart = (int)$_GET['start'];
-		    $sSearch = $_GET['search']['value'];
-		    $sOrderByID = $_GET['order'][0]['column'];
-		    $sOrderBy = $_GET['columns'][$sOrderByID]['data'];
-		    $sOrderdir = $_GET['order'][0]['dir'];
-		    $iTotalDisplayRecords = EventmRegistration::Event(EventmEvent::getid($id))->Search('%'.$sSearch.'%')->count();
-		    $default = EventmRegistration::Event(EventmEvent::getid($id))->Search('%'.$sSearch.'%')
-		    	->take($iDisplayLength)->skip($iDisplayStart)
-		    	->orderBy($sOrderBy, $sOrderdir)
+			$default = EventmRegistration::Event(EventmEvent::getid($id))
 		    	->get(array('created_at', 'name', 'rhq', 'zone', 'chapter', 
 					'nric', 'division', 'status', 'uniquecode', 'dateofbirth', 'role', 'groupcode', 'auditioncode', 
 					'eventitem', 'costume9'))->toarray();
 
-			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
-				'draw' => (string)$sEcho, 'data' => $default));
+			return Response::json(array('data' => $default));
 		}
 		catch(\Exception $e)
 		{
@@ -1394,6 +1382,58 @@ class EventDetailController extends BaseController
 		catch(\Exception $e)
 		{
 			LogsfLogs::postLogs('Delete', 30, $id, ' - Event - Pariticpant- ' . $e, NULL, NULL, 'Failed');
+			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown', 'value' => $id), 400);
+		}
+	}
+
+	public function postOrganisationDetail($id)
+	{
+		try
+		{
+			if (AccessfCheck::getResourceCRUDAccess(Auth::user()->roleid, 'EV04', 'update') == 't')
+			{
+				$eventmember = EventmRegistration::where('uniquecode', $id)->pluck('memberid');
+				if ($eventmember == 0)
+				{
+					LogsfLogs::postLogs('Update', 30, 0, ' - Event - Update Organisation Detail - No Record in MSSA', NULL, NULL, 'Failed');
+					return Response::json(array('info' => 'Failed', 'ErrType' => 'NoRecord'), 400);
+				}
+				else
+				{
+					$member = MembersmSSA::find($eventmember)->toarray();
+
+					$post = EventmRegistration::find(EventmRegistration::getid($id));
+
+					$post->rhq = $member['rhq'];
+					$post->zone = $member['zone'];
+					$post->chapter = $member['chapter'];
+					$post->district = $member['district'];
+					$post->position = $member['position'];
+					$post->positionlevel = $member['positionlevel'];
+					$post->division = $member['division'];
+					$post->dateofbirth = $member['dateofbirth'];
+
+					$post->save();
+					if($post->save())
+					{
+						return Response::json(array('info' => 'Success'), 200);
+					}
+					else
+					{
+						LogsfLogs::postLogs('Update', 28, $id, ' - Update Organisation Detail - ' . $member['name'] . ' - ' . $id, NULL, NULL, 'Failed');
+						return Response::json(array('info' => 'Failed'), 400);
+					}
+				}
+			}
+			else
+			{
+				LogsfLogs::postLogs('Update', 30, 0, ' - Event - Update Organisation Detail - No Access Rights', NULL, NULL, 'Failed');
+				return Response::json(array('info' => 'Failed', 'ErrType' => 'NoAccess'), 400);
+			}
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Update', 30, $id, ' - Event - Pariticpant (Update Organisation Detail) - ' . $e, NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown', 'value' => $id), 400);
 		}
 	}

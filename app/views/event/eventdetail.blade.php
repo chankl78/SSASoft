@@ -2515,7 +2515,7 @@
 		        statusCode: { 
 		        	200:function(){
 		        		var oTable = $('#tdefault').DataTable();
-		        		oTable.clearPipeline().draw();
+						oTable.ajax.reload(null, false);
 		        		var oprogperformer = $('#tprogperformer').DataTable();
 		        		oprogperformer.clearPipeline().draw();
 		        		$("#btneventmemadd").modal('hide');
@@ -2562,7 +2562,7 @@
 		        statusCode: { 
 		        	200:function(){
 		        		var oTable = $('#tdefault').DataTable();
-		        		oTable.clearPipeline().draw();
+						oTable.ajax.reload(null, false);
             			noty({
 							layout: 'topRight', type: 'success', text: 'Record Updated!!',
 							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
@@ -2606,7 +2606,7 @@
 		        statusCode: { 
 		        	200:function(){
 		        		var oTable = $('#tdefault').DataTable();
-		        		oTable.clearPipeline().draw();
+						oTable.ajax.reload(null, false);
             			noty({
 							layout: 'topRight', type: 'success', text: 'Record Created!!',
 							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
@@ -2650,7 +2650,7 @@
 		        statusCode: { 
 		        	200:function(){
 		        		var oTable = $('#tdefault').DataTable();
-		        		oTable.clearPipeline().draw();
+						oTable.ajax.reload(null, false);
             			noty({
 							layout: 'topRight', type: 'success', text: 'Record Created!!',
 							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
@@ -2694,7 +2694,7 @@
 		        statusCode: { 
 		        	200:function(){
 		        		var oTable = $('#tdefault').DataTable();
-		        		oTable.clearPipeline().draw();
+						oTable.ajax.reload(null, false);
             			noty({
 							layout: 'topRight', type: 'success', text: 'Record Created!!',
 							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
@@ -4061,7 +4061,7 @@
 
 		function reloaddt(submit){ 
 			var oTable = $('#tdefault').DataTable();
-		    oTable.clearPipeline().draw();
+		    oTable.ajax.reload(null, false);
 		    var oprogperformer = $('#tprogperformer').DataTable();
 		    oprogperformer.clearPipeline().draw();
 		    var oprogperformeronly = $('#tprogperformeronly').DataTable();
@@ -4103,7 +4103,7 @@
 					        statusCode: { 
 					        	200:function(){
 					        		var oTable = $('#tdefault').DataTable();
-					        		oTable.clearPipeline().draw();
+									oTable.ajax.reload(null, false);
 					        		var oprogperformer = $('#tprogperformer').DataTable();
 		    						oprogperformer.clearPipeline().draw();
 		    						var oprogrolebystatus = $('#tprogrolebystatus').DataTable();
@@ -4147,63 +4147,41 @@
 			});
 	    }
 
-	    function accessrow(submit){ 
-	    	noty({
-				layout: 'center', type: 'confirm', text: 'Do you want to add this person to mark attendance?',
-				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
-				timeout: 4000,
-				buttons: [
-				    {addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
-				    	$noty.close();
-				    	noty({
-							layout: 'topRight', type: 'warning', text: 'Adding Record ...',
-							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
+		function updateodrow(submit){ 
+	    	$.ajax({
+		        url: 'updateorganisationdetail/' + submit,
+		        type: 'POST',
+		        data: { id: submit },
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(data){ 
+						var oTable = $('#tdefault').DataTable();
+						oTable.ajax.reload(null, false);
+						noty({
+							layout: 'topRight', type: 'success', text: 'Organisation Detail Updated!!',
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500
+								},
 							timeout: 4000
 						});
-				    	$.ajax({
-					        url: 'postAccessRightsTrainer/' + submit,
-					        type: 'POST',
-					        data: { dparticipant: submit },
-					        dataType: 'json',
-					        statusCode: { 
-					        	200:function(){
-					        		var oTable = $('#tdefault').DataTable();
-					        		oTable.clearPipeline().draw();
-			            			noty({
-										layout: 'topRight', type: 'success', text: 'Access Rights Added for this user!!',
-										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500
-											},
-										timeout: 4000
-									}); 
-					        	},
-					        	400:function(data){ 
-					        		var txtMessage;
-					        		if (data.responseJSON.ErrType == "NoAccess") 
-					        			{ txtMessage = 'You do not have Access Rights!'; }
-					        		else { txtMessage = 'Please check your entry!'; }
-					        		noty({
-										layout: 'topRight', type: 'error', text: txtMessage,
-										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
-											},
-										timeout: 4000
-									}); 
-					        	}
-					        }
-					    });
-				      }
-				    },
-				    {addClass: 'btn btn-danger', text: 'Cancel', onClick: function($noty) {
-				        $noty.close();
-				        noty({
-							layout: 'topRight', type: 'success', text: 'Delete Cancelled.',
+		        	},
+		        	400:function(data){ 
+		        		var txtMessage;
+		        		if (data.responseJSON.ErrType == "NoAccess") 
+		        			{ txtMessage = 'You do not have Access Rights!'; }
+						else if (data.responseJSON.ErrType == "NoRecord") 
+		        			{ txtMessage = 'Record Not found in MSSA!'; }
+						else if (data.responseJSON.ErrType == "Failed") 
+		        			{ txtMessage = 'Failed to Update Record!'; }
+		        		else { txtMessage = 'Please check your entry!'; }
+		        		noty({
+							layout: 'topRight', type: 'error', text: txtMessage,
 							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
 								},
 							timeout: 4000
 						}); 
-				      }
-				    }
-				]
-			});
+		        	}
+		        }
+		    });
 	    }
 
 	    function forwardrow(submit){
@@ -4461,12 +4439,6 @@
 		    });
 	    	var url = '/stimulsoft/index.php?stimulsoft_client_key=ViewerFx&stimulsoft_report_key=EventRegistrationHC.mrt&param1=' + {{ Auth::user()->id }} + '&param2="' + submit + '"';
 			window.open(url, '_blank');
-	    }
-
-	    function addsecurityrow(submit){
-	    	$("#cardmemberid").val(submit);
-	    	$("#cacardno").focus();
-	    	$("#btneventcardadd").modal('show');
 	    }
 
 	    function deleteSProw(submit){ 
@@ -4811,24 +4783,20 @@
 			        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
 			        "pagingType": "full_numbers",
 			        "responsive": false,
-			        "processing": true,
 			        "stateSave": true, // Remember paging & filters
 			        "autoWidth": false,
 			        "scrollCollapse": true,
 			        "processing": false,
-			        "serverSide": true,
+			        "serverSide": false,
 			        "searching": true,
 			        "deferRender": true,
 			        "order": [[ 0, "desc" ]],
-			        "ajax": $.fn.dataTable.pipeline({
-			            url: 'getParticipantListing/' + "{{ $rid }}",
-			            pages: 5 // number of pages to cache
-			        }),
+			        "ajax": 'getParticipantListing/' + "{{ $rid }}",
 			        "columnDefs": [
 	            	{
 				    	"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
 				    	"render": function ( data, type, full ){
-				    		return moment(data).format("DD-MMM-YYYY");
+				    		return moment(data).format("YYYY-MM-DD HH:mm:ss");
 					    }
 			    	},
 			    	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
@@ -4887,9 +4855,9 @@
 				    	"targets": [ 10 ], "data": "uniquecode",
 				    	"render": function ( data, type, full ){
 				    		@if ($REEVGKA == 't' || $REEVRAR == 't' || $REEVRRR == 't')
-				    			return '<a href="#resourceedit" role="button" onClick=editrow("'+ data +'") class="btn btn-xs btn-info" data-toggle="modal"><i class="fa fa-edit bigger-120"></i></a> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button> <button type="submit" onClick=addsecurityrow("'+ data +'") class="btn btn-xs btn-purple"><i class="fa fa-bolt bigger-120"></i></button> <button type="submit" onClick=printrow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-print bigger-120"></i></button> </button> <button type="submit" onClick=accessrow("'+ data +'") class="btn btn-xs btn-inverse"><i class="fa fa-key bigger-120"></i></button> <button type="submit" onClick=forwardrow("'+ data +'") class="btn btn-xs btn-pink"><i class="fa fa-mail-forward bigger-120"></i></button>'
+				    			return '<a href="#resourceedit" role="button" onClick=editrow("'+ data +'") class="btn btn-xs btn-info" data-toggle="modal"><i class="fa fa-edit bigger-120"></i></a> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button> <button type="submit" onClick=updateodrow("'+ data +'") class="btn btn-xs btn-purple"><i class="fa fa-bolt bigger-120"></i></button> <button type="submit" onClick=printrow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-print bigger-120"></i></button> </button> <button type="submit" onClick=forwardrow("'+ data +'") class="btn btn-xs btn-pink"><i class="fa fa-mail-forward bigger-120"></i></button>'
 			    			@else
-			    				return '<a href="#resourceedit" role="button" onClick=editrow("'+ data +'") class="btn btn-xs btn-info" data-toggle="modal"><i class="fa fa-edit bigger-120"></i></a> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button> <button type="submit" onClick=addsecurityrow("'+ data +'") class="btn btn-xs btn-purple"><i class="fa fa-bolt bigger-120"></i></button> <button type="submit" onClick=printrow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-print bigger-120"></i></button> </button> <button type="submit" onClick=forwardrow("'+ data +'") class="btn btn-xs btn-pink"><i class="fa fa-mail-forward bigger-120"></i></button>'
+			    				return '<a href="#resourceedit" role="button" onClick=editrow("'+ data +'") class="btn btn-xs btn-info" data-toggle="modal"><i class="fa fa-edit bigger-120"></i></a> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button> <button type="submit" onClick=printrow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-print bigger-120"></i></button> </button> <button type="submit" onClick=forwardrow("'+ data +'") class="btn btn-xs btn-pink"><i class="fa fa-mail-forward bigger-120"></i></button>'
 		    				@endif
 					    }
 			    	}]
@@ -5563,7 +5531,7 @@
 		        statusCode: { 
 		        	200:function(){
 		        		var oTable = $('#teventgroup').DataTable();
-						oTable.clearPipeline().draw();
+						oTable.ajax.reload(null, false);
 						$("#txtEGvalue").val('');
 		        		noty({
 							layout: 'topRight', type: 'success', text: 'Record Created!!',
@@ -5659,7 +5627,7 @@
 		        		var oCDTable = $('#dtcardlisting').DataTable();
 						oCDTable.clearPipeline().draw();
 						var oTable = $('#tdefault').DataTable();
-		        		oTable.clearPipeline().draw();
+		        		oTable.ajax.reload(null, false);
 						$("#anricsearch").val('');
 						$("#acardno").val('');
 		        		noty({
@@ -5706,7 +5674,7 @@
 		        		var oCDTable = $('#dtcardlisting').DataTable();
 						oCDTable.clearPipeline().draw();
 						var oTable = $('#tdefault').DataTable();
-		        		oTable.clearPipeline().draw();
+		        		oTable.ajax.reload(null, false);
 						$("#cacardno").val('');
 						$("#btneventcardadd").modal('hide');
 		        		noty({

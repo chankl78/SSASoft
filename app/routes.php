@@ -169,6 +169,7 @@ Route::get('/Event/Detail/{id}', array('before' => 'auth', 'uses' => 'EventDetai
 Route::get('/Event/Detail/getParticipantListing/{id}', 'EventDetailController@getParticipantListing');
 Route::get('/Event/Detail/getSecurityPassListing/{id}', 'EventDetailController@getSecurityPassListing');
 Route::post('/Event/Detail/deleteParticipant/{id}', 'EventDetailController@deleteParticipant');
+Route::post('/Event/Detail/updateorganisationdetail/{id}', 'EventDetailController@postOrganisationDetail');
 Route::post('/Event/Detail/SecurityPass/{id}', 'EventDetailController@postSecurityPass');
 Route::post('/Event/Detail/deleteSecurityPass/{id}', 'EventDetailController@deleteSecurityPass');
 Route::post('/Event/Detail/deleteAllSecurityPass/{id}', 'EventDetailController@deleteAllSecurityPass');
