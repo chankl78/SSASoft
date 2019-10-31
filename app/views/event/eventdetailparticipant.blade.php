@@ -1278,8 +1278,8 @@
 							</div>
 						</div>
 					</div> <!-- Official Information -->
-					<div class="col-xs-12 col-sm-6 widget-container-span ui-sortable" hidden>
-						<div class="widget-box widget-color-red">
+					<div class="col-xs-12 col-sm-6 widget-container-span ui-sortable" @if ($REEVGKA == 't') '' @else hidden @endif>
+						<div class="widget-box widget-color-red collapsed">
 							<div class="widget-header widget-header-small header-color-red">
 								<h6 class="widget-title">
 									<i class="icon-sort"></i>
