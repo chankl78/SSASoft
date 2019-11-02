@@ -63,7 +63,7 @@
 										</div>
 										<div class="widget-body">
 											<div class="widget-main no-padding">
-												{{ Form::open(array('action' => 'Event20194ObjectsController@postStatistic', 'id' => 'fUniqueCodeUpdate', 'class' => 'form-horizontal')) }}
+												{{ Form::open(array('action' => 'Event20194ObjectsController@postStatistic', 'id' => 'fUpdate', 'class' => 'form-horizontal')) }}
 													<br />
 													<div class="form-group">
 														<div class="col-md-offset-2 col-xs-12 col-sm-12">
@@ -76,7 +76,7 @@
 											</div>
 										</div>
 									</div>
-								</div> <!-- Update uniquecode -->
+								</div> <!-- Update Statistic -->
 							<div class="col-sm-12 widget-container-span ui-sortable">
 								<div class="widget-box widget-color-blue">
 									<div class="widget-header">
@@ -194,5 +194,49 @@
 			    });
 			});
 		});
+
+		$('#fUpdate').submit(function(e){
+	    	noty({
+				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
+				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
+				timeout: 4000
+			});
+			$.ajax({
+		        url: '/Event20194Objects/postStatistic',
+		        type: 'POST',
+		        data: { },
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(){
+		        		var oTable = $('#tdefault').DataTable();
+						oTable.ajax.reload(null, false);
+            			noty({
+							layout: 'topRight', type: 'success', text: 'Record Updated!!',
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	},
+		        	400:function(data){ 
+		        		var txtMessage;
+		        		if (data.responseJSON.ErrType == "Duplicate") 
+		        			{ txtMessage = 'Record already existed!';  }
+		        		else if (data.responseJSON.ErrType == "Failed")
+		        			{ txtMessage = 'Please check your entry!'; }
+		        		else if (data.responseJSON.ErrType == "CannotUpdate")
+		        			{ txtMessage = 'Unable to Update.  Please check your entry!'; }
+		        		else { txtMessage = 'Please check your entry!'; }
+		        		$("#search").focus();
+		        		noty({
+							layout: 'topRight', type: 'error', text: txtMessage,
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						});
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+	    });
 	</script>
 @stop
