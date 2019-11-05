@@ -29,6 +29,15 @@
 						</div>
 					</fieldset>
 				{{ Form::close() }}
+				{{ Form::open(array('action' => 'MemberController@post2019Members', 'id' => 'resource2019Members', 'class' => 'form-horizontal')) }}
+					<fieldset>
+						<div class="form-group">
+							<div class=col-sm-12>
+								{{ Form::button('<i class="icon-plus Add"></i> Update 2019 Membership', array('type' => 'submit', 'class' => 'btn btn-xs btn-yellow bigger' )); }}
+							</div>
+						</div>
+					</fieldset>
+				{{ Form::close() }}
 				{{ Form::open(array('action' => 'MemberController@postConvertNricHash', 'id' => 'resourceadd', 'class' => 'form-horizontal')) }}
 					<fieldset>
 						<div class="form-group">
@@ -168,6 +177,38 @@
 		        	400:function(data){ 
 		        		noty({
 							layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+	    });
+
+		$('#resource2019Members').submit(function(e){
+	    	noty({
+				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
+				animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 },
+				timeout: 4000
+			});
+			$.ajax({
+		        url: 'post2019Members',
+		        type: 'POST',
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(){
+		        		noty({
+							layout: 'topRight', type: 'success', text: 'Record Updated!!',
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	},
+		        	400:function(data){ 
+		        		noty({
+							layout: 'topRight', type: 'error', text: 'Failed to Update!! ' + txtMessage,
 							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
 								},
 							timeout: 4000

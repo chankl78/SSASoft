@@ -419,38 +419,6 @@ Route::post('/Group/Detail/deleteContactGroup/{id}', 'GroupzContactGroupControll
 Route::get('/Group/Detail/getGroupAttendanceListing/{id}', 'GroupDetailController@getGroupAttendanceListing');
 Route::get('/Group/Detail/getGroupPreMADKebshuListing/{id}', 'GroupDetailController@getGroupPreMADKebshuListing');
 
-// Route::post('/Event/Detail/postEventAttendance/{id}', 'EventAttendanceController@postEventAttendance');
-// Route::post('/Event/Detail/deleteEventAttendance/{id}', 'EventAttendanceController@deleteEventAttendance');
-
-// Route::get('/Event/Detail/EventAttendance/{id}', array('before' => 'auth', 'uses' => 'GroupAttendanceController@getIndex'));
-// Route::get('/Event/Detail/EventAttendance/getAttendeesListing/{id}', 'GroupAttendanceController@getAttendeesListing');
-// Route::get('/Event/Detail/EventAttendance/getrhqstatsListing/{id}', 'GroupAttendanceController@getrhqstatsListing');
-
-// Route::get('/Event/Detail/EventAttendance/getParticipantListing/{id}', 'GroupAttendanceController@getParticipantListing');
-// Route::post('/Event/Detail/EventAttendance/postAttendedAttendee/{id}', 'GroupAttendanceController@postAttendedAttendee');
-// Route::post('/Event/Detail/EventAttendance/postAbsentAttendee/{id}', 'GroupAttendanceController@postAbsentAttendee');
-
-// Route::post('/Event/Detail/EventAttendance/putAttendance/{id}', 'GroupAttendanceController@putAttendance');
-// Route::post('/Event/Detail/EventAttendance/postNricSearch/{id}', 'GroupAttendanceController@postNricSearch');
-// Route::post('/Event/Detail/EventAttendance/postNricSearchExpress/{id}', 'GroupAttendanceController@postNricSearchExpress');
-// Route::post('/Event/Detail/EventAttendance/postSPSearch/{id}', 'GroupAttendanceController@postSPSearch');
-// Route::post('/Event/Detail/EventAttendance/postAddMember/{id}', 'GroupAttendanceController@postAddMember');
-// Route::post('/Event/Detail/EventAttendance/postAddNewFriend/{id}', 'GroupAttendanceController@postAddNewFriend');
-// Route::post('/Event/Detail/EventAttendance/putEditMember/{id}', 'GroupAttendanceController@putEditMember');
-// Route::post('/Event/Detail/EventAttendance/deleteAttendee/{id}', 'GroupAttendanceController@deleteAttendee');
-// Route::post('/Event/Detail/EventAttendance/putAttendedAttendee/{id}', 'GroupAttendanceController@putAttendedAttendee');
-// Route::post('/Event/Detail/EventAttendance/putAbsentAttendee/{id}', 'GroupAttendanceController@putAbsentAttendee');
-// Route::post('/Event/Detail/EventAttendance/postEventAttended/{id}', 'GroupAttendanceController@postEventAttended');
-// Route::post('/Event/Detail/EventAttendance/postEventAbsent/{id}', 'GroupAttendanceController@postEventAbsent');
-// Route::post('/Event/Detail/EventAttendance/postEventItemAttended/{id}', 'GroupAttendanceController@postEventItemAttended');
-// Route::post('/Event/Detail/EventAttendance/postEventItemAbsent/{id}', 'GroupAttendanceController@postEventItemAbsent');
-// Route::post('/Event/Detail/EventAttendance/deleteAllAttendee/{id}', 'GroupAttendanceController@deleteAllAttendee');
-// Route::post('/Event/Detail/EventAttendance/PrintAttendancePrint/{id}', 'GroupAttendanceController@postAttendancePrint');
-// Route::post('/Event/Detail/EventAttendance/PrintAttendanceStudentDivisionPrint/{id}', 'GroupAttendanceController@postStudentDivisionAttendancePrint');
-// Route::post('/Event/Detail/EventAttendance/PrintAttendanceByPerformerPrint/{id}', 'GroupAttendanceController@postAttendanceByPerformerPrint');
-// Route::get('/Event/Detail/EventAttendance/getZone/{id}','GroupAttendanceController@getZone');
-// Route::get('/Event/Detail/EventAttendance/getChapter/{id}','GroupAttendanceController@getChapter');
-
 // Group zTables
 Route::get('/Group/GroupType', array('before' => 'auth', 'uses' => 'GroupzGroupTypeController@getIndex'));
 Route::get('/Group/getGroupTypeListing', 'GroupzGroupTypeController@getListing');
@@ -495,6 +463,7 @@ Route::post('/Members/putMember/{id}', 'MemberController@putMember');
 
 Route::get('/Members/convert', 'MemberController@getConvert');
 Route::post('/Members/postConvert', 'MemberController@postConvert');
+Route::post('/Members/post2019Members', 'MemberController@post2019Members');
 Route::post('/Members/postConvertNricHash', 'MemberController@postConvertNricHash');
 Route::post('/Members/postConvertFront/{id}', 'MemberController@postConvertFront');
 Route::post('/Members/putCNameDOB', 'MemberController@putCNameDOB');
