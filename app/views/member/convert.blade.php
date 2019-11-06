@@ -29,6 +29,15 @@
 						</div>
 					</fieldset>
 				{{ Form::close() }}
+				{{ Form::open(array('action' => 'MemberController@postConvertAuto', 'id' => 'resourceaddauto', 'class' => 'form-horizontal')) }}
+					<fieldset>
+						<div class="form-group">
+							<div class=col-sm-12>
+								{{ Form::button('<i class="icon-plus Add"></i> Convert Auto', array('type' => 'submit', 'class' => 'btn btn-xs btn-yellow bigger' )); }}
+							</div>
+						</div>
+					</fieldset>
+				{{ Form::close() }}
 				{{ Form::open(array('action' => 'MemberController@post2019Members', 'id' => 'resource2019Members', 'class' => 'form-horizontal')) }}
 					<fieldset>
 						<div class="form-group">
@@ -169,6 +178,38 @@
 		        	200:function(){
 		        		noty({
 							layout: 'topRight', type: 'success', text: 'Record Created!!',
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	},
+		        	400:function(data){ 
+		        		noty({
+							layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+	    });
+
+		$('#resourceaddauto').submit(function(e){
+	    	noty({
+				layout: 'topRight', type: 'warning', text: 'Converting Record ...',
+				animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 },
+				timeout: 4000
+			});
+			$.ajax({
+		        url: 'postConvertAuto',
+		        type: 'POST',
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(){
+		        		noty({
+							layout: 'topRight', type: 'success', text: 'Record Converted!!',
 							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
 								},
 							timeout: 4000

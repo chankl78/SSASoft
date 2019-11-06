@@ -463,6 +463,150 @@ class MemberController extends BaseController
 		DB::statement('DROP TABLE zz_2019_culturefunction;');
 	}
 
+	public function postConvertAuto()
+	{
+		$convertcount = DB::table('Members_m_ImportSSA')->count();
+		for($i = 1; $i <= $convertcount; $i++)
+		{
+			try
+			{
+				try
+				{
+					$member = MembersmImportSSA::find($i)->toarray();
+					$personid =  $member['personid'];
+					$nric =  $member['nric'];
+					$nrichash =  $member['nrichash'];
+					$mmsuuid =  $member['uuid'];
+					$searchcode =  $member['searchcode'];
+					$name = $member['name'];
+					$chinesename =  $member['chinese_name'];
+					$alias =  $member['alias'];
+					$gender =  $member['gender'];
+					$nationality =  $member['citizenship'];
+					$countryofbirth =  $member['country_of_birth'];
+					$language =  $member['language_name'];
+					$dateofbirth =  $member['date_of_birth'];
+					$convertedon =  $member['converted_on'];
+					$tel =  $member['tel_home'];
+					$mobile =  $member['tel_mobile'];
+					$email =  $member['email'];
+					$rhq =  $member['hq'];
+					$zone =  $member['zone'];
+					$chapter =  $member['chapter'];
+					$district =  $member['dist'];
+					$position =  $member['position'];
+					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
+					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
+					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }		
+					$division =  $member['division'];
+					$address =  $member['address1'];
+					$buildingname =  $member['buildingName'];
+					$unitno =  $member['address2'];
+					$postalcode =  $member['postalcode'];
+					$classification =  $member['classification'];
+					$status =  $member['status'];
+					$memsigned =  $member['mem_signed'];
+					$belsigned =  $member['bel_signed'];
+				}
+				catch(\Exception $e) { }
+
+				try
+				{
+					if (MembersmSSA::where('personid', $member['personid'])->count() == 0)
+					{
+						$post = new MembersmSSA;
+						$post->personid = $personid;
+						$post->nric = $nric;
+						$post->nrichash = $nrichash;
+						$post->mmsuuid = $mmsuuid;
+						$post->name = $name;
+						$post->uniquecode = uniqid('',TRUE);
+						$post->searchcode = $searchcode;
+						$post->chinesename = $chinesename;
+						$post->alias = $alias;
+						$post->nationality = $nationality;
+						$post->language = $language;
+						$post->gender = $gender;
+						$post->dateofbirth = $dateofbirth;
+						$post->converted_on = $convertedon;
+						$post->countryofbirth = $countryofbirth;
+						if($tel == ''){$post->tel = 'NIL';} else {$post->tel = $tel;}
+						if($mobile == ''){$post->mobile = 'NIL';} else {$post->mobile = $mobile;}
+						if($email == ''){$post->email = 'NIL';} else {$post->email = $email;}
+						$post->rhq = $rhq;
+						$post->zone = $zone;
+						$post->chapter = $chapter;
+						$post->district = $district;
+						$post->position = $position;
+						$post->positionlevel = $positionlevel;
+						$post->division = $division;
+						if($address == ''){$post->address = 'NIL';} else {$post->address = $address;}
+						if($buildingname == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $buildingname;}
+						if($unitno == ''){$post->unitno = 'NIL';} else {$post->unitno = $unitno;}
+						if($postalcode == ''){$post->postalcode = 'NIL';} else {$post->postalcode = $postalcode;}
+						$post->emergencytel = 'NIL'; 
+				 		$post->emergencymobile = 'NIL';
+				 		$post->introducermobile = 'NIL';
+				 		$post->classification = $classification;
+				 		$post->status = $status;
+				 		$post->memsigned = $memsigned;
+				 		$post->belsigned = $belsigned;
+				 		if($belsigned == 1){$post->believersigned = 1;}
+
+						$post->save();
+						LogsfLogs::postLogs('Create', 39, 0, ' - Members - Convert New - ' . $i . ' ' . $personid, NULL, NULL, 'Success');
+					}
+					else
+					{
+						$mid = DB::table('Members_m_SSA')->where('personid', $member['personid'])->pluck('id');
+						$post = MembersmSSA::find($mid);
+						$post->personid = $personid;
+						$post->nric = $nric;
+						$post->nrichash = $nrichash;
+						$post->mmsuuid = $mmsuuid;
+						$post->searchcode = $searchcode;
+						$post->name = $name;
+						$post->chinesename = $chinesename;
+						$post->alias = $alias;
+						$post->nationality = $nationality;
+						$post->language = $language;
+						$post->gender = $gender;
+						$post->dateofbirth = $dateofbirth;
+						$post->converted_on = $convertedon;
+						$post->countryofbirth = $countryofbirth;
+						if($tel == ''){$post->tel = 'NIL';} else {$post->tel = $tel;}
+						if($mobile == ''){$post->mobile = 'NIL';} else {$post->mobile = $mobile;}
+						if($email == ''){$post->email = 'NIL';} else {$post->email = $email;}
+						$post->rhq = $rhq;
+						$post->zone = $zone;
+						$post->chapter = $chapter;
+						$post->district = $district;
+						$post->position = $position;
+						$post->positionlevel = $positionlevel;
+						$post->division = $division;
+						if($address == ''){$post->address = 'NIL';} else {$post->address = $address;}
+						if($buildingname == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $buildingname;}
+						if($unitno == ''){$post->unitno = 'NIL';} else {$post->unitno = $unitno;}
+						if($postalcode == ''){$post->postalcode = 'NIL';} else {$post->postalcode = $postalcode;}
+						$post->classification = $classification;
+						$post->status = $status;
+						$post->memsigned = $memsigned;
+				 		$post->belsigned = $belsigned;
+				 		if($belsigned == 1){$post->believersigned = 1;}
+						
+						$post->save();
+					}
+				}
+				catch(\Exception $e) 
+				{
+				}
+			}
+			catch(\Exception $e) 
+			{
+			}
+		}
+	}
+
 	public function postConvertNricHash()
 	{
 		for($i=1; $i <= 49286; $i++) //49356

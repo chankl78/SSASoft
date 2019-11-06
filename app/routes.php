@@ -463,6 +463,7 @@ Route::post('/Members/putMember/{id}', 'MemberController@putMember');
 
 Route::get('/Members/convert', 'MemberController@getConvert');
 Route::post('/Members/postConvert', 'MemberController@postConvert');
+Route::post('/Members/postConvertAuto', 'MemberController@postConvertAuto');
 Route::post('/Members/post2019Members', 'MemberController@post2019Members');
 Route::post('/Members/postConvertNricHash', 'MemberController@postConvertNricHash');
 Route::post('/Members/postConvertFront/{id}', 'MemberController@postConvertFront');
