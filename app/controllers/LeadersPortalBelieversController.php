@@ -40,7 +40,7 @@ class LeadersPortalBelieversController extends BaseController
 		    $sOrderdir = $_GET['order'][0]['dir'];
 		    $iTotalDisplayRecords = MembersmSSA::BelieversShq()->Search('%'.$sSearch.'%')->count();
 		    $result = MembersmSSA::BelieversShq()->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
-                     ->orderby('division')->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('position')->orderby('name')->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode'));
+                     ->orderby('division')->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('position')->orderby('name')->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode', 'created_at'));
      		// Log::debug(DB::getQueryLog());
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $result));
@@ -55,7 +55,7 @@ class LeadersPortalBelieversController extends BaseController
 	{
 		try
 		{
-			$result = MembersmSSA::BelieversRhq()->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode'));
+			$result = MembersmSSA::BelieversRhq()->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode', 'created_at'));
      		// Log::debug(DB::getQueryLog());
 			return Response::json(array('data' => $result));
 		}
@@ -69,7 +69,7 @@ class LeadersPortalBelieversController extends BaseController
 	{
 		try
 		{
-			$result = MembersmSSA::BelieversZone()->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode'));
+			$result = MembersmSSA::BelieversZone()->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode', 'created_at'));
 			return Response::json(array('data' => $result));
 		}
 		catch(\Exception $e)
@@ -82,7 +82,7 @@ class LeadersPortalBelieversController extends BaseController
 	{
 		try
 		{
-			$result = MembersmSSA::BelieversChapter()->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode'));
+			$result = MembersmSSA::BelieversChapter()->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode', 'created_at'));
 			return Response::json(array('data' => $result));
 		}
 		catch(\Exception $e)
@@ -95,7 +95,7 @@ class LeadersPortalBelieversController extends BaseController
 	{
 		try
 		{
-			$result = MembersmSSA::BelieversDistrict()->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode'));
+			$result = MembersmSSA::BelieversDistrict()->get(array('name','chinesename','rhq','zone','chapter','district','division','position','believersigned', 'uniquecode', 'created_at'));
 			return Response::json(array('data' => $result));
 		}
 		catch(\Exception $e)

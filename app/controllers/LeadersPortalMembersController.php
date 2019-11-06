@@ -30,7 +30,7 @@ class LeadersPortalMembersController extends BaseController
 		    $sOrderdir = $_GET['order'][0]['dir'];
 		    $iTotalDisplayRecords = MembersmSSA::MembersShq()->Search('%'.$sSearch.'%')->count();
 		    $result = MembersmSSA::MembersShq()->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
-                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode'));
+                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode','created_at'));
      		// Log::debug(DB::getQueryLog());
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $result));
@@ -55,7 +55,7 @@ class LeadersPortalMembersController extends BaseController
 		    $sOrderdir = $_GET['order'][0]['dir'];
 		    $iTotalDisplayRecords = MembersmSSA::MembersRhq()->Search('%'.$sSearch.'%')->count();
 		    $result = MembersmSSA::MembersRhq()->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
-                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode'));
+                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode','created_at'));
      		// Log::debug(DB::getQueryLog());
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $result));
@@ -80,7 +80,7 @@ class LeadersPortalMembersController extends BaseController
 		    $sOrderdir = $_GET['order'][0]['dir'];
 		    $iTotalDisplayRecords = MembersmSSA::MembersZone()->Search('%'.$sSearch.'%')->count();
 		    $result = MembersmSSA::MembersZone()->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
-                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode'));
+                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode','created_at'));
      		// Log::debug(DB::getQueryLog());
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $result));
@@ -105,7 +105,7 @@ class LeadersPortalMembersController extends BaseController
 		    $sOrderdir = $_GET['order'][0]['dir'];
 		    $iTotalDisplayRecords = MembersmSSA::MembersChapter()->Search('%'.$sSearch.'%')->count();
 		    $result = MembersmSSA::MembersChapter()->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
-                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode'));
+                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode','created_at'));
      		// Log::debug(DB::getQueryLog());
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $result));
@@ -130,7 +130,7 @@ class LeadersPortalMembersController extends BaseController
 		    $sOrderdir = $_GET['order'][0]['dir'];
 		    $iTotalDisplayRecords = MembersmSSA::MembersDistrict()->Search('%'.$sSearch.'%')->count();
 		    $result = MembersmSSA::MembersDistrict()->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
-                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode'));
+                     ->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('name','chinesename', 'alias','rhq','zone','chapter','district','division','position','uniquecode','created_at'));
      		// Log::debug(DB::getQueryLog());
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $result));

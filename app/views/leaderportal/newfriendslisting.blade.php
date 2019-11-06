@@ -38,6 +38,7 @@
 									<table id="tshq" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
+												<th>Created</th>
 												<th>Name</th>
 												<th>名字</th>
 												<th>RHQ</th>
@@ -83,6 +84,7 @@
 									<table id="trhq" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
+												<th>Created</th>
 												<th>Name</th>
 												<th>名字</th>
 												<th>RHQ</th>
@@ -128,6 +130,7 @@
 									<table id="tzone" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
+												<th>Created</th>
 												<th>Name</th>
 												<th>名字</th>
 												<th>RHQ</th>
@@ -173,6 +176,7 @@
 									<table id="tchapter" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
+												<th>Created</th>
 												<th>Name</th>
 												<th>名字</th>
 												<th>RHQ</th>
@@ -219,6 +223,7 @@
 									<table id="tdistrict" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
+												<th>Created</th>
 												<th>Name</th>
 												<th>名字</th>
 												<th>RHQ</th>
@@ -497,25 +502,30 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
-				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
+				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
 				        "ajax": $.fn.dataTable.pipeline({
 				            url: 'BOEPortalNewFriends/getNewFriendsListingSHQ',
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "believersigned",
+						    	"targets": [ 9 ], "data": "believersigned",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">No</span>';
@@ -526,7 +536,7 @@
 					    		}
 				    		},
 					    	{
-						    	"targets": [ 9 ], "data": "chanting",
+						    	"targets": [ 10 ], "data": "chanting",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">'+'No'+'</span>';
@@ -536,9 +546,9 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 10 ], "data": "noofmtg", "searchable": "true" },
+				    		{ "targets": [ 11 ], "data": "noofmtg", "searchable": "true" },
 					    	{
-						    	"targets": [ 11 ], "data": "uniquecode",
+						    	"targets": [ 12 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -557,7 +567,6 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
 				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
@@ -566,16 +575,22 @@
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "believersigned",
+						    	"targets": [ 9 ], "data": "believersigned",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">No</span>';
@@ -586,7 +601,7 @@
 					    		}
 				    		},
 					    	{
-						    	"targets": [ 9 ], "data": "chanting",
+						    	"targets": [ 10 ], "data": "chanting",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">'+'No'+'</span>';
@@ -596,9 +611,9 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 10 ], "data": "noofmtg", "searchable": "true" },
+				    		{ "targets": [ 11 ], "data": "noofmtg", "searchable": "true" },
 					    	{
-						    	"targets": [ 11 ], "data": "uniquecode",
+						    	"targets": [ 12 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -617,25 +632,30 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
-				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
+				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
 				        "ajax": $.fn.dataTable.pipeline({
 				            url: 'BOEPortalNewFriends/getNewFriendsListingZone',
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "believersigned",
+						    	"targets": [ 9 ], "data": "believersigned",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">No</span>';
@@ -646,7 +666,7 @@
 					    		}
 				    		},
 					    	{
-						    	"targets": [ 9 ], "data": "chanting",
+						    	"targets": [ 10 ], "data": "chanting",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">'+'No'+'</span>';
@@ -656,9 +676,9 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 10 ], "data": "noofmtg", "searchable": "true" },
+				    		{ "targets": [ 11 ], "data": "noofmtg", "searchable": "true" },
 					    	{
-						    	"targets": [ 11 ], "data": "uniquecode",
+						    	"targets": [ 12 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -677,25 +697,30 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
-				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
+				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
 				        "ajax": $.fn.dataTable.pipeline({
 				            url: 'BOEPortalNewFriends/getNewFriendsListingChapter',
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "believersigned",
+						    	"targets": [ 9 ], "data": "believersigned",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">No</span>';
@@ -706,7 +731,7 @@
 					    		}
 				    		},
 					    	{
-						    	"targets": [ 9 ], "data": "chanting",
+						    	"targets": [ 10 ], "data": "chanting",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">'+'No'+'</span>';
@@ -716,9 +741,9 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 10 ], "data": "noofmtg", "searchable": "true" },
+				    		{ "targets": [ 11 ], "data": "noofmtg", "searchable": "true" },
 					    	{
-						    	"targets": [ 11 ], "data": "uniquecode",
+						    	"targets": [ 12 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -737,25 +762,30 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
-				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
+				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
 				        "ajax": $.fn.dataTable.pipeline({
 				            url: 'BOEPortalNewFriends/getNewFriendsListingDistrict',
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "believersigned",
+						    	"targets": [ 9 ], "data": "believersigned",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">No</span>';
@@ -766,7 +796,7 @@
 					    		}
 				    		},
 					    	{
-						    	"targets": [ 9 ], "data": "chanting",
+						    	"targets": [ 10 ], "data": "chanting",
 						    	render: function ( data, type, full ){
 								    if (data === 0 || data === '0'){
 								    	return '<span class="label label-danger arrowed-in">'+'No'+'</span>';
@@ -776,9 +806,9 @@
 								    }
 					    		}
 				    		},
-				    		{ "targets": [ 10 ], "data": "noofmtg", "searchable": "true" },
+				    		{ "targets": [ 11 ], "data": "noofmtg", "searchable": "true" },
 					    	{
-						    	"targets": [ 11 ], "data": "uniquecode",
+						    	"targets": [ 12 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=editdistrictrow("'+ data +'") class="btn btn-xs btn-info"><i class="fa fa-edit bigger-120"></i></button> <button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button>'
 							    }

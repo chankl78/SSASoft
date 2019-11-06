@@ -38,6 +38,7 @@
 									<table id="tshq" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
+												<th>Create</th>
 												<th>Name</th>
 												<th>名字</th>
 												<th>RHQ</th>
@@ -80,15 +81,16 @@
 									<table id="trhq" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th class="hidden-480">Name</th>
-												<th class="hidden-480">名字</th>
-												<th class="hidden-480">RHQ</th>
-												<th class="hidden-480">Zone</th>
-												<th class="hidden-480">Chapter</th>
-												<th class="hidden-480">District</th>
-												<th class="hidden-480">Division</th>
-												<th class="hidden-480">Position</th>
-												<th class="hidden-480">Action</th>
+												<th>Create</th>
+												<th>Name</th>
+												<th>名字</th>
+												<th>RHQ</th>
+												<th>Zone</th>
+												<th>Chapter</th>
+												<th>District</th>
+												<th>Division</th>
+												<th>Position</th>
+												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -122,15 +124,16 @@
 									<table id="tzone" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th class="hidden-480">Name</th>
-												<th class="hidden-480">名字</th>
-												<th class="hidden-480">RHQ</th>
-												<th class="hidden-480">Zone</th>
-												<th class="hidden-480">Chapter</th>
-												<th class="hidden-480">District</th>
-												<th class="hidden-480">Division</th>
-												<th class="hidden-480">Position</th>
-												<th class="hidden-480">Action</th>
+												<th>Create</th>
+												<th>Name</th>
+												<th>名字</th>
+												<th>RHQ</th>
+												<th>Zone</th>
+												<th>Chapter</th>
+												<th>District</th>
+												<th>Division</th>
+												<th>Position</th>
+												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -164,15 +167,16 @@
 									<table id="tchapter" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th class="hidden-480">Name</th>
-												<th class="hidden-480">名字</th>
-												<th class="hidden-480">RHQ</th>
-												<th class="hidden-480">Zone</th>
-												<th class="hidden-480">Chapter</th>
-												<th class="hidden-480">District</th>
-												<th class="hidden-480">Division</th>
-												<th class="hidden-480">Position</th>
-												<th class="hidden-480">Action</th>
+												<th>Create</th>
+												<th>Name</th>
+												<th>名字</th>
+												<th>RHQ</th>
+												<th>Zone</th>
+												<th>Chapter</th>
+												<th>District</th>
+												<th>Division</th>
+												<th>Position</th>
+												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -206,15 +210,16 @@
 									<table id="tdistrict" class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th class="hidden-480">Name</th>
-												<th class="hidden-480">名字</th>
-												<th class="hidden-480">RHQ</th>
-												<th class="hidden-480">Zone</th>
-												<th class="hidden-480">Chapter</th>
-												<th class="hidden-480">District</th>
-												<th class="hidden-480">Division</th>
-												<th class="hidden-480">Position</th>
-												<th class="hidden-480">Action</th>
+												<th>Create</th>
+												<th>Name</th>
+												<th>名字</th>
+												<th>RHQ</th>
+												<th>Zone</th>
+												<th>Chapter</th>
+												<th>District</th>
+												<th>Division</th>
+												<th>Position</th>
+												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -306,25 +311,30 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
-				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
+				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
 				        "ajax": $.fn.dataTable.pipeline({
 				            url: 'BOEPortalMembers/getMembersListingSHQ',
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "uniquecode",
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -343,25 +353,30 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
-				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
+				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
 				        "ajax": $.fn.dataTable.pipeline({
 				            url: 'BOEPortalMembers/getMembersListingRHQ',
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "uniquecode",
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -380,25 +395,30 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
-				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
+				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
 				        "ajax": $.fn.dataTable.pipeline({
 				            url: 'BOEPortalMembers/getMembersListingZone',
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "uniquecode",
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -417,25 +437,30 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
-				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
+				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
 				        "ajax": $.fn.dataTable.pipeline({
 				            url: 'BOEPortalMembers/getMembersListingChapter',
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "uniquecode",
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
@@ -454,25 +479,30 @@
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "processing": false,
 				        "serverSide": true,
 				        "searching": true,
-				        "order": [[ 2, "asc" ],[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 0, "asc" ]],
+				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
 				        "ajax": $.fn.dataTable.pipeline({
 				            url: 'BOEPortalMembers/getMembersListingDistrict',
 				            pages: 5 // number of pages to cache
 				        }),
 				        "columnDefs": [
-			            	{ "targets": [ 0 ], "data": "name", "searchable": "true" },
-			            	{ "targets": [ 1 ], "data": "chinesename", "searchable": "true" },
-					    	{ "targets": [ 2 ], "data": "rhq", "searchable": "true" },
-					    	{ "targets": [ 3 ], "data": "zone", "searchable": "true" },
-					    	{ "targets": [ 4 ], "data": "chapter", "searchable": "true" },
-					    	{ "targets": [ 5 ], "data": "district", "searchable": "true" },
-					    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
-					    	{ "targets": [ 7 ], "data": "position", "searchable": "true" },
+							{
+								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
+								"render": function ( data, type, full ){
+									return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+								}
+							},
+			            	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
+			            	{ "targets": [ 2 ], "data": "chinesename", "searchable": "true" },
+					    	{ "targets": [ 3 ], "data": "rhq", "searchable": "true" },
+					    	{ "targets": [ 4 ], "data": "zone", "searchable": "true" },
+					    	{ "targets": [ 5 ], "data": "chapter", "searchable": "true" },
+					    	{ "targets": [ 6 ], "data": "district", "searchable": "true" },
+					    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
+					    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 					    	{
-						    	"targets": [ 8 ], "data": "uniquecode",
+						    	"targets": [ 9 ], "data": "uniquecode",
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
