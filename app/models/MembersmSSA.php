@@ -112,7 +112,8 @@ class MembersmSSA extends Eloquent {
                 ->orwhere('district', 'Like', '%'.$sSearch.'%')
                 ->orwhere('division', 'Like', '%'.$sSearch.'%')
                 ->orwhere('position', 'Like', '%'.$sSearch.'%')
-                ->orwhere('alias', 'Like', '%'.$sSearch.'%');
+                ->orwhere('alias', 'Like', '%'.$sSearch.'%')
+                ->orwhere('created_at', 'Like', '%'.$sSearch.'%');
         });
     }
 
