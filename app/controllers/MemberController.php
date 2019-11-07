@@ -465,8 +465,9 @@ class MemberController extends BaseController
 
 	public function postConvertAuto()
 	{
+		LogsfLogs::postLogs('Update', 39, 0, ' - Members - Convertion Starts', NULL, NULL, 'Success');
 		$convertcount = DB::table('Members_m_ImportSSA')->count();
-		for($i = 1; $i <= $convertcount; $i++)
+		for($i = Input::get('startnumber'); $i <= Input::get('endnumber'); $i++)
 		{
 			try
 			{
@@ -554,7 +555,6 @@ class MemberController extends BaseController
 				 		if($belsigned == 1){$post->believersigned = 1;}
 
 						$post->save();
-						LogsfLogs::postLogs('Create', 39, 0, ' - Members - Convert New - ' . $i . ' ' . $personid, NULL, NULL, 'Success');
 					}
 					else
 					{
@@ -605,6 +605,9 @@ class MemberController extends BaseController
 			{
 			}
 		}
+
+		LogsfLogs::postLogs('Update', 39, 0, ' - Members - Convertion from MMS to BOE Successfully Completed with Start Number: ' . Input::get('startnumber') . ' End Number: ' . Input::get('endnumber'), NULL, NULL, 'Success');
+		return Response::json(array('info' => 'Success', 'numbercount' => $convertcount), 200);
 	}
 
 	public function postConvertNricHash()

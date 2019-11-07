@@ -32,6 +32,11 @@
 				{{ Form::open(array('action' => 'MemberController@postConvertAuto', 'id' => 'resourceaddauto', 'class' => 'form-horizontal')) }}
 					<fieldset>
 						<div class="form-group">
+							<div class=col-sm-12>{{ Form::text('txtcaStart', '1', array('class' => 'col-xs-1 col-sm-1', 'id' => 'txtcaStart'));}}
+								{{ Form::text('txtcaEnd', '8000', array('class' => 'col-xs-1 col-sm-1', 'id' => 'txtcaEnd'));}}
+								{{ Form::label('', '', array('class' => 'control-label col-xs-12 col-sm-1 no-padding-right', 'id' => 'lblnumbercount')); }}
+								{{ Form::label('', '', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right', 'id' => 'lblmessage')); }}
+							</div>
 							<div class=col-sm-12>
 								{{ Form::button('<i class="icon-plus Add"></i> Convert Auto', array('type' => 'submit', 'class' => 'btn btn-xs btn-yellow bigger' )); }}
 							</div>
@@ -205,19 +210,23 @@
 			$.ajax({
 		        url: 'postConvertAuto',
 		        type: 'POST',
+				data: { startnumber: $("#txtcaStart").val(), endnumber: $("#txtcaEnd").val() },
 		        dataType: 'json',
 		        statusCode: { 
-		        	200:function(){
+		        	200:function(data){
 		        		noty({
 							layout: 'topRight', type: 'success', text: 'Record Converted!!',
 							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
 								},
 							timeout: 4000
 						}); 
+						$("#lblnumbercount").text(data.numbercount);
+						$("#lblmessage").text('Start Number = ' + $("#txtcaStart").val() + ' End Number = ' + $("#txtcaEnd").val() + ' Completed Successfully.');
+						console.log('Start Number = ' + $("#txtcaStart").val() + ' End Number = ' + $("#txtcaEnd").val() + ' Completed Successfully.');
 		        	},
 		        	400:function(data){ 
 		        		noty({
-							layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
+							layout: 'topRight', type: 'error', text: 'Failed to Convert!! ' + txtMessage,
 							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
 								},
 							timeout: 4000
