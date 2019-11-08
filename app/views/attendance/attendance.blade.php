@@ -190,10 +190,10 @@
 								<div class="well well-lg">
 									{{ Form::open(array('id' => 'fselectupdatestats', 'class' => 'form-horizontal')) }}
 										<fieldset>
-											{{ Form::label('ddmonthstats', 'Month:', array('class' => 'control-label col-xs-12 col-sm-2')); }}
-											{{ Form::select('ddmonthstats', array('01' => 'Jan', '02' => 'Feb', '03' => 'Mar', '04' => 'Apr', '05' => 'May', '06' => 'Jun', '07' => 'Jul', '08' => 'Aug', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'), '', array('class' => 'col-xs-12 col-sm-2', 'id' => 'ddmonthstats'));}}
-											{{ Form::label('txtyear', 'Year:', array('class' => 'control-label col-xs-12 col-sm-2')); }}
-											{{ Form::text('txtyearstats', $currentyear, array('class' => 'col-xs-12 col-sm-2', 'id' => 'txtyearstats')); }}
+											{{ Form::label('ddmonthstatsus', 'Month:', array('class' => 'control-label col-xs-12 col-sm-2')); }}
+											{{ Form::select('ddmonthstatsus', array('01' => 'Jan', '02' => 'Feb', '03' => 'Mar', '04' => 'Apr', '05' => 'May', '06' => 'Jun', '07' => 'Jul', '08' => 'Aug', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'), '', array('class' => 'col-xs-12 col-sm-2', 'id' => 'ddmonthstatsus'));}}
+											{{ Form::label('txtyearus', 'Year:', array('class' => 'control-label col-xs-12 col-sm-2')); }}
+											{{ Form::text('txtyearstatsus', $currentyear, array('class' => 'col-xs-12 col-sm-2', 'id' => 'txtyearstatsus')); }}
 											{{ Form::button('<i class="fa fa-check"></i> Update', array('type' => 'Search', 'class' => 'btn btn-warning bigger pull-right' )); }}
 										</fieldset>
 									{{ Form::close() }}
@@ -220,13 +220,13 @@
 								<table id="tdefault" class="table table-striped table-bordered table-hover">
 									<thead>
 										<tr>
-											<th class="hidden-480">Date</th>
-											<th class="hidden-480">Type</th>
-											<th class="hidden-480">Event</th>
-											<th class="hidden-480">Event Item</th>
-											<th class="hidden-480">Description</th>
-											<th class="hidden-480">Status</th>
-											<th class="hidden-480">Action</th>
+											<th>Date</th>
+											<th>Type</th>
+											<th>Event</th>
+											<th>Event Item</th>
+											<th>Description</th>
+											<th>Status</th>
+											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -242,7 +242,39 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> <!-- Attendance Listing -->
+				<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
+					<div class="widget-box widget-color-blue">
+						<div class="widget-header">
+							<h5 class="widget-title">Discussion Meeting Not Submitted</h5>
+							<div class="widget-toolbar">
+								<a href="#" data-action="fullscreen" class="orange2">
+									<i class="ace-icon fa fa-expand"></i>
+								</a>
+								<a href="#" data-action="reload">
+									<i class="fa fa-refresh"></i>
+								</a>
+							</div>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<table id="tdmnotsubmitted" class="table table-striped table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<div class="widget-toolbox padding-8 clearfix">
+								<div class="col-xs-12">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- Discussion Meeting Not Submitted Listing -->
 				<!-- PAGE CONTENT ENDS HERE -->
 			</div><!-- /.col -->
 		</div><!--/row-->
@@ -561,14 +593,16 @@
 			$.ajax({
 		        url: 'Attendance/postDMStatsUpdate',
 		        type: 'POST',
-		        data: { ddmonth: $('#ddmonthstats').val(), txtyear: $('#txtyearstats').val() },
+		        data: { ddmonth: $('#ddmonthstatsus').val(), txtyear: $('#txtyearstatsus').val() },
 		        dataType: 'json',
 		        statusCode: { 
 		        	200:function(data){
 		        		var oTable = $('#tdefault').DataTable();
 					    oTable.clearPipeline().draw();
+						var oDMNotSubmittedTable = $('#tdmnotsubmitted').DataTable();
+						oDMNotSubmittedTable.ajax.reload(null, false);
 		        		noty({
-							layout: 'topRight', type: 'success', text: 'Attendance Closed!!',
+							layout: 'topRight', type: 'success', text: 'Discussion Meeting Statistic Updated!!',
 							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
 								},
 							timeout: 4000
@@ -648,6 +682,23 @@
 				    		return '<a href="#resourceedit" role="button" onClick=editrow("'+ data +'") class="btn btn-xs btn-info" data-toggle="modal"><i class="fa fa-edit bigger-120"></i></a> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button>'
 					    }
 			    	}]
+			    });
+
+				var oDMNotSubmittedTable = $('#tdmnotsubmitted').DataTable({
+			        "displayLength": 10, // Default No of Records per page on 1st load
+			        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+			        "pagingType": "first_last_numbers",
+			        "responsive": false,
+			        "stateSave": true, // Remember paging & filters
+			        "autoWidth": true,
+			        "scrollCollapse": true,
+			        "processing": false,
+			        "serverSide": false,
+			        "searching": true,
+			        "deferRender": true,
+			        "order": [[ 0, "desc" ]],
+			        "ajax": 'Attendance/getDiscussionMeetingNotSubmitted',
+			        "columnDefs": [ { "targets": [ 0 ], "data": "description", "searchable": "true" }]
 			    });
 			});
 		});

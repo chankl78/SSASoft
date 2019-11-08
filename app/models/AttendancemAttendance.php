@@ -142,6 +142,11 @@ class AttendancemAttendance extends Eloquent {
         return $query->where('attendancetype', 'Discussion Meeting')->select(DB::Raw('year(attendancedate) as year'))->groupBy(DB::raw('year(attendancedate)'))->orderBy(DB::raw('year(attendancedate)', 'DESC'));
     }
 
+    public function scopeDMNotSubmittedStats($query)
+    {
+        return $query->where('attendancetype', 'Discussion Meeting')->where('status', 'Active')->where('attendancetotal', '<=', 5);
+    }
+
     public function scopeRegionDMCurrentMonthStats($query)
     {
         return $query->whereYear('attendancedate', '=', date('Y'))->whereMonth('attendancedate', '=', date('m'))->where('status', 'Active')->where('attendancetype', 'Discussion Meeting')

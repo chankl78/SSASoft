@@ -111,6 +111,7 @@ Route::get('/Vehicle/getVehiclesListing', 'VehicleController@getVehiclesListing'
 // Attendance
 Route::get('/Attendance', array('before' => 'auth', 'uses' => 'AttendanceController@getIndex'));
 Route::get('/Attendance/getAttendanceListing', 'AttendanceController@getAttendanceListing');
+Route::get('/Attendance/getDiscussionMeetingNotSubmitted', 'AttendanceController@getDiscussionMeetingNotSubmitted');
 
 Route::post('/Attendance/deleteAttendance/{id}', 'AttendanceController@deleteAttendance');
 Route::post('/Attendance/postAttendanceACCheck/{id}', 'AttendanceController@postAttendanceACCheck');

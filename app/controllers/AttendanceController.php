@@ -49,6 +49,19 @@ class AttendanceController extends BaseController
 		}
 	}
 
+	public function getDiscussionMeetingNotSubmitted()
+	{
+		try
+		{
+			$default = AttendancemAttendance::DMNotSubmittedStats()->get(array('attendancedate', 'attendancetype', 'description', 'uniquecode', 'event', 'eventitem', 'status'))->toarray();
+			return Response::json(array('data' => $default));
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Read', 27, 0, ' - Discussion Meeting Not Attended [DT] - ' . $e, NULL, NULL, 'Failed');
+		}
+	}
+
 	public function deleteAttendance($id)
 	{
 		try
@@ -509,12 +522,15 @@ class AttendanceController extends BaseController
 	{
 		try
 		{
-			AttendancemAttendance::postAttendanceDMClosed(Input::get('txtyear'), Input::get('ddmonth'));
+			$statement = 'UPDATE Attendance_m_Attendance aa, (SELECT aa.id, aa.uniquecode, aa.description, COUNT(ap.attendancestatus) as TokangMembership, SUM(CASE WHEN ap.division IN ("MD") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + srmd as "MD", SUM(CASE WHEN ap.division IN ("WD") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + srwd as "WD", SUM(CASE WHEN ap.division IN ("YM") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + srymd as "YMD", SUM(CASE WHEN ap.division IN ("YW") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + srymd as "YWD", SUM(CASE WHEN ap.division IN ("PD") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "PD", SUM(CASE WHEN ap.division IN ("YC") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "YC", SUM(CASE WHEN ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + (srmd + srwd + srymd + srywd) as "DivisionAttendanceTotal", SUM(CASE WHEN ap.position NOT IN ("NF", "MEM", "BEL") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "LDR", SUM(CASE WHEN ap.position IN ("MEM") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "MEM", SUM(CASE WHEN ap.position IN ("BEL") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "BEL", SUM(CASE WHEN ap.position IN ("NF") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "NF" FROM Attendance_m_Attendance aa LEFT JOIN Attendance_m_Person ap on aa.id = ap.attendanceid WHERE attendancetype IN ("Discussion Meeting") and year(aa.attendancedate) =' . Input::get('txtyear') . ' and month(aa.attendancedate) = ' . Input::get('ddmonth') . ' and ap.deleted_at IS NULL GROUP BY aa.description) ap SET aa.tokangmembership = ap.TokangMembership, aa.md = ap.md, aa.wd = ap.wd, aa.ymd = ap.ymd, aa.ywd = ap.ywd, aa.pd = ap.pd, aa.yc = ap.yc, aa.attendancetotal = ap.DivisionAttendanceTotal, aa.ldr = ap.LDR, aa.mem = ap.MEM, aa.bel = ap.BEL, aa.nf = ap.NF WHERE aa.id = ap.id;';
+			DB::Statement($statement);
+
+			
 			return Response::json(array('info' => 'Success'), 200);
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Update', 34, 0, ' - Discussion Meeting Attendance Update - ' . $e, NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Update', 34, 0, ' - Discussion Meeting Attendance Update Statistic - ' . $e, NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown'), 400);
 		}
 	}
