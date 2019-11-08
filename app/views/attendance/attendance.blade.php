@@ -696,7 +696,7 @@
 			        "serverSide": false,
 			        "searching": true,
 			        "deferRender": true,
-			        "order": [[ 0, "desc" ]],
+			        "order": [[ 0, "asc" ]],
 			        "ajax": 'Attendance/getDiscussionMeetingNotSubmitted',
 			        "columnDefs": [ { "targets": [ 0 ], "data": "description", "searchable": "true" }]
 			    });
