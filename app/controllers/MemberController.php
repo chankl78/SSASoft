@@ -478,6 +478,20 @@ class MemberController extends BaseController
 		
 	}
 
+	public function posttransfermmsboedesc()
+	{
+		try
+		{
+			MembersmImportSSA::transfermmstoboedesc();
+			return Response::json(array('info' => 'Success'), 200);
+		}
+		catch (\Exception $e)
+		{
+			return Response::json(array('info' => 'Failed'), 400);
+		}
+		
+	}
+
 	public function postConvertAuto()
 	{
 		LogsfLogs::postLogs('Update', 39, 0, ' - Members - Convertion Starts', NULL, NULL, 'Success');

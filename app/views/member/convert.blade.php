@@ -29,6 +29,15 @@
 						</div>
 					</fieldset>
 				{{ Form::close() }}
+				{{ Form::open(array('action' => 'MemberController@posttransfermmsboedesc', 'id' => 'resourcetransferdesc', 'class' => 'form-horizontal')) }}
+					<fieldset>
+						<div class="form-group">
+							<div class=col-sm-12>
+								{{ Form::button('<i class="icon-plus Add"></i> Transfer MMS to BOE (DESC)', array('type' => 'submit', 'class' => 'btn btn-xs btn-yellow bigger' )); }}
+							</div>
+						</div>
+					</fieldset>
+				{{ Form::close() }}
 				{{ Form::open(array('action' => 'MemberController@post2019Members', 'id' => 'resource2019Members', 'class' => 'form-horizontal')) }}
 					<fieldset>
 						<div class="form-group">
@@ -180,7 +189,7 @@
 	<script type="text/javascript">
 		$('#resourcetransfer').submit(function(e){
 	    	noty({
-				layout: 'topRight', type: 'warning', text: 'Converting Record ...',
+				layout: 'topRight', type: 'warning', text: 'Transferring Record ...',
 				animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 },
 				timeout: 4000
 			});
@@ -212,7 +221,42 @@
 		    });
 		    e.preventDefault();
 	    });
-		
+
+		$('#resourcetransferdesc').submit(function(e){
+	    	noty({
+				layout: 'topRight', type: 'warning', text: 'Transferring Record By Desc ...',
+				animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 },
+				timeout: 4000
+			});
+			$.ajax({
+		        url: 'posttransfermmsboedesc',
+		        type: 'POST',
+				data: {  },
+				async: true,
+				timeout: 90000,
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(){
+		        		noty({
+							layout: 'topRight', type: 'success', text: 'Record Transfer from MMS to BOE!!',
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	},
+		        	400:function(data){ 
+		        		noty({
+							layout: 'topRight', type: 'error', text: 'Failed to Transfer!! ' + txtMessage,
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+	    });
+
 		$('#resource2019Members').submit(function(e){
 	    	noty({
 				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
