@@ -319,6 +319,21 @@ class MembersmSSA extends Eloquent {
         return $mid;
     }
 
+    public static function getcheckpersonidexist($value)
+    {
+        if (DB::table('Members_m_SSA')->where('personid', $value)->where('deleted_at', NULL)->count() >= 1)
+        {
+            return true;
+        }
+        else { return false; }
+    }
+
+    public static function getIdByPersonID($value)
+    {
+        $mid = DB::table('Members_m_SSA')->where('personid', $value)->pluck('id');
+        return $mid;
+    }
+
     public function scopeMADMembership($query, $value)
     {
         if ($value == 'Youth Division') {

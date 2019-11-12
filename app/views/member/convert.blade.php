@@ -20,6 +20,24 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS HERE -->
+				{{ Form::open(array('action' => 'MemberController@posttransfermmsboe', 'id' => 'resourcetransfer', 'class' => 'form-horizontal')) }}
+					<fieldset>
+						<div class="form-group">
+							<div class=col-sm-12>
+								{{ Form::button('<i class="icon-plus Add"></i> Transfer MMS to BOE', array('type' => 'submit', 'class' => 'btn btn-xs btn-yellow bigger' )); }}
+							</div>
+						</div>
+					</fieldset>
+				{{ Form::close() }}
+				{{ Form::open(array('action' => 'MemberController@post2019Members', 'id' => 'resource2019Members', 'class' => 'form-horizontal')) }}
+					<fieldset>
+						<div class="form-group">
+							<div class=col-sm-12>
+								{{ Form::button('<i class="icon-plus Add"></i> Update 2019 Membership', array('type' => 'submit', 'class' => 'btn btn-xs btn-yellow bigger' )); }}
+							</div>
+						</div>
+					</fieldset>
+				{{ Form::close() }}
 				{{ Form::open(array('action' => 'MemberController@postConvert', 'id' => 'resourceadd', 'class' => 'form-horizontal')) }}
 					<fieldset>
 						<div class="form-group">
@@ -39,15 +57,6 @@
 							</div>
 							<div class=col-sm-12>
 								{{ Form::button('<i class="icon-plus Add"></i> Convert Auto', array('type' => 'submit', 'class' => 'btn btn-xs btn-yellow bigger' )); }}
-							</div>
-						</div>
-					</fieldset>
-				{{ Form::close() }}
-				{{ Form::open(array('action' => 'MemberController@post2019Members', 'id' => 'resource2019Members', 'class' => 'form-horizontal')) }}
-					<fieldset>
-						<div class="form-group">
-							<div class=col-sm-12>
-								{{ Form::button('<i class="icon-plus Add"></i> Update 2019 Membership', array('type' => 'submit', 'class' => 'btn btn-xs btn-yellow bigger' )); }}
 							</div>
 						</div>
 					</fieldset>
@@ -169,6 +178,73 @@
 @stop
 @section('js')
 	<script type="text/javascript">
+		$('#resourcetransfer').submit(function(e){
+	    	noty({
+				layout: 'topRight', type: 'warning', text: 'Converting Record ...',
+				animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 },
+				timeout: 4000
+			});
+			$.ajax({
+		        url: 'posttransfermmsboe',
+		        type: 'POST',
+				data: {  },
+				async: true,
+				timeout: 90000,
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(){
+		        		noty({
+							layout: 'topRight', type: 'success', text: 'Record Transfer from MMS to BOE!!',
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	},
+		        	400:function(data){ 
+		        		noty({
+							layout: 'topRight', type: 'error', text: 'Failed to Transfer!! ' + txtMessage,
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+	    });
+		
+		$('#resource2019Members').submit(function(e){
+	    	noty({
+				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
+				animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 },
+				timeout: 4000
+			});
+			$.ajax({
+		        url: 'post2019Members',
+		        type: 'POST',
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(){
+		        		noty({
+							layout: 'topRight', type: 'success', text: 'Record Updated!!',
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	},
+		        	400:function(data){ 
+		        		noty({
+							layout: 'topRight', type: 'error', text: 'Failed to Update!! ' + txtMessage,
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+	    });
+
 		$('#resourceadd').submit(function(e){
 	    	noty({
 				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
@@ -227,38 +303,6 @@
 		        	400:function(data){ 
 		        		noty({
 							layout: 'topRight', type: 'error', text: 'Failed to Convert!! ' + txtMessage,
-							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
-								},
-							timeout: 4000
-						}); 
-		        	}
-		        }
-		    });
-		    e.preventDefault();
-	    });
-
-		$('#resource2019Members').submit(function(e){
-	    	noty({
-				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
-				animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 },
-				timeout: 4000
-			});
-			$.ajax({
-		        url: 'post2019Members',
-		        type: 'POST',
-		        dataType: 'json',
-		        statusCode: { 
-		        	200:function(){
-		        		noty({
-							layout: 'topRight', type: 'success', text: 'Record Updated!!',
-							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
-								},
-							timeout: 4000
-						}); 
-		        	},
-		        	400:function(data){ 
-		        		noty({
-							layout: 'topRight', type: 'error', text: 'Failed to Update!! ' + txtMessage,
 							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
 								},
 							timeout: 4000
