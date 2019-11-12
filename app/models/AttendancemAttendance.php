@@ -78,6 +78,12 @@ class AttendancemAttendance extends Eloquent {
         return true;
     }
 
+    public static function postAttendanceDMClosedSubmitted($year, $month)
+    {
+        DB::table('Attendance_m_Attendance')->where('attendancetype', 'Discussion Meeting')->where('status', 'Active')->where('attendancetotal', '>=', 5)->whereYear('attendancedate', '=', $year)->whereMonth('attendancedate', '=', $month)->update(array('status' => 'Closed'));
+        return true;
+    }
+
     public static function getid($value)
     {
         $mid = DB::table('Attendance_m_Attendance')->where('uniquecode', $value)->pluck('id');

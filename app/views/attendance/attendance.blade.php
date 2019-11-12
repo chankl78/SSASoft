@@ -151,7 +151,7 @@
 				<div class="col-xs-12 col-sm-4 widget-container-span ui-sortable">
 					<div class="widget-box collapsed widget-color-red">
 						<div class="widget-header">
-							<h5 class="widget-title">Close Discussion Meeting</h5>
+							<h5 class="widget-title">Close Discussion Meeting (All)</h5>
 							<div class="widget-toolbar">
 								<a href="#" data-action="collapse">
 									<i class="ace-icon fa fa-chevron-up"></i>
@@ -167,14 +167,41 @@
 											{{ Form::select('ddmonthclosed', array('01' => 'Jan', '02' => 'Feb', '03' => 'Mar', '04' => 'Apr', '05' => 'May', '06' => 'Jun', '07' => 'Jul', '08' => 'Aug', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'), '', array('class' => 'col-xs-12 col-sm-2', 'id' => 'ddmonthclosed'));}}
 											{{ Form::label('txtyear', 'Year:', array('class' => 'control-label col-xs-12 col-sm-2')); }}
 											{{ Form::text('txtyear', $currentyear, array('class' => 'col-xs-12 col-sm-2', 'id' => 'txtyear')); }}
-											{{ Form::button('<i class="fa fa-plus"></i> Close', array('type' => 'Search', 'class' => 'btn btn-warning bigger pull-right' )); }}
+											{{ Form::button('<i class="fa fa-plus"></i> Close All', array('type' => 'Search', 'class' => 'btn btn-warning bigger pull-right' )); }}
 										</fieldset>
 									{{ Form::close() }}
 								</div>
 							</div>
 						</div>
 					</div>
-				</div> <!-- Closed of Discussion Meeting -->
+				</div> <!-- Closed of Discussion Meeting All -->
+				<div class="col-xs-12 col-sm-4 widget-container-span ui-sortable">
+					<div class="widget-box collapsed widget-color-red">
+						<div class="widget-header">
+							<h5 class="widget-title">Close Discussion Meeting (Submitted)</h5>
+							<div class="widget-toolbar">
+								<a href="#" data-action="collapse">
+									<i class="ace-icon fa fa-chevron-up"></i>
+								</a>
+							</div>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<div class="well well-lg">
+									{{ Form::open(array('id' => 'fselectclosedsubmitted', 'class' => 'form-horizontal')) }}
+										<fieldset>
+											{{ Form::label('ddmonthclosedsubmitted', 'Month:', array('class' => 'control-label col-xs-12 col-sm-2')); }}
+											{{ Form::select('ddmonthclosedsubmitted', array('01' => 'Jan', '02' => 'Feb', '03' => 'Mar', '04' => 'Apr', '05' => 'May', '06' => 'Jun', '07' => 'Jul', '08' => 'Aug', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'), '', array('class' => 'col-xs-12 col-sm-2', 'id' => 'ddmonthclosedsubmitted'));}}
+											{{ Form::label('txtyearsubmitted', 'Year:', array('class' => 'control-label col-xs-12 col-sm-2')); }}
+											{{ Form::text('txtyearsubmitted', $currentyear, array('class' => 'col-xs-12 col-sm-2', 'id' => 'txtyearsubmitted')); }}
+											{{ Form::button('<i class="fa fa-plus"></i> Close Submitted', array('type' => 'Search', 'class' => 'btn btn-warning bigger pull-right' )); }}
+										</fieldset>
+									{{ Form::close() }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- Closed of Discussion Meeting Submitted -->
 				<div class="col-xs-12 col-sm-4 widget-container-span ui-sortable">
 					<div class="widget-box collapsed widget-color-blue">
 						<div class="widget-header">
@@ -544,7 +571,7 @@
 
 		$('#fselectclosed').submit(function(e) {
 			noty({
-				layout: 'topRight', type: 'warning', text: 'Closing Discussion Meeting Attendance ...',
+				layout: 'topRight', type: 'warning', text: 'Closing Discussion Meeting Attendance (ALL) ...',
 				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
 				timeout: 4000
 			});
@@ -552,6 +579,48 @@
 		        url: 'Attendance/postClosedDMAttendance',
 		        type: 'POST',
 		        data: { ddmonth: $('#ddmonthclosed').val(), txtyear: $('#txtyear').val() },
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(data){
+		        		var oTable = $('#tdefault').DataTable();
+					    oTable.clearPipeline().draw();
+		        		noty({
+							layout: 'topRight', type: 'success', text: 'Attendance Closed!!',
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						});
+		        	},
+		        	400:function(data){ 
+		        		var txtMessage;
+		        		if (data.responseJSON.ErrType == "Duplicate") 
+		        			{ txtMessage = 'Record already existed!'; }
+		        		else if (data.responseJSON.ErrType == "Failed")
+		        			{ txtMessage = 'Please check your entry!'; }
+		        		else { txtMessage = 'Please check your entry!'; }
+		        		$("#search").focus();
+		        		noty({
+							layout: 'topRight', type: 'error', text: txtMessage,
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+		});
+
+		$('#fselectclosedsubmitted').submit(function(e) {
+			noty({
+				layout: 'topRight', type: 'warning', text: 'Closing Discussion Meeting Attendance (Submitted) ...',
+				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
+				timeout: 4000
+			});
+			$.ajax({
+		        url: 'Attendance/postClosedDMAttendanceSubmitted',
+		        type: 'POST',
+		        data: { ddmonth: $('#ddmonthclosedsubmitted').val(), txtyear: $('#txtyearsubmitted').val() },
 		        dataType: 'json',
 		        statusCode: { 
 		        	200:function(data){

@@ -518,6 +518,21 @@ class AttendanceController extends BaseController
 		}
 	}
 
+	public function postClosedDMAttendanceSubmitted()
+	{
+		try
+		{
+			AttendancemAttendance::postAttendanceDMClosedSubmitted(Input::get('txtyear'), Input::get('ddmonth'));
+			
+			return Response::json(array('info' => 'Success'), 200);
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Update', 34, 0, ' - Discussion Meeting Attendance Update - ' . $e, NULL, NULL, 'Failed');
+			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown'), 400);
+		}
+	}
+
 	public function postDMStatsUpdate()
 	{
 		try

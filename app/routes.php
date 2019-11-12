@@ -120,6 +120,7 @@ Route::post('/Attendance/postCreateDMLevelDivisionAttendance', 'AttendanceContro
 Route::post('/Attendance/postCreateEventTrainingAttendance', 'AttendanceController@postCreateEventTrainingAttendance');
 Route::post('/Attendance/postCreateGroupCodePrefixTrainingAttendance', 'AttendanceController@postCreateGroupCodePrefixTrainingAttendance');
 Route::post('/Attendance/postClosedDMAttendance', 'AttendanceController@postClosedDMAttendance');
+Route::post('/Attendance/postClosedDMAttendanceSubmitted', 'AttendanceController@postClosedDMAttendanceSubmitted');
 Route::post('/Attendance/postDMStatsUpdate', 'AttendanceController@postDMStatsUpdate');
 
 // Attendance Detail
