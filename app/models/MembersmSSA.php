@@ -497,6 +497,26 @@ class MembersmSSA extends Eloquent {
         );
     }
 
+    public function scopeFDMembership($query)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
+            return $query->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 13')->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) <= 17')
+                ->select(DB::raw('name, chinesename, rhq, zone, chapter, district, position, division, uniquecode, (Year(now()) - Year(dateofbirth)) as "age"'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'rhq' ) {
+            return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 13')->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) <= 17')
+                ->select(DB::raw('name, chinesename, rhq, zone, chapter, district, position, division, uniquecode, (Year(now()) - Year(dateofbirth)) as "age"'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone' ) {
+            return $query->where('zone', Session::get('gakkaiuserzone'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 13')->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) <= 17')
+            ->select(DB::raw('name, chinesename, rhq, zone, chapter, district, position, division, uniquecode, (Year(now()) - Year(dateofbirth)) as "age"'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'chapter' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 13')->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) <= 17')
+            ->select(DB::raw('name, chinesename, rhq, zone, chapter, district, position, division, uniquecode, (Year(now()) - Year(dateofbirth)) as "age"'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'district' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 13')->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) <= 17')
+            ->select(DB::raw('name, chinesename, rhq, zone, chapter, district, position, division, uniquecode, (Year(now()) - Year(dateofbirth)) as "age"'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+        }
+    }
+
     public function scopeStudyExamEntrance($query)
     {
         if (Session::get('gakkaiuserpositionlevel') == 'rhq') {

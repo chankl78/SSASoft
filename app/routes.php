@@ -603,6 +603,10 @@ Route::get('/BOEPortalMembers/getMembersListingChapter', 'LeadersPortalMembersCo
 Route::get('/BOEPortalMembers/getMembersListingDistrict', 'LeadersPortalMembersController@getMembersListingDistrict');
 Route::get('/BOEPortalMembers/getMembersInfo/{id}', 'LeadersPortalMembersController@getMembersInfo');
 
+// Leaders FD List
+Route::get('/BOEPortalFDListing', array('before' => 'auth', 'uses' => 'LeadersPortalFDController@getIndex'));
+Route::get('/BOEPortalFDListing/getListing', 'LeadersPortalFDController@getListing');
+
 // Leaders Portal Discussion Meeting Listing
 Route::get('/BOEPortalDiscussionMeetingListing', array('before' => 'auth', 'uses' => 'LeadersPortalDiscussionMeetingListingController@getIndex'));
 Route::get('/BOEPortalDiscussionMeetingListing/getDiscussionMeetingListingDistrict', 'LeadersPortalDiscussionMeetingListingController@getDiscussionMeetingListingDistrict');

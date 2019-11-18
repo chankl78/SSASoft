@@ -25,6 +25,11 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Campaign
 					</a>
 				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/FD' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalFDController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
+					</a>
+				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalPastPreMADTrainingListingController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Past Pre M&D Training Attendees
@@ -99,6 +104,11 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Campaign
 					</a>
 				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/FD' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalFDController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
+					</a>
+				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalPastPreMADTrainingListingController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Past Pre M&D Training Attendees
@@ -171,6 +181,11 @@
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/Campaign' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalCampaignListingController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Campaign
+					</a>
+				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/FD' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalFDController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
@@ -252,6 +267,11 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Campaign
 					</a>
 				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/FD' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalFDController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
+					</a>
+				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalPastPreMADTrainingListingController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Past Pre M&D Training Attendees
@@ -329,6 +349,11 @@
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/Campaign' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalCampaignListingController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Campaign
+					</a>
+				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/FD' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalFDController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
