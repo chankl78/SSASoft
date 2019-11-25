@@ -172,6 +172,7 @@ class AttendanceController extends BaseController
 							$postm->district = $dmattendancememberlist['district'];
 							$postm->division = $dmattendancememberlist['division'];
 							$postm->position = $dmattendancememberlist['position'];
+							$postm->positionlevel = $dmattendancememberlist['positionlevel'];
 							if ($dmattendancememberlist['position'] == 'NF')
 							{
 								$postm->noofnewfriend = 1;
