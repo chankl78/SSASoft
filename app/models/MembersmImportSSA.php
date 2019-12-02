@@ -53,6 +53,7 @@ class MembersmImportSSA extends Eloquent {
 					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
 					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }	
+					$post->positionlevel = $positionlevel;
 					$post->division = $member['division'];
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
@@ -104,6 +105,7 @@ class MembersmImportSSA extends Eloquent {
 					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
 					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }	
+					$post->positionlevel = $positionlevel;
 					$post->division = $member['division'];
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
@@ -182,6 +184,7 @@ class MembersmImportSSA extends Eloquent {
 					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
 					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }	
+					$post->positionlevel = $positionlevel;
 					$post->division = $member['division'];
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
@@ -233,6 +236,7 @@ class MembersmImportSSA extends Eloquent {
 					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
 					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }	
+					$post->positionlevel = $positionlevel;
 					$post->division = $member['division'];
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
@@ -253,7 +257,7 @@ class MembersmImportSSA extends Eloquent {
 				$i++;
 				if ($i == 5000 || $i == 10000 || $i == 15000 || $i == 20000 || $i == 25000 || $i == 30000 || $i == 35000 || $i == 40000 || $i == 45000 || $i == 50000 || $i == 55000 || $i == 60000)
 				{
-					LogsfLogs::postLogs('Update', 39, 0, ' - MembersmImportSSA Model - MMS to BOE Success - ' . $i, NULL, NULL, 'Success');
+					LogsfLogs::postLogs('Update', 39, 0, ' - MembersmImportSSA Model DESC - MMS to BOE Success - ' . $i, NULL, NULL, 'Success');
 				}
 			}
 
