@@ -1,10 +1,8 @@
 <?php
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class MemberszOrgChart extends Eloquent {
 
 	protected $table = 'Members_z_OrgChart';
-    use SoftDeletingTrait;
 
 	public function scopeRhq($query)
     {
@@ -32,4 +30,13 @@ class MemberszOrgChart extends Eloquent {
         return $this->attributes['zone'] . ' - ' . $this->attributes['chapter'];
     }
 
+    public static function scopeNationwideOrgChartTotal($query)
+    {
+        return $query->whereNotIn("id", array(1,2))->select(DB::raw('COUNT(DISTINCT rhqabbv) as rhq, COUNT(DISTINCT zoneabbv) as zone, COUNT(DISTINCT chapabbv) as chapter, COUNT(district) as district'));
+    }
+
+    public static function scopeNationwideOrgChartByRHQTotal($query)
+    {
+        return $query->whereNotIn("id", array(1,2))->select(DB::raw('rhqabbv, COUNT(DISTINCT zoneabbv) as zone, COUNT(DISTINCT chapabbv) as chapter, COUNT(district) as district'))->groupby('rhqabbv');
+    }
 }

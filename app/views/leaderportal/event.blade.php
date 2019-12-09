@@ -3520,7 +3520,11 @@
 									stateSave: true, // Remember paging & filters
 									autoWidth: false,
 									scrollCollapse: true,
-									serverSide: false,
+									@if ($gakkaishq == 't')
+										serverSide: true,
+									@else
+										serverSide: false,
+									@endif
 									deferRender: true,
 									searching: true,
 									order: [[2, "asc"], [3, "asc"], [4, "asc"], [5, "asc"], [0, "asc"]],
@@ -3687,7 +3691,7 @@
 							});
 						@endif
 				    @endif
-				@endif
+				@endif // tmembership
 
 				$('#cbrhq').change(function(){
 	        		$.ajax({

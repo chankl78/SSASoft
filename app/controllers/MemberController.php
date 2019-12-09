@@ -64,7 +64,7 @@ class MemberController extends BaseController
 		try
 		{
 			$default = MembersmSSA::Role()->FuneralServices()->orderBy('rhq', 'ASC')->orderBy('zone', 'ASC')->orderBy('chapter', 'ASC')
-			->orderBy('position', 'ASC')->orderBy('name', 'ASC')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'chinesename', 'classification', 'created_at', 'alias', 'email', 'mobile', 'division'))->toarray();
+			->orderBy('position', 'ASC')->orderBy('name', 'ASC')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'chinesename', 'classification', 'created_at', 'alias', 'email', 'mobile', 'division', 'mobile'))->toarray();
 			return Response::json(array('data' => $default));
 		}
 		catch(\Exception $e)

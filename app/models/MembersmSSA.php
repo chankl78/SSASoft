@@ -754,6 +754,16 @@ class MembersmSSA extends Eloquent {
                 WHEN Members_m_SSA.division = "PD" THEN 5 WHEN Members_m_SSA.division = "YC" THEN 6 END'));
     }
 
+    public static function scopeNationWideBOEPositionSummary($query)
+    {
+        return $query->whereNotNull('positionlevel')->select(DB::raw('positionlevel, COUNT(positionlevel) as total'))->groupby('positionlevel');
+    }
+
+    public static function scopeNationWideDistrictLeadersSummary($query)
+    {
+        return $query->whereNotNull('positionlevel')->whereNotIn('positionlevel', array('mem', 'nf', 'bel'))->whereNotNull('rhq')->whereNotIn('rhq', array('-', 'H0'))->whereNotIn('zone', array('-', ''))->whereNotIn('chapter', array('-', ''))->whereNotIn('district', array('-'))->select(DB::raw('rhq, zone, chapter, SUM(CASE WHEN positionlevel = "district"  THEN 1 ELSE 0 END) as total'))->groupby('rhq')->groupby('zone')->groupby('chapter');
+    }
+
     // To delete after Youth Summit Event
     public function scopeYouthSummitYonsha($query)
     {

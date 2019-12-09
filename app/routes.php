@@ -31,6 +31,10 @@ Route::post('/installadmin', 'InstallAdminController@postSetup');
 // Dashboard
 Route::get('/Dashboard', array('before' => 'auth', 'uses' => 'DashboardController@getIndex'));
 Route::get('/Dashboard/userlogs', 'DashboardController@userlogs');
+Route::get('/Dashboard/nationwideorgcharttotal', 'DashboardController@nationwideorgcharttotal');
+Route::get('/Dashboard/nationwideorgchartbyrhqtotal', 'DashboardController@nationwideorgchartbyrhqtotal');
+Route::get('/Dashboard/nationwideboepositionsummary', 'DashboardController@nationwideboepositionsummary');
+Route::get('/Dashboard/nationwidedistrictleaderssummary', 'DashboardController@nationwidedistrictleaderssummary');
 
 // User Profile
 Route::get('/UserProfile', array('before' => 'auth', 'uses' => 'UserController@getIndex'));

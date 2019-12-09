@@ -9,6 +9,7 @@ class LogsmLogs extends Eloquent {
         return $query->where(function($query) use ($sSearch)
         {
             $query->where('created_at', 'Like', '%'.$sSearch.'%')
+                ->orwhere('description', 'Like', '%'.$sSearch.'%')
                 ->orwhere('logtype', 'Like', '%'.$sSearch.'%')
                 ->orwhere('ipaddress', 'Like', '%'.$sSearch.'%')
                 ->orwhere('status', 'Like', '%'.$sSearch.'%');

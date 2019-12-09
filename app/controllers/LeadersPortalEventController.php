@@ -186,27 +186,25 @@ class LeadersPortalEventController extends BaseController
 				$sOrderByID = $_GET['order'][0]['column'];
 				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
 				$sOrderdir = $_GET['order'][0]['dir'];
-				$iTotalDisplayRecords = MembersmSSA::StudyExamEntrance()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'))->count();
-				$default = MembersmSSA::StudyExamEntrance()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
+				$iTotalDisplayRecords = MembersmSSA::StudyExamEntrance()->Search('%'.$sSearch.'%')->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'))->count();
+				$default = MembersmSSA::StudyExamEntrance()->Search('%'.$sSearch.'%')->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
 
 				return Response::json(array(
-					'recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords,
-					'draw' => (string)$sEcho, 'data' => $default
+					'recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 'draw' => (string)$sEcho, 'data' => $default
 				));
 			} else {
 				$sEcho = (int)$_GET['draw'];
-				$iTotalRecords = MembersmSSA::Role()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'))->count();
+				$iTotalRecords = MembersmSSA::Role()->get(array('uniquecode'))->count();
 				$iDisplayLength = (int)$_GET['length'];
 				$iDisplayStart = (int)$_GET['start'];
 				$sSearch = $_GET['search']['value'];
 				$sOrderByID = $_GET['order'][0]['column'];
 				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
 				$sOrderdir = $_GET['order'][0]['dir'];
-				$iTotalDisplayRecords = MembersmSSA::Role()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'))->count();
-				$default = MembersmSSA::Role()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
+				$iTotalDisplayRecords = MembersmSSA::Role()->Search('%'.$sSearch.'%')->get(array('uniquecode'))->count();
+				$default = MembersmSSA::Role()->Search('%'.$sSearch.'%')->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
 				return Response::json(array(
-					'recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords,
-					'draw' => (string)$sEcho, 'data' => $default
+					'recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 'draw' => (string)$sEcho, 'data' => $default
 				));
 			}
 		} catch (\Exception $e) {

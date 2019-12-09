@@ -47,6 +47,7 @@
 											<th>Div</th>
 											<th>Pos</th>
 											<th>Class</th>
+											<th>Mobile</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -282,8 +283,9 @@
 			    	{ "targets": [ 7 ], "data": "division", "searchable": "true" },
 			    	{ "targets": [ 8 ], "data": "position", "searchable": "true" },
 			    	{ "targets": [ 9 ], "data": "classification", "searchable": "true" },
+					{ "targets": [ 10 ], "data": "mobile", "searchable": "true" },
 			    	{
-				    	"targets": [ 10 ], "data": "uniquecode",
+				    	"targets": [ 11 ], "data": "uniquecode",
 				    	"render": function ( data, type, full ){
 				    		return '<button type="submit" onClick=getinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-edit bigger-120"></i></button>'
 					    }
