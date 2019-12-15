@@ -142,7 +142,7 @@ class LeadersPortalLoginController extends BaseController {
 			if (Input::get('year') == $memberdob)
 			{
 				$post = AccessmUsers::find($memberid);
-				LogsfLogs::postLogs('Login', 3, 0, ' - Reset Account ' . Hash::make(Input::get('password')) . ' - ' . $memberid, NULL, NULL, 'Failed');
+				LogsfLogs::postLogs('Login', 3, 0, ' - Reset Account ' . Hash::make(Input::get('password')) . ' - ' . Input::get('email'), NULL, NULL, 'Failed');
 				$post->password = Hash::make(Input::get('password'));
 				$post->encryptedcode = Input::get('password');
 
@@ -151,7 +151,7 @@ class LeadersPortalLoginController extends BaseController {
 				if($post->save())
 				{
 					LogsfLogs::postLogs('Login', 3, 0, ' - BOE Portal Reset Account Password Successfully ' . Input::get('email'), NULL, NULL, 'Success');
-					return Redirect::back()->withInput();
+					return Redirect::action('LeadersPortalLoginController@getIndex');
 				}
 				else
 				{
@@ -166,7 +166,7 @@ class LeadersPortalLoginController extends BaseController {
 
 				Cache::put('alerts_message', 'Unable to verify! Please check your email with gakkai department or email ssahq@ssabuddhist.org!', 1);
 
-				LogsfLogs::postLogs('Login', 3, 0, ' BOE Portal Reset Account [Birth Year] - Failed to verify email - ' . Input::get('email'), NULL, NULL, 'Failed');
+				LogsfLogs::postLogs('Login', 3, 0, ' BOE Portal Reset Account [Birth Year] - Birth Year is wrong - ' . Input::get('email'), NULL, NULL, 'Failed');
 				return Response::json(array('info' => 'Failed', 'ErrType' => 'DOB'), 400);
 			}
 		}
@@ -177,7 +177,7 @@ class LeadersPortalLoginController extends BaseController {
 
 			Cache::put('alerts_message', 'Email does not exist!  Please check your email with gakkai department or email ssahq@ssabuddhist.org!', 1);
 
-			LogsfLogs::postLogs('Login', 3, 0, ' BOE Portal Reset Account [Email] - Failed to verify email - ' . Input::get('email'), NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Login', 3, 0, ' BOE Portal Reset Account [Email] - Email does not Exist - ' . Input::get('email'), NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed', 'ErrType' => 'Email'), 400);
 		}
 	}

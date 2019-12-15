@@ -280,37 +280,30 @@
 			});
 
 			$(document).ready(function () {
-				$('#nric').keyup(function(){
-			    this.value = this.value.toUpperCase();
-				});
-
-				$('#register').validate({
+				$('#retrieve').validate({
 					errorElement: 'div',
 					errorClass: 'help-block',
 					focusInvalid: false,
 					rules: {
-						gpassword: {
+						rpassword: {
 							required: true,
 							minlength: 6
 						},
-						gusername: {
+						rpassword2: {
 							required: true,
-							email: true
-						}
+							minlength: 6,
+							equalTo: "#rpassword"
+						},
 					},
 			
 					messages: {
-						gemail: {
+						remail: {
 							required: "Please provide a valid email.",
 							email: "Please provide a valid email."
 						},
-						gpassword: {
+						rpassword: {
 							required: "Please specify a password.",
 							minlength: "Minimum length for password is 6 alpha-numeric characters."
-						},
-						gusername: {
-							required: "Please provide a username.",
-							minlength: "Minimum length for username is 6 alpha-numeric characters."
 						}
 					},
 			
@@ -340,11 +333,13 @@
 		        statusCode: { 
 		        	200:function(){
 						noty({
-							layout: 'topRight', type: 'success', text: 'Password Resetted!!',
+							layout: 'topRight', type: 'success', text: 'Password Resetted!! Please click Back to Login to continue',
 							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
 								},
 							timeout: 4000
 						}); 
+
+						$("#remail").val(''); $("#rpassword").val(''); $("#rpassword2").val(''); $("#rcbyear").val('')
 		        	},
 		        	400:function(data){ 
 						var txtMessage;
