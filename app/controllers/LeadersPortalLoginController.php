@@ -6,11 +6,12 @@ class LeadersPortalLoginController extends BaseController {
 		$view->title = 'Login - SSA BOE Portal';
 		Session::put('current_page', 'Dashboard');
 		Session::put('current_resource', 'USER');
+		$ddyears = array('' => 'Please select your Birth Year') + MembersmSSA::DateofBirthSelect()->lists('year', 'year');
 		if (Cache::has('alerts_message'))
 		{
 			$view->alert_message = Cache::get('alerts_message');
 		}
-		return $view;
+		return $view->with('ddyears', $ddyears);
 	}
 
 	public function postLogin()
@@ -75,7 +76,7 @@ class LeadersPortalLoginController extends BaseController {
 			if (Cache::has('alerts_message_Failed_Login')) { Cache::put('alerts_message_Failed_Login', 'true', 1); }
 			else { Cache::add('alerts_message_Failed_Login', 'true', 1); }
 
-			Cache::put('alerts_message', 'Failed to verify your email!  Please check your email with gakkai department!', 1);
+			Cache::put('alerts_message', 'Failed to verify your email!  Please check your email with gakkai department or email ssahq@ssabuddhist.org!!', 1);
 
 			LogsfLogs::postLogs('Login', 3, 0, ' BOE Portal - Failed to verify email - ' . Input::get('gusername'), NULL, NULL, 'Failed');
 			return Redirect::back()->withInput();
@@ -124,9 +125,60 @@ class LeadersPortalLoginController extends BaseController {
 				Cache::put('alerts_message_Failed_Registered', 'true', 1);
 				Cache::put('alerts_message', 'You had already verify or register this email.  Please click I forget my password to reset.', 1);
 
-				LogsfLogs::postLogs('Login', 3, 0, ' BOE Portal - Duplicate Username or email - ' . Input::get('gusername'), NULL, NULL, 'Failed');
+				LogsfLogs::postLogs('Login', 3, 0, ' BOE Portal Verify against MMS - Duplicate Username or email - ' . Input::get('gusername'), NULL, NULL, 'Failed');
 				return Redirect::back()->withInput();
 			}
+		}
+	}
+
+	public function postReset()
+	{
+		// Step 1 - check if username exist
+		if (AccessmUsers::getFindDuplicateValue(Input::get('email')) == true)
+		{
+			$memberid = AccessmUsers::getuserid(Input::get('email'));
+			$memberdob = MembersmSSA::getdob(AccessmUsers::getusermemberid(Input::get('email')));
+			
+			if (Input::get('year') == $memberdob)
+			{
+				$post = AccessmUsers::find($memberid);
+				LogsfLogs::postLogs('Login', 3, 0, ' - Reset Account ' . Hash::make(Input::get('password')) . ' - ' . $memberid, NULL, NULL, 'Failed');
+				$post->password = Hash::make(Input::get('password'));
+				$post->encryptedcode = Input::get('password');
+
+				$post->save();
+
+				if($post->save())
+				{
+					LogsfLogs::postLogs('Login', 3, 0, ' - BOE Portal Reset Account Password Successfully ' . Input::get('email'), NULL, NULL, 'Success');
+					return Redirect::back()->withInput();
+				}
+				else
+				{
+					LogsfLogs::postLogs('Login', 3, 0, ' - BOE Portal Reset Account Password Failed ' . Input::get('email'), NULL, NULL, 'Failed');
+					return Response::json(array('info' => 'Failed'), 400);
+				}
+			}
+			else
+			{
+				if (Cache::has('alerts_message_Failed_Login')) { Cache::put('alerts_message_Failed_Login', 'true', 1); }
+				else { Cache::add('alerts_message_Failed_Login', 'true', 1); }
+
+				Cache::put('alerts_message', 'Unable to verify! Please check your email with gakkai department or email ssahq@ssabuddhist.org!', 1);
+
+				LogsfLogs::postLogs('Login', 3, 0, ' BOE Portal Reset Account [Birth Year] - Failed to verify email - ' . Input::get('email'), NULL, NULL, 'Failed');
+				return Response::json(array('info' => 'Failed', 'ErrType' => 'DOB'), 400);
+			}
+		}
+		else
+		{
+			if (Cache::has('alerts_message_Failed_Login')) { Cache::put('alerts_message_Failed_Login', 'true', 1); }
+			else { Cache::add('alerts_message_Failed_Login', 'true', 1); }
+
+			Cache::put('alerts_message', 'Email does not exist!  Please check your email with gakkai department or email ssahq@ssabuddhist.org!', 1);
+
+			LogsfLogs::postLogs('Login', 3, 0, ' BOE Portal Reset Account [Email] - Failed to verify email - ' . Input::get('email'), NULL, NULL, 'Failed');
+			return Response::json(array('info' => 'Failed', 'ErrType' => 'Email'), 400);
 		}
 	}
 

@@ -119,7 +119,7 @@
 										</div><!-- /widget-main -->
 										<div class="toolbar clearfix">
 											<div>
-												<a href="https://dms.ssabuddhist.org/password/new" target="_self" class="forgot-password-link">
+												<a href="#" data-target="#forgot-box" class="forgot-password-link">
 													<i class="ace-icon fa fa-arrow-left"></i>
 													I forgot my password
 												</a>
@@ -133,6 +133,58 @@
 										</div>
 									</div><!-- /widget-body -->
 								</div><!-- /login-box -->
+								<div id="forgot-box" class="forgot-box widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header red lighter bigger">
+												<i class="ace-icon fa fa-key"></i>
+												Retrieve Password
+											</h4>
+
+											<div class="space-6"></div>
+											<p>
+												Please key in the information below
+											</p>
+
+											{{ Form::open(array('action' => 'LeadersPortalLoginController@postReset', 'id' => 'retrieve')) }}
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															{{ Form::email('remail', '', array('class' => 'form-control', 'placeholder'=>'Email (All small letters)', 'id' => 'remail')); }}
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+													</label>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															{{ Form::select('rcbyear', $ddyears, '', array('class' => 'form-control', 'id' => 'rcbyear'));}}
+														</span>
+													</label>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															{{ Form::password('rpassword', array('class' => 'form-control', 'placeholder' => 'Password', 'id' => 'rpassword'));}}
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+													</label>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															{{ Form::password('rpassword2', array('class' => 'form-control', 'placeholder' => 'Repeat Password', 'id' => 'rpassword2'));}}
+															<i class="ace-icon fa fa-retweet"></i>
+														</span>
+													</label>
+													<div class="clearfix">
+														{{ Form::button('<i class="ce-icon fa fa-lightbulb-o"></i> Reset!', array('type' => 'submit', 'class' => 'width-35 pull-right btn btn-sm btn-danger')) }}
+													</div>
+												</fieldset>
+											{{ Form::close() }}
+										</div><!-- /widget-main -->
+										<div class="toolbar center">
+											<a href="#" data-target="#login-box" class="back-to-login-link">
+												Back to login
+												<i class="ace-icon fa fa-arrow-right"></i>
+											</a>
+										</div>
+									</div><!-- /widget-body -->
+								</div><!-- /forgot-box -->
 								<div id="signup-box" class="signup-box widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">
@@ -207,6 +259,7 @@
 			if("ontouchend" in document) document.write("<script src='{{{ asset('assets/js/jquery.mobile.custom.min.js') }}}'>"+"<"+"/script>");
 		</script>
 		<!-- page specific plugin scripts -->
+		<script type="text/javascript" src="{{{ asset('assets/js/noty/packaged/jquery.noty.packaged.min.js') }}}"></script>
 		<script type="text/javascript" src="{{{ asset('assets/js/jquery.validate.min.js') }}}"></script>
 		<script type="text/javascript" src="{{{ asset('assets/js/additional-methods.min.js') }}}"></script>
 		<script type="text/javascript" src="{{{ asset('assets/js/jquery.maskedinput.min.js') }}}"></script>
@@ -275,6 +328,45 @@
 					}
 				});
 			});
+
+			$('#retrieve').submit(function(e){
+	    	$.ajax({
+		        url: '/boeportallogin/postReset',
+		        type: 'POST',
+				data: { email: $("#remail").val(), password: $("#rpassword").val(), year: $("#rcbyear").val() },
+				async: true,
+				timeout: 90000,
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(){
+						noty({
+							layout: 'topRight', type: 'success', text: 'Password Resetted!!',
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	},
+		        	400:function(data){ 
+						var txtMessage;
+		        		if (data.responseJSON.ErrType == "DOB") 
+		        			{ txtMessage = 'Some information is wrong.  Please check the fields!';  }
+		        		else if (data.responseJSON.ErrType == "Failed")
+		        			{ txtMessage = 'Please check your entry!'; }
+		        		else if (data.responseJSON.ErrType == "Email")
+		        			{ txtMessage = 'Email does not exist!  Please check your email with gakkai department or email ssahq@ssabuddhist.org!'; }
+		        		else { txtMessage = 'Please check your entry!'; }
+		        		$("#search").focus();
+		        		noty({
+							layout: 'topRight', type: 'error', text: txtMessage,
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 10000
+						});
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+	    });
 		</script>
 	</body>
 </html>

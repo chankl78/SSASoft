@@ -262,6 +262,12 @@ class MembersmSSA extends Eloquent {
         return $mid;
     }
 
+    public static function getdob($value)
+    {
+        $mid = DB::table('Members_m_SSA')->where('deleted_at', NULL)->where('id', $value)->pluck(DB::raw('year(dateofbirth)'));
+        return $mid;
+    }
+
     public static function hasemailhashboelogin($value)
     {
         if (DB::table('Members_m_SSA')->where('emailhash', md5($value))->count() >= 1)
@@ -332,6 +338,11 @@ class MembersmSSA extends Eloquent {
     {
         $mid = DB::table('Members_m_SSA')->where('personid', $value)->pluck('id');
         return $mid;
+    }
+
+    public function scopeDateofBirthSelect($query)
+    {
+        return $query->whereNotNull('dateofbirth')->whereYear('dateofbirth', '>', 1919)->select(DB::raw('year(dateofbirth) as year'))->groupby(DB::raw('year(dateofbirth)'))->orderby(DB::raw('year(dateofbirth)'), 'DESC');
     }
 
     public function scopeMADMembership($query, $value)

@@ -535,6 +535,7 @@ Route::get('/boeportallogin', array('before' => 'installadmin', 'uses' => 'Leade
 Route::controller('BOEPortalLogin', 'LeadersPortalLoginController');
 Route::get('/getLeadersPortalLogout', 'LeadersPortalLoginController@getLogout');
 Route::get('/public/getLeadersPortalLogout', 'LeadersPortalLoginController@getLogout');
+Route::post('/boeportallogin/postReset', 'LeadersPortalLoginController@postReset');
 
 // Leaders Portal Dashboard
 Route::get('/BOEPortalDashboard', array('before' => 'auth', 'uses' => 'LeadersPortalDashboardController@getIndex'));
