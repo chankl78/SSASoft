@@ -372,14 +372,6 @@ class MemberController extends BaseController
 
 	public function post2019Members()
 	{
-		DB::table('zz_2019_Members')->truncate();
-
-		DB::statement('INSERT INTO zz_2019_Members (created_at, updated_at, source, uniquecode, id, name, chinesename, rhq, zone, chapter, district, division, position, positionlevel, belsigned, memsigned, gender, age, agegroup, below13, `1316`, `1723`, `2430`, `3135`, `3640`, `4145`, `4650`, `5155`, `5660`, `6165`, `6670`, `7175`, above75, dmjan, dmfeb, dmmar, dmapr, dmmay, dmjun, dmjul, dmaug, dmsep, dmoct, dmnov, dmdec, dmtotal, dmunique, sgistudyjan, irstudymar, irstudyjun, studytotal, rythemofpeace, sokastallion, ojokai, sokaknights, peonydancegroup, tulipchoir, sunshineaunty, kanekogroup, dendrobium, carnationgroup, sokapassiongroup, happycreativegroup, whitephoenix, courageousmusician, ymdgymcoregroup, goldenliondancetroupe, gajokai, younglion, vanguard, fearlessgroup, sunflower, kotekitai, ikedakayokai, byakuren, bluebelle, juniorchoir, sydc, futuredivision, studentdivision, snco, sokachorus, rco, smg, svg, propsgroup, skalumni) 
-			SELECT mssa.created_at, mssa.updated_at, mssa.source, mssa.uniquecode, mssa.id, mssa.name, mssa.chinesename, mssa.rhq, mssa.zone, mssa.chapter, mssa.district, mssa.division, mssa.position, mssa.positionlevel, mssa.belsigned, mssa.memsigned, mssa.gender, Year(now()) - Year(mssa.dateofbirth) as age, CASE WHEN (Year(now()) - Year(mssa.dateofbirth)) <= 6 THEN "0 to 6" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 7 and (Year(now()) - Year(mssa.dateofbirth)) <= 12 THEN "7 to 12" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 13 and (Year(now()) - Year(mssa.dateofbirth)) <= 16 THEN "13 to 16" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 17 and (Year(now()) - Year(mssa.dateofbirth)) <= 23 THEN "17 to 23" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 24 and (Year(now()) - Year(mssa.dateofbirth)) <= 30 THEN "24 to 30" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 31 and (Year(now()) - Year(mssa.dateofbirth)) <= 35 THEN "31 to 35" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 36 and (Year(now()) - Year(mssa.dateofbirth)) <= 40 THEN "36 to 40" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 41 and (Year(now()) - Year(mssa.dateofbirth)) <= 45 THEN "41 to 45" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 46 and (Year(now()) - Year(mssa.dateofbirth)) <= 50 THEN "46 to 50" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 51 and (Year(now()) - Year(mssa.dateofbirth)) <= 55 THEN "51 to 55" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 56 and (Year(now()) - Year(mssa.dateofbirth)) <= 60 THEN "56 to 60" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 61 and (Year(now()) - Year(mssa.dateofbirth)) <= 65 THEN "61 to 65" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 66 and (Year(now()) - Year(mssa.dateofbirth)) <= 70 THEN "66 to 70" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 71 and (Year(now()) - Year(mssa.dateofbirth)) <= 75 THEN "71 to 75" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 76 and (Year(now()) - Year(mssa.dateofbirth)) <= 120 THEN "Above 75" WHEN (Year(mssa.dateofbirth)) IS NULL THEN "Unknown" ELSE "Unknown" END as agegroup, CASE WHEN Year(now()) - Year(mssa.dateofbirth) < 13 THEN 1 ELSE 0 END as "below13", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 13 and Year(now()) - Year(mssa.dateofbirth) <= 16 THEN 1 ELSE 0 END as "1316", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 17 and Year(now()) - Year(mssa.dateofbirth) <= 23 THEN 1 ELSE 0 END as "1723", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 24 and Year(now()) - Year(mssa.dateofbirth) <= 30 THEN 1 ELSE 0 END as "2430", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 31 and Year(now()) - Year(mssa.dateofbirth) <= 35 THEN 1 ELSE 0 END as "3135", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 36 and Year(now()) - Year(mssa.dateofbirth) <= 40 THEN 1 ELSE 0 END as "3640", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 41 and Year(now()) - Year(mssa.dateofbirth) <= 45 THEN 1 ELSE 0 END as "4145", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 46 and Year(now()) - Year(mssa.dateofbirth) <= 50 THEN 1 ELSE 0 END as "4650", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 51 and Year(now()) - Year(mssa.dateofbirth) <= 55 THEN 1 ELSE 0 END as "5155", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 56 and Year(now()) - Year(mssa.dateofbirth) <= 60 THEN 1 ELSE 0 END as "5660", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 61 and Year(now()) - Year(mssa.dateofbirth) <= 65 THEN 1 ELSE 0 END as "6165", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 66 and Year(now()) - Year(mssa.dateofbirth) <= 70 THEN 1 ELSE 0 END as "6670", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 71 and Year(now()) - Year(mssa.dateofbirth) <= 75 THEN 1 ELSE 0 END as "7175", CASE WHEN Year(now()) - Year(mssa.dateofbirth) > 76 THEN 1 ELSE 0 END as "above75", 0 as dmjan, 0 as dmfeb, 0 as dmmar, 0 as dmapr, 0 as dmmay, 0 as dmjun, 0 as dmjul, 0 as dmaug, 0 as dmsep, 0 as dmoct, 0 as dmnov, 0 as dmdec, 0 as dmtotal, 0 as dmunique, 0 as sgistudyjan, 0 as irstudymar, 0 as irstudyjun, 0 as studytotal, "" as "rythemofpeace", "" as "sokastallion", "" as "ojokai", "" as "sokaknights", "" as "peonydancegroup", "" as "tulipchoir", "" as "sunshineaunty", "" as "kanekogroup", "" as "dendrobium", "" as "carnationgroup", "" as "sokapassiongroup", "" as "happycreativegroup", "" as "whitephoenix", "" as "courageousmusician", "" as "ymdgymcoregroup", "" as "goldenliondancetroupe", "" as "gajokai", "" as "younglion", "" as vanguard, "" as "fearlessgroup", "" as "sunflower", "" as "kotekitai", "" as "ikedakayokai", "" as "byakuren", "" as "bluebelle", "" as "juniorchoir", "" as "sydc", "" as "futuredivision", "" as "studentdivision", "" as "snco", "" as "sokachorus", "" as "rco", "" as "smg", "" as "svg", "" as "propsgroup", "" as "skalumni"
-			FROM Members_m_SSA mssa
-			WHERE mssa.deleted_at IS NULL and mssa.division IN ("MD", "WD", "YM", "YW", "PD", "YC")
-			ORDER BY mssa.rhq, mssa.zone, mssa.chapter, mssa.district, mssa.division, mssa.position, mssa.positionlevel, mssa.name;');
-
 		DB::statement('CREATE TABLE zz_2019_dm (SELECT ap.memberid, mssa.uniquecode,
 			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 1) THEN 1 ELSE 0 END as dmjan, 
 			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 2) THEN 1 ELSE 0 END as dmfeb, 
@@ -462,6 +454,91 @@ class MemberController extends BaseController
 			SET m.sokastallion = cf.sokastallion, m.ojokai = cf.ojokai, m.rythemofpeace = cf.rythemofpeace, m.sokaknights = cf.sokaknights, m.peonydancegroup = cf.peonydancegroup, m.tulipchoir = cf.tulipchoir, m.sunshineaunty = cf.sunshineaunty, m.kanekogroup = cf.kanekogroup, m.dendrobium = cf.dendrobium, m.carnationgroup = cf.carnationgroup, m.sokapassiongroup = cf.sokapassiongroup, m.happycreativegroup = cf.happycreativegroup, m.whitephoenix = cf.whitephoenix, m.ymdgymcoregroup = cf.ymdgymcoregroup, m.goldenliondancetroupe = cf.goldenliondancetroupe, m.courageousmusician = cf.courageousmusician, m.gajokai = cf.gajokai, m.younglion = cf.younglion, m.vanguard = cf.vanguard, m.fearlessgroup = cf.fearlessgroup, m.sunflower = cf.sunflower, m.kotekitai = cf.kotekitai, m.ikedakayokai = cf.ikedakayokai, m.byakuren = cf.byakuren, m.bluebelle = cf.bluebelle, m.juniorchoir = cf.juniorchoir, m.sydc = cf.sydc, m.futuredivision = cf.futuredivision, m.studentdivision = cf.studentdivision, m.snco = cf.snco, m.sokachorus = cf.sokachorus, m.rco = cf.rco, m.smg = cf.smg, m.svg = cf.svg, m.propsgroup = cf.propsgroup, m.skalumni = cf.skalumni;');
 
 		DB::statement('DROP TABLE zz_2019_culturefunction;');
+
+		LogsfLogs::postLogs('Update', 39, 0, ' - SSA 2019 Membership Updated Successfully ', NULL, NULL, 'Success');
+	}
+
+	public function post2020Members()
+	{
+		DB::table('zz_2020_Members')->truncate();
+
+		DB::statement('INSERT INTO zz_2020_Members (created_at, updated_at, source, uniquecode, id, name, chinesename, rhq, zone, chapter, district, division, position, positionlevel, belsigned, memsigned, gender, age, agegroup, below13, `1316`, `1723`, `2430`, `3135`, `3640`, `4145`, `4650`, `5155`, `5660`, `6165`, `6670`, `7175`, above75, dmjan, dmfeb, dmmar, dmapr, dmmay, dmjun, dmjul, dmaug, dmsep, dmoct, dmnov, dmdec, dmtotal, dmunique, sgistudyjan, irstudymar, irstudyjun, studytotal, rythemofpeace, sokastallion, ojokai, sokaknights, peonydancegroup, tulipchoir, sunshineaunty, kanekogroup, dendrobium, carnationgroup, sokapassiongroup, happycreativegroup, whitephoenix, courageousmusician, ymdgymcoregroup, goldenliondancetroupe, gajokai, younglion, vanguard, fearlessgroup, sunflower, kotekitai, ikedakayokai, byakuren, bluebelle, juniorchoir, sydc, futuredivision, studentdivision, snco, sokachorus, rco, smg, svg, propsgroup, skalumni) 
+			SELECT mssa.created_at, mssa.updated_at, mssa.source, mssa.uniquecode, mssa.id, mssa.name, mssa.chinesename, mssa.rhq, mssa.zone, mssa.chapter, mssa.district, mssa.division, mssa.position, mssa.positionlevel, mssa.belsigned, mssa.memsigned, mssa.gender, Year(now()) - Year(mssa.dateofbirth) as age, CASE WHEN (Year(now()) - Year(mssa.dateofbirth)) <= 6 THEN "0 to 6" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 7 and (Year(now()) - Year(mssa.dateofbirth)) <= 12 THEN "7 to 12" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 13 and (Year(now()) - Year(mssa.dateofbirth)) <= 16 THEN "13 to 16" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 17 and (Year(now()) - Year(mssa.dateofbirth)) <= 23 THEN "17 to 23" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 24 and (Year(now()) - Year(mssa.dateofbirth)) <= 30 THEN "24 to 30" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 31 and (Year(now()) - Year(mssa.dateofbirth)) <= 35 THEN "31 to 35" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 36 and (Year(now()) - Year(mssa.dateofbirth)) <= 40 THEN "36 to 40" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 41 and (Year(now()) - Year(mssa.dateofbirth)) <= 45 THEN "41 to 45" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 46 and (Year(now()) - Year(mssa.dateofbirth)) <= 50 THEN "46 to 50" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 51 and (Year(now()) - Year(mssa.dateofbirth)) <= 55 THEN "51 to 55" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 56 and (Year(now()) - Year(mssa.dateofbirth)) <= 60 THEN "56 to 60" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 61 and (Year(now()) - Year(mssa.dateofbirth)) <= 65 THEN "61 to 65" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 66 and (Year(now()) - Year(mssa.dateofbirth)) <= 70 THEN "66 to 70" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 71 and (Year(now()) - Year(mssa.dateofbirth)) <= 75 THEN "71 to 75" WHEN (Year(now()) - Year(mssa.dateofbirth)) >= 76 and (Year(now()) - Year(mssa.dateofbirth)) <= 120 THEN "Above 75" WHEN (Year(mssa.dateofbirth)) IS NULL THEN "Unknown" ELSE "Unknown" END as agegroup, CASE WHEN Year(now()) - Year(mssa.dateofbirth) < 13 THEN 1 ELSE 0 END as "below13", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 13 and Year(now()) - Year(mssa.dateofbirth) <= 16 THEN 1 ELSE 0 END as "1316", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 17 and Year(now()) - Year(mssa.dateofbirth) <= 23 THEN 1 ELSE 0 END as "1723", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 24 and Year(now()) - Year(mssa.dateofbirth) <= 30 THEN 1 ELSE 0 END as "2430", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 31 and Year(now()) - Year(mssa.dateofbirth) <= 35 THEN 1 ELSE 0 END as "3135", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 36 and Year(now()) - Year(mssa.dateofbirth) <= 40 THEN 1 ELSE 0 END as "3640", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 41 and Year(now()) - Year(mssa.dateofbirth) <= 45 THEN 1 ELSE 0 END as "4145", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 46 and Year(now()) - Year(mssa.dateofbirth) <= 50 THEN 1 ELSE 0 END as "4650", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 51 and Year(now()) - Year(mssa.dateofbirth) <= 55 THEN 1 ELSE 0 END as "5155", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 56 and Year(now()) - Year(mssa.dateofbirth) <= 60 THEN 1 ELSE 0 END as "5660", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 61 and Year(now()) - Year(mssa.dateofbirth) <= 65 THEN 1 ELSE 0 END as "6165", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 66 and Year(now()) - Year(mssa.dateofbirth) <= 70 THEN 1 ELSE 0 END as "6670", CASE WHEN Year(now()) - Year(mssa.dateofbirth) >= 71 and Year(now()) - Year(mssa.dateofbirth) <= 75 THEN 1 ELSE 0 END as "7175", CASE WHEN Year(now()) - Year(mssa.dateofbirth) > 76 THEN 1 ELSE 0 END as "above75", 0 as dmjan, 0 as dmfeb, 0 as dmmar, 0 as dmapr, 0 as dmmay, 0 as dmjun, 0 as dmjul, 0 as dmaug, 0 as dmsep, 0 as dmoct, 0 as dmnov, 0 as dmdec, 0 as dmtotal, 0 as dmunique, 0 as sgistudyjan, 0 as irstudymar, 0 as irstudyjun, 0 as studytotal, "" as "rythemofpeace", "" as "sokastallion", "" as "ojokai", "" as "sokaknights", "" as "peonydancegroup", "" as "tulipchoir", "" as "sunshineaunty", "" as "kanekogroup", "" as "dendrobium", "" as "carnationgroup", "" as "sokapassiongroup", "" as "happycreativegroup", "" as "whitephoenix", "" as "courageousmusician", "" as "ymdgymcoregroup", "" as "goldenliondancetroupe", "" as "gajokai", "" as "younglion", "" as vanguard, "" as "fearlessgroup", "" as "sunflower", "" as "kotekitai", "" as "ikedakayokai", "" as "byakuren", "" as "bluebelle", "" as "juniorchoir", "" as "sydc", "" as "futuredivision", "" as "studentdivision", "" as "snco", "" as "sokachorus", "" as "rco", "" as "smg", "" as "svg", "" as "propsgroup", "" as "skalumni"
+			FROM Members_m_SSA mssa
+			WHERE mssa.deleted_at IS NULL and mssa.division IN ("MD", "WD", "YM", "YW", "PD", "YC") 
+			ORDER BY mssa.rhq, mssa.zone, mssa.chapter, mssa.district, mssa.division, mssa.position, mssa.positionlevel, mssa.name;');
+
+		DB::statement('CREATE TABLE zz_2020_dm (SELECT ap.memberid, mssa.uniquecode,
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 1) THEN 1 ELSE 0 END as dmjan, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 2) THEN 1 ELSE 0 END as dmfeb, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 3) THEN 1 ELSE 0 END as dmmar, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 4) THEN 1 ELSE 0 END as dmapr, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 5) THEN 1 ELSE 0 END as dmmay, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 6) THEN 1 ELSE 0 END as dmjun, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 7) THEN 1 ELSE 0 END as dmjul, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 8) THEN 1 ELSE 0 END as dmaug, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 9) THEN 1 ELSE 0 END as dmsep, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 10) THEN 1 ELSE 0 END as dmoct, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 11) THEN 1 ELSE 0 END as dmnov, 
+			CASE WHEN SUM(ap.attendancestatus = "Attended" and month(aa.attendancedate) = 12) THEN 1 ELSE 0 END as dmdec,
+			SUM(CASE WHEN ap.attendancestatus = "Attended" THEN 1 ELSE 0 END) as dmtotal,
+			CASE WHEN (SUM(CASE WHEN ap.attendancestatus = "Attended" THEN 1 ELSE 0 END) > 0) THEN 1 ELSE 0 END as dmunique
+			FROM Attendance_m_Person ap LEFT JOIN Attendance_m_Attendance aa on ap.attendanceid = aa.id LEFT JOIN Members_m_SSA mssa on mssa.id = ap.memberid
+			WHERE aa.attendancetype IN ("Discussion Meeting") and aa.deleted_at IS NULL and year(aa.attendancedate) = 2020 and ap.deleted_at IS NULL and ap.memberid != 0 and ap.division in ("MD", "WD", "YM", "YW", "PD", "YC")
+			GROUP BY ap.memberid ORDER BY ap.memberid);');
+		
+		DB::statement('UPDATE zz_2020_Members m INNER JOIN zz_2020_dm mdm on m.id = mdm.memberid
+			SET m.dmjan = mdm.dmjan, m.dmfeb = mdm.dmfeb, m.dmmar = mdm.dmmar, m.dmapr = mdm.dmapr, m.dmmay = mdm.dmmay, m.dmjun = mdm.dmjun, m.dmjul = mdm.dmjul, m.dmaug = mdm.dmaug, m.dmsep = mdm.dmsep, m.dmoct = mdm.dmoct, m.dmnov = mdm.dmnov, m.dmdec = mdm.dmdec, m.dmtotal = mdm.dmtotal, m.dmunique = mdm.dmunique;');
+
+		DB::statement('DROP TABLE zz_2020_dm;');
+
+		DB::statement('CREATE TABLE zz_2020_culturefunction (SELECT gm.memberid, mssa.uniquecode,
+		CASE WHEN SUM(gm.groupid IN (13)) THEN gm.position ELSE "" END as sokastallion,
+		CASE WHEN SUM(gm.groupid IN (15)) THEN gm.position ELSE "" END as ojokai,
+		CASE WHEN SUM(gm.groupid IN (18)) THEN gm.position ELSE "" END as rythemofpeace,
+		CASE WHEN SUM(gm.groupid IN (30)) THEN gm.position ELSE "" END as sokaknights,
+		CASE WHEN SUM(gm.groupid IN (6)) THEN gm.position ELSE "" END as peonydancegroup,
+		CASE WHEN SUM(gm.groupid IN (19)) THEN gm.position ELSE "" END as tulipchoir,
+		CASE WHEN SUM(gm.groupid IN (21)) THEN gm.position ELSE "" END as sunshineaunty,
+		CASE WHEN SUM(gm.groupid IN (28)) THEN gm.position ELSE "" END as kanekogroup,
+		CASE WHEN SUM(gm.groupid IN (31)) THEN gm.position ELSE "" END as dendrobium,
+		CASE WHEN SUM(gm.groupid IN (34)) THEN gm.position ELSE "" END as carnationgroup,
+		CASE WHEN SUM(gm.groupid IN (42)) THEN gm.position ELSE "" END as sokapassiongroup,
+		CASE WHEN SUM(gm.groupid IN (44)) THEN gm.position ELSE "" END as happycreativegroup,
+		CASE WHEN SUM(gm.groupid IN (45)) THEN gm.position ELSE "" END as whitephoenix,
+		CASE WHEN SUM(gm.groupid IN (2)) THEN gm.position ELSE "" END as ymdgymcoregroup,
+		CASE WHEN SUM(gm.groupid IN (5)) THEN gm.position ELSE "" END as goldenliondancetroupe,
+		CASE WHEN SUM(gm.groupid IN (33)) THEN gm.position ELSE "" END as courageousmusician,
+		CASE WHEN SUM(gm.groupid IN (14)) THEN gm.position ELSE "" END as gajokai,
+		CASE WHEN SUM(gm.groupid IN (12)) THEN gm.position ELSE "" END as younglion,
+		CASE WHEN SUM(gm.groupid IN (46)) THEN gm.position ELSE "" END as vanguard,
+		CASE WHEN SUM(gm.groupid IN (48)) THEN gm.position ELSE "" END as fearlessgroup,
+		CASE WHEN SUM(gm.groupid IN (7)) THEN gm.position ELSE "" END as sunflower,
+		CASE WHEN SUM(gm.groupid IN (32)) THEN gm.position ELSE "" END as kotekitai,
+		CASE WHEN SUM(gm.groupid IN (29)) THEN gm.position ELSE "" END as ikedakayokai,
+		CASE WHEN SUM(gm.groupid IN (11)) THEN gm.position ELSE "" END as byakuren,
+		CASE WHEN SUM(gm.groupid IN (43)) THEN gm.position ELSE "" END as bluebelle,
+		CASE WHEN SUM(gm.groupid IN (8)) THEN gm.position ELSE "" END as juniorchoir,
+		CASE WHEN SUM(gm.groupid IN (16)) THEN gm.position ELSE "" END as sydc,
+		CASE WHEN SUM(gm.groupid IN (4)) THEN gm.position ELSE "" END as futuredivision,
+		CASE WHEN SUM(gm.groupid IN (3)) THEN gm.position ELSE "" END as studentdivision,
+		CASE WHEN SUM(gm.groupid IN (9)) THEN gm.position ELSE "" END as snco,
+		CASE WHEN SUM(gm.groupid IN (10)) THEN gm.position ELSE "" END as sokachorus,
+		CASE WHEN SUM(gm.groupid IN (25)) THEN gm.position ELSE "" END as rco,
+		CASE WHEN SUM(gm.groupid IN (27)) THEN gm.position ELSE "" END as smg,
+		CASE WHEN SUM(gm.groupid IN (36)) THEN gm.position ELSE "" END as svg,
+		CASE WHEN SUM(gm.groupid IN (35)) THEN gm.position ELSE "" END as propsgroup,
+		CASE WHEN SUM(gm.groupid IN (49)) THEN gm.position ELSE "" END as skalumni
+		FROM Group_m_Member gm LEFT JOIN Group_m_Group gg on gm.groupid = gg.id LEFT JOIN Members_m_SSA mssa on gm.memberid = mssa.id
+		WHERE gg.deleted_at IS NULL and gm.deleted_at IS NULL and gm.status = "Active" 
+		GROUP BY gm.memberid ORDER BY gm.memberid);');
+
+		DB::statement('UPDATE zz_2020_Members m INNER JOIN zz_2020_culturefunction cf on m.id = cf.memberid
+			SET m.sokastallion = cf.sokastallion, m.ojokai = cf.ojokai, m.rythemofpeace = cf.rythemofpeace, m.sokaknights = cf.sokaknights, m.peonydancegroup = cf.peonydancegroup, m.tulipchoir = cf.tulipchoir, m.sunshineaunty = cf.sunshineaunty, m.kanekogroup = cf.kanekogroup, m.dendrobium = cf.dendrobium, m.carnationgroup = cf.carnationgroup, m.sokapassiongroup = cf.sokapassiongroup, m.happycreativegroup = cf.happycreativegroup, m.whitephoenix = cf.whitephoenix, m.ymdgymcoregroup = cf.ymdgymcoregroup, m.goldenliondancetroupe = cf.goldenliondancetroupe, m.courageousmusician = cf.courageousmusician, m.gajokai = cf.gajokai, m.younglion = cf.younglion, m.vanguard = cf.vanguard, m.fearlessgroup = cf.fearlessgroup, m.sunflower = cf.sunflower, m.kotekitai = cf.kotekitai, m.ikedakayokai = cf.ikedakayokai, m.byakuren = cf.byakuren, m.bluebelle = cf.bluebelle, m.juniorchoir = cf.juniorchoir, m.sydc = cf.sydc, m.futuredivision = cf.futuredivision, m.studentdivision = cf.studentdivision, m.snco = cf.snco, m.sokachorus = cf.sokachorus, m.rco = cf.rco, m.smg = cf.smg, m.svg = cf.svg, m.propsgroup = cf.propsgroup, m.skalumni = cf.skalumni;');
+
+		DB::statement('DROP TABLE zz_2020_culturefunction;');
+
+		LogsfLogs::postLogs('Update', 39, 0, ' - SSA 2020 Membership Updated Successfully ', NULL, NULL, 'Success');
 	}
 
 	public function posttransfermmsboe()

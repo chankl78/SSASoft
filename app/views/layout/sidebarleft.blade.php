@@ -289,6 +289,11 @@
 					</li>
 				@endif
 				@if ($REEV10 == 't')
+					@if (Session::get('current_page') == 'event/ssamadkenshu' )<li class="active"> @else <li> @endif
+						<a href="{{{ URL::action('EventSSAMADKenshuController@getIndex') }}}">
+							<i class="menu-icon fa fa-double-angle-right"></i> SSA Mentor and Disciple Training Course
+						</a>
+					</li>
 					@if (Session::get('current_page') == 'event/prekenshu' )<li class="active"> @else <li> @endif
 						<a href="{{{ URL::action('EventPreKenshuController@getIndex') }}}">
 							<i class="menu-icon fa fa-double-angle-right"></i> Pre Kenshu Attendees

@@ -329,6 +329,10 @@ Route::get('/Event/Registration/Print/{id}', array('before' => 'auth', 'uses' =>
 Route::get('/EventSubscription', array('before' => 'auth', 'uses' => 'EventSubscriptionController@getIndex'));
 Route::get('/EventSubscription/getListing', 'EventSubscriptionController@getListing');
 
+// Event SSA Mentor and Disciple Training Course
+Route::get('/EventSSAMADKenshu', array('before' => 'auth', 'uses' => 'EventSSAMADKenshuController@getIndex'));
+Route::get('/EventSSAMADKenshu/getListing', 'EventSSAMADKenshuController@getListing');
+
 // Event PreKenshu
 Route::get('/EventPreKenshu', array('before' => 'auth', 'uses' => 'EventPreKenshuController@getIndex'));
 Route::get('/EventPreKenshu/getListing', 'EventPreKenshuController@getListing');
@@ -473,6 +477,7 @@ Route::post('/Members/posttransfermmsboe', 'MemberController@posttransfermmsboe'
 Route::post('/Members/posttransfermmsboedesc', 'MemberController@posttransfermmsboedesc');
 Route::post('/Members/postConvertAuto', 'MemberController@postConvertAuto');
 Route::post('/Members/post2019Members', 'MemberController@post2019Members');
+Route::post('/Members/post2020Members', 'MemberController@post2020Members');
 Route::post('/Members/postConvertNricHash', 'MemberController@postConvertNricHash');
 Route::post('/Members/postConvertFront/{id}', 'MemberController@postConvertFront');
 Route::post('/Members/putCNameDOB', 'MemberController@putCNameDOB');
