@@ -492,6 +492,26 @@ class MembersmSSA extends Eloquent {
         }
     }
 
+    public function scopeSSAMADListing($query)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
+            return $query->join('Event_m_SSAMADKenshu', 'Members_m_SSA.id', '=', 'Event_m_SSAMADKenshu.memberid')
+            ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode, Event_m_SSAMADKenshu.trainingdate, Event_m_SSAMADKenshu.language'))->orderby(DB::raw('Members_m_SSA.rhq', 'Members_m_SSA.zone', 'Members_m_SSA.chapter', 'Members_m_SSA.district', 'Members_m_SSA.division', 'Members_m_SSA.position', 'Members_m_SSA.name'));
+        } else if (Session::get('gakkaiuserpositionlevel') == 'rhq' ) {
+            return $query->where('Members_m_SSA.rhq', Session::get('gakkaiuserrhq'))->join('Event_m_SSAMADKenshu', 'Members_m_SSA.id', '=', 'Event_m_SSAMADKenshu.memberid')
+                ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode, Event_m_SSAMADKenshu.trainingdate, Event_m_SSAMADKenshu.language'))->orderby(DB::raw('Members_m_SSA.rhq', 'Members_m_SSA.zone', 'Members_m_SSA.chapter', 'Members_m_SSA.district', 'Members_m_SSA.division', 'Members_m_SSA.position', 'Members_m_SSA.name'));
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone' ) {
+            return $query->where('Members_m_SSA.zone', Session::get('gakkaiuserzone'))->whereRaw('Members_m_SSA.id IN (Select mssa.id FROM Members_m_SSA mssa LEFT JOIN Event_m_SSAMADKenshu ap on mssa.id = ap.memberid)')
+            ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode, Event_m_SSAMADKenshu.trainingdate, Event_m_SSAMADKenshu.language'))->orderby(DB::raw('Members_m_SSA.rhq', 'Members_m_SSA.zone', 'Members_m_SSA.chapter', 'Members_m_SSA.district', 'Members_m_SSA.division', 'Members_m_SSA.position', 'Members_m_SSA.name'));
+        } else if (Session::get('gakkaiuserpositionlevel') == 'chapter' ) {
+            return $query->where('Members_m_SSA.chapter', Session::get('gakkaiuserchapter'))->whereRaw('Members_m_SSA.id IN (Select mssa.id FROM Members_m_SSA mssa LEFT JOIN Event_m_SSAMADKenshu ap on mssa.id = ap.memberid)')
+            ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode, Event_m_SSAMADKenshu.trainingdate, Event_m_SSAMADKenshu.language'))->orderby(DB::raw('Members_m_SSA.rhq', 'Members_m_SSA.zone', 'Members_m_SSA.chapter', 'Members_m_SSA.district', 'Members_m_SSA.division', 'Members_m_SSA.position', 'Members_m_SSA.name'));
+        } else if (Session::get('gakkaiuserpositionlevel') == 'district' ) {
+            return $query->where('Members_m_SSA.chapter', Session::get('gakkaiuserchapter'))->where('Members_m_SSA.district', Session::get('gakkaiuserdistrict'))->whereRaw('Members_m_SSA.id IN (Select mssa.id FROM Members_m_SSA mssa LEFT JOIN Event_m_SSAMADKenshu ap on mssa.id = ap.memberid)')
+            ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode, Event_m_SSAMADKenshu.trainingdate, Event_m_SSAMADKenshu.language'))->orderby(DB::raw('Members_m_SSA.rhq', 'Members_m_SSA.zone', 'Members_m_SSA.chapter', 'Members_m_SSA.district', 'Members_m_SSA.division', 'Members_m_SSA.position', 'Members_m_SSA.name'));
+        }
+    }
+
     public function scopeSearchPreKenshuEligible($query, $sSearch)
     {
         return $query->where(function ($query) use ($sSearch) {
@@ -541,6 +561,23 @@ class MembersmSSA extends Eloquent {
                 ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
         } else if ( Session::get('gakkaiuserpositionlevel') == 'district') {
             return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereNotIn('division', array('PD', 'YC'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 16')->whereRaw( 'Members_m_SSA.id NOT IN (Select mssa.id FROM Members_m_SSA mssa LEFT JOIN Event_m_Registration er on mssa.id = er.memberid LEFT JOIN Event_m_Event ee on ee.id = er.eventid WHERE mssa.chapter = ? and mssa.district = ? and mssa.deleted_at IS NULL and ee.eventtype IN ("Entrance Study Exam", "Elementary Study Exam") and er.studyexamstatus = "Passed" and er.deleted_at IS NULL GROUP BY mssa.id)', array(Session::get('gakkaiuserchapter'), Session::get('gakkaiuserdistrict')))
+                ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+            }
+    }
+
+    public function scopeMADEligibleListing($query)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'rhq') {
+            return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereNotIn('position', array('BEL', 'NF', ''))->whereNotIn('division', array('PD', 'YC'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 16')->whereRaw( 'Members_m_SSA.id NOT IN (Select mssa.id FROM Members_m_SSA mssa INNER JOIN Event_m_SSAMADKenshu er on mssa.id = er.memberid WHERE mssa.rhq = ? and mssa.deleted_at IS NULL)', array(Session::get('gakkaiuserrhq')))
+                ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone') {
+            return $query->where('zone', Session::get('gakkaiuserzone'))->whereNotIn('position', array('BEL', 'NF', ''))->whereNotIn('division', array('PD', 'YC'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 16')->whereRaw( 'Members_m_SSA.id NOT IN (Select mssa.id FROM Members_m_SSA mssa INNER JOIN Event_m_SSAMADKenshu er on mssa.id = er.memberid WHERE mssa.zone = ? and mssa.deleted_at IS NULL)', array(Session::get('gakkaiuserzone')))
+                ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+        } else if ( Session::get('gakkaiuserpositionlevel') == 'chapter') {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->whereNotIn('position', array('BEL', 'NF', ''))->whereNotIn('division', array('PD', 'YC'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 16')->whereRaw( 'Members_m_SSA.id NOT IN (Select mssa.id FROM Members_m_SSA mssa INNER JOIN Event_m_SSAMADKenshu er on mssa.id = er.memberid WHERE mssa.chapter = ? and mssa.deleted_at IS NULL)', array(Session::get('gakkaiuserchapter')))
+                ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+        } else if ( Session::get('gakkaiuserpositionlevel') == 'district') {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereNotIn('position', array('BEL', 'NF', ''))->whereNotIn('division', array('PD', 'YC'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 16')->whereRaw( 'Members_m_SSA.id NOT IN (Select mssa.id FROM Members_m_SSA mssa INNER JOIN Event_m_SSAMADKenshu er on mssa.id = er.memberid WHERE mssa.chapter = ? and mssa.district = ? and mssa.deleted_at IS NULL)', array(Session::get('gakkaiuserchapter'), Session::get('gakkaiuserdistrict')))
                 ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
             }
     }

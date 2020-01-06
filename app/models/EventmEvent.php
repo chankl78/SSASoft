@@ -26,6 +26,10 @@ class EventmEvent extends Eloquent {
             $value4 = DB::table('Access_m_AccessRights')->where('userid', Auth::user()->id)->where('resourcecode', 'EV04')->where('deleted_at', NULL)->pluck('eventid');
             return $query->where('id', $value4);
         }
+        else if (Auth::user()->roleid == 'Gakkai Administrator' )
+        {
+            return $query;
+        }
         else if (Auth::user()->roleid == 'Single Event Administrator' or Auth::user()->roleid == 'Single Event User' or Auth::user()->roleid == 'Single Event Item User' )
         {
             $value4 = AccessmAccessRights::where('userid', Auth::user()->id)->where('resourcecode', 'EV04')->lists('eventid');
@@ -141,7 +145,9 @@ class EventmEvent extends Eloquent {
     public static function geteventtype($value)
     {
         $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('eventtype');
-        if ($mid == 'Pre M and D Kenshu') { return true; } else { return false; }
+        if ($mid == 'Pre M and D Kenshu') { return true; }
+        elseif ($mid == 'SSA Mentor and Disciple Training Course') { return true; } 
+        else { return false; }
     }
 
     public static function getdivisiontype($value)
@@ -161,6 +167,13 @@ class EventmEvent extends Eloquent {
         $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('eventtype');
         if ($mid == 'Entrance Study Exam') { return true; } 
         elseif ($mid == 'Elementary Study Exam') { return true; }
+        else { return false; }
+    }
+
+    public static function getmadeventtype($value)
+    {
+        $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('eventtype');
+        if ($mid == 'SSA Mentor and Disciple Training Course') { return true; } 
         else { return false; }
     }
 

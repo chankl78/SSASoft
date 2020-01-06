@@ -14,6 +14,7 @@ class LeadersPortalEventController extends BaseController
 		$eventtype = EventmEvent::geteventtype($id);
 		$rsvpeventtype = EventmEvent::getrsvpeventtype($id);
 		$studyeventtype = EventmEvent::getstudyeventtype($id);
+		$madeventtype = EventmEvent::getmadeventtype($id);
 		$special = EventmEvent::getspecial($id);
 		$viewattendance = EventmEvent::getviewattendance($id);
 		$sessionselect = EventmEvent::getsessionselect($id);
@@ -29,7 +30,8 @@ class LeadersPortalEventController extends BaseController
 		$rhq_options = MemberszOrgChart::Rhq()->lists('rhq', 'rhqabbv');
 		$zone_options = array('' => 'Please Select a Zone') + MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
 		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
-		$memposition_options = MemberszPosition::Role()->whereIn('name', array('Believer', 'New Friend', 'Member'))->orderBy('name', 'ASC')->lists('name', 'code');
+		//$memposition_options = MemberszPosition::Role()->whereIn('name', array('Believer', 'New Friend', 'Member'))->orderBy('name', 'ASC')->lists('name', 'code');
+		$memposition_options = MemberszPosition::Role()->orderBy('name', 'ASC')->lists('name', 'code');
 		if ($studyeventtype == true){ $language_options = array('' => 'Please Select a Language') + EventzLanguage::Role()->where('studyexam', 1)->lists('value', 'value'); }
 		else { $language_options = array('' => 'Please Select a Language') + EventzLanguage::Role()->where('studyexam', 0)->lists('value', 'value'); }
 		$country_options = array('' => 'Please Select a Country') + EventzCountry::Role()->lists('value', 'value');
@@ -106,7 +108,7 @@ class LeadersPortalEventController extends BaseController
 			->with('gakkaizone', $gakkaizone)->with('gakkaichapter', $gakkaichapter)
 			->with('gakkaidistrict', $gakkaidistrict)->with('eventname', $eventname)
 			->with('eventtype', $eventtype)->with('rid', $id)->with('result', $query)
-			->with('memposition_options', $memposition_options)
+			->with('memposition_options', $memposition_options)->with('madeventtype', $madeventtype)
 			->with('position_options', $position_options)->with('rhq_options', $rhq_options)
 			->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)
 			->with('rhq', $rhq)->with('zone', $zone)->with('chapter', $chapter)
@@ -160,6 +162,11 @@ class LeadersPortalEventController extends BaseController
 			if (EventmEvent::getstudyeventtype($id) == true)
 			{
 				$result = MembersmSSA::StudyExamEntrance()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
+				return Response::json(array('data' => $result));
+			}
+			else if (EventmEvent::getmadeventtype($id) == true)
+			{
+				$result = MembersmSSA::MADEligibleListing()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
 				return Response::json(array('data' => $result));
 			}
 			else 
@@ -216,8 +223,16 @@ class LeadersPortalEventController extends BaseController
 	{
 		try
 		{
-			$result = MembersmSSA::MADMembership(EventmEvent::getdivisiontype($id))->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
-			return Response::json(array('data' => $result));
+			if (EventmEvent::getmadeventtype($id) == true)
+			{
+				$result = MembersmSSA::MADEligibleListing()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
+				return Response::json(array('data' => $result));
+			}
+			else
+			{
+				$result = MembersmSSA::MADMembership(EventmEvent::getdivisiontype($id))->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
+				return Response::json(array('data' => $result));
+			}
 		}
 		catch(\Exception $e)
 		{

@@ -30,14 +30,9 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPastPreMADTrainingListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Past Pre M&D Training Attendees
-					</a>
-				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPreMADEligibleListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/SSAMADKenshu' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalSSAMADKenshuController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> SSA Mentor and Disciple Training Course (Attended)
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif
@@ -109,14 +104,9 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPastPreMADTrainingListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Past Pre M&D Training Attendees
-					</a>
-				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPreMADEligibleListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/SSAMADKenshu' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalSSAMADKenshuController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> SSA Mentor and Disciple Training Course (Attended)
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif
@@ -188,14 +178,9 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPastPreMADTrainingListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Past Pre M&D Training Attendees
-					</a>
-				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPreMADEligibleListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/SSAMADKenshu' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalSSAMADKenshuController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> SSA Mentor and Disciple Training Course (Attended)
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif
@@ -272,14 +257,9 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPastPreMADTrainingListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Past Pre M&D Training Attendees
-					</a>
-				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPreMADEligibleListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/SSAMADKenshu' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalSSAMADKenshuController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> SSA Mentor and Disciple Training Course (Attended)
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif
@@ -356,14 +336,9 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PastPreMAD' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPastPreMADTrainingListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Past Pre M&D Training Attendees
-					</a>
-				</li>
-				@if (Session::get('lp_current_resource') == 'LeadersPortal/PreMADEligible' )<li class="active"> @else <li> @endif
-					<a href="{{{ URL::action('LeadersPortalPreMADEligibleListingController@getIndex') }}}">
-						<i class="menu-icon fa fa-double-angle-right"></i> Pre M&D Eligible Listing
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/SSAMADKenshu' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalSSAMADKenshuController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> SSA Mentor and Disciple Training Course (Attended)
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/20194objects' )<li class="active"> @else <li> @endif

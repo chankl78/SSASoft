@@ -191,7 +191,7 @@
 						</div><!-- Homevisit Campaign 2019 (To remove after campaign finished) -->
 					@endif
 				@endif
-				<div class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
+				<div hidden class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
 					<div class="widget-box widget-color-blue">
 						<div class="widget-header">
 							<h5 class="widget-title">Bodhisattvas of the Earth </h5>
@@ -255,7 +255,7 @@
 						</div>
 					</div>
 				</div> <!-- Bodhisattvas of the Earth -->
-				<div class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
+				<div hidden class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
 					<div class="widget-box widget-color-red">
 						<div class="widget-header">
 							<h5 class="widget-title">Youth Successors</h5>
@@ -319,7 +319,7 @@
 						</div>
 					</div>
 				</div> <!-- Youth Submit -->
-				<div class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
+				<div hidden class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
 					<div class="widget-box widget-color-green">
 						<div class="widget-header">
 							<h5 class="widget-title">Discussion Meeting</h5>
@@ -383,7 +383,7 @@
 						</div>
 					</div>
 				</div> <!-- Discussion Meeting -->
-				<div class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
+				<div hidden class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
 					<div class="widget-box widget-color-purple">
 						<div class="widget-header">
 							<h5 class="widget-title">Entrance Study Exam</h5>
@@ -448,7 +448,7 @@
 					</div>
 				</div> <!-- Study Exam -->
 				@if ($gakkaidivision == 'MD')
-					<div class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
+					<div hidden class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
 						<div class="widget-box widget-color-orange">
 							<div class="widget-header">
 								<h5 class="widget-title">MD Daimoku Campaign 2018 (In Minutes)</h5>

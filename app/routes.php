@@ -743,6 +743,10 @@ Route::get('/BOEPortalPastPreMADTrainingListing/getListing', 'LeadersPortalPastP
 Route::get('/BOEPortalPreMADEligibleListing', array('before' => 'auth', 'uses' => 'LeadersPortalPreMADEligibleListingController@getIndex'));
 Route::get('/BOEPortalPreMADEligibleListing/getListing', 'LeadersPortalPreMADEligibleListingController@getListing');
 
+// Leaders Portal SSA Mentor and Disciple Training Course Listing
+Route::get('/BOEPortalSSAMADKenshuListing', array('before' => 'auth', 'uses' => 'LeadersPortalSSAMADKenshuController@getIndex'));
+Route::get('/BOEPortalSSAMADKenshuListing/getListing', 'LeadersPortalSSAMADKenshuController@getListing');
+
 // Leaders Portal 2019 4 Objectives
 Route::get('/BOEPortal20194Objects', array('before' => 'auth', 'uses' => 'LeadersPortal20194ObjectsController@getIndex'));
 Route::get('/BOEPortal20194Objects/getListing', 'LeadersPortal20194ObjectsController@getListing');

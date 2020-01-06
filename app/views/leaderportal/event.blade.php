@@ -2203,14 +2203,14 @@
 									<fieldset>
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="blue bigger">Pre Mentor and Disciple Kenshu Training</h4>
+											<h4 class="blue bigger">SSA Mentor and Disciple Kenshu Training</h4>
 										</div>
 										<div class="modal-body overflow-visible">
 											<div class="row">
 												<div class="col-sm-12 widget-container-col">
 													<div class="widget-box widget-color-blue">
 														<div class="widget-header">
-															<h5 class="widget-title">Pre Mentor and Disciple Kenshu Training</h5>
+															<h5 class="widget-title">SSA Mentor and Disciple Kenshu Training</h5>
 															<div class="widget-toolbar">
 																<a href="#" data-action="fullscreen" class="orange2">
 																	<i class="ace-icon fa fa-expand"></i>
@@ -2250,6 +2250,159 @@
 											</button>
 										</div>
 									</fieldset>
+								</div>
+							</div>
+						</div>
+						<div id="btnresourceaddothers" class="modal" tabindex="-1">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									{{ Form::open(array('action' => 'LeadersPortalEventController@postEventParticipantOthers', 'id' => 'resourceaddothers', 'class' => 'form-horizontal')) }}
+										<fieldset>
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="blue bigger">Add Record</h4>
+											</div>
+											<div class="modal-body overflow-visible">
+												<div class="row">
+													<div class="form-group">
+														{{ Form::label('name', 'Name:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::text('name', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'name'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('cname', '名字:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::text('cname', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'cname'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('mobile', 'Mobile:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::text('mobile', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'mobile'));}}
+															</div>
+														</div>
+													</div>
+													<div hidden class="form-group">
+														{{ Form::label('dateofbirthtxt', 'Date of Birth:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::text('dateofbirthtxt', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'dateofbirthtxt'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('cbrhq', 'RHQ:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::select('cbrhq', $rhq_options, $rhq, array('class' => 'col-xs-12 col-sm-11', 'id' => 'cbrhq'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('cbzone', 'Zone:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix" id="zonediv">
+																{{ Form::select('cbzone', $zone_options, $zone, array('class' => 'col-xs-12 col-sm-11', 'id' => 'cbzone'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('cbchapter', 'Chapter:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix" id="chapterdiv">
+																{{ Form::select('cbchapter', $chapter_options, $chapter, array('class' => 'col-xs-12 col-sm-11', 'id' => 'cbchapter'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('district', 'District:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::select('division', array('' => '', '-' => '-', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'district'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('position', 'Position:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::select('position', $memposition_options, 'BEL', array('class' => 'col-xs-12 col-sm-11', 'id' => 'position'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('division', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::select('division', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'division'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('introducer', 'Introducer:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::text('introducer', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'introducer'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group"  @if ($nationalityselect == false) hidden @endif>
+														{{ Form::label('country', 'Country:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::select('country', $country_options, 'Please Select a Country', array('class' => 'col-xs-12 col-sm-11', 'id' => 'country'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group"  @if ($sessionselect == false) hidden @endif>
+														{{ Form::label('session', 'Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::select('session', $sessionshow_options, 'Please Select a Session', array('class' => 'col-xs-12 col-sm-11', 'id' => 'session'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group" @if ($languageselect == false) hidden @endif>
+														{{ Form::label('language', 'Language:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::select('language', $language_options, 'Please Select a Language', array('class' => 'col-xs-12 col-sm-11', 'id' => 'language'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group">
+														{{ Form::label('remarks', 'Remarks:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::textarea('remarks', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'remarks', 'rows'=>'3'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group" hidden>
+														{{ Form::label('uniquecode', 'UniqueCode:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																{{ Form::text('uniquecode', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'uniquecode'));}}
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button class="btn btn-sm" data-dismiss="modal" id="btnclose">
+													<i class="icon-remove"></i>
+													Cancel
+												</button>
+												{{ Form::button('<i class="icon-ok"></i> <strong>Save</strong>', array('type' => 'Submit', 'class' => 'btn btn-sm btn-primary', 'id' => 'resourceadd')); }}
+											</div>
+										</fieldset>
+									{{ Form::close() }}
 								</div>
 							</div>
 						</div>
@@ -4196,7 +4349,49 @@
 	    }
 
 	    function insertrow(submit){ 
-			@if ($studyeventtype == false and $moredetailselect == 0)
+			@if ($madeventtype == true and $moredetailselect == 0)
+				var RowID = "";
+		        var oTable = $('#tpremad').DataTable();
+				$("#tpremad tbody tr").click(function () {
+					var position = oTable.row(this).index();
+					RowID = oTable.row(position).data();
+					$("#euniquecode").val(RowID.uniquecode);
+					$.ajax({
+				        url: 'getMemberInfo/' + $("#euniquecode").val(),
+				        type: 'POST',
+				        data: { uniquecode: $("#euniquecode").val() },
+				        dataType: 'json',
+				        statusCode: { 
+				        	200:function(data){
+				        		$("#name").val(data.name); $("#chinesename").val(data.chinesename);
+				        		$("#mobile").val(data.mobile); $("#cbrhq").val(data.rhq); $("#cbzone").val(data.zone);
+								$("#cbchapter").val(data.chapter); $("#district").val(data.district); 
+								$("#division").val(data.division); $("#position").val(data.position);
+								$("#ecountry").val(data.nationality); $("#elanguage").val(data.language);
+								$("#session").val(data.session); $("#dateofbirthtxt").val(moment(data.dateofbirth).format("DD-MMM"));
+				        	},
+				        	400:function(data){ 
+				        		var txtMessage;
+				        		if (data.responseJSON.ErrType == "Duplicate") 
+				        			{ txtMessage = 'Record already existed!'; }
+				        		else if (data.responseJSON.ErrType == "Failed")
+				        			{ txtMessage = 'Please check your entry!'; }
+				        		else if (data.responseJSON.ErrType == "NoAccess") 
+				        			{ txtMessage = 'You do not have Access Rights!'; }
+				        		else { txtMessage = 'Please check your entry!'; }
+				        		noty({
+									layout: 'topRight', type: 'error', text: txtMessage,
+									animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+										},
+									timeout: 4000
+								});
+				        	}
+				        }
+				    });
+					$("#btnresourcemdadd").modal('hide');
+					$("#btnresourceaddothers").modal('show');
+	            });
+			@elseif ($studyeventtype == false and $moredetailselect == 0)
 				$.ajax({
 					url: 'postEventParticipant/' + submit,
 					type: 'POST',
