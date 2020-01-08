@@ -43,40 +43,40 @@
 					<div class="tab-content">
 						<div id="home" class="tab-pane in active">
 							<div class="col-xs-12 col-sm-3 widget-container-span ui-sortable">
-									<div class="widget-box collapsed widget-color-purple">
-										<div class="widget-header widget-header-small">
-											<h6 class="widget-title">
-												<i class="icon-sort"></i>
-												Update Statistic
-											</h6>
-											<div class="widget-toolbar">
-												<a href="#" data-action="fullscreen" class="orange2">
-													<i class="ace-icon fa fa-expand"></i>
-												</a>
-												<a href="#" data-action="reload">
-													<i class="fa fa-refresh"></i>
-												</a>
-												<a href="#" data-action="collapse">
-													<i class="ace-icon fa fa-chevron-down"></i>
-												</a>
-											</div>
-										</div>
-										<div class="widget-body">
-											<div class="widget-main no-padding">
-												{{ Form::open(array('action' => 'Event20194ObjectsController@postStatistic', 'id' => 'fUpdate', 'class' => 'form-horizontal')) }}
-													<br />
-													<div class="form-group">
-														<div class="col-md-offset-2 col-xs-12 col-sm-12">
-															<div class="clearfix">
-																{{ Form::button('Update Statistic', array('type' => 'Search', 'class' => 'btn btn-warning btn-lg' )); }}
-															</div>
-														</div>
-													</div>
-												{{ Form::close() }}
-											</div>
+								<div class="widget-box collapsed widget-color-purple">
+									<div class="widget-header widget-header-small">
+										<h6 class="widget-title">
+											<i class="icon-sort"></i>
+											Update Statistic
+										</h6>
+										<div class="widget-toolbar">
+											<a href="#" data-action="fullscreen" class="orange2">
+												<i class="ace-icon fa fa-expand"></i>
+											</a>
+											<a href="#" data-action="reload">
+												<i class="fa fa-refresh"></i>
+											</a>
+											<a href="#" data-action="collapse">
+												<i class="ace-icon fa fa-chevron-down"></i>
+											</a>
 										</div>
 									</div>
-								</div> <!-- Update Statistic -->
+									<div class="widget-body">
+										<div class="widget-main no-padding">
+											{{ Form::open(array('action' => 'Event20194ObjectsController@postStatistic', 'id' => 'fUpdate', 'class' => 'form-horizontal')) }}
+												<br />
+												<div class="form-group">
+													<div class="col-md-offset-2 col-xs-12 col-sm-12">
+														<div class="clearfix">
+															{{ Form::button('Update Statistic', array('type' => 'Search', 'class' => 'btn btn-warning btn-lg' )); }}
+														</div>
+													</div>
+												</div>
+											{{ Form::close() }}
+										</div>
+									</div>
+								</div>
+							</div> <!-- Update Statistic -->
 							<div class="col-sm-12 widget-container-span ui-sortable">
 								<div class="widget-box widget-color-blue">
 									<div class="widget-header">

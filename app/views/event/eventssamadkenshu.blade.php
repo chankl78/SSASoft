@@ -27,25 +27,44 @@
 								Info
 							</a>
 						</li> <!-- Info -->
-						@if ($REEV05R == 't') 
-							<li>
-								<a data-toggle="tab" href="#reports">
-									<i class="green fa fa-user bigger-110"></i>
-									Reports
-								</a>
-							</li>
-						@endif <!-- Report -->
-						@if ($REEV01R == 't') 
-							<li>
-								<a data-toggle="tab" href="#logs">
-									<i class="fa fa-book"></i>
-									Logs
-								</a>
-							</li>
-						@endif <!-- Logs, Access Rights -->
 					</ul>
 					<div class="tab-content">
 						<div id="home" class="tab-pane in active">
+							<div class="col-xs-12 col-sm-3 widget-container-span ui-sortable">
+								<div class="widget-box collapsed widget-color-purple">
+									<div class="widget-header widget-header-small">
+										<h6 class="widget-title">
+											<i class="icon-sort"></i>
+											Update SSA Training Course
+										</h6>
+										<div class="widget-toolbar">
+											<a href="#" data-action="fullscreen" class="orange2">
+												<i class="ace-icon fa fa-expand"></i>
+											</a>
+											<a href="#" data-action="reload">
+												<i class="fa fa-refresh"></i>
+											</a>
+											<a href="#" data-action="collapse">
+												<i class="ace-icon fa fa-chevron-down"></i>
+											</a>
+										</div>
+									</div>
+									<div class="widget-body">
+										<div class="widget-main no-padding">
+											{{ Form::open(array('action' => 'Event20194ObjectsController@postStatistic', 'id' => 'fUpdate', 'class' => 'form-horizontal')) }}
+												<br />
+												<div class="form-group">
+													<div class="col-md-offset-2 col-xs-12 col-sm-12">
+														<div class="clearfix">
+															{{ Form::button('Update Statistic', array('type' => 'Search', 'class' => 'btn btn-warning btn-lg' )); }}
+														</div>
+													</div>
+												</div>
+											{{ Form::close() }}
+										</div>
+									</div>
+								</div>
+							</div> <!-- Update Statistic -->
 							<div class="col-sm-12 widget-container-span ui-sortable">
 								<div class="widget-box widget-color-blue">
 									<div class="widget-header">
@@ -86,14 +105,6 @@
 								</div>
 							</div>
 						</div>
-						@if ($REEV05R == 't') 
-							<div id="reports" class="tab-pane">
-							</div>
-						@endif <!-- Reports -->
-						@if ($REEV01R == 't') 
-							<div id="logs" class="tab-pane">
-							</div>
-						@endif
 					</div>
 				</div>
 				<!-- PAGE CONTENT ENDS HERE -->
@@ -144,5 +155,49 @@
 			    });
 			});
 		});
+
+		$('#fUpdate').submit(function(e){
+	    	noty({
+				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
+				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
+				timeout: 4000
+			});
+			$.ajax({
+		        url: '/EventSSAMADKenshu/postStatistic',
+		        type: 'POST',
+		        data: { },
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(){
+		        		var oTable = $('#tdefault').DataTable();
+						oTable.ajax.reload(null, false);
+            			noty({
+							layout: 'topRight', type: 'success', text: 'Record Updated!!',
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	},
+		        	400:function(data){ 
+		        		var txtMessage;
+		        		if (data.responseJSON.ErrType == "Duplicate") 
+		        			{ txtMessage = 'Record already existed!';  }
+		        		else if (data.responseJSON.ErrType == "Failed")
+		        			{ txtMessage = 'Please check your entry!'; }
+		        		else if (data.responseJSON.ErrType == "CannotUpdate")
+		        			{ txtMessage = 'Unable to Update.  Please check your entry!'; }
+		        		else { txtMessage = 'Please check your entry!'; }
+		        		$("#search").focus();
+		        		noty({
+							layout: 'topRight', type: 'error', text: txtMessage,
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						});
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+	    });
 	</script>
 @stop

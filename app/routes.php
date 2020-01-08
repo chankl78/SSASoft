@@ -332,6 +332,7 @@ Route::get('/EventSubscription/getListing', 'EventSubscriptionController@getList
 // Event SSA Mentor and Disciple Training Course
 Route::get('/EventSSAMADKenshu', array('before' => 'auth', 'uses' => 'EventSSAMADKenshuController@getIndex'));
 Route::get('/EventSSAMADKenshu/getListing', 'EventSSAMADKenshuController@getListing');
+Route::post('/EventSSAMADKenshu/postStatistic', 'EventSSAMADKenshuController@postStatistic');
 
 // Event PreKenshu
 Route::get('/EventPreKenshu', array('before' => 'auth', 'uses' => 'EventPreKenshuController@getIndex'));

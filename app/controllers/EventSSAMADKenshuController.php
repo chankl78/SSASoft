@@ -28,4 +28,11 @@ class EventSSAMADKenshuController extends BaseController
 			LogsfLogs::postLogs('Read', 60, 0, ' - SSA Mentor and Disciple Training Course [DT] - ' . $e, NULL, NULL, 'Failed');
 		}
 	}
+
+	public function postStatistic()
+	{
+		EventmSSAMADKenshu::transfermmstoboe();
+
+		return Response::json(array('info' => 'Success'), 200);
+	}
 }
