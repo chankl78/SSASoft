@@ -90,6 +90,7 @@
 														<th>Zone</th>
 														<th>Chap</th>
 														<th>Dist</th>
+														<th>Div</th>
 														<th>Position</th>
 													</tr>
 												</thead>
@@ -103,7 +104,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> <!-- Listing -->
 						</div>
 					</div>
 				</div>
@@ -151,7 +152,8 @@
 			    	{ targets: [ 4 ], data: "zone", searchable: true },
 			    	{ targets: [ 5 ], data: "chapter", searchable: true },
 			    	{ targets: [ 6 ], data: "district", searchable: true },
-			    	{ targets: [ 7 ], data: "position", searchable: true }]
+					{ targets: [ 7 ], data: "division", searchable: true },
+			    	{ targets: [ 8 ], data: "position", searchable: true }]
 			    });
 			});
 		});

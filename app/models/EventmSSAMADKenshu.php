@@ -29,13 +29,14 @@ class EventmSSAMADKenshu extends Eloquent {
 					$post->zone = $member['zone'];
 					$post->chapter = $member['chapter'];
 					$post->district = $member['dist'];
+					$post->division = $member['division'];
 					$post->position = $member['position'];
 					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
 					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }	
 					$post->positionlevel = $positionlevel;
 					$post->trainingdate = $member['training_on'];
-					$post->language = $member['training_on'];
+					$post->language = $member['language'];
 
 					$post->save();
 				}
