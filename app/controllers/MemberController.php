@@ -550,6 +550,7 @@ class MemberController extends BaseController
 		}
 		catch (\Exception $e)
 		{
+			LogsfLogs::postLogs('Create', 39, 0, ' - MembersmImportSSA Model - MMS to BOE Failed - ' . $e, NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed'), 400);
 		}
 		
@@ -564,6 +565,7 @@ class MemberController extends BaseController
 		}
 		catch (\Exception $e)
 		{
+			LogsfLogs::postLogs('Create', 39, 0, ' - MembersmImportSSA Model DESC - MMS to BOE Failed - ' . $e, NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed'), 400);
 		}
 		

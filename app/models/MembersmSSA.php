@@ -105,14 +105,21 @@ class MembersmSSA extends Eloquent {
         return $query->where(function($query) use ($sSearch)
         {
             $query->where('name', 'Like', '%'.$sSearch.'%')
-                ->orwhere('position', 'Like', '%'.$sSearch.'%')
+                ->orwhere('chinesename', 'Like', '%'.$sSearch.'%')
                 ->orwhere('rhq', 'Like', '%'.$sSearch.'%')
                 ->orwhere('zone', 'Like', '%'.$sSearch.'%')
                 ->orwhere('chapter', 'Like', '%'.$sSearch.'%')
                 ->orwhere('district', 'Like', '%'.$sSearch.'%')
                 ->orwhere('division', 'Like', '%'.$sSearch.'%')
                 ->orwhere('position', 'Like', '%'.$sSearch.'%')
+                ->orwhere('positionlevel', 'Like', '%'.$sSearch.'%')
                 ->orwhere('alias', 'Like', '%'.$sSearch.'%')
+                ->orwhere('email', 'Like', '%'.$sSearch.'%')
+                ->orwhere('mobile', 'Like', '%'.$sSearch.'%')
+                ->orwhere('tel', 'Like', '%'.$sSearch.'%')
+                ->orwhere('dateofbirth', 'Like', '%'.$sSearch.'%')
+                ->orwhere('address', 'Like', '%'.$sSearch.'%')
+                ->orwhere('postalcode', 'Like', '%'.$sSearch.'%')
                 ->orwhere('created_at', 'Like', '%'.$sSearch.'%');
         });
     }

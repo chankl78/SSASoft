@@ -189,104 +189,35 @@ class LeadersPortalDiscussionMeetingController extends BaseController
 			try
 			{
 				$attendance = AttendancemAttendance::findorfail(AttendancemAttendance::getid($id), array('rhq', 'zone', 'chapter', 'district'));
-				/*if(Input::get('position') == "NF")
+				
+				$post = new AttendancemPerson;
+				$post->attendanceid = AttendancemAttendance::getid(Input::get('id'));
+				$post->name = Input::get('name');
+				$post->chinesename = Input::get('cname');
+				$post->memberid = 0;
+				$post->rhq = Input::get('rhq');
+				$post->zone = Input::get('zone');
+				$post->chapter = Input::get('chapter');
+				$post->district =Input::get('district');
+				$post->position = Input::get('position');
+				$post->positionlevel = MemberszPosition::getPositionLevel(Input::get('position'));
+				$post->division = Input::get('division');
+				if (Input::get('position') == 'NF') { $post->noofnewfriend = 1; }
+				$post->uniquecode = uniqid('', TRUE);
+				$post->attendancestatus = 'Attended';
+				$post->remarks = Input::get('remarks');
+				$post->save();
+
+				if($post->save())
 				{
-					// Add to Members_m_SSA
-					$mssa = new MembersmSSA;
-					$mssa->name = Input::get('name');
-					$mssa->chinesename = Input::get('cname');
-					$mssa->nric = 'NIL';
-					$mssa->nrichash = md5(Input::get('name'));
-					$mssa->searchcode = '000';
-					$mssa->personid = 0;
-					$mssa->rhq = Input::get('rhq');
-					$mssa->zone = Input::get('zone');
-					$mssa->chapter = Input::get('chapter');
-					$mssa->district =Input::get('district');
-					$mssa->position = Input::get('position');
-					$mssa->division = Input::get('division');
-					$mssa->uniquecode = uniqid('',TRUE);
-					$mssa->source = 'ATTE';
-					$mssa->resourcefromid = 0;
 
-					$mssa->tel = 'NIL';
-					if(Input::get('mobile') == ''){$mssa->mobile = 'NIL';} else {$mssa->mobile = Input::get('mobile');}
-					$mssa->email = 'NIL';
-					$mssa->introducer = Input::get('introducer');
-					$mssa->introducermobile = 'NIL';
-
-					$mssa->emergencytel = 'NIL';
-					$mssa->emergencymobile = 'NIL';
-
-					$mssa->address = 'NIL';
-					$mssa->buildingname = 'NIL';
-					$mssa->unitno = 'NIL';
-					$mssa->postalcode = 'NIL';
-					$mssa->save();
-
-					if($mssa->save())
-					{
-						$post = new AttendancemPerson;
-						$post->attendanceid = AttendancemAttendance::getid(Input::get('id'));
-						$post->name = Input::get('name');
-						$post->chinesename = Input::get('cname');
-						$post->memberid = $mssa->id;
-						$post->rhq = Input::get('rhq');
-						$post->zone = Input::get('zone');
-						$post->chapter = Input::get('chapter');
-						$post->district =Input::get('district');
-						$post->position = Input::get('position');
-						$post->division = Input::get('division');
-						if (Input::get('position') == 'NF') { $post->noofnewfriend = 1; }
-						$post->uniquecode = uniqid('', TRUE);
-						$post->attendancestatus = 'Attended';
-						$post->remarks = Input::get('remarks');
-						$post->save();
-
-						if($post->save())
-						{
-
-							return Response::json(array('info' => 'Success'), 200);
-						}
-						else
-						{
-							LogsfLogs::postLogs('Create', 53, 0, ' - Discussion Meeting - New Member - Failed to Save', NULL, NULL, 'Failed');
-							return Response::json(array('info' => 'Duplicate'), 400);
-						}
-					}
+					return Response::json(array('info' => 'Success'), 200);
 				}
 				else
-				{*/
-					$post = new AttendancemPerson;
-					$post->attendanceid = AttendancemAttendance::getid(Input::get('id'));
-					$post->name = Input::get('name');
-					$post->chinesename = Input::get('cname');
-					$post->memberid = 0;
-					$post->rhq = Input::get('rhq');
-					$post->zone = Input::get('zone');
-					$post->chapter = Input::get('chapter');
-					$post->district =Input::get('district');
-					$post->position = Input::get('position');
-					$post->positionlevel = MemberszPosition::getPositionLevel(Input::get('position'));
-					$post->division = Input::get('division');
-					if (Input::get('position') == 'NF') { $post->noofnewfriend = 1; }
-					$post->uniquecode = uniqid('', TRUE);
-					$post->attendancestatus = 'Attended';
-					$post->remarks = Input::get('remarks');
-					$post->save();
-
-					if($post->save())
-					{
-
-						return Response::json(array('info' => 'Success'), 200);
-					}
-					else
-					{
-						LogsfLogs::postLogs('Create', 53, 0, ' - Discussion Meeting - New Member - Failed to Save', NULL, NULL, 'Failed');
-						return Response::json(array('info' => 'Duplicate'), 400);
-					}
-				// }
-				
+				{
+					LogsfLogs::postLogs('Create', 53, 0, ' - Discussion Meeting - New Member - Failed to Save', NULL, NULL, 'Failed');
+					return Response::json(array('info' => 'Duplicate'), 400);
+				}
 			}
 			catch(\Exception $e)
 			{
@@ -565,44 +496,12 @@ class LeadersPortalDiscussionMeetingController extends BaseController
 
 	public function postDMStatistic($id)
 	{
-		$md = AttendancemPerson::getAttendancePersonMD(AttendancemAttendance::getid($id));
-		$wd = AttendancemPerson::getAttendancePersonWD(AttendancemAttendance::getid($id));
-		$ym = AttendancemPerson::getAttendancePersonYMD(AttendancemAttendance::getid($id));
-		$yw = AttendancemPerson::getAttendancePersonYWD(AttendancemAttendance::getid($id));
-		$pd = AttendancemPerson::getAttendancePersonPD(AttendancemAttendance::getid($id));
-		$yc = AttendancemPerson::getAttendancePersonYC(AttendancemAttendance::getid($id));
-		$total = AttendancemPerson::getAttendancePersonTotal(AttendancemAttendance::getid($id));
-		$ldr = AttendancemPerson::getAttendancePersonLDR(AttendancemAttendance::getid($id));
-		$mem = AttendancemPerson::getAttendancePersonMEM(AttendancemAttendance::getid($id));
-		$bel = AttendancemPerson::getAttendancePersonBEL(AttendancemAttendance::getid($id));
-		$nf = AttendancemPerson::getAttendancePersonNF(AttendancemAttendance::getid($id));
-
 		try
 		{
-			$post = AttendancemAttendance::find(AttendancemAttendance::getid($id));
-			$post->md = $md;
-			$post->wd = $wd;
-			$post->ymd = $ym;
-			$post->ywd = $yw;
-			$post->pd = $pd;
-			$post->yc = $yc;
-			$post->attendancetotal = $total;
-			$post->ldr = $ldr;
-			$post->mem = $mem;
-			$post->bel = $bel;
-			$post->nf = $nf;
+			$statement = 'UPDATE Attendance_m_Attendance aa, (SELECT aa.id, aa.uniquecode, aa.description, COUNT(ap.attendancestatus) as TokangMembership, SUM(CASE WHEN ap.division IN ("MD") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + srmd as "MD", SUM(CASE WHEN ap.division IN ("WD") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + srwd as "WD", SUM(CASE WHEN ap.division IN ("YM") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + srymd as "YMD", SUM(CASE WHEN ap.division IN ("YW") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + srymd as "YWD", SUM(CASE WHEN ap.division IN ("PD") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "PD", SUM(CASE WHEN ap.division IN ("YC") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "YC", SUM(CASE WHEN ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + (srmd + srwd + srymd + srywd) as "DivisionAttendanceTotal", SUM(CASE WHEN ap.position NOT IN ("NF", "MEM", "BEL") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "LDR", SUM(CASE WHEN ap.position IN ("MEM") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "MEM", SUM(CASE WHEN ap.position IN ("BEL") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "BEL", SUM(CASE WHEN ap.position IN ("NF") and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "NF", SUM(CASE WHEN mp.level IN ("district", "group") and ap.division ="MD" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + aa.srmd as "ldrmd", SUM(CASE WHEN mp.level IN ("mem") and ap.division = "MD" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "memmd", SUM(CASE WHEN mp.level IN ("bel") and ap.division = "MD" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "belmd", SUM(CASE WHEN mp.level IN ("nf") and ap.division = "MD" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "nfmd", SUM(CASE WHEN mp.level IN ("district", "group") and ap.division = "WD" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + aa.srwd as "ldrwd", SUM(CASE WHEN mp.level IN ("mem") and ap.division = "WD" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "memwd", SUM(CASE WHEN mp.level IN ("bel") and ap.division = "WD" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "belwd", SUM(CASE WHEN mp.level IN ("nf") and ap.division = "WD" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "nfwd", SUM(CASE WHEN mp.level IN ("district", "group") and ap.division = "YM" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + aa.srymd as "ldrymd", SUM(CASE WHEN mp.level IN ("mem") and ap.division = "YM" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "memymd", SUM(CASE WHEN mp.level IN ("bel") and ap.division = "YM" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "belymd", SUM(CASE WHEN mp.level IN ("nf") and ap.division = "YM" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "nfymd", 0 as PDm , 0 as YCm, SUM(CASE WHEN mp.level IN ("district", "group") and ap.division = "YW" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) + aa.srywd as "ldrywd", SUM(CASE WHEN mp.level IN ("mem") and ap.division = "YW" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "memywd", SUM(CASE WHEN mp.level IN ("bel") and ap.division = "YW" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "belywd", SUM(CASE WHEN mp.level IN ("nf") and ap.division = "YW" and ap.attendancestatus IN ("attended") and ap.deleted_at IS NULL THEN 1 ELSE 0 End) as "nfywd" FROM Attendance_m_Attendance aa LEFT JOIN Attendance_m_Person ap on aa.id = ap.attendanceid LEFT JOIN Members_z_Position mp on mp.code = ap.position WHERE aa.uniquecode = "' . $id . '" GROUP BY aa.description) ap SET aa.tokangmembership = ap.TokangMembership, aa.md = ap.md, aa.wd = ap.wd, aa.ymd = ap.ymd, aa.ywd = ap.ywd, aa.pd = ap.pd, aa.yc = ap.yc, aa.attendancetotal = ap.DivisionAttendanceTotal, aa.ldr = ap.LDR, aa.mem = ap.MEM, aa.bel = ap.BEL, aa.nf = ap.NF, aa.ldrmd = ap.ldrmd, aa.memmd = ap.memmd, aa.belmd = ap.belmd, aa.nfmd = ap.nfmd, aa.ldrwd = ap.ldrwd, aa.memwd = ap.memwd, aa.belwd = ap.belwd, aa.nfwd = ap.nfwd, aa.ldrymd = ap.ldrymd, aa.memymd = ap.memymd, aa.belymd = ap.belymd, aa.nfymd = ap.nfymd, aa.ldrywd = ap.ldrywd, aa.memywd = ap.memywd, aa.belywd = ap.belywd, aa.nfywd = ap.nfywd WHERE aa.id = ap.id;';
+			DB::Statement($statement);
 
-			$post->save();
-
-			if($post->save())
-			{
-				return Response::json(array('info' => 'Success'), 200);
-			}
-			else
-			{
-				LogsfLogs::postLogs('Create', 53, 0, ' - Discussion Meeting - Statistic - Failed to Save', NULL, NULL, 'Failed');
-				return Response::json(array('info' => 'Duplicate'), 400);
-			}
+			return Response::json(array('info' => 'Success'), 200);
 		}
 		catch(\Exception $e)
 		{

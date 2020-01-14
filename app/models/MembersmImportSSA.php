@@ -14,8 +14,8 @@ class MembersmImportSSA extends Eloquent {
 			// Get arrary from MMS
 			$pdo = DB::connection("mysql2")->getPdo();
 			$member = $pdo->query(DB::raw('SELECT * FROM person_view;'));
-			// Insert into BOE
 			$i = 1;
+
 			foreach($member as $member)
 			{
 				if (MembersmSSA::getcheckpersonidexist($member['id']) == false) 
