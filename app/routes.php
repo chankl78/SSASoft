@@ -153,6 +153,7 @@ Route::get('/Attendance/Detail/getChapter/{id}','AttendanceDetailController@getC
 // Attendance Discussion Meeting Statistic
 Route::get('/Attendance/DMStatistic', array('before' => 'auth', 'uses' => 'AttendanceDMStatisticController@getIndex'));
 Route::get('/Attendance/DMStatistic/getListing/{id}', 'AttendanceDMStatisticController@getListing');
+Route::get('/Attendance/DMStatistic/getRHQAgeGroupStats/{id}', 'AttendanceDMStatisticController@getRHQAgeGroupStats');
 
 // Event Registration By Members
 Route::get('/eventregistration', 'EventMemRegistrationController@getIndex');
