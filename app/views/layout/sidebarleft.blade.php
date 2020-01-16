@@ -573,6 +573,11 @@
 							<i class="menu-icon fa fa-double-angle-right"></i> Attendance
 						</a>
 					</li>
+					@if (Session::get('current_page') == 'attendance/dmstatistic' )<li class="active"> @else <li> @endif
+						<a href="{{{ URL::action('AttendanceDMStatisticController@getIndex') }}}">
+							<i class="menu-icon fa fa-double-angle-right"></i> DM Statistic
+						</a>
+					</li>
 				@endif
 				@if ($REAT01 == 't')
 					<li class="">

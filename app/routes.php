@@ -150,6 +150,10 @@ Route::post('/Attendance/Detail/putEditMember/{id}', 'AttendanceDetailController
 Route::get('/Attendance/Detail/getZone/{id}','AttendanceDetailController@getZone');
 Route::get('/Attendance/Detail/getChapter/{id}','AttendanceDetailController@getChapter');
 
+// Attendance Discussion Meeting Statistic
+Route::get('/Attendance/DMStatistic', array('before' => 'auth', 'uses' => 'AttendanceDMStatisticController@getIndex'));
+Route::get('/Attendance/DMStatistic/getListing/{id}', 'AttendanceDMStatisticController@getListing');
+
 // Event Registration By Members
 Route::get('/eventregistration', 'EventMemRegistrationController@getIndex');
 Route::post('/eventregistration/postNricSearch/{id}', 'EventMemRegistrationController@postNricSearch');

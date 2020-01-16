@@ -148,6 +148,17 @@ class AttendancemAttendance extends Eloquent {
         return $query->where('attendancetype', 'Discussion Meeting')->select(DB::Raw('year(attendancedate) as year'))->groupBy(DB::raw('year(attendancedate)'))->orderBy(DB::raw('year(attendancedate)', 'DESC'));
     }
 
+    public function scopeDMStatsListing($query, $value)
+    {
+        return $query->where('attendancetype', 'Discussion Meeting')->whereRaw('year(attendancedate) = ?', array($value))->select(DB::Raw('year(attendancedate) as year'), DB::Raw('month(attendancedate) as month'), 'rhq', 'zone', 'chapter', 'district', 'attendancetotal', 'ldr', 'mem', 'bel', 'nf', 'pd', 'yc', 'srmd', 'srwd', 'srymd', 'srywd', 'ldrmd', 'ldrwd', 'ldrymd', 'ldrywd', 'memmd', 'memwd', 'memymd', 'memywd', 'belmd', 'belwd', 'belymd', 'belywd', 'nfmd', 'nfwd', 'nfymd', 'nfywd', DB::Raw('concat(chapter, " ", district) as description'));
+    }
+
+    public function scopeDMMaxYear($query)
+    {
+        $mid = DB::table('Attendance_m_Attendance')->where('attendancetype', 'Discussion Meeting')->select(DB::Raw('MAX(year(attendancedate)) as year'))->pluck('year');
+        return $mid;
+    }
+
     public function scopeDMNotSubmittedStats($query)
     {
         return $query->where('attendancetype', 'Discussion Meeting')->where('status', 'Active')->where('attendancetotal', '<=', 5);
