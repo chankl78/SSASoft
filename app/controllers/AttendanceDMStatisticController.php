@@ -29,6 +29,37 @@ class AttendanceDMStatisticController extends BaseController
 		}
 	}
 
+	public function getRHQStats($id)
+	{
+		try
+		{
+			if ($id == 2017)
+			{
+				$default = zz2017members::RHQStats($id)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
+			else if ($id == 2018)
+			{
+				$default = zz2018members::RHQStats($id)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
+			else if ($id == 2019)
+			{
+				$default = zz2019members::RHQStats($id)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
+			else if ($id == 2020)
+			{
+				$default = zz2020members::RHQStats($id)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Read', 27, 0, ' - Discussion Meeting Statistic Listing RHQStats [DT] - ' . $e, NULL, NULL, 'Failed');
+		}
+	}
+
 	public function getRHQAgeGroupStats($id)
 	{
 		try

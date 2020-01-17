@@ -58,8 +58,13 @@ class zz2020members extends Eloquent {
         }
     }
 
+    public function scopeRHQStats($query, $value)
+    {
+        return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereNotIn('district', array("-"))->select('rhq', 'zone', 'chapter', 'district', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district');
+    }
+    
     public function scopeRHQAgeGroupStats($query, $value)
     {
-        return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->select('rhq', 'agegroup', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'))->groupby('rhq')->groupby('agegroup');
+        return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereNotIn('district', array("-"))->select('rhq', 'zone', 'chapter', 'district', 'agegroup', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('agegroup');
     }
 }
