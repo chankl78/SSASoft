@@ -758,6 +758,12 @@ Route::get('/BOEPortalSSAMADKenshuListing/getListing', 'LeadersPortalSSAMADKensh
 Route::get('/BOEPortal20194Objects', array('before' => 'auth', 'uses' => 'LeadersPortal20194ObjectsController@getIndex'));
 Route::get('/BOEPortal20194Objects/getListing', 'LeadersPortal20194ObjectsController@getListing');
 
+// Leaders Portal DM Stats
+Route::get('/BOEPortalDMStats', array('before' => 'auth', 'uses' => 'LeadersPortalDMStatsController@getIndex'));
+Route::get('/BOEPortalDMStats/getListing/{id}', 'LeadersPortalDMStatsController@getListing');
+Route::get('/BOEPortalDMStats/getRHQStats/{id}', 'LeadersPortalDMStatsController@getRHQStats');
+Route::get('/BOEPortalDMStats/getRHQAgeGroupStats/{id}', 'LeadersPortalDMStatsController@getRHQAgeGroupStats');
+
 // Campaign
 Route::get('/Campaign', array('before' => 'auth', 'uses' => 'CampaignController@getIndex'));
 Route::get('/Campaign/getListing', 'CampaignController@getListing');

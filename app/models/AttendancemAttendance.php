@@ -153,6 +153,21 @@ class AttendancemAttendance extends Eloquent {
         return $query->where('attendancetype', 'Discussion Meeting')->whereRaw('year(attendancedate) = ?', array($value))->select(DB::Raw('year(attendancedate) as year'), DB::Raw('month(attendancedate) as month'), 'rhq', 'zone', 'chapter', 'district', 'attendancetotal', 'ldr', 'mem', 'bel', 'nf', 'pd', 'yc', 'srmd', 'srwd', 'srymd', 'srywd', 'ldrmd', 'ldrwd', 'ldrymd', 'ldrywd', 'memmd', 'memwd', 'memymd', 'memywd', 'belmd', 'belwd', 'belymd', 'belywd', 'nfmd', 'nfwd', 'nfymd', 'nfywd', DB::Raw('concat(chapter, " ", district) as description'));
     }
 
+    public function scopeLPDMStatsListing($query, $value)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
+            return $query->where('attendancetype', 'Discussion Meeting')->whereRaw('year(attendancedate) = ?', array($value))->select(DB::Raw('year(attendancedate) as year'), DB::Raw('month(attendancedate) as month'), 'rhq', 'zone', 'chapter', 'district', 'attendancetotal', 'ldr', 'mem', 'bel', 'nf', 'pd', 'yc', 'srmd', 'srwd', 'srymd', 'srywd', 'ldrmd', 'ldrwd', 'ldrymd', 'ldrywd', 'memmd', 'memwd', 'memymd', 'memywd', 'belmd', 'belwd', 'belymd', 'belywd', 'nfmd', 'nfwd', 'nfymd', 'nfywd', DB::Raw('concat(chapter, " ", district) as description'));
+        } else if (Session::get('gakkaiuserpositionlevel') == 'rhq' ) {
+            return $query->where('attendancetype', 'Discussion Meeting')->where('rhq', Session::get('gakkaiuserrhq'))->whereRaw('year(attendancedate) = ?', array($value))->select(DB::Raw('year(attendancedate) as year'), DB::Raw('month(attendancedate) as month'), 'rhq', 'zone', 'chapter', 'district', 'attendancetotal', 'ldr', 'mem', 'bel', 'nf', 'pd', 'yc', 'srmd', 'srwd', 'srymd', 'srywd', 'ldrmd', 'ldrwd', 'ldrymd', 'ldrywd', 'memmd', 'memwd', 'memymd', 'memywd', 'belmd', 'belwd', 'belymd', 'belywd', 'nfmd', 'nfwd', 'nfymd', 'nfywd', DB::Raw('concat(chapter, " ", district) as description'));
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone' ) {
+            return $query->where('attendancetype', 'Discussion Meeting')->where('zone', Session::get('gakkaiuserzone'))->whereRaw('year(attendancedate) = ?', array($value))->select(DB::Raw('year(attendancedate) as year'), DB::Raw('month(attendancedate) as month'), 'rhq', 'zone', 'chapter', 'district', 'attendancetotal', 'ldr', 'mem', 'bel', 'nf', 'pd', 'yc', 'srmd', 'srwd', 'srymd', 'srywd', 'ldrmd', 'ldrwd', 'ldrymd', 'ldrywd', 'memmd', 'memwd', 'memymd', 'memywd', 'belmd', 'belwd', 'belymd', 'belywd', 'nfmd', 'nfwd', 'nfymd', 'nfywd', DB::Raw('concat(chapter, " ", district) as description'));
+        } else if (Session::get('gakkaiuserpositionlevel') == 'chapter' ) {
+            return $query->where('attendancetype', 'Discussion Meeting')->where('chapter', Session::get('gakkaiuserchapter'))->whereRaw('year(attendancedate) = ?', array($value))->select(DB::Raw('year(attendancedate) as year'), DB::Raw('month(attendancedate) as month'), 'rhq', 'zone', 'chapter', 'district', 'attendancetotal', 'ldr', 'mem', 'bel', 'nf', 'pd', 'yc', 'srmd', 'srwd', 'srymd', 'srywd', 'ldrmd', 'ldrwd', 'ldrymd', 'ldrywd', 'memmd', 'memwd', 'memymd', 'memywd', 'belmd', 'belwd', 'belymd', 'belywd', 'nfmd', 'nfwd', 'nfymd', 'nfywd', DB::Raw('concat(chapter, " ", district) as description'));
+        } else if (Session::get('gakkaiuserpositionlevel') == 'district' ) {
+            return $query->where('attendancetype', 'Discussion Meeting')->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereRaw('year(attendancedate) = ?', array($value))->select(DB::Raw('year(attendancedate) as year'), DB::Raw('month(attendancedate) as month'), 'rhq', 'zone', 'chapter', 'district', 'attendancetotal', 'ldr', 'mem', 'bel', 'nf', 'pd', 'yc', 'srmd', 'srwd', 'srymd', 'srywd', 'ldrmd', 'ldrwd', 'ldrymd', 'ldrywd', 'memmd', 'memwd', 'memymd', 'memywd', 'belmd', 'belwd', 'belymd', 'belywd', 'nfmd', 'nfwd', 'nfymd', 'nfywd', DB::Raw('concat(chapter, " ", district) as description'));
+        }
+    }
+
     public function scopeDMMaxYear($query)
     {
         $mid = DB::table('Attendance_m_Attendance')->where('attendancetype', 'Discussion Meeting')->select(DB::Raw('MAX(year(attendancedate)) as year'))->pluck('year');

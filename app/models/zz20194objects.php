@@ -86,11 +86,4 @@ class zz20194objects extends Eloquent {
                 ->orderby('rhq', 'zone', 'chapter', 'district');
         }
     }
-
-    public function scopeUpdateDM($query)
-    {
-        
-    }
-
-
 }
