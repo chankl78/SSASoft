@@ -24,12 +24,13 @@ class CampaignDetailController extends BaseController
 		$zone_options = array('' => 'Please Select a Zone') + MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
 		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
 		$memposition_options = MemberszPosition::Role()->orderBy('code', 'ASC')->lists('name', 'code');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$event_options = array('' => 'Please Select an Event') + EventmEvent::Role()->ActiveStatus()
 			->orderBy('description', 'ASC')->lists('description', 'description');
 		$view->title = $pagetitle;
 		$view->with('RECP03A', $RECP03A)->with('rid', $id)->with('result', $query)->with('pagetitle', $pagetitle)
 			->with('RECP05R', $RECP05R)->with('RECP01R', $RECP01R)->with('RECP04A', $RECP04A)
-			->with('divisiontype_options', $divisiontype_options)->with('RECP02R', $RECP02R)
+			->with('divisiontype_options', $divisiontype_options)->with('division_options', $division_options)->with('RECP02R', $RECP02R)
 			->with('campaigntype_options', $campaigntype_options)->with('status_options', $status_options)
 			->with('REEVGKA', $REEVGKA)->with('event_options', $event_options)->with('leveltype_options', $leveltype_options)->with('rhq_options', $rhq_options)->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)->with('memposition_options', $memposition_options);
 		return $view;

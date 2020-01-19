@@ -1910,7 +1910,7 @@
 															{{ Form::label('yspdivision', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">
-																	{{ Form::select('yspdivision', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'yspdivision'));}}
+																	{{ Form::select('yspdivision', $division_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'yspdivision'));}}
 																</div>
 															</div>
 														</div>
@@ -2031,7 +2031,7 @@
 															{{ Form::label('ysydivision', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">
-																	{{ Form::select('ysydivision', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ysydivision'));}}
+																	{{ Form::select('ysydivision', $division_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ysydivision'));}}
 																</div>
 															</div>
 														</div>
@@ -2152,7 +2152,7 @@
 															{{ Form::label('ysadivision', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">
-																	{{ Form::select('ysaposition', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ysadivision'));}}
+																	{{ Form::select('ysaposition', $division_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ysadivision'));}}
 																</div>
 															</div>
 														</div>
@@ -2340,7 +2340,7 @@
 														{{ Form::label('division', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-8">
 															<div class="clearfix">
-																{{ Form::select('division', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'division'));}}
+																{{ Form::select('division', $division_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'division'));}}
 															</div>
 														</div>
 													</div>

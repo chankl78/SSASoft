@@ -18,6 +18,7 @@ class EventAttendanceController extends BaseController
 		$zone_options = array('' => 'Please Select a Zone') + MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
 		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
 		$memposition_options = MemberszPosition::Role()->orderBy('code', 'ASC')->lists('name', 'code');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$view = View::make('event/eventattendance');
 		$eventname = EventmEvent::geteventattname($id);
 		$eventcode = EventmEvent::getattuniquecode($id);
@@ -35,14 +36,12 @@ class EventAttendanceController extends BaseController
 			->where('eventid', EventmEvent::getid($id))->orderBy('name', 'ASC')->lists('name', 'name');
 		$view->title = $pagetitle;
 		$view->with('rid', $id)->with('result', $query)->with('eventname', $eventname)->with('pagetitle', $pagetitle)
-			->with('eventuniquecode', $eventcode)->with('REEV07A', $REEV07A)->with('REEV07R', $REEV07R)->with('REEVROL', $REEVROL)->with('REEV08D', $REEV08D)->with('REEV08P', $REEV08P)->with('REEV08R', $REEV08R)->with('REEV05R', $REEV05R)->with('commonstatus_options', $commonstatus_options)->with('eventitem_options', $eventitem_options)->with('eventitemprint_options', $eventitemprint_options)->with('ssagroup_options', $ssaeventgroup_options)->with('ssagroupprint_options', $ssaeventgroupprint_options)->with('attendancetype_options', $attendancetype_options)->with('event_options', $event_options)->with('rhq_options', $rhq_options)->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)->with('memposition_options', $memposition_options);
+			->with('eventuniquecode', $eventcode)->with('REEV07A', $REEV07A)->with('REEV07R', $REEV07R)->with('REEVROL', $REEVROL)->with('REEV08D', $REEV08D)->with('REEV08P', $REEV08P)->with('REEV08R', $REEV08R)->with('REEV05R', $REEV05R)->with('commonstatus_options', $commonstatus_options)->with('eventitem_options', $eventitem_options)->with('eventitemprint_options', $eventitemprint_options)->with('ssagroup_options', $ssaeventgroup_options)->with('ssagroupprint_options', $ssaeventgroupprint_options)->with('attendancetype_options', $attendancetype_options)->with('event_options', $event_options)->with('rhq_options', $rhq_options)->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)->with('memposition_options', $memposition_options)->with('division_options', $division_options);
 		return $view;
 	}
 
 	public function getEventAttendanceNameSearch()
 	{
-		LogsfLogs::postLogs('Read', 28, $id, ' - Event - NRIC Search - Step 1 ', NULL, NULL, 'Failed');
-		
 		$membercode = Input::get('term');
 		$member = MembersmSSA::where('name','LIKE','%'. $membercode .'%')->orwhere('alias','LIKE','%'. $membercode .'%')->orwhere('uniquecode', 'Like', '%'. $membercode .'%')->orwhere('mmsuuid', 'Like', '%'. $membercode .'%')->orderBy('name', 'ASC')->get(array('id', 'uniquecode', 'name', 'alias', 'mmsuuid', 'mobile', 'tel', 'rhq', 'zone', 'chapter', 'district', 'division', 'position'))->take(10)->toarray();
 		$memberlist = array();

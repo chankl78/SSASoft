@@ -18,6 +18,7 @@ class EventDetailParticipantNewController extends BaseController
 		$ssagroup_options = array('' => 'Please Select a Group') + EventmGroup::Role()->where('eventid', EventmEvent::getid($id))->orderBy('name', 'ASC')->lists('name', 'name');
 		$eventitem_options = array('' => 'Please Select an Item') + EventmEventItem::Role()->where('eventid', EventmEvent::getid($id))->orderBy('name', 'ASC')->lists('name', 'name');
 		$memposition_options = MemberszPosition::Role()->orderBy('code', 'ASC')->lists('name', 'code');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$country_options = array('' => 'Please Select a Country') + EventzCountry::Role()->lists('value', 'value');
 		$language_options = array('' => 'Please Select a Language') + EventzLanguage::Role()->lists('value', 'value');
 		$REEVGKA = AccessfCheck::getResourceGakkaiRole();
@@ -29,7 +30,8 @@ class EventDetailParticipantNewController extends BaseController
 			->with('chapter_options', $chapter_options)->with('ssagroup_options', $ssagroup_options)
 			->with('eventitem_options', $eventitem_options)->with('eventuniquecode', $eventcode)
 			->with('memposition_options', $memposition_options)->with('REEVGKA', $REEVGKA)
-			->with('language_options', $language_options)->with('country_options', $country_options);
+			->with('language_options', $language_options)->with('country_options', $country_options)
+			->with('division_options', $division_options);
 		return $view;
 	}
 

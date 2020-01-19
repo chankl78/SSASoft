@@ -875,7 +875,7 @@
 															{{ Form::label('nfdivision', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">
-																	{{ Form::select('nfdivision', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), $result->division, array('class' => 'col-xs-12 col-sm-11', 'id' => 'nfdivision'));}}
+																	{{ Form::select('nfdivision', $division_options, $result->division, array('class' => 'col-xs-12 col-sm-11', 'id' => 'nfdivision'));}}
 																</div>
 															</div>
 														</div>

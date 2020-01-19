@@ -37,6 +37,7 @@ class LeadersPortalEventController extends BaseController
 		$country_options = array('' => 'Please Select a Country') + EventzCountry::Role()->lists('value', 'value');
 		$position_options = MemberszPosition::Role()->whereIn('level', array('bel', 'nf', 'mem', 'district'))->orderBy('name', 'ASC')->lists('name', 'code');
 		$sessionshow_options = array('' => 'Please Select a Session') + EventmEventShow::Role()->where('eventid', EventmEvent::getid($id))->lists('value', 'value');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$rhq = Session::get('gakkaiuserrhq');
 		$zone = Session::get('gakkaiuserzone');
 		$chapter = Session::get('gakkaiuserchapter');
@@ -123,7 +124,7 @@ class LeadersPortalEventController extends BaseController
 			->with('youthsummittickets', $youthsummittickets)->with('youthsummit', $youthsummit)
 			->with('languageselect', $languageselect)->with('nationalityselect', $nationalityselect)
 			->with('addnontokang', $addnontokang)->with('directaccept', $directaccept)
-			->with('moredetailselect', $moredetailselect);
+			->with('moredetailselect', $moredetailselect)->with('division_options', $division_options);
 	}
 
 	public function getZone($id)

@@ -11,6 +11,7 @@ class LeadersPortalBelieversController extends BaseController
 		$gakkaichapter = AccessfCheck::getChapterUser();
 		$gakkaidistrict = AccessfCheck::getDistrictUser();
 		$memposition_options = MemberszPosition::Role()->whereIn('name', array('Believer', 'New Friend'))->orderBy('name', 'ASC')->lists('name', 'code');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$rhq = Session::get('gakkaiuserrhq');
 		$zone = Session::get('gakkaiuserzone');
 		$chapter = Session::get('gakkaiuserchapter');
@@ -23,7 +24,7 @@ class LeadersPortalBelieversController extends BaseController
 		return $view->with('gakkaishq', $gakkaishq)->with('gakkairegion', $gakkairegion)->with('gakkaizone', $gakkaizone)->with('gakkaichapter', $gakkaichapter)
 			->with('gakkaidistrict', $gakkaidistrict)->with('memposition_options', $memposition_options)->with('rhq_options', $rhq_options)
 			->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)
-			->with('rhq', $rhq)->with('zone', $zone)->with('chapter', $chapter);
+			->with('rhq', $rhq)->with('zone', $zone)->with('chapter', $chapter)->with('division_options', $division_options);
 	}
 
 	public function getBelieversListingSHQ() // Server-Side Datatable

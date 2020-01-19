@@ -10,10 +10,11 @@ class GroupMemSVGRegistrationController extends BaseController {
 		$zone_options = MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
 		$chapter_options = MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
 		$memposition_options = MemberszPosition::orderBy('code', 'ASC')->lists('name', 'code');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$event_options = array('' => 'Please Select an Event') + EventmEvent::MemRegEvent()->orderBy('description', 'ASC')->lists('description', 'uniquecode');
 		$view->with('event_options', $event_options)->with('rhq_options', $rhq_options)
 			->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)
-			->with('memposition_options', $memposition_options);
+			->with('memposition_options', $memposition_options)->with('division_options', $division_options);
 		return $view;
 	}
 

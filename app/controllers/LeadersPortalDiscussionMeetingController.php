@@ -13,9 +13,11 @@ class LeadersPortalDiscussionMeetingController extends BaseController
 		$dmname = AttendancemAttendance::getdescription($id);
 		$memposition_options = MemberszPosition::Role()->whereIn('name', array('Believer', 'New Friend', 'Member'))->orderBy('name', 'ASC')->lists('name', 'code');
 		$position_options = MemberszPosition::Role()->whereIn('level', array('bel', 'nf', 'mem', 'district'))->orderBy('name', 'ASC')->lists('name', 'code');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$rhq_options = MemberszOrgChart::Rhq()->lists('rhq', 'rhqabbv');
 		$zone_options = array('' => 'Please Select a Zone') + MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
 		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
+		
 		$rhq = Session::get('gakkaiuserrhq');
 		$zone = Session::get('gakkaiuserzone');
 		$chapter = Session::get('gakkaiuserchapter');
@@ -23,7 +25,7 @@ class LeadersPortalDiscussionMeetingController extends BaseController
 		$query = AttendancemAttendance::Role()->where('uniquecode', '=', $id)->get();
 		$view = View::make('leaderportal/discussionmeeting');
 		$view->title = 'BOE Portal - ' . $dmname;
-		return $view->with('gakkaishq', $gakkaishq)->with('gakkaidistrict', $gakkaidistrict)->with('gakkaichapter', $gakkaichapter)->with('gakkairegion', $gakkairegion)->with('gakkaizone', $gakkaizone)->with('dmname', $dmname)->with('rid', $id)->with('result', $query)->with('memposition_options', $memposition_options)->with('position_options', $position_options)->with('rhq_options', $rhq_options)->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)->with('rhq', $rhq)->with('zone', $zone)->with('chapter', $chapter)->with('district', $district);
+		return $view->with('gakkaishq', $gakkaishq)->with('gakkaidistrict', $gakkaidistrict)->with('gakkaichapter', $gakkaichapter)->with('gakkairegion', $gakkairegion)->with('gakkaizone', $gakkaizone)->with('dmname', $dmname)->with('rid', $id)->with('result', $query)->with('memposition_options', $memposition_options)->with('position_options', $position_options)->with('rhq_options', $rhq_options)->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)->with('rhq', $rhq)->with('zone', $zone)->with('chapter', $chapter)->with('district', $district)->with('division_options', $division_options);
 	}
 
 	public function getZone($id)

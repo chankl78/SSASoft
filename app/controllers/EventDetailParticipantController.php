@@ -19,6 +19,7 @@ class EventDetailParticipantController extends BaseController
 		$gohonzontype_options = EventzGohonzonType::Role()->lists('value', 'value');
 		$role_options = EventzRole::Role()->orderBy('value', 'ASC')->lists('value', 'value');
 		$memposition_options = MemberszPosition::Role()->orderBy('name', 'ASC')->lists('name', 'code');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$event_options = array('0' => 'Please Select an Event') + EventmEvent::Role()->orderBy('description', 'ASC')->lists('description', 'id');
 		$REEVGKA = AccessfCheck::getResourceGakkaiRole();
 		$ssagroup_options = array('' => 'Please Select a Group') + EventmGroup::Role()->where('eventid', EventmEvent::geteventid($id))->orderBy('name', 'ASC')->lists('name', 'name');
@@ -35,7 +36,8 @@ class EventDetailParticipantController extends BaseController
 			->with('ssagroup_options', $ssagroup_options)->with('eventitem_options', $eventitem_options)
 			->with('memposition_options', $memposition_options)->with('REEVGKA', $REEVGKA)->with('event_options', $event_options)
 			->with('gohonzonstatus_options', $gohonzonstatus_options)->with('gohonzontype_options', $gohonzontype_options)
-			->with('language_options', $language_options)->with('country_options', $country_options)->with('session_options', $session_options);
+			->with('language_options', $language_options)->with('country_options', $country_options)->with('session_options', $session_options)
+			->with('division_options', $division_options);
 		return $view;
 	}
 

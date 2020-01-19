@@ -29,6 +29,7 @@ class EventDetailController extends BaseController
 		$commonstatus_options = CommonzStatus::Role()->orderBy('value', 'ASC')->lists('value', 'value');
 		$eventtype_options = EventzEventType::Role()->lists('value', 'value');
 		$divisiontype_options = CommonzDivisionType::Role()->lists('value', 'value');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$eventregstatus_options = EventzRegistrationStatus::Role()->lists('value', 'value');
 		$attendancetype_options = AttendancezType::Role()->lists('value', 'value');
 		$groups_options = array('' => 'Please Select a Group') + GroupmGroup::Role()->orderBy('name', 'ASC')->lists('name', 'name');
@@ -49,7 +50,8 @@ class EventDetailController extends BaseController
 			->with('eventitem_options', $eventitem_options)->with('eventitemprint_options', $eventitemprint_options)
 			->with('ssagroup_options', $ssaeventgroup_options)->with('ssagroupprint_options', $ssaeventgroupprint_options)
 			->with('attendancetype_options', $attendancetype_options)->with('event_options', $event_options)
-			->with('eventregstatus_options', $eventregstatus_options)->with('divisiontype_options', $divisiontype_options);
+			->with('eventregstatus_options', $eventregstatus_options)
+			->with('division_options', $division_options)->with('divisiontype_options', $divisiontype_options);
 		return $view;
 	}
 

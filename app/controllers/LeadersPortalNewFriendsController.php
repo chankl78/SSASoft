@@ -11,10 +11,11 @@ class LeadersPortalNewFriendsController extends BaseController
 		$gakkaichapter = AccessfCheck::getChapterUser();
 		$gakkaidistrict = AccessfCheck::getDistrictUser();
 		$position_options = MemberszPosition::Role()->whereIn('name', array('Believer', 'New Friend'))->orderBy('code', 'ASC')->lists('name', 'code');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$view = View::make('leaderportal/newfriendslisting');
 		$view->title = 'BOE Portal - New Friends Listing';
 		return $view->with('gakkaishq', $gakkaishq)->with('gakkairegion', $gakkairegion)->with('gakkaizone', $gakkaizone)->with('gakkaichapter', $gakkaichapter)
-			->with('gakkaidistrict', $gakkaidistrict)->with('position_options', $position_options);
+			->with('gakkaidistrict', $gakkaidistrict)->with('position_options', $position_options)->with('division_options', $division_options);
 	}
 
 	public function getNewFriendsListingSHQ() // Server-Side Datatable

@@ -381,7 +381,7 @@
 												{{ Form::label('newdivision', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 												<div class="col-xs-12 col-sm-8">
 													<div class="clearfix">
-														{{ Form::select('newdivision', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'newdivision'));}}
+														{{ Form::select('newdivision', $division_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'newdivision'));}}
 													</div>
 												</div>
 											</div>

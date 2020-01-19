@@ -333,16 +333,16 @@
 											<table id="tdefault" class="table table-striped table-bordered table-hover">
 												<thead>
 													<tr>
-														<th class="hidden-480">Date</th>
-														<th class="hidden-480">RHQ</th>
-														<th class="hidden-480">Zone</th>
-														<th class="hidden-480">Chapter</th>
-														<th class="hidden-480">District</th>
-														<th class="hidden-480">Value</th>
-														<th class="hidden-480">Name</th>
-														<th class="hidden-480">Division</th>
-														<th class="hidden-480">Position</th>
-														<th class="hidden-480">Action</th>
+														<th>Date</th>
+														<th>RHQ</th>
+														<th>Zone</th>
+														<th>Chapter</th>
+														<th>District</th>
+														<th>Value</th>
+														<th>Name</th>
+														<th>Division</th>
+														<th>Position</th>
+														<th>Action</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -399,7 +399,7 @@
 															{{ Form::label('adivision', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">
-																	{{ Form::select('adivision', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), 'MD', array('class' => 'col-xs-12 col-sm-11', 'id' => 'adivision'));}}
+																	{{ Form::select('adivision', $division_options, 'MD', array('class' => 'col-xs-12 col-sm-11', 'id' => 'adivision'));}}
 																</div>
 															</div>
 														</div>
@@ -504,7 +504,7 @@
 															{{ Form::label('edivision', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">
-																	{{ Form::select('edivision', array('' => '', 'MD' => 'MD', 'WD' => 'WD', 'YM' => 'YMD', 'YW' => 'YWD', 'PD' => 'PD', 'YC' => 'YC'), $result->division, array('class' => 'col-xs-12 col-sm-11', 'id' => 'edivision'));}}
+																	{{ Form::select('edivision', $division_options, $result->division, array('class' => 'col-xs-12 col-sm-11', 'id' => 'edivision'));}}
 																</div>
 															</div>
 														</div>

@@ -24,6 +24,7 @@ class AttendanceDetailController extends BaseController
 		$zone_options = array('' => 'Please Select a Zone') + MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
 		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
 		$memposition_options = MemberszPosition::Role()->whereIn('name', array('New Friend'))->orderBy('code', 'ASC')->lists('name', 'code');
+		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$event_options = array('' => 'Please Select an Event') + EventmEvent::Role()->ActiveStatus()->orderBy('description', 'ASC')->lists('description', 'description');
 		$view->title = $pagetitle;
 		$view->with('rid', $id)->with('result', $query)->with('pagetitle', $pagetitle)
@@ -32,7 +33,8 @@ class AttendanceDetailController extends BaseController
 			->with('groups_options', $groups_options)->with('attendancetype_options', $attendancetype_options)
 			->with('event_options', $event_options)->with('memposition_options', $memposition_options)
 			->with('rhq_options', $rhq_options)->with('zone_options', $zone_options)->with('role_options', $role_options)
-			->with('chapter_options', $chapter_options)->with('event_options', $event_options);
+			->with('chapter_options', $chapter_options)->with('event_options', $event_options)
+			->with('division_options', $division_options);
 		return $view;
 	}
 
