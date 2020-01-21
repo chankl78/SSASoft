@@ -54,7 +54,17 @@ class MembersmImportSSA extends Eloquent {
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
 					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }	
 					$post->positionlevel = $positionlevel;
-					$post->division = $member['division'];
+					if ( $member['division'] == "PD" )
+					{
+						if ( $member['gender'] == "F" ) { $post->division = "PDYW"; }
+						else { $post->division = "PDYM"; }
+					}
+					elseif ( $member['division'] == "YC" )
+					{
+						if ( $member['gender'] == "F" ) { $post->division = "YCYW"; }
+						else { $post->division = "YCYM"; }
+					}
+					else { $post->division = $member['division']; }
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
 					if($member['address2'] == ''){$post->unitno = 'NIL';} else {$post->unitno = $member['address2'];}
@@ -106,7 +116,17 @@ class MembersmImportSSA extends Eloquent {
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
 					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }	
 					$post->positionlevel = $positionlevel;
-					$post->division = $member['division'];
+					if ( $member['division'] == "PD" )
+					{
+						if ( $member['gender'] == "F" ) { $post->division = "PDYW"; }
+						else { $post->division = "PDYM"; }
+					}
+					elseif ( $member['division'] == "YC" )
+					{
+						if ( $member['gender'] == "F" ) { $post->division = "YCYW"; }
+						else { $post->division = "YCYM"; }
+					}
+					else { $post->division = $member['division']; }
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
 					if($member['address2'] == ''){$post->unitno = 'NIL';} else {$post->unitno = $member['address2'];}
@@ -185,7 +205,17 @@ class MembersmImportSSA extends Eloquent {
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
 					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }	
 					$post->positionlevel = $positionlevel;
-					$post->division = $member['division'];
+					if ( $member['division'] == "PD" )
+					{
+						if ( $member['gender'] == "F" ) { $post->division = "PDYW"; }
+						else { $post->division = "PDYM"; }
+					}
+					elseif ( $member['division'] == "YC" )
+					{
+						if ( $member['gender'] == "F" ) { $post->division = "YCYW"; }
+						else { $post->division = "YCYM"; }
+					}
+					else { $post->division = $member['division']; }
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
 					if($member['address2'] == ''){$post->unitno = 'NIL';} else {$post->unitno = $member['address2'];}
@@ -237,7 +267,17 @@ class MembersmImportSSA extends Eloquent {
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
 					else { $positionlevel = MemberszPosition::getPositionLevel($member['position']); }	
 					$post->positionlevel = $positionlevel;
-					$post->division = $member['division'];
+					if ( $member['division'] == "PD" )
+					{
+						if ( $member['gender'] == "F" ) { $post->division = "PDYW"; }
+						else { $post->division = "PDYM"; }
+					}
+					elseif ( $member['division'] == "YC" )
+					{
+						if ( $member['gender'] == "F" ) { $post->division = "YCYW"; }
+						else { $post->division = "YCYM"; }
+					}
+					else { $post->division = $member['division']; }
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
 					if($member['address2'] == ''){$post->unitno = 'NIL';} else {$post->unitno = $member['address2'];}

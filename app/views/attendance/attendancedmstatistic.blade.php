@@ -80,12 +80,22 @@
 											<th>YM-M</th>
 											<th>YM-B</th>
 											<th>YM-NF</th>
+											<th>YMPD-M</th>
+											<th>YMPD-B</th>
+											<th>YMPD-NF</th>
+											<th>YMYC-M</th>
+											<th>YMYC-B</th>
+											<th>YMYC-NF</th>
 											<th>YW-L</th>
 											<th>YW-M</th>
 											<th>YW-B</th>
 											<th>YW-NF</th>
-											<th>PD</th>
-											<th>YC</th>
+											<th>YWPD-M</th>
+											<th>YWPD-B</th>
+											<th>YWPD-NF</th>
+											<th>YWYC-M</th>
+											<th>YWYC-B</th>
+											<th>YWYC-NF</th>
 											<th>Description</th>
 										</tr>
 									</thead>
@@ -93,7 +103,7 @@
 									</tbody>
 									<tfoot id="tdefaultfoot">
 										<tr>
-											<th>Total</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+											<th>Total</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
 										</tr>
 									</tfoot>
 								</table>
@@ -278,13 +288,23 @@
 						{ targets: [ 16 ], data: "memymd", searchable: true },
 						{ targets: [ 17 ], data: "belymd", searchable: true },
 						{ targets: [ 18 ], data: "nfymd", searchable: true },
-						{ targets: [ 19 ], data: "ldrywd", searchable: true },
-						{ targets: [ 20 ], data: "memywd", searchable: true },
-						{ targets: [ 21 ], data: "belywd", searchable: true },
-						{ targets: [ 22 ], data: "nfywd", searchable: true },
-						{ targets: [ 23 ], data: "pd", searchable: true },
-						{ targets: [ 24 ], data: "yc", searchable: true },
-						{ targets: [ 25 ], data: "description", searchable: true, visible: false }
+						{ targets: [ 19 ], data: "mempdymd", searchable: true },
+						{ targets: [ 20 ], data: "belpdymd", searchable: true },
+						{ targets: [ 21 ], data: "nfpdymd", searchable: true },
+						{ targets: [ 22 ], data: "memycymd", searchable: true },
+						{ targets: [ 23 ], data: "belycymd", searchable: true },
+						{ targets: [ 24 ], data: "nfycymd", searchable: true },
+						{ targets: [ 25 ], data: "ldrywd", searchable: true },
+						{ targets: [ 26 ], data: "memywd", searchable: true },
+						{ targets: [ 27 ], data: "belywd", searchable: true },
+						{ targets: [ 28 ], data: "nfywd", searchable: true },
+						{ targets: [ 29 ], data: "mempdywd", searchable: true },
+						{ targets: [ 30 ], data: "belpdywd", searchable: true },
+						{ targets: [ 31 ], data: "nfpdywd", searchable: true },
+						{ targets: [ 32 ], data: "memycywd", searchable: true },
+						{ targets: [ 33 ], data: "belycywd", searchable: true },
+						{ targets: [ 34 ], data: "nfycywd", searchable: true },
+						{ targets: [ 35 ], data: "description", searchable: true, visible: false }
 					],
 	            	"footerCallback": function (row, data, start, end, display) {
 		                var api = this.api(), data
@@ -296,7 +316,7 @@
 			                    typeof i === 'number' ?
 			                        i : 0;
 			            };
-		                columns = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]; // Add columns here
+		                columns = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,]; // Add columns here
 
 		       			for (var i = 0; i < columns.length; i++) {
 		                    $('#tdefaultfoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
@@ -464,13 +484,23 @@
 							{ targets: [ 16 ], data: "memymd", searchable: true },
 							{ targets: [ 17 ], data: "belymd", searchable: true },
 							{ targets: [ 18 ], data: "nfymd", searchable: true },
-							{ targets: [ 19 ], data: "ldrywd", searchable: true },
-							{ targets: [ 20 ], data: "memywd", searchable: true },
-							{ targets: [ 21 ], data: "belywd", searchable: true },
-							{ targets: [ 22 ], data: "nfywd", searchable: true },
-							{ targets: [ 23 ], data: "pd", searchable: true },
-							{ targets: [ 24 ], data: "yc", searchable: true },
-							{ targets: [ 25 ], data: "description", searchable: true, visible: false }
+							{ targets: [ 19 ], data: "mempdymd", searchable: true },
+							{ targets: [ 20 ], data: "belpdymd", searchable: true },
+							{ targets: [ 21 ], data: "nfpdymd", searchable: true },
+							{ targets: [ 22 ], data: "memycymd", searchable: true },
+							{ targets: [ 23 ], data: "belycymd", searchable: true },
+							{ targets: [ 24 ], data: "nfycymd", searchable: true },
+							{ targets: [ 25 ], data: "ldrywd", searchable: true },
+							{ targets: [ 26 ], data: "memywd", searchable: true },
+							{ targets: [ 27 ], data: "belywd", searchable: true },
+							{ targets: [ 28 ], data: "nfywd", searchable: true },
+							{ targets: [ 29 ], data: "mempdywd", searchable: true },
+							{ targets: [ 30 ], data: "belpdywd", searchable: true },
+							{ targets: [ 31 ], data: "nfpdywd", searchable: true },
+							{ targets: [ 32 ], data: "memycywd", searchable: true },
+							{ targets: [ 33 ], data: "belycywd", searchable: true },
+							{ targets: [ 34 ], data: "nfycywd", searchable: true },
+							{ targets: [ 35 ], data: "description", searchable: true, visible: false }
 						],
 						"footerCallback": function (row, data, start, end, display) {
 							var api = this.api(), data
@@ -482,7 +512,7 @@
 									typeof i === 'number' ?
 										i : 0;
 							};
-							columns = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]; // Add columns here
+							columns = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,]; // Add columns here
 
 							for (var i = 0; i < columns.length; i++) {
 								$('#tdefaultfoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
