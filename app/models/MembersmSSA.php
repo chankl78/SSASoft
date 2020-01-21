@@ -750,7 +750,10 @@ class MembersmSSA extends Eloquent {
             ->leftJoin('Members_z_Position', 'Members_z_Position.code', '=', 'Members_m_SSA.position')
             ->groupBy('division')->orderby(DB::raw('CASE WHEN Members_m_SSA.division = "MD" THEN 1 WHEN Members_m_SSA.division = "WD" THEN 2 
                 WHEN Members_m_SSA.division = "YM" THEN 3 WHEN Members_m_SSA.division = "YW" THEN 4 
-                WHEN Members_m_SSA.division = "PD" THEN 5 WHEN Members_m_SSA.division = "YC" THEN 6 END'));
+                WHEN Members_m_SSA.division = "PDYM" THEN 5 WHEN Members_m_SSA.division = "PDYM" THEN 6
+                WHEN Members_m_SSA.division = "PDYW" THEN 7 WHEN Members_m_SSA.division = "PDYM" THEN 8
+                WHEN Members_m_SSA.division = "YCYM" THEN 9 WHEN Members_m_SSA.division = "YCYM" THEN 10
+                WHEN Members_m_SSA.division = "YCYW" THEN 11 WHEN Members_m_SSA.division = "YCYM" THEN 12 END'));
     }
 
     public function scopeRHQStats($query, $value)
@@ -764,7 +767,10 @@ class MembersmSSA extends Eloquent {
             ->leftJoin('Members_z_Position', 'Members_z_Position.code', '=', 'Members_m_SSA.position')
             ->groupBy('division')->orderby(DB::raw('CASE WHEN Members_m_SSA.division = "MD" THEN 1 WHEN Members_m_SSA.division = "WD" THEN 2 
                 WHEN Members_m_SSA.division = "YM" THEN 3 WHEN Members_m_SSA.division = "YW" THEN 4 
-                WHEN Members_m_SSA.division = "PD" THEN 5 WHEN Members_m_SSA.division = "YC" THEN 6 END'));
+                WHEN Members_m_SSA.division = "PDYM" THEN 5 WHEN Members_m_SSA.division = "PDYM" THEN 6
+                WHEN Members_m_SSA.division = "PDYW" THEN 7 WHEN Members_m_SSA.division = "PDYM" THEN 8
+                WHEN Members_m_SSA.division = "YCYM" THEN 9 WHEN Members_m_SSA.division = "YCYM" THEN 10
+                WHEN Members_m_SSA.division = "YCYW" THEN 11 WHEN Members_m_SSA.division = "YCYM" THEN 12 END'));
     }
 
     public function scopeZoneStats($query, $value)
@@ -792,7 +798,10 @@ class MembersmSSA extends Eloquent {
             ->leftJoin('Members_z_Position', 'Members_z_Position.code', '=', 'Members_m_SSA.position')
             ->groupBy('division')->orderby(DB::raw('CASE WHEN Members_m_SSA.division = "MD" THEN 1 WHEN Members_m_SSA.division = "WD" THEN 2 
                 WHEN Members_m_SSA.division = "YM" THEN 3 WHEN Members_m_SSA.division = "YW" THEN 4 
-                WHEN Members_m_SSA.division = "PD" THEN 5 WHEN Members_m_SSA.division = "YC" THEN 6 END'));
+                WHEN Members_m_SSA.division = "PDYM" THEN 5 WHEN Members_m_SSA.division = "PDYM" THEN 6
+                WHEN Members_m_SSA.division = "PDYW" THEN 7 WHEN Members_m_SSA.division = "PDYM" THEN 8
+                WHEN Members_m_SSA.division = "YCYM" THEN 9 WHEN Members_m_SSA.division = "YCYM" THEN 10
+                WHEN Members_m_SSA.division = "YCYW" THEN 11 WHEN Members_m_SSA.division = "YCYM" THEN 12 END'));
     }
 
     public function scopeDistrictStats($query, $value, $value2)
@@ -806,7 +815,10 @@ class MembersmSSA extends Eloquent {
             ->leftJoin('Members_z_Position', 'Members_z_Position.code', '=', 'Members_m_SSA.position')
             ->groupBy('division')->orderby(DB::raw('CASE WHEN Members_m_SSA.division = "MD" THEN 1 WHEN Members_m_SSA.division = "WD" THEN 2 
                 WHEN Members_m_SSA.division = "YM" THEN 3 WHEN Members_m_SSA.division = "YW" THEN 4 
-                WHEN Members_m_SSA.division = "PD" THEN 5 WHEN Members_m_SSA.division = "YC" THEN 6 END'));
+                WHEN Members_m_SSA.division = "PDYM" THEN 5 WHEN Members_m_SSA.division = "PDYM" THEN 6
+                WHEN Members_m_SSA.division = "PDYW" THEN 7 WHEN Members_m_SSA.division = "PDYM" THEN 8
+                WHEN Members_m_SSA.division = "YCYM" THEN 9 WHEN Members_m_SSA.division = "YCYM" THEN 10
+                WHEN Members_m_SSA.division = "YCYW" THEN 11 WHEN Members_m_SSA.division = "YCYM" THEN 12 END'));
     }
 
     public static function scopeNationWideBOEPositionSummary($query)
