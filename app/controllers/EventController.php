@@ -165,6 +165,7 @@ class EventController extends BaseController
 				$post->sessionselect = Input::get('sessionselect');
 				$post->languageselect = Input::get('languageselect');
 				$post->nationalityselect = Input::get('nationalityselect');
+				$post->moredetailselect = Input::get('moredetailselect');
 				$post->addnontokang = Input::get('addnontokang');
 				$post->directaccept = Input::get('directaccept');
 

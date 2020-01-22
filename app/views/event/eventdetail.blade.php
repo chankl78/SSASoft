@@ -313,6 +313,14 @@
 														</div>
 													</div>
 													<div class="form-group" @if ($REEVGKA == 'f') hidden @endif>
+														{{ Form::label('moredetailselect', 'More Select Options', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-9">
+															<div class="clearfix">
+																{{ Form::checkbox('moredetailselect', 'false', $result->addnontokang, array('id' => 'moredetailselect'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group" @if ($REEVGKA == 'f') hidden @endif>
 														{{ Form::label('directaccept', 'Accepted Status', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-9">
 															<div class="clearfix">
@@ -5309,6 +5317,7 @@
 			if ($("#sessionselect").is(':checked')) { $("#sessionselect").val('1'); } else {$("#sessionselect").val('0'); }
 			if ($("#languageselect").is(':checked')) { $("#languageselect").val('1'); } else {$("#languageselect").val('0'); }
 			if ($("#nationalityselect").is(':checked')) { $("#nationalityselect").val('1'); } else {$("#nationalityselect").val('0'); }
+			if ($("#moredetailselect").is(':checked')) { $("#moredetailselect").val('1'); } else {$("#moredetailselect").val('0'); }
 			if ($("#addnontokang").is(':checked')) { $("#addnontokang").val('1'); } else {$("#addnontokang").val('0'); }
 			if ($("#directaccept").is(':checked')) { $("#directaccept").val('1'); } else {$("#directaccept").val('0'); }
 	    	noty({
@@ -5319,7 +5328,7 @@
 			$.ajax({
 		        url: 'putEvent/' + $("#eventid").val(),
 		        type: 'POST',
-		        data: { eventdate: $("#eventdate").val(), description: $("#description").val(), location: $("#location").val(), divisiontype: $("#divisiontype").val(), eventtype: $("#eventtype").val(), status: $("#status").val(), allowshqregistration: $("#allowshqregistration").val(), allowmemregistration: $("#allowmemregistration").val(), allowregionregistration: $("#allowregionregistration").val(), allowzoneregistration: $("#allowzoneregistration").val(), allowchapterregistration: $("#allowchapterregistration").val(), allowdistrictregistration: $("#allowdistrictregistration").val(), special: $("#allowspecialregistration").val(), readonly: $("#readonly").val(), addonly: $("#addonly").val(), editonly: $("#editonly").val(), deleteonly: $("#deleteonly").val(), viewattendance: $("#viewattendance").val(), sessionselect: $("#sessionselect").val(), languageselect: $("#languageselect").val(), addnontokang: $("#addnontokang").val(), directaccept: $("#directaccept").val() },
+		        data: { eventdate: $("#eventdate").val(), description: $("#description").val(), location: $("#location").val(), divisiontype: $("#divisiontype").val(), eventtype: $("#eventtype").val(), status: $("#status").val(), allowshqregistration: $("#allowshqregistration").val(), allowmemregistration: $("#allowmemregistration").val(), allowregionregistration: $("#allowregionregistration").val(), allowzoneregistration: $("#allowzoneregistration").val(), allowchapterregistration: $("#allowchapterregistration").val(), allowdistrictregistration: $("#allowdistrictregistration").val(), special: $("#allowspecialregistration").val(), readonly: $("#readonly").val(), addonly: $("#addonly").val(), editonly: $("#editonly").val(), deleteonly: $("#deleteonly").val(), viewattendance: $("#viewattendance").val(), sessionselect: $("#sessionselect").val(), languageselect: $("#languageselect").val(), moredetailselect: $("#moredetailselect").val(), addnontokang: $("#addnontokang").val(), directaccept: $("#directaccept").val() },
 		        dataType: 'json',
 		        statusCode: { 
 		        	200:function(){
