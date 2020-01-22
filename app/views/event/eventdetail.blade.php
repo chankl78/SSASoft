@@ -316,7 +316,7 @@
 														{{ Form::label('moredetailselect', 'More Select Options', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-9">
 															<div class="clearfix">
-																{{ Form::checkbox('moredetailselect', 'false', $result->addnontokang, array('id' => 'moredetailselect'));}}
+																{{ Form::checkbox('moredetailselect', 'false', $result->moredetailselect, array('id' => 'moredetailselect'));}}
 															</div>
 														</div>
 													</div>
