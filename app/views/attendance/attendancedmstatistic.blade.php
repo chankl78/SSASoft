@@ -43,6 +43,30 @@
 						</div>
 					</div>
 				</div> <!-- Year Selection -->
+				<div class="col-xs-12 col-sm-3 widget-container-span ui-sortable">
+					<div class="widget-box widget-color-green">
+						<div class="widget-header">
+							<h5 class="widget-title">Select Division to view Statistic</h5>
+							<div class="widget-toolbar">
+								<a href="#" data-action="collapse">
+									<i class="ace-icon fa fa-chevron-up"></i>
+								</a>
+							</div>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<div class="well well-lg">
+									{{ Form::open(array('id' => 'fselect', 'class' => 'form-horizontal')) }}
+										<fieldset>
+											{{ Form::label('dddivisiontype', 'Division: ', array('class' => 'control-label col-xs-12 col-sm-4')); }}
+											{{ Form::select('dddivisiontype', $divisiontype_options, 'All', array('class' => 'col-xs-12 col-sm-6', 'id' => 'dddivisiontype')); }}
+										</fieldset>
+									{{ Form::close() }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- Division Type Selection -->
 				<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
 					<div class="widget-box widget-color-blue">
 						<div class="widget-header">
@@ -262,7 +286,7 @@
 					serverSide: false,
 					searching: true,
 					order: [[ 0, "desc" ], [ 1, "asc" ]],
-			        ajax: 'DMStatistic/getListing/' + $('#ddyear').val(),
+			        ajax: 'DMStatistic/getListing/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 			        columnDefs: [
 						{ responsivePriority: 1, targets: 0 },
 						{ responsivePriority: 2, targets: 1 },
@@ -338,7 +362,7 @@
 					serverSide: false,
 					searching: true,
 					order: [[ 0, "desc" ], [ 1, "asc" ]],
-			        ajax: 'DMStatistic/getRHQStats/' + $('#ddyear').val(),
+			        ajax: 'DMStatistic/getRHQStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 			        columnDefs: [
 						{ responsivePriority: 1, targets: 0 },
 						{ responsivePriority: 2, targets: 1 },
@@ -395,7 +419,7 @@
 					serverSide: false,
 					searching: true,
 					order: [[ 0, "desc" ], [ 1, "asc" ]],
-			        ajax: 'DMStatistic/getRHQAgeGroupStats/' + $('#ddyear').val(),
+			        ajax: 'DMStatistic/getRHQAgeGroupStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 			        columnDefs: [
 						{ responsivePriority: 1, targets: 0 },
 						{ responsivePriority: 2, targets: 1 },
@@ -458,7 +482,7 @@
 						serverSide: false,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'DMStatistic/getListing/' + $('#ddyear').val(),
+						ajax: 'DMStatistic/getListing/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },
@@ -538,7 +562,7 @@
 						serverSide: false,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'DMStatistic/getRHQStats/' + $('#ddyear').val(),
+						ajax: 'DMStatistic/getRHQStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },
@@ -599,7 +623,212 @@
 						serverSide: false,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'DMStatistic/getRHQAgeGroupStats/' + $('#ddyear').val(),
+						ajax: 'DMStatistic/getRHQAgeGroupStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						columnDefs: [
+							{ responsivePriority: 1, targets: 0 },
+							{ responsivePriority: 2, targets: 1 },
+							{ responsivePriority: 3, targets: 4 },
+							{ responsivePriority: 4, targets: 5 },
+							{ responsivePriority: 5, targets: 6 },
+							{ targets: [ 0 ], data: "rhq", searchable: true },
+							{ targets: [ 1 ], data: "zone", searchable: true },
+							{ targets: [ 2 ], data: "chapter", searchable: true },
+							{ targets: [ 3 ], data: "district", searchable: true },
+							{ targets: [ 4 ], data: "agegroup", searchable: true },
+							{ targets: [ 5 ], data: "jan", searchable: true},
+							{ targets: [ 6 ], data: "feb", searchable: true},
+							{ targets: [ 7 ], data: "mar", searchable: true},
+							{ targets: [ 8 ], data: "apr", searchable: true},
+							{ targets: [ 9 ], data: "may", searchable: true },
+							{ targets: [ 10 ], data: "jun", searchable: true },
+							{ targets: [ 11 ], data: "jul", searchable: true },
+							{ targets: [ 12 ], data: "aug", searchable: true },
+							{ targets: [ 13 ], data: "sep", searchable: true },
+							{ targets: [ 14 ], data: "oct", searchable: true },
+							{ targets: [ 15 ], data: "nov", searchable: true },
+							{ targets: [ 16 ], data: "dec", searchable: true },
+							{ targets: [ 17 ], data: "description", searchable: true, visible: false }
+						],
+						"footerCallback": function (row, data, start, end, display) {
+							var api = this.api(), data
+
+							// Remove the formatting to get integer data for summation
+							var intVal = function ( i ) {
+								return typeof i === 'string' ?
+									i.replace(/[\$,]/g, '')*1 :
+									typeof i === 'number' ?
+										i : 0;
+							};
+							columns = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]; // Add columns here
+
+							for (var i = 0; i < columns.length; i++) {
+								$('#trhqagegroupfoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
+							}
+						}
+					});
+	        	});
+
+				$('#dddivisiontype').change(function(){
+					var oTable = $('#tdefault').DataTable();
+					oTable.destroy();
+					$('#tdefault tbody').remove();
+
+					var oTable = $('#tdefault').DataTable({
+						dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
+						displayLength: 10, // Default No of Records per page on 1st load
+						lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+						pagingType: "first_last_numbers",
+						responsive: true,
+						stateSave: true, // Remember paging & filters
+						autoWidth: false,
+						scrollCollapse: true,
+						processing: false,
+						serverSide: false,
+						searching: true,
+						order: [[ 0, "desc" ], [ 1, "asc" ]],
+						ajax: 'DMStatistic/getListing/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						columnDefs: [
+							{ responsivePriority: 1, targets: 0 },
+							{ responsivePriority: 2, targets: 1 },
+							{ responsivePriority: 3, targets: 4 },
+							{ responsivePriority: 4, targets: 5 },
+							{ responsivePriority: 5, targets: 6 },
+							{ targets: [ 0 ], data: "year", searchable: true },
+							{ targets: [ 1 ], data: "month", searchable: true },
+							{ targets: [ 2 ], data: "rhq", searchable: true},
+							{ targets: [ 3 ], data: "zone", searchable: true},
+							{ targets: [ 4 ], data: "chapter", searchable: true},
+							{ targets: [ 5 ], data: "district", searchable: true},
+							{ targets: [ 6 ], data: "attendancetotal", searchable: true },
+							{ targets: [ 7 ], data: "ldrmd", searchable: true },
+							{ targets: [ 8 ], data: "memmd", searchable: true },
+							{ targets: [ 9 ], data: "belmd", searchable: true },
+							{ targets: [ 10 ], data: "nfmd", searchable: true },
+							{ targets: [ 11 ], data: "ldrwd", searchable: true },
+							{ targets: [ 12 ], data: "memwd", searchable: true },
+							{ targets: [ 13 ], data: "belwd", searchable: true },
+							{ targets: [ 14 ], data: "nfwd", searchable: true },
+							{ targets: [ 15 ], data: "ldrymd", searchable: true },
+							{ targets: [ 16 ], data: "memymd", searchable: true },
+							{ targets: [ 17 ], data: "belymd", searchable: true },
+							{ targets: [ 18 ], data: "nfymd", searchable: true },
+							{ targets: [ 19 ], data: "mempdymd", searchable: true },
+							{ targets: [ 20 ], data: "belpdymd", searchable: true },
+							{ targets: [ 21 ], data: "nfpdymd", searchable: true },
+							{ targets: [ 22 ], data: "memycymd", searchable: true },
+							{ targets: [ 23 ], data: "belycymd", searchable: true },
+							{ targets: [ 24 ], data: "nfycymd", searchable: true },
+							{ targets: [ 25 ], data: "ldrywd", searchable: true },
+							{ targets: [ 26 ], data: "memywd", searchable: true },
+							{ targets: [ 27 ], data: "belywd", searchable: true },
+							{ targets: [ 28 ], data: "nfywd", searchable: true },
+							{ targets: [ 29 ], data: "mempdywd", searchable: true },
+							{ targets: [ 30 ], data: "belpdywd", searchable: true },
+							{ targets: [ 31 ], data: "nfpdywd", searchable: true },
+							{ targets: [ 32 ], data: "memycywd", searchable: true },
+							{ targets: [ 33 ], data: "belycywd", searchable: true },
+							{ targets: [ 34 ], data: "nfycywd", searchable: true },
+							{ targets: [ 35 ], data: "description", searchable: true, visible: false }
+						],
+						"footerCallback": function (row, data, start, end, display) {
+							var api = this.api(), data
+
+							// Remove the formatting to get integer data for summation
+							var intVal = function ( i ) {
+								return typeof i === 'string' ?
+									i.replace(/[\$,]/g, '')*1 :
+									typeof i === 'number' ?
+										i : 0;
+							};
+							columns = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,]; // Add columns here
+
+							for (var i = 0; i < columns.length; i++) {
+								$('#tdefaultfoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
+							}
+						}
+					});
+
+					var oRhqTable = $('#trhq').DataTable();
+					oRhqTable.destroy();
+					$('#trhq tbody').remove();
+
+					var oRhqTable = $('#trhq').DataTable({
+						dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
+						displayLength: 10, // Default No of Records per page on 1st load
+						lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+						pagingType: "first_last_numbers",
+						responsive: true,
+						stateSave: true, // Remember paging & filters
+						autoWidth: false,
+						scrollCollapse: true,
+						processing: false,
+						serverSide: false,
+						searching: true,
+						order: [[ 0, "desc" ], [ 1, "asc" ]],
+						ajax: 'DMStatistic/getRHQStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						columnDefs: [
+							{ responsivePriority: 1, targets: 0 },
+							{ responsivePriority: 2, targets: 1 },
+							{ responsivePriority: 3, targets: 4 },
+							{ responsivePriority: 4, targets: 5 },
+							{ responsivePriority: 5, targets: 6 },
+							{ targets: [ 0 ], data: "rhq", searchable: true },
+							{ targets: [ 1 ], data: "zone", searchable: true },
+							{ targets: [ 2 ], data: "chapter", searchable: true },
+							{ targets: [ 3 ], data: "district", searchable: true },
+							{ targets: [ 4 ], data: "jan", searchable: true},
+							{ targets: [ 5 ], data: "feb", searchable: true},
+							{ targets: [ 6 ], data: "mar", searchable: true},
+							{ targets: [ 7 ], data: "apr", searchable: true},
+							{ targets: [ 8 ], data: "may", searchable: true },
+							{ targets: [ 9 ], data: "jun", searchable: true },
+							{ targets: [ 10 ], data: "jul", searchable: true },
+							{ targets: [ 11 ], data: "aug", searchable: true },
+							{ targets: [ 12 ], data: "sep", searchable: true },
+							{ targets: [ 13 ], data: "oct", searchable: true },
+							{ targets: [ 14 ], data: "nov", searchable: true },
+							{ targets: [ 15 ], data: "dec", searchable: true },
+							{ targets: [ 16 ], data: "description", searchable: true, visible: false }
+						],
+						"footerCallback": function (row, data, start, end, display) {
+							var api = this.api(), data
+
+							// Remove the formatting to get integer data for summation
+							var intVal = function ( i ) {
+								return typeof i === 'string' ?
+									i.replace(/[\$,]/g, '')*1 :
+									typeof i === 'number' ?
+										i : 0;
+							};
+							columns = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; // Add columns here
+
+							for (var i = 0; i < columns.length; i++) {
+								$('#trhqfoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
+							}
+						}
+					});
+
+					var oRhqAgeGrpTable = $('#trhqagegroup').DataTable();
+					oRhqAgeGrpTable.destroy();
+					$('#trhqagegroup tbody').remove();
+
+					var oRhqAgeGrpTable = $('#trhqagegroup').DataTable({
+						dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
+						displayLength: 10, // Default No of Records per page on 1st load
+						lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+						pagingType: "first_last_numbers",
+						responsive: true,
+						stateSave: true, // Remember paging & filters
+						autoWidth: false,
+						scrollCollapse: true,
+						processing: false,
+						serverSide: false,
+						searching: true,
+						order: [[ 0, "desc" ], [ 1, "asc" ]],
+						ajax: 'DMStatistic/getRHQAgeGroupStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },

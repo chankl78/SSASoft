@@ -148,7 +148,7 @@ class AttendancemAttendance extends Eloquent {
         return $query->where('attendancetype', 'Discussion Meeting')->select(DB::Raw('year(attendancedate) as year'))->groupBy(DB::raw('year(attendancedate)'))->orderBy(DB::raw('year(attendancedate)', 'DESC'));
     }
 
-    public function scopeDMStatsListing($query, $value)
+    public function scopeDMStatsListing($query, $value, $divisiontype)
     {
         return $query->where('attendancetype', 'Discussion Meeting')->whereRaw('year(attendancedate) = ?', array($value))->select(DB::Raw('year(attendancedate) as year'), DB::Raw('month(attendancedate) as month'), 'rhq', 'zone', 'chapter', 'district', 'attendancetotal', 'ldr', 'mem', 'bel', 'nf', 'pd', 'yc', 'srmd', 'srwd', 'srymd', 'srywd', 'ldrmd', 'ldrwd', 'ldrymd', 'ldrywd', 'memmd', 'memwd', 'memymd', 'memywd', 'mempdymd', 'mempdywd', 'memycymd', 'memycywd', 'belmd', 'belwd', 'belymd', 'belywd', 'belpdymd', 'belpdywd', 'belycymd', 'belycywd', 'nfmd', 'nfwd', 'nfymd', 'nfywd', 'nfpdymd', 'nfpdywd', 'nfycymd', 'nfycywd', DB::Raw('concat(chapter, " ", district) as description'));
     }

@@ -8,19 +8,20 @@ class AttendanceDMStatisticController extends BaseController
 		Session::put('current_page', 'attendance/dmstatistic');
 		Session::put('current_resource', 'ATTE');
 		$REAT03A = AccessfCheck::getResourceCRUDAccess(Auth::user()->roleid, 'AT03', 'create');
+		$divisiontype_options = array('All' => 'All') +CommonzDivisionType::Role()->lists('value', 'value');
 		$dmyear_options = AttendancemAttendance::DMyear()->orderBy('year', 'desc')->lists('year', 'year');
 		$currentyear = AttendancemAttendance::DMMaxYear();
 		$view = View::make('attendance/attendancedmstatistic');
 		$view->title = 'Discussion Meeting Statistic';
-		$view->with('REAT03A', $REAT03A)->with('dmyear_options', $dmyear_options)->with('currentyear', $currentyear);
+		$view->with('REAT03A', $REAT03A)->with('dmyear_options', $dmyear_options)->with('currentyear', $currentyear)->with('divisiontype_options', $divisiontype_options);
 		return $view;
 	}
 
-	public function getListing($id)
+	public function getListing($id, $divisiontype)
 	{
 		try
 		{
-			$default = AttendancemAttendance::DMStatsListing($id)->get()->toarray();
+			$default = AttendancemAttendance::DMStatsListing($id, $divisiontype)->get()->toarray();
 			return Response::json(array('data' => $default));
 		}
 		catch(\Exception $e)
@@ -29,28 +30,28 @@ class AttendanceDMStatisticController extends BaseController
 		}
 	}
 
-	public function getRHQStats($id)
+	public function getRHQStats($id, $divisiontype)
 	{
 		try
 		{
 			if ($id == 2017)
 			{
-				$default = zz2017members::RHQStats($id)->get()->toarray();
+				$default = zz2017members::RHQStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 			else if ($id == 2018)
 			{
-				$default = zz2018members::RHQStats($id)->get()->toarray();
+				$default = zz2018members::RHQStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 			else if ($id == 2019)
 			{
-				$default = zz2019members::RHQStats($id)->get()->toarray();
+				$default = zz2019members::RHQStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 			else if ($id == 2020)
 			{
-				$default = zz2020members::RHQStats($id)->get()->toarray();
+				$default = zz2020members::RHQStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 		}
@@ -60,28 +61,28 @@ class AttendanceDMStatisticController extends BaseController
 		}
 	}
 
-	public function getRHQAgeGroupStats($id)
+	public function getRHQAgeGroupStats($id, $divisiontype)
 	{
 		try
 		{
 			if ($id == 2017)
 			{
-				$default = zz2017members::RHQAgeGroupStats($id)->get()->toarray();
+				$default = zz2017members::RHQAgeGroupStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 			else if ($id == 2018)
 			{
-				$default = zz2018members::RHQAgeGroupStats($id)->get()->toarray();
+				$default = zz2018members::RHQAgeGroupStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 			else if ($id == 2019)
 			{
-				$default = zz2019members::RHQAgeGroupStats($id)->get()->toarray();
+				$default = zz2019members::RHQAgeGroupStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 			else if ($id == 2020)
 			{
-				$default = zz2020members::RHQAgeGroupStats($id)->get()->toarray();
+				$default = zz2020members::RHQAgeGroupStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 		}
