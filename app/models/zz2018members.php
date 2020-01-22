@@ -146,6 +146,50 @@ class zz2018members extends Eloquent {
         }
     }
 
+    public function scopeNameList($query, $value, $divisiontype)
+    {
+        if ( $divisiontype == 'All' or $divisiontype == "4 Division")
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'MD')
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'MD')->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'WD')
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'WD')->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'YMD')
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YM')->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'YWD')
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YW')->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Primary Division')
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '07 to 12')->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Future Division')
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '13 to 16')->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Student Division')
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('studentdivision', '!=', '')->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Adult Division')
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('MD', 'WD'))->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Youth Division')
+        {
+            return $query->whereIn('rhq', array('H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('YM', 'YW'))->whereNotIn('district', array("-"))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(dmjan) as "jan"'), DB::Raw('SUM(dmfeb) as "feb"'), DB::Raw('SUM(dmmar) as "mar"'), DB::Raw('SUM(dmapr) as "apr"'), DB::Raw('SUM(dmmay) as "may"'), DB::Raw('SUM(dmjun) as "jun"'), DB::Raw('SUM(dmjul) as "jul"'), DB::Raw('SUM(dmaug) as "aug"'), DB::Raw('SUM(dmsep) as "sep", SUM(dmoct) as "oct"'), DB::Raw('SUM(dmnov) as "nov"'), DB::Raw('SUM(dmdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+    }
+
     public function scopeLPRHQAgeGroupStats($query, $value)
     {
         if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {

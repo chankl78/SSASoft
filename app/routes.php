@@ -155,6 +155,7 @@ Route::get('/Attendance/DMStatistic', array('before' => 'auth', 'uses' => 'Atten
 Route::get('/Attendance/DMStatistic/getListing/{id}/{divisiontype}', 'AttendanceDMStatisticController@getListing');
 Route::get('/Attendance/DMStatistic/getRHQStats/{id}/{divisiontype}', 'AttendanceDMStatisticController@getRHQStats');
 Route::get('/Attendance/DMStatistic/getRHQAgeGroupStats/{id}/{divisiontype}', 'AttendanceDMStatisticController@getRHQAgeGroupStats');
+Route::get('/Attendance/DMStatistic/getNameList/{id}/{divisiontype}', 'AttendanceDMStatisticController@getNameList');
 
 // Event Registration By Members
 Route::get('/eventregistration', 'EventMemRegistrationController@getIndex');
