@@ -119,7 +119,7 @@ class AttendanceDMStatisticController extends BaseController
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Read', 27, 0, ' - Discussion Meeting Statistic Listing RHQStats [DT] - ' . $e, NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Read', 27, 0, ' - Discussion Meeting Statistic Listing NameList [DT] - ' . $e, NULL, NULL, 'Failed');
 		}
 	}
 }

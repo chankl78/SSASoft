@@ -42,6 +42,30 @@
 						</div>
 					</div>
 				</div> <!-- Year Selection -->
+				<div class="col-xs-12 col-sm-3 widget-container-span ui-sortable">
+					<div class="widget-box widget-color-green">
+						<div class="widget-header">
+							<h5 class="widget-title">Select Division to view Statistic</h5>
+							<div class="widget-toolbar">
+								<a href="#" data-action="collapse">
+									<i class="ace-icon fa fa-chevron-up"></i>
+								</a>
+							</div>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<div class="well well-lg">
+									{{ Form::open(array('id' => 'fselect', 'class' => 'form-horizontal')) }}
+										<fieldset>
+											{{ Form::label('dddivisiontype', 'Division: ', array('class' => 'control-label col-xs-12 col-sm-4')); }}
+											{{ Form::select('dddivisiontype', $divisiontype_options, 'All', array('class' => 'col-xs-12 col-sm-6', 'id' => 'dddivisiontype')); }}
+										</fieldset>
+									{{ Form::close() }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- Division Type Selection -->
 				<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
 					<div class="widget-box widget-color-blue">
 						<div class="widget-header">
@@ -219,6 +243,61 @@
 						</div>
 					</div>
 				</div> <!-- Discussion Meeting Statistic By RHQ By Age Group Listing -->
+				<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
+					<div class="widget-box widget-color-blue">
+						<div class="widget-header">
+							<h5 class="widget-title">Name List of Attendance</h5>
+							<div class="widget-toolbar">
+								<a href="#" data-action="fullscreen" class="orange2">
+									<i class="ace-icon fa fa-expand"></i>
+								</a>
+								<a href="#" data-action="reload">
+									<i class="fa fa-refresh"></i>
+								</a>
+							</div>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<table id="tname" class="table table-striped table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>RHQ</th>
+											<th>Zone</th>
+											<th>Chap</th>
+											<th>Dist</th>
+											<th>Div</th>
+											<th>Pos</th>
+											<th>Jan</th>
+											<th>Feb</th>
+											<th>Mar</th>
+											<th>Apr</th>
+											<th>May</th>
+											<th>Jun</th>
+											<th>Jul</th>
+											<th>Aug</th>
+											<th>Sep</th>
+											<th>Oct</th>
+											<th>Nov</th>
+											<th>Dec</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+									<tfoot id="tnamefoot">
+										<tr>
+											<th>Total</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							<div class="widget-toolbox padding-8 clearfix">
+								<div class="col-xs-12">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- Discussion Meeting Statistic By Name By RHQ Listing -->
 				<!-- PAGE CONTENT ENDS HERE -->
 			</div><!-- /.col -->
 		</div><!--/row-->
@@ -261,7 +340,7 @@
 					serverSide: false,
 					searching: true,
 					order: [[ 0, "desc" ], [ 1, "asc" ]],
-			        ajax: 'BOEPortalDMStats/getListing/' + $('#ddyear').val(),
+			        ajax: 'BOEPortalDMStats/getListing/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 			        columnDefs: [
 						{ responsivePriority: 1, targets: 0 },
 						{ responsivePriority: 2, targets: 1 },
@@ -337,7 +416,7 @@
 					serverSide: false,
 					searching: true,
 					order: [[ 0, "desc" ], [ 1, "asc" ]],
-			        ajax: 'BOEPortalDMStats/getRHQStats/' + $('#ddyear').val(),
+			        ajax: 'BOEPortalDMStats/getRHQStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 			        columnDefs: [
 						{ responsivePriority: 1, targets: 0 },
 						{ responsivePriority: 2, targets: 1 },
@@ -394,7 +473,7 @@
 					serverSide: false,
 					searching: true,
 					order: [[ 0, "desc" ], [ 1, "asc" ]],
-			        ajax: 'BOEPortalDMStats/getRHQAgeGroupStats/' + $('#ddyear').val(),
+			        ajax: 'BOEPortalDMStats/getRHQAgeGroupStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 			        columnDefs: [
 						{ responsivePriority: 1, targets: 0 },
 						{ responsivePriority: 2, targets: 1 },
@@ -438,6 +517,66 @@
 		            }
 			    });
 
+				var oNameTable = $('#tname').DataTable({
+			        dom: 'Bflrtip',
+					buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
+					displayLength: 10, // Default No of Records per page on 1st load
+					lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+					pagingType: "first_last_numbers",
+					responsive: true,
+					stateSave: true, // Remember paging & filters
+					autoWidth: false,
+					scrollCollapse: true,
+					processing: false,
+					serverSide: false,
+					searching: true,
+					order: [[ 0, "desc" ], [ 1, "asc" ]],
+			        ajax: 'BOEPortalDMStats/getNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+			        columnDefs: [
+						{ responsivePriority: 1, targets: 0 },
+						{ responsivePriority: 2, targets: 1 },
+						{ responsivePriority: 3, targets: 4 },
+						{ responsivePriority: 4, targets: 5 },
+						{ responsivePriority: 5, targets: 6 },
+						{ targets: [ 0 ], data: "name", searchable: true },
+						{ targets: [ 1 ], data: "rhq", searchable: true },
+						{ targets: [ 2 ], data: "zone", searchable: true },
+						{ targets: [ 3 ], data: "chapter", searchable: true },
+						{ targets: [ 4 ], data: "district", searchable: true },
+						{ targets: [ 5 ], data: "division", searchable: true },
+						{ targets: [ 6 ], data: "position", searchable: true },
+						{ targets: [ 7 ], data: "jan", searchable: true},
+						{ targets: [ 8 ], data: "feb", searchable: true},
+						{ targets: [ 9 ], data: "mar", searchable: true},
+						{ targets: [ 10 ], data: "apr", searchable: true},
+						{ targets: [ 11 ], data: "may", searchable: true },
+						{ targets: [ 12 ], data: "jun", searchable: true },
+						{ targets: [ 13 ], data: "jul", searchable: true },
+						{ targets: [ 14 ], data: "aug", searchable: true },
+						{ targets: [ 15 ], data: "sep", searchable: true },
+						{ targets: [ 16 ], data: "oct", searchable: true },
+						{ targets: [ 17 ], data: "nov", searchable: true },
+						{ targets: [ 18 ], data: "dec", searchable: true },
+						{ targets: [ 19 ], data: "description", searchable: true, visible: false }
+					],
+	            	"footerCallback": function (row, data, start, end, display) {
+		                var api = this.api(), data
+
+		                // Remove the formatting to get integer data for summation
+			            var intVal = function ( i ) {
+			                return typeof i === 'string' ?
+			                    i.replace(/[\$,]/g, '')*1 :
+			                    typeof i === 'number' ?
+			                        i : 0;
+			            };
+		                columns = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]; // Add columns here
+
+		       			for (var i = 0; i < columns.length; i++) {
+		                    $('#tnamefoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
+		                }
+		            }
+			    });
+
 				$('#ddyear').change(function(){
 					var oTable = $('#tdefault').DataTable();
 					oTable.destroy();
@@ -457,7 +596,7 @@
 						serverSide: false,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'BOEPortalDMStats/getListing/' + $('#ddyear').val(),
+						ajax: 'BOEPortalDMStats/getListing/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },
@@ -537,7 +676,7 @@
 						serverSide: false,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'BOEPortalDMStats/getRHQStats/' + $('#ddyear').val(),
+						ajax: 'BOEPortalDMStats/getRHQStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },
@@ -598,7 +737,7 @@
 						serverSide: false,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'BOEPortalDMStats/getRHQAgeGroupStats/' + $('#ddyear').val(),
+						ajax: 'BOEPortalDMStats/getRHQAgeGroupStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },
@@ -638,6 +777,259 @@
 
 							for (var i = 0; i < columns.length; i++) {
 								$('#trhqagegroupfoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
+							}
+						}
+					});
+
+					var oNameTable = $('#tname').DataTable();
+					oNameTable.destroy();
+					$('#tname tbody').remove();
+
+					var oNameTable = $('#tname').DataTable({
+						dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
+						displayLength: 10, // Default No of Records per page on 1st load
+						lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+						pagingType: "first_last_numbers",
+						responsive: true,
+						stateSave: true, // Remember paging & filters
+						autoWidth: false,
+						scrollCollapse: true,
+						processing: false,
+						serverSide: false,
+						searching: true,
+						order: [[ 0, "desc" ], [ 1, "asc" ]],
+						ajax: 'BOEPortalDMStats/getNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						columnDefs: [
+							{ responsivePriority: 1, targets: 0 },
+							{ responsivePriority: 2, targets: 1 },
+							{ responsivePriority: 3, targets: 4 },
+							{ responsivePriority: 4, targets: 5 },
+							{ responsivePriority: 5, targets: 6 },
+							{ targets: [ 0 ], data: "name", searchable: true },
+							{ targets: [ 1 ], data: "rhq", searchable: true },
+							{ targets: [ 2 ], data: "zone", searchable: true },
+							{ targets: [ 3 ], data: "chapter", searchable: true },
+							{ targets: [ 4 ], data: "district", searchable: true },
+							{ targets: [ 5 ], data: "division", searchable: true },
+							{ targets: [ 6 ], data: "position", searchable: true },
+							{ targets: [ 7 ], data: "jan", searchable: true},
+							{ targets: [ 8 ], data: "feb", searchable: true},
+							{ targets: [ 9 ], data: "mar", searchable: true},
+							{ targets: [ 10 ], data: "apr", searchable: true},
+							{ targets: [ 11 ], data: "may", searchable: true },
+							{ targets: [ 12 ], data: "jun", searchable: true },
+							{ targets: [ 13 ], data: "jul", searchable: true },
+							{ targets: [ 14 ], data: "aug", searchable: true },
+							{ targets: [ 15 ], data: "sep", searchable: true },
+							{ targets: [ 16 ], data: "oct", searchable: true },
+							{ targets: [ 17 ], data: "nov", searchable: true },
+							{ targets: [ 18 ], data: "dec", searchable: true },
+							{ targets: [ 19 ], data: "description", searchable: true, visible: false }
+						],
+						"footerCallback": function (row, data, start, end, display) {
+							var api = this.api(), data
+
+							// Remove the formatting to get integer data for summation
+							var intVal = function ( i ) {
+								return typeof i === 'string' ?
+									i.replace(/[\$,]/g, '')*1 :
+									typeof i === 'number' ?
+										i : 0;
+							};
+							columns = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]; // Add columns here
+
+							for (var i = 0; i < columns.length; i++) {
+								$('#tnamefoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
+							}
+						}
+					});
+	        	});
+
+				$('#dddivisiontype').change(function(){
+					var oRhqTable = $('#trhq').DataTable();
+					oRhqTable.destroy();
+					$('#trhq tbody').remove();
+
+					var oRhqTable = $('#trhq').DataTable({
+						dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
+						displayLength: 10, // Default No of Records per page on 1st load
+						lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+						pagingType: "first_last_numbers",
+						responsive: true,
+						stateSave: true, // Remember paging & filters
+						autoWidth: false,
+						scrollCollapse: true,
+						processing: false,
+						serverSide: false,
+						searching: true,
+						order: [[ 0, "desc" ], [ 1, "asc" ]],
+						ajax: 'BOEPortalDMStats/getRHQStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						columnDefs: [
+							{ responsivePriority: 1, targets: 0 },
+							{ responsivePriority: 2, targets: 1 },
+							{ responsivePriority: 3, targets: 4 },
+							{ responsivePriority: 4, targets: 5 },
+							{ responsivePriority: 5, targets: 6 },
+							{ targets: [ 0 ], data: "rhq", searchable: true },
+							{ targets: [ 1 ], data: "zone", searchable: true },
+							{ targets: [ 2 ], data: "chapter", searchable: true },
+							{ targets: [ 3 ], data: "district", searchable: true },
+							{ targets: [ 4 ], data: "jan", searchable: true},
+							{ targets: [ 5 ], data: "feb", searchable: true},
+							{ targets: [ 6 ], data: "mar", searchable: true},
+							{ targets: [ 7 ], data: "apr", searchable: true},
+							{ targets: [ 8 ], data: "may", searchable: true },
+							{ targets: [ 9 ], data: "jun", searchable: true },
+							{ targets: [ 10 ], data: "jul", searchable: true },
+							{ targets: [ 11 ], data: "aug", searchable: true },
+							{ targets: [ 12 ], data: "sep", searchable: true },
+							{ targets: [ 13 ], data: "oct", searchable: true },
+							{ targets: [ 14 ], data: "nov", searchable: true },
+							{ targets: [ 15 ], data: "dec", searchable: true },
+							{ targets: [ 16 ], data: "description", searchable: true, visible: false }
+						],
+						"footerCallback": function (row, data, start, end, display) {
+							var api = this.api(), data
+
+							// Remove the formatting to get integer data for summation
+							var intVal = function ( i ) {
+								return typeof i === 'string' ?
+									i.replace(/[\$,]/g, '')*1 :
+									typeof i === 'number' ?
+										i : 0;
+							};
+							columns = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; // Add columns here
+
+							for (var i = 0; i < columns.length; i++) {
+								$('#trhqfoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
+							}
+						}
+					});
+
+					var oRhqAgeGrpTable = $('#trhqagegroup').DataTable();
+					oRhqAgeGrpTable.destroy();
+					$('#trhqagegroup tbody').remove();
+
+					var oRhqAgeGrpTable = $('#trhqagegroup').DataTable({
+						dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
+						displayLength: 10, // Default No of Records per page on 1st load
+						lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+						pagingType: "first_last_numbers",
+						responsive: true,
+						stateSave: true, // Remember paging & filters
+						autoWidth: false,
+						scrollCollapse: true,
+						processing: false,
+						serverSide: false,
+						searching: true,
+						order: [[ 0, "desc" ], [ 1, "asc" ]],
+						ajax: 'BOEPortalDMStats/getRHQAgeGroupStats/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						columnDefs: [
+							{ responsivePriority: 1, targets: 0 },
+							{ responsivePriority: 2, targets: 1 },
+							{ responsivePriority: 3, targets: 4 },
+							{ responsivePriority: 4, targets: 5 },
+							{ responsivePriority: 5, targets: 6 },
+							{ targets: [ 0 ], data: "rhq", searchable: true },
+							{ targets: [ 1 ], data: "zone", searchable: true },
+							{ targets: [ 2 ], data: "chapter", searchable: true },
+							{ targets: [ 3 ], data: "district", searchable: true },
+							{ targets: [ 4 ], data: "agegroup", searchable: true },
+							{ targets: [ 5 ], data: "jan", searchable: true},
+							{ targets: [ 6 ], data: "feb", searchable: true},
+							{ targets: [ 7 ], data: "mar", searchable: true},
+							{ targets: [ 8 ], data: "apr", searchable: true},
+							{ targets: [ 9 ], data: "may", searchable: true },
+							{ targets: [ 10 ], data: "jun", searchable: true },
+							{ targets: [ 11 ], data: "jul", searchable: true },
+							{ targets: [ 12 ], data: "aug", searchable: true },
+							{ targets: [ 13 ], data: "sep", searchable: true },
+							{ targets: [ 14 ], data: "oct", searchable: true },
+							{ targets: [ 15 ], data: "nov", searchable: true },
+							{ targets: [ 16 ], data: "dec", searchable: true },
+							{ targets: [ 17 ], data: "description", searchable: true, visible: false }
+						],
+						"footerCallback": function (row, data, start, end, display) {
+							var api = this.api(), data
+
+							// Remove the formatting to get integer data for summation
+							var intVal = function ( i ) {
+								return typeof i === 'string' ?
+									i.replace(/[\$,]/g, '')*1 :
+									typeof i === 'number' ?
+										i : 0;
+							};
+							columns = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]; // Add columns here
+
+							for (var i = 0; i < columns.length; i++) {
+								$('#trhqagegroupfoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
+							}
+						}
+					});
+
+					var oNameTable = $('#tname').DataTable();
+					oNameTable.destroy();
+					$('#tname tbody').remove();
+
+					var oNameTable = $('#tname').DataTable({
+						dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
+						displayLength: 10, // Default No of Records per page on 1st load
+						lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+						pagingType: "first_last_numbers",
+						responsive: true,
+						stateSave: true, // Remember paging & filters
+						autoWidth: false,
+						scrollCollapse: true,
+						processing: false,
+						serverSide: false,
+						searching: true,
+						order: [[ 0, "desc" ], [ 1, "asc" ]],
+						ajax: 'BOEPortalDMStats/getNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						columnDefs: [
+							{ responsivePriority: 1, targets: 0 },
+							{ responsivePriority: 2, targets: 1 },
+							{ responsivePriority: 3, targets: 4 },
+							{ responsivePriority: 4, targets: 5 },
+							{ responsivePriority: 5, targets: 6 },
+							{ targets: [ 0 ], data: "name", searchable: true },
+							{ targets: [ 1 ], data: "rhq", searchable: true },
+							{ targets: [ 2 ], data: "zone", searchable: true },
+							{ targets: [ 3 ], data: "chapter", searchable: true },
+							{ targets: [ 4 ], data: "district", searchable: true },
+							{ targets: [ 5 ], data: "division", searchable: true },
+							{ targets: [ 6 ], data: "position", searchable: true },
+							{ targets: [ 7 ], data: "jan", searchable: true},
+							{ targets: [ 8 ], data: "feb", searchable: true},
+							{ targets: [ 9 ], data: "mar", searchable: true},
+							{ targets: [ 10 ], data: "apr", searchable: true},
+							{ targets: [ 11 ], data: "may", searchable: true },
+							{ targets: [ 12 ], data: "jun", searchable: true },
+							{ targets: [ 13 ], data: "jul", searchable: true },
+							{ targets: [ 14 ], data: "aug", searchable: true },
+							{ targets: [ 15 ], data: "sep", searchable: true },
+							{ targets: [ 16 ], data: "oct", searchable: true },
+							{ targets: [ 17 ], data: "nov", searchable: true },
+							{ targets: [ 18 ], data: "dec", searchable: true },
+							{ targets: [ 19 ], data: "description", searchable: true, visible: false }
+						],
+						"footerCallback": function (row, data, start, end, display) {
+							var api = this.api(), data
+
+							// Remove the formatting to get integer data for summation
+							var intVal = function ( i ) {
+								return typeof i === 'string' ?
+									i.replace(/[\$,]/g, '')*1 :
+									typeof i === 'number' ?
+										i : 0;
+							};
+							columns = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]; // Add columns here
+
+							for (var i = 0; i < columns.length; i++) {
+								$('#tnamefoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
 							}
 						}
 					});
