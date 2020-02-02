@@ -499,6 +499,15 @@ Route::post('/Members/EventKnightDetailInsert', 'MemberController@posteventknigh
 Route::post('/Members/EventANCInsert', 'MemberController@posteventancdetail');
 Route::post('/Members/EventZoneDM', 'MemberController@postzonedm');
 
+// Members Statistic
+Route::get('/Members/MemberStatistic', array('before' => 'auth', 'uses' => 'MemberStatisticController@getIndex'));
+Route::get('/Members/MemberStatistic/getListing/{divisiontype}', 'MemberStatisticController@getListing');
+Route::get('/Members/MemberStatistic/getRHQPositionListing/{divisiontype}', 'MemberStatisticController@getRHQPositionListing');
+Route::get('/Members/MemberStatistic/getZonePositionListing/{divisiontype}', 'MemberStatisticController@getZonePositionListing');
+Route::get('/Members/MemberStatistic/getChapterPositionListing/{divisiontype}', 'MemberStatisticController@getChapterPositionListing');
+Route::get('/Members/MemberStatistic/getDistrictPositionListing/{divisiontype}', 'MemberStatisticController@getDistrictPositionListing');
+Route::get('/Members/MemberStatistic/getPositionAgeGroupListing/{divisiontype}', 'MemberStatisticController@getPositionAgeGroupListing');
+
 // Award / Gifts / Certificates
 Route::get('/Award', array('before' => 'auth', 'uses' => 'AwardController@getIndex'));
 Route::get('/Award/getAwardListing', 'AwardController@getAwardListing');

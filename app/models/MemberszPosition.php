@@ -42,6 +42,11 @@ class MemberszPosition extends Eloquent {
         return $mid;
     }
 
+    public function scopePositionLevel($query)
+    {
+        return $query->groupBy('level')->orderBy('level');
+    }
+
     public static function boot()
     {
         parent::boot();

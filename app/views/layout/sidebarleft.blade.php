@@ -631,6 +631,11 @@
 							<i class="menu-icon fa fa-double-angle-right"></i> Members
 						</a>
 					</li>
+					@if (Session::get('current_page') == 'member/statistic' )<li class="active"> @else <li> @endif
+						<a href="{{{ URL::action('MemberStatisticController@getIndex') }}}">
+							<i class="menu-icon fa fa-double-angle-right"></i> Members Statistic
+						</a>
+					</li>
 					@if (Session::get('current_page') == 'member/funeralmdchapterandabovelisting' )<li class="active"> @else <li> @endif
 						<a href="{{{ URL::action('MemberController@getFuneralServicesIndex') }}}">
 							<i class="menu-icon fa fa-double-angle-right"></i> Funeral Services

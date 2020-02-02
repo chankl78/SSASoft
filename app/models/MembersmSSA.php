@@ -357,7 +357,7 @@ class MembersmSSA extends Eloquent {
         if ($value == 'Youth Division') {
             if (Session::get('gakkaiuserposition') == 'H1' or Session::get('gakkaiuserposition') == 'H2' or Session::get('gakkaiuserposition') == 'H3' or Session::get('gakkaiuserposition') == 'H5') 
             {
-                return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereNotIn('position', array('BEL', 'NF', ''))->whereNotIn('division', array('PD', 'YC', 'MD', 'WD'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 16')->whereRaw('Members_m_SSA.id NOT IN (Select mssa.id FROM Members_m_SSA mssa LEFT JOIN Attendance_m_Person ap on mssa.id = ap.memberid LEFT JOIN Attendance_m_Attendance aa on aa.id = ap.attendanceid WHERE mssa.rhq = ? and mssa.deleted_at IS NULL and aa.attendancetype = "M&D PreKenshu" and ap.deleted_at IS NULL GROUP BY mssa.id)', array(Session::get('gakkaiuserrhq')))
+                return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereNotIn('position', array('BEL', 'NF', ''))->whereNotIn('division', array('PD', 'YC', 'MD', 'WD'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 16')->whereRaw('Members_m_SSA.id NOT IN (Select id FROM Members_m_SSA mssa LEFT JOIN Attendance_m_Person ap on mssa.id = ap.memberid LEFT JOIN Attendance_m_Attendance aa on aa.id = ap.attendanceid WHERE mssa.rhq = ? and mssa.deleted_at IS NULL and aa.attendancetype = "M&D PreKenshu" and ap.deleted_at IS NULL GROUP BY mssa.id)', array(Session::get('gakkaiuserrhq')))
                     ->select(DB::raw('Members_m_SSA.name, Members_m_SSA.chinesename, Members_m_SSA.rhq, Members_m_SSA.zone, Members_m_SSA.chapter, Members_m_SSA.district, Members_m_SSA.position, Members_m_SSA.division, Members_m_SSA.uniquecode'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
             } 
             else if (Session::get('gakkaiuserposition') == 'Z1' or Session::get('gakkaiuserposition') == 'Z2' or Session::get('gakkaiuserposition') == 'Z3' or Session::get('gakkaiuserposition') == 'Z5') 
@@ -819,6 +819,118 @@ class MembersmSSA extends Eloquent {
                 WHEN Members_m_SSA.division = "PDYW" THEN 7 WHEN Members_m_SSA.division = "PDYM" THEN 8
                 WHEN Members_m_SSA.division = "YCYM" THEN 9 WHEN Members_m_SSA.division = "YCYM" THEN 10
                 WHEN Members_m_SSA.division = "YCYW" THEN 11 WHEN Members_m_SSA.division = "YCYM" THEN 12 END'));
+    }
+
+    public function scopemRHQStats($query, $value)
+    {
+        return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+            SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+            SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+            SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+            SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+            SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+            SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+            SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+            SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+            COUNT(division) as total'))
+            ->groupBy('rhq');
+    }
+
+    public function scopemRHQPositionStats($query, $value)
+    {
+        return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+            SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+            SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+            SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+            SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+            SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+            SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+            SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+            SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+            COUNT(division) as total'))
+            ->groupBy('rhq')->groupBy('positionlevel');
+    }
+
+    public function scopemZonePositionStats($query, $value)
+    {
+        return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+            SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+            SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+            SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+            SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+            SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+            SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+            SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+            SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+            COUNT(division) as total'))
+            ->groupBy('rhq')->groupBy('zone')->groupBy('positionlevel');
+    }
+
+    public function scopemChapterPositionStats($query, $value)
+    {
+        return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+            SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+            SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+            SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+            SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+            SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+            SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+            SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+            SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+            COUNT(division) as total'))
+            ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('positionlevel');
+    }
+
+    public function scopemDistrictPositionStats($query, $value)
+    {
+        return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+            SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+            SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+            SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+            SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+            SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+            SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+            SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+            SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+            concat(chapter, " ", district) as description, COUNT(division) as total'))
+            ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel');
+    }
+
+    public function scopemPositionAgeGroupStats($query, $value)
+    {
+        return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+            SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+            SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+            SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+            SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+            SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+            SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+            SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+            SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+            concat(chapter, " ", district) as description, COUNT(division) as total, CASE
+            WHEN (Year(now()) - Year(dateofbirth)) <= 6 THEN "00 to 06"
+            WHEN (Year(now()) - Year(dateofbirth)) >= 7 and (Year(now()) - Year(dateofbirth)) <= 12 THEN "07 to 12"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 13 and (Year(now()) -1 - Year(dateofbirth)) <= 16 THEN "13 to 16"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 17 and (Year(now()) -1 - Year(dateofbirth)) <= 23 THEN "17 to 23"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 24 and (Year(now()) -1 - Year(dateofbirth)) <= 30 THEN "24 to 30"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 31 and (Year(now()) -1 - Year(dateofbirth)) <= 35 THEN "31 to 35"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 36 and (Year(now()) -1 - Year(dateofbirth)) <= 40 THEN "36 to 40"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 41 and (Year(now()) -1 - Year(dateofbirth)) <= 45 THEN "41 to 45"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 46 and (Year(now()) -1 - Year(dateofbirth)) <= 50 THEN "46 to 50"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 51 and (Year(now()) -1 - Year(dateofbirth)) <= 55 THEN "51 to 55"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 56 and (Year(now()) -1 - Year(dateofbirth)) <= 60 THEN "56 to 60"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 61 and (Year(now()) -1 - Year(dateofbirth)) <= 65 THEN "61 to 65"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 66 and (Year(now()) -1 - Year(dateofbirth)) <= 70 THEN "66 to 70"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 71 and (Year(now()) -1 - Year(dateofbirth)) <= 75 THEN "71 to 75"
+            WHEN (Year(now()) -1 - Year(dateofbirth)) >= 76 and (Year(now()) -1 - Year(dateofbirth)) <= 120 THEN "Above 75"
+            WHEN (Year(dateofbirth)) IS NULL THEN "Unknown" END as agegroup'))
+            ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel')->groupBy('agegroup');
     }
 
     public static function scopeNationWideBOEPositionSummary($query)
