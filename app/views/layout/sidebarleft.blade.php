@@ -704,4 +704,21 @@
 			</ul>
 		</li>
 	@endif
+	@if ($RGCRMA == 't')
+		@if (Session::get('current_resource') == 'CRMA')<li class="active open"> @else <li> @endif
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-exclamation-circle"></i><span class="menu-text"> Crisis Management</span>
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+			<ul class="submenu">
+				@if ($RECR03 == 't')
+					@if (Session::get('current_page') == 'crisis/crisis' )<li class="active"> @else <li> @endif
+						<a href="{{{ URL::action('CrisisManagementController@getIndex') }}}">
+							<i class="menu-icon fa fa-double-angle-right"></i> Crisis Management Listing
+						</a>
+					</li>
+				@endif
+			</ul>
+		</li>
+	@endif
 </ul><!--/.nav-list-->

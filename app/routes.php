@@ -531,6 +531,7 @@ Route::post('/Award/Detail/deleteGroupMember/{id}', 'AwardDetailController@delet
 
 // Security
 Route::get('/Security', 'SecurityDashboardController@getIndex');
+
 // Security Attendance
 Route::get('/Security/Attendance', 'SecurityAttendanceController@getIndex');
 Route::post('/Security/postLogIn', 'SecurityLoginController@postLogIn');
@@ -538,6 +539,7 @@ Route::post('/Security/postSignIn', 'SecurityAttendanceController@postSignIn');
 Route::post('/Security/postSignOut/{id}', 'SecurityAttendanceController@postSignOut');
 Route::get('/Security/getSecurityAttendanceListing', 'SecurityAttendanceController@getSecurityAttendanceListing');
 Route::post('/Security/deleteSecurityAttendance/{id}', 'SecurityAttendanceController@deleteSecurityAttendance');
+
 // Security Occurrence
 Route::post('/Security/postOccurrence', 'SecurityDashboardController@postOccurrence');
 Route::get('/Security/getSecurityOccurrenceListing', 'SecurityDashboardController@getSecurityOccurrenceListing');
@@ -821,3 +823,31 @@ Route::get('/Campaign/getStatusListing', 'CampaignzStatuseController@getListing'
 Route::post('/Campaign/postStatus', 'CampaignzStatusController@postStatus');
 Route::post('/Campaign/putStatus/{id}', 'CampaignzStatusController@putStatus');
 Route::post('/Campaign/deleteStatus/{id}', 'CampaignzStatusController@deleteStatus');
+
+// Crisis Management
+Route::get('/CrisisManagement', array('before' => 'auth', 'uses' => 'CrisisManagementController@getIndex'));
+Route::get('/CrisisManagement/getListing', 'CrisisManagementController@getListing');
+Route::post('/CrisisManagement/postResource', 'CrisisManagementController@postResource');
+Route::post('/CrisisManagement/postACCheck/{id}', 'CrisisManagementController@postACCheck');
+Route::post('/CrisisManagement/deleteResource/{id}', 'CrisisManagementController@deleteResource');
+
+// Crisis Management Detail
+Route::get('/CrisisManagement/Detail/{id}', array('before' => 'auth', 'uses' => 'CrisisManagementDetailController@getIndex'));
+Route::get('/CrisisManagement/Detail/getListing/{id}', 'CrisisManagementDetailController@getListing');
+Route::get('/CrisisManagement/getNameSearch', 'CrisisManagementDetailController@getNameSearch');
+Route::post('/CrisisManagement/Detail/putResource/{id}', 'CrisisManagementDetailController@putResource');
+
+Route::post('/CrisisManagement/Detail/postResourceDetail/{id}/{role}', 'CrisisManagementDetailController@postResourceDetail');
+Route::post('/CrisisManagement/Detail/postResourceDetailVisitor/{id}', 'CrisisManagementDetailController@postResourceDetailVisitor');
+Route::post('/CrisisManagement/Detail/getModuleDetail/{id}', 'CrisisManagementDetailController@getModuleDetail');
+Route::post('/CrisisManagement/Detail/putResourceDetailVisitor/{id}', 'CrisisManagementDetailController@putResourceDetailVisitor');
+Route::post('/CrisisManagement/Detail/deleteResourceDetail/{id}', 'CrisisManagementDetailController@deleteResourceDetail');
+Route::get('/CrisisManagement/Detail/getZone/{id}','CrisisManagementDetailController@getZone');
+Route::get('/CrisisManagement/Detail/getChapter/{id}','CrisisManagementDetailController@getChapter');
+Route::get('/CrisisManagement/Detail/getZoneEdit/{id}','CrisisManagementDetailController@getZoneEdit');
+Route::get('/CrisisManagement/Detail/getChapterEdit/{id}','CrisisManagementDetailController@getChapterEdit');
+
+Route::get('/CrisisManagement/Detail/getOccurrenceListing/{id}', 'CrisisManagementDetailController@getOccurrenceListing');
+Route::post('/CrisisManagement/Detail/postOccurrence/{id}', 'CrisisManagementDetailController@postOccurrence');
+Route::post('/CrisisManagement/Detail/deleteOccurrence/{id}', 'CrisisManagementDetailController@deleteOccurrence');
+Route::post('/CrisisManagement/Detail/putOccurrence/{id}', 'CrisisManagementDetailController@putOccurrence');

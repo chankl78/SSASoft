@@ -21,6 +21,7 @@
 		<link href="{{{ asset('assets/css/font-awesome.min.css') }}}" rel="stylesheet" />
 
 		<!-- page specific plugin styles -->
+		<link href="{{{ asset('assets/css/jquery-ui.min.css') }}}" rel="stylesheet" />
 
 		<!-- text fonts -->
 		<link rel="stylesheet" href="{{{ asset('assets/css/ace-fonts.css') }}}" />

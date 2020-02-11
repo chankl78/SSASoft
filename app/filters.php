@@ -344,6 +344,51 @@ View::composer('layout.master', function($view)
 		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'RECP05 - ' . $e, NULL, NULL, 'Failed');$RECP05 = 'f';
 	}
 
+	try // Check Crisis Management Enabled
+	{
+		$RGCRMA = AccessfCheck::getAccessAdmin(Auth::user()->roleid, 'CRMA', 'RG');
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'RGCRMA - ' . $e, NULL, NULL, 'Failed'); $RGCRMA = 'f'; 
+	}
+
+	try // Check Crisis Management - Crisis Managements Enabled
+	{
+		$RECR01 = AccessfCheck::getResourceAccess(Auth::user()->roleid, 'CR01', 'RE', Auth::user()->id);
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'RECR01 - ' . $e, NULL, NULL, 'Failed'); $RECR01 = 'f';
+	}
+
+	try // Check Crisis Management - Default Tables Enabled
+	{
+		$RECR02 = AccessfCheck::getResourceAccess(Auth::user()->roleid, 'CR02', 'RE', Auth::user()->id);
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'RECR02 - ' . $e, NULL, NULL, 'Failed'); $RECR02 = 'f';
+	}
+
+	try // Check Crisis Management - Listing Enabled
+	{
+		$RECR03 = AccessfCheck::getResourceAccess(Auth::user()->roleid, 'CR03', 'RE', Auth::user()->id);
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'RECR03 - ' . $e, NULL, NULL, 'Failed'); $RECR03 = 'f';
+	}
+
+	try // Check Crisis Management - Report Enabled
+	{
+		$RECR05 = AccessfCheck::getResourceAccess(Auth::user()->roleid, 'CR05', 'RE', Auth::user()->id);
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'RECR05 - ' . $e, NULL, NULL, 'Failed');$RECR05 = 'f';
+	}
+
 	try // Check Vehicle Enabled
 	{
 		$RGVEHI = AccessfCheck::getAccessAdmin(Auth::user()->roleid, 'VEHI', 'RG');
@@ -467,6 +512,7 @@ View::composer('layout.master', function($view)
 	$view->with('RGEVEN', $RGEVEN); $view->with('REEV01', $REEV01); $view->with('REEV02', $REEV02); $view->with('REEV03', $REEV03); $view->with('REEV05', $REEV05); $view->with('REEV06', $REEV06); $view->with('REEV10', $REEV10);
 	$view->with('RGGRPS', $RGGRPS); $view->with('REGP01', $REGP01); $view->with('REGP02', $REGP02); $view->with('REGP03', $REGP03); $view->with('REGP05', $REGP05);
 	$view->with('RGCAMP', $RGCAMP); $view->with('RECP01', $RECP01); $view->with('RECP02', $RECP02); $view->with('RECP03', $RECP03); $view->with('RECP05', $RECP05);
+	$view->with('RGCRMA', $RGCRMA); $view->with('RECR01', $RECR01); $view->with('RECR02', $RECR02); $view->with('RECR03', $RECR03); $view->with('RECR05', $RECR05);
 	$view->with('RGVEHI', $RGVEHI); $view->with('REVE01', $REVE01); $view->with('REVE02', $REVE02); $view->with('REVE03', $REVE03); $view->with('REVE05', $REVE05); $view->with('REVE07', $REVE07); $view->with('REVE08', $REVE08); $view->with('REVE09', $REVE09);
 	$view->with('RGATTE', $RGATTE); $view->with('REAT01', $REAT01); $view->with('REAT02', $REAT02); $view->with('REAT03', $REAT03); $view->with('REAT05', $REAT05);
 	$view->with('RGSSAM', $RGSSAM); $view->with('REME01', $REME01); $view->with('REME02', $REME02); $view->with('REME03', $REME03); $view->with('REME05', $REME05); $view->with('REME06', $REME06);

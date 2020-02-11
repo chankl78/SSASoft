@@ -583,11 +583,11 @@
 							<table id="tevent" class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
-										<th class="hidden-480">Date</th>
-										<th class="hidden-480">Event Type</th>
-										<th class="hidden-480">Description</th>
-										<th class="hidden-480">Location</th>
-										<th class="hidden-480">Status</th>
+										<th>Date</th>
+										<th>Event Type</th>
+										<th>Description</th>
+										<th>Location</th>
+										<th>Status</th>
 									</tr>
 								</thead>
 								<tbody>
