@@ -8,18 +8,7 @@ class CrisismCrisis extends Eloquent {
 
 	public function scopeRole($query)
     {
-        if (AccessfCheck::getCheckSYS(Auth::user()->roleid))
-        {
-            return $query;
-        }
-        else if (AccessfCheck::getCheckSOF(Auth::user()->roleid))
-        {
-            return $query->whereNotIn('id', array(1));
-        }
-        else
-        {
-            return $query->whereNotIn('id', array(1, 2));
-        }    
+        return $query;   
     }
 
     public static function getid($value)
@@ -35,7 +24,7 @@ class CrisismCrisis extends Eloquent {
 
     public static function getcrisisdescription($value)
     {
-        $mid = DB::table('crisis_m_crisis')->where('uniquecode', $value)->select(DB::raw('concat(resourcedate, " - ", location, " [ ", shift, " ]") as description'))->pluck('description');
+        $mid = DB::table('Crisis_m_Crisis')->where('uniquecode', $value)->select(DB::raw('concat(resourcedate, " - ", location, " [ ", shift, " ]") as description'))->pluck('description');
         return $mid;
     }
 

@@ -180,7 +180,7 @@
 										</div>
 										<div class="space-2"></div>
 										<div class="form-group">
-											{{ Form::label('equipmentsurgicalmask', 'No of Declaration Forms Signed:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											{{ Form::label('equipmentsurgicalmask', 'Surgical Mask:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
 													{{ Form::text('equipmentsurgicalmask', $result->equipmentsurgicalmask, array('class' => 'col-xs-12 col-sm-9', 'id' => 'equipmentsurgicalmask'));}}
@@ -1117,6 +1117,49 @@
 		    });
 		    e.preventDefault();
 	    });
+
+		$('#btnadddutypersonnel').click(function(){
+			noty({
+				layout: 'topRight', type: 'warning', text: 'Adding Record ...',
+				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
+				timeout: 2000
+			});
+			$.ajax({
+		        url: 'postResourceDetail/{{ $rid }}/' + "duty",
+		        type: 'POST',
+		        data: { namesearch: $("#namesearch").val() },
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(data){
+		        		noty({
+							layout: 'topRight', type: 'success', text: 'Record Added for ' + $("#namesearch").val(),
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						});
+
+						var oTable = $('#tdefault').DataTable();
+		    			oTable.ajax.reload(null, false);
+
+						$("#namesearch").val('');
+		        	},
+		        	400:function(data){ 
+		        		var txtMessage = 'Please check your entry!!';
+		        		if (data.responseJSON.ErrType == "NoAccess") 
+	        			{ txtMessage = 'You do not have access to Update!'; }
+	        			else if (data.responseJSON.ErrType == "Does Not Exist")
+		        			{ txtMessage = 'NRIC does not Exist!  Please check again'; }
+		        		else { txtMessage = 'Please check your entry!'; }
+		        		noty({
+							layout: 'topRight', type: 'error', text: txtMessage,
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	}
+		        }
+		    });
+		});
 
 		$('#btnaddvisitor').click(function(){
 			$("#btnresourcedetailadd").modal('show');

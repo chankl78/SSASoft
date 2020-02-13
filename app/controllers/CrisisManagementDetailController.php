@@ -13,7 +13,7 @@ class CrisisManagementDetailController extends BaseController
 		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
 		$memposition_options = MemberszPosition::Role()->orderBy('code', 'ASC')->lists('name', 'code');
 		$division_options = MemberszDivision::Role()->lists('name', 'code');
-		$query = crisismcrisis::Role()->where('uniquecode', $id)->get();
+		$query = CrisismCrisis::where('uniquecode', $id)->get();
 		$pagetitle = CrisismCrisis::getcrisisdescription($id);
 		$view = View::make('crisis/crisisdetail');
 		$view->title = $pagetitle;
@@ -56,7 +56,7 @@ class CrisisManagementDetailController extends BaseController
 			try
 			{
 				$datDate = DateTime::createFromFormat('d-M-Y', Input::get('resourcedate'));
-				$post = crisismcrisis::find(crisismcrisis::getid($id));
+				$post = CrisismCrisis::find(CrisismCrisis::getid($id));
 				$post->resourcedate = $datDate;
 				$post->location = Input::get('location');
 				$post->shift = Input::get('shift');
