@@ -777,6 +777,15 @@ Route::get('/BOEPortalDMStats/getRHQStats/{id}/{divisiontype}', 'LeadersPortalDM
 Route::get('/BOEPortalDMStats/getRHQAgeGroupStats/{id}/{divisiontype}', 'LeadersPortalDMStatsController@getRHQAgeGroupStats');
 Route::get('/BOEPortalDMStats/getNameList/{id}/{divisiontype}', 'LeadersPortalDMStatsController@getNameList');
 
+// Leaders Portal Membership Statistic
+Route::get('/BOEPortalMembershipStats', array('before' => 'auth', 'uses' => 'LeadersPortalMembershipStatsController@getIndex'));
+Route::get('/BOEPortalMembershipStats/getListing', 'LeadersPortalMembershipStatsController@getListing');
+Route::get('/BOEPortalMembershipStats/getRHQPositionListing', 'LeadersPortalMembershipStatsController@getRHQPositionListing');
+Route::get('/BOEPortalMembershipStats/getZonePositionListing', 'LeadersPortalMembershipStatsController@getZonePositionListing');
+Route::get('/BOEPortalMembershipStats/getChapterPositionListing', 'LeadersPortalMembershipStatsController@getChapterPositionListing');
+Route::get('/BOEPortalMembershipStats/getDistrictPositionListing', 'LeadersPortalMembershipStatsController@getDistrictPositionListing');
+Route::get('/BOEPortalMembershipStats/getPositionAgeGroupListing', 'LeadersPortalMembershipStatsController@getPositionAgeGroupListing');
+
 // Campaign
 Route::get('/Campaign', array('before' => 'auth', 'uses' => 'CampaignController@getIndex'));
 Route::get('/Campaign/getListing', 'CampaignController@getListing');

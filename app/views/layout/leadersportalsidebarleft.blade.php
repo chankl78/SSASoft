@@ -30,6 +30,11 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/MembershipStats' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalMembershipStatsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Membership Statistic
+					</a>
+				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/DMStats' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalDMStatsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Discussion Meeting Statistic
@@ -109,6 +114,11 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/MembershipStats' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalMembershipStatsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Membership Statistic
+					</a>
+				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/DMStats' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalDMStatsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Discussion Meeting Statistic
@@ -186,6 +196,11 @@
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/FD' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalFDController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
+					</a>
+				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/MembershipStats' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalMembershipStatsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Membership Statistic
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/DMStats' )<li class="active"> @else <li> @endif
@@ -272,6 +287,11 @@
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
 					</a>
 				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/MembershipStats' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalMembershipStatsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Membership Statistic
+					</a>
+				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/DMStats' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalDMStatsController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Discussion Meeting Statistic
@@ -354,6 +374,11 @@
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/FD' )<li class="active"> @else <li> @endif
 					<a href="{{{ URL::action('LeadersPortalFDController@getIndex') }}}">
 						<i class="menu-icon fa fa-double-angle-right"></i> Youth (13 to 17 Years old)
+					</a>
+				</li>
+				@if (Session::get('lp_current_resource') == 'LeadersPortal/MembershipStats' )<li class="active"> @else <li> @endif
+					<a href="{{{ URL::action('LeadersPortalMembershipStatsController@getIndex') }}}">
+						<i class="menu-icon fa fa-double-angle-right"></i> Membership Statistic
 					</a>
 				</li>
 				@if (Session::get('lp_current_resource') == 'LeadersPortal/DMStats' )<li class="active"> @else <li> @endif

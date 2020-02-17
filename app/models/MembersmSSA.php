@@ -499,6 +499,506 @@ class MembersmSSA extends Eloquent {
         }
     }
 
+    public function scopeLPMembershipStats($query)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
+            return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'rhq' ) {
+            return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone' ) {
+            return $query->where('zone', Session::get('gakkaiuserzone'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'chapter' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'district' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district');
+        }
+    }
+
+    public function scopeLPMembershipStatsByRHQByPosition($query)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
+            return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'rhq' ) {
+            return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone' ) {
+            return $query->where('zone', Session::get('gakkaiuserzone'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'chapter' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'district' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel');
+        }
+    }
+
+    public function scopeLPMembershipStatsByZoneByPosition($query)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
+            return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'rhq' ) {
+            return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone' ) {
+            return $query->where('zone', Session::get('gakkaiuserzone'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'chapter' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'district' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel');
+        }
+    }
+
+    public function scopeLPMembershipStatsByChapterByPosition($query)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
+            return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'rhq' ) {
+            return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone' ) {
+            return $query->where('zone', Session::get('gakkaiuserzone'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'chapter' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'district' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel');
+        }
+    }
+
+    public function scopeLPMembershipStatsByDistrictByPosition($query)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
+            return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'rhq' ) {
+            return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone' ) {
+            return $query->where('zone', Session::get('gakkaiuserzone'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'chapter' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'district' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel');
+        }
+    }
+
+    public function scopeLPMembershipStatsByPositionAgeGroup($query)
+    {
+        if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
+            return $query->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total, CASE
+                WHEN (Year(now()) - Year(dateofbirth)) <= 6 THEN "00 to 06"
+                WHEN (Year(now()) - Year(dateofbirth)) >= 7 and (Year(now()) - Year(dateofbirth)) <= 12 THEN "07 to 12"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 13 and (Year(now()) -1 - Year(dateofbirth)) <= 16 THEN "13 to 16"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 17 and (Year(now()) -1 - Year(dateofbirth)) <= 23 THEN "17 to 23"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 24 and (Year(now()) -1 - Year(dateofbirth)) <= 30 THEN "24 to 30"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 31 and (Year(now()) -1 - Year(dateofbirth)) <= 35 THEN "31 to 35"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 36 and (Year(now()) -1 - Year(dateofbirth)) <= 40 THEN "36 to 40"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 41 and (Year(now()) -1 - Year(dateofbirth)) <= 45 THEN "41 to 45"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 46 and (Year(now()) -1 - Year(dateofbirth)) <= 50 THEN "46 to 50"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 51 and (Year(now()) -1 - Year(dateofbirth)) <= 55 THEN "51 to 55"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 56 and (Year(now()) -1 - Year(dateofbirth)) <= 60 THEN "56 to 60"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 61 and (Year(now()) -1 - Year(dateofbirth)) <= 65 THEN "61 to 65"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 66 and (Year(now()) -1 - Year(dateofbirth)) <= 70 THEN "66 to 70"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 71 and (Year(now()) -1 - Year(dateofbirth)) <= 75 THEN "71 to 75"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 76 and (Year(now()) -1 - Year(dateofbirth)) <= 120 THEN "Above 75"
+                WHEN (Year(dateofbirth)) IS NULL THEN "Unknown" END as agegroup'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel')->groupBy('agegroup');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'rhq' ) {
+            return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total, CASE
+                WHEN (Year(now()) - Year(dateofbirth)) <= 6 THEN "00 to 06"
+                WHEN (Year(now()) - Year(dateofbirth)) >= 7 and (Year(now()) - Year(dateofbirth)) <= 12 THEN "07 to 12"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 13 and (Year(now()) -1 - Year(dateofbirth)) <= 16 THEN "13 to 16"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 17 and (Year(now()) -1 - Year(dateofbirth)) <= 23 THEN "17 to 23"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 24 and (Year(now()) -1 - Year(dateofbirth)) <= 30 THEN "24 to 30"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 31 and (Year(now()) -1 - Year(dateofbirth)) <= 35 THEN "31 to 35"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 36 and (Year(now()) -1 - Year(dateofbirth)) <= 40 THEN "36 to 40"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 41 and (Year(now()) -1 - Year(dateofbirth)) <= 45 THEN "41 to 45"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 46 and (Year(now()) -1 - Year(dateofbirth)) <= 50 THEN "46 to 50"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 51 and (Year(now()) -1 - Year(dateofbirth)) <= 55 THEN "51 to 55"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 56 and (Year(now()) -1 - Year(dateofbirth)) <= 60 THEN "56 to 60"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 61 and (Year(now()) -1 - Year(dateofbirth)) <= 65 THEN "61 to 65"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 66 and (Year(now()) -1 - Year(dateofbirth)) <= 70 THEN "66 to 70"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 71 and (Year(now()) -1 - Year(dateofbirth)) <= 75 THEN "71 to 75"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 76 and (Year(now()) -1 - Year(dateofbirth)) <= 120 THEN "Above 75"
+                WHEN (Year(dateofbirth)) IS NULL THEN "Unknown" END as agegroup'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel')->groupBy('agegroup');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'zone' ) {
+            return $query->where('zone', Session::get('gakkaiuserzone'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+            DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total, CASE
+                WHEN (Year(now()) - Year(dateofbirth)) <= 6 THEN "00 to 06"
+                WHEN (Year(now()) - Year(dateofbirth)) >= 7 and (Year(now()) - Year(dateofbirth)) <= 12 THEN "07 to 12"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 13 and (Year(now()) -1 - Year(dateofbirth)) <= 16 THEN "13 to 16"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 17 and (Year(now()) -1 - Year(dateofbirth)) <= 23 THEN "17 to 23"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 24 and (Year(now()) -1 - Year(dateofbirth)) <= 30 THEN "24 to 30"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 31 and (Year(now()) -1 - Year(dateofbirth)) <= 35 THEN "31 to 35"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 36 and (Year(now()) -1 - Year(dateofbirth)) <= 40 THEN "36 to 40"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 41 and (Year(now()) -1 - Year(dateofbirth)) <= 45 THEN "41 to 45"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 46 and (Year(now()) -1 - Year(dateofbirth)) <= 50 THEN "46 to 50"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 51 and (Year(now()) -1 - Year(dateofbirth)) <= 55 THEN "51 to 55"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 56 and (Year(now()) -1 - Year(dateofbirth)) <= 60 THEN "56 to 60"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 61 and (Year(now()) -1 - Year(dateofbirth)) <= 65 THEN "61 to 65"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 66 and (Year(now()) -1 - Year(dateofbirth)) <= 70 THEN "66 to 70"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 71 and (Year(now()) -1 - Year(dateofbirth)) <= 75 THEN "71 to 75"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 76 and (Year(now()) -1 - Year(dateofbirth)) <= 120 THEN "Above 75"
+                WHEN (Year(dateofbirth)) IS NULL THEN "Unknown" END as agegroup'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel')->groupBy('agegroup');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'chapter' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total, CASE
+                WHEN (Year(now()) - Year(dateofbirth)) <= 6 THEN "00 to 06"
+                WHEN (Year(now()) - Year(dateofbirth)) >= 7 and (Year(now()) - Year(dateofbirth)) <= 12 THEN "07 to 12"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 13 and (Year(now()) -1 - Year(dateofbirth)) <= 16 THEN "13 to 16"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 17 and (Year(now()) -1 - Year(dateofbirth)) <= 23 THEN "17 to 23"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 24 and (Year(now()) -1 - Year(dateofbirth)) <= 30 THEN "24 to 30"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 31 and (Year(now()) -1 - Year(dateofbirth)) <= 35 THEN "31 to 35"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 36 and (Year(now()) -1 - Year(dateofbirth)) <= 40 THEN "36 to 40"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 41 and (Year(now()) -1 - Year(dateofbirth)) <= 45 THEN "41 to 45"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 46 and (Year(now()) -1 - Year(dateofbirth)) <= 50 THEN "46 to 50"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 51 and (Year(now()) -1 - Year(dateofbirth)) <= 55 THEN "51 to 55"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 56 and (Year(now()) -1 - Year(dateofbirth)) <= 60 THEN "56 to 60"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 61 and (Year(now()) -1 - Year(dateofbirth)) <= 65 THEN "61 to 65"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 66 and (Year(now()) -1 - Year(dateofbirth)) <= 70 THEN "66 to 70"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 71 and (Year(now()) -1 - Year(dateofbirth)) <= 75 THEN "71 to 75"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 76 and (Year(now()) -1 - Year(dateofbirth)) <= 120 THEN "Above 75"
+                WHEN (Year(dateofbirth)) IS NULL THEN "Unknown" END as agegroup'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel')->groupBy('agegroup');
+        } else if (Session::get('gakkaiuserpositionlevel') == 'district' ) {
+            return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereRaw('(status NOT IN ("XB", "XD", "XF", "XI", "XL", "XM", "XR") or status IS NULL)')->select('rhq', 'zone', 'chapter', 'district', 'positionlevel', 
+                DB::raw('SUM(CASE WHEN division ="MD" THEN 1 ELSE 0 End) as md, 
+                SUM(CASE WHEN division ="WD" THEN 1 ELSE 0 End) as wd,
+                SUM(CASE WHEN division ="YM" THEN 1 ELSE 0 End) as ym,
+                SUM(CASE WHEN division ="YW" THEN 1 ELSE 0 End) as yw,
+                SUM(CASE WHEN division ="PDYM" THEN 1 ELSE 0 End) as pdym,
+                SUM(CASE WHEN division ="PDYW" THEN 1 ELSE 0 End) as pdyw,
+                SUM(CASE WHEN division ="YCYM" THEN 1 ELSE 0 End) as ycym,
+                SUM(CASE WHEN division ="YCYW" THEN 1 ELSE 0 End) as ycyw,
+                SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW") THEN 1 ELSE 0 End) as unknown,
+                concat(chapter, " ", district) as description, COUNT(division) as total, CASE
+                WHEN (Year(now()) - Year(dateofbirth)) <= 6 THEN "00 to 06"
+                WHEN (Year(now()) - Year(dateofbirth)) >= 7 and (Year(now()) - Year(dateofbirth)) <= 12 THEN "07 to 12"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 13 and (Year(now()) -1 - Year(dateofbirth)) <= 16 THEN "13 to 16"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 17 and (Year(now()) -1 - Year(dateofbirth)) <= 23 THEN "17 to 23"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 24 and (Year(now()) -1 - Year(dateofbirth)) <= 30 THEN "24 to 30"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 31 and (Year(now()) -1 - Year(dateofbirth)) <= 35 THEN "31 to 35"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 36 and (Year(now()) -1 - Year(dateofbirth)) <= 40 THEN "36 to 40"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 41 and (Year(now()) -1 - Year(dateofbirth)) <= 45 THEN "41 to 45"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 46 and (Year(now()) -1 - Year(dateofbirth)) <= 50 THEN "46 to 50"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 51 and (Year(now()) -1 - Year(dateofbirth)) <= 55 THEN "51 to 55"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 56 and (Year(now()) -1 - Year(dateofbirth)) <= 60 THEN "56 to 60"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 61 and (Year(now()) -1 - Year(dateofbirth)) <= 65 THEN "61 to 65"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 66 and (Year(now()) -1 - Year(dateofbirth)) <= 70 THEN "66 to 70"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 71 and (Year(now()) -1 - Year(dateofbirth)) <= 75 THEN "71 to 75"
+                WHEN (Year(now()) -1 - Year(dateofbirth)) >= 76 and (Year(now()) -1 - Year(dateofbirth)) <= 120 THEN "Above 75"
+                WHEN (Year(dateofbirth)) IS NULL THEN "Unknown" END as agegroup'))
+                ->groupBy('rhq')->groupBy('zone')->groupBy('chapter')->groupBy('district')->groupBy('positionlevel')->groupBy('agegroup');
+        }
+    }
+
     public function scopeSSAMADListing($query)
     {
         if (Session::get('gakkaiuserpositionlevel') == 'shq' ) {
