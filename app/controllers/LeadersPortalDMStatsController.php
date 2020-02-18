@@ -20,6 +20,7 @@ class LeadersPortalDMStatsController extends BaseController
 		$view->with('gakkaishq', $gakkaishq)->with('gakkairegion', $gakkairegion)->with('gakkaizone', $gakkaizone)->with('gakkaichapter', $gakkaichapter)
 			->with('gakkaidistrict', $gakkaidistrict)->with('dmyear_options', $dmyear_options)->with('currentyear', $currentyear)
 			->with('divisiontype_options', $divisiontype_options);
+		LogsfLogs::postLogs('Read', 1, 0, ' [ DM Statistic ] - Name: ' . Session::get('gakkaiusername') . ' RHQ: ' . Session::get('gakkaiuserrhq') . ' Zone: ' . Session::get('gakkaiuserzone') . ' Chapter: ' . Session::get('gakkaiuserchapter') . ' District: ' . Session::get('gakkaiuserdistrict') . ' Division: ' . Session::get('gakkaiuserdivision') . ' Position: ' . Session::get('gakkaiuserposition') . ' - ' . Session::get('gakkaiuserpositionlevel'), NULL, NULL, 'Success');
 		return $view;
 	}
 

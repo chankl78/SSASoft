@@ -16,6 +16,7 @@ class LeadersPortalMembershipStatsController extends BaseController
 		$view->title = 'BOE Portal - Membership Statistics';
 		$view->with('gakkaishq', $gakkaishq)->with('gakkairegion', $gakkairegion)->with('gakkaizone', $gakkaizone)->with('gakkaichapter', $gakkaichapter)
 			->with('gakkaidistrict', $gakkaidistrict);
+		LogsfLogs::postLogs('Read', 1, 0, ' [ Membership Statistic ] - Name: ' . Session::get('gakkaiusername') . ' RHQ: ' . Session::get('gakkaiuserrhq') . ' Zone: ' . Session::get('gakkaiuserzone') . ' Chapter: ' . Session::get('gakkaiuserchapter') . ' District: ' . Session::get('gakkaiuserdistrict') . ' Division: ' . Session::get('gakkaiuserdivision') . ' Position: ' . Session::get('gakkaiuserposition') . ' - ' . Session::get('gakkaiuserpositionlevel'), NULL, NULL, 'Success');
 		return $view;
 	}
 
