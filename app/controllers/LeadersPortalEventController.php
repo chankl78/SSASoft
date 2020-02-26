@@ -675,7 +675,7 @@ class LeadersPortalEventController extends BaseController
 
 			$post->language = Input::get('language');
 			$post->countryofbirth = Input::get('country');
-			$post->dateofbirthtxt = Input::get('dateofbirthtxt');
+			$post->dateofbirth = Input::get('dateofbirthtxt');
 			$post->session = Input::get('session');
 
 			$post->role = 'Participant';

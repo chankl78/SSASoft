@@ -1545,7 +1545,7 @@
 															{{ Form::label('dateofbirthtxt', 'Date of Birth:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">
-																	{{ Form::text('dateofbirthtxt', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'dateofbirthtxt'));}}
+																	{{ Form::text('dateofbirthtxt', '', array('class' => 'col-xs-12 col-sm-11 date-picker', 'id' => 'dateofbirthtxt', 'placeholder' => 'YYYY-MM-DD', 'data-date-format' => 'yyyy-mm-dd', ));}}
 																</div>
 															</div>
 														</div>
@@ -2432,6 +2432,11 @@
 
 				$.fn.datepicker.defaults.format = "yyyy-mm-dd";
 				$('#eDateofBirth').datepicker({
+					currentText: "Now",
+					dateFormat: "yyyy-mm-dd",
+					gotoCurrent: true
+				});
+				$('#dateofbirthtxt').datepicker({
 					currentText: "Now",
 					dateFormat: "yyyy-mm-dd",
 					gotoCurrent: true
