@@ -974,7 +974,8 @@
 												</br></br>
 												For example, if all the 4 division district leaders went, put '1' in each of the boxes for MD, WD, YMD & YWD.</p>
 
-												Thank you! " data-original-title="Instructions for {{ $eventname }}">How to Use?</span>
+												Thank you! " data-original-title="Instructions for {{ $eventname }}">How to Use?
+											</span>
 										@endif
 										@if ($youthsummittickets == 1) <!-- How to Use for Tickets RSVP -->
 											<span class="btn btn-purple btn-sm popover-purple" data-rel="popover" data-placement="bottom" title="" data-content="
@@ -1032,7 +1033,7 @@
 													<th>District</th> <!--06-->
 													<th>Division</th> <!--07-->
 													<th>Position</th> <!--08-->
-													<th>Introducer</th> <!--09-->
+													<th>Role</th> <!--09-->
 													<th>Status</th> <!--10-->
 													@if ($readonly == 0)<th>Action</th> @endif <!--11-->
 													@if ($youthsummit == 1)
@@ -2489,7 +2490,7 @@
 			            	{ targets: [ 6 ], data: "district", searchable: true },
 					    	{ targets: [ 7 ], data: "division", searchable: true },
 					    	{ targets: [ 8 ], data: "position", searchable: true },
-							{ targets: [ 9 ], data: "Introducer", searchable: true },
+							{ targets: [ 9 ], data: "role", searchable: true },
 					    	{
 						    	targets: [ 10 ], data: "status",
 						    	render: function ( data, type, full ){
