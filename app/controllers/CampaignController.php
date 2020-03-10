@@ -49,7 +49,7 @@ class CampaignController extends BaseController
 		{
 			try
 			{
-				$datDate = DateTime::createFromFormat('d-m-Y', Input::get('resourcedate'));
+				$datDate = DateTime::createFromFormat('Y-m-d', Input::get('resourcedate'));
 				if(CampaignmCampaign::getFindDuplicateValue(Input::get('description')) == false)
 				{
 					$post = new CampaignmCampaign;
@@ -133,7 +133,7 @@ class CampaignController extends BaseController
 		{
 			try
 			{
-				$datDate = DateTime::createFromFormat('m/d/Y', Input::get('resourcedate'));
+				$datDate = DateTime::createFromFormat('Y-m-d', Input::get('resourcedate'));
 				$post = CampaignmCampaign::find(CampaignmCampaign::getid($id));
 				$post->resourcedate = $datDate;
 				$post->description = Input::get('description');

@@ -598,7 +598,7 @@ class LeadersPortalDashboardController extends BaseController
 		try
 		{
 			$post = new CampaignmDetail;
-			$post->campaignid = 5;
+			$post->campaignid = 11;
 			$post->uniquecode = uniqid('',TRUE);
 			$post->campaigndetaildate = date('Y-m-d H:i:s');
 			$post->rhq = Session::get('gakkaiuserrhq');

@@ -76,7 +76,7 @@
 												{{ Form::label('resourcedate', 'Date:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 												<div class="col-xs-12 col-sm-8">
 													<div class="clearfix">
-														{{ Form::text('resourcedate', '', array('class' => 'col-xs-11 col-sm-11 input-mask-date', 'id' => 'resourcedate', 'placeholder' => 'DD-MM-YYYY'));}}
+														{{ Form::text('resourcedate', '', array('class' => 'col-xs-11 col-sm-11 input-mask-date', 'id' => 'resourcedate', 'placeholder' => 'YYYY-MM-DD'));}}
 													</div>
 												</div>
 											</div>
@@ -242,7 +242,7 @@
 	<script type="text/javascript">	
 		$(document).ready(function () {
 			$.mask.definitions['~']='[+-]';
-			$('.input-mask-date').mask('99-99-9999');
+			$('.input-mask-date').mask('9999-99-99');
 
 			$(function() {
 				var oTable = $('#tdefault').DataTable({
@@ -257,7 +257,7 @@
 			        "processing": false,
 			        "serverSide": true,
 			        "searching": true,
-			        "order": [[ 1, "asc" ]],
+			        "order": [[ 0, "desc" ]],
 			        "ajax": $.fn.dataTable.pipeline({
 			            url: 'Campaign/getListing',
 			            pages: 5 // number of pages to cache
@@ -266,7 +266,7 @@
 	            	{
 				    	"targets": [ 0 ], "data": "resourcedate", "width": "200px", "searchable": "true",
 				    	"render": function ( data, type, full ){
-				    		return moment(data).format("DD-MMM-YYYY");
+				    		return moment(data).format("YYYY-MM-DD");
 					    }
 			    	},
 			    	{ "targets": [ 1 ], "data": "campaigntype", "searchable": "true" },

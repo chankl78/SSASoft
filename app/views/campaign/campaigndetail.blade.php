@@ -75,7 +75,7 @@
 														{{ Form::label('resourcedate', 'Date:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-9">
 															<div class="clearfix">
-																{{ Form::text('resourcedate', date("m-d-Y",strtotime($result->resourcedate)), array('class' => 'date-picker col-xs-12 col-sm-9', 'data-date-format' => 'dd-mm-yyyy'));}}
+																{{ Form::text('resourcedate', date("Y-m-d",strtotime($result->resourcedate)), array('class' => 'date-picker col-xs-12 col-sm-9', 'id' => 'resourcedate'));}}
 															</div>
 														</div>
 													</div>
@@ -659,6 +659,7 @@
 	<script type="text/javascript" src="{{{ asset('assets/js/jquery.validate.min.js') }}}"></script>
 	<script type="text/javascript">
 		$('.date-picker').datepicker({
+			dateFormat: 'yy-mm-dd',
 			autoclose: true,
 			todayHighlight: true
 		})

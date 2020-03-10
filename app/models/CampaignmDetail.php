@@ -282,31 +282,31 @@ class CampaignmDetail extends Eloquent {
 
     public static function getMDDaimokuDistrictValue()
     {
-        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 5)->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 11)->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
         return $mid;
     }
 
     public static function getMDDaimokuChapterValue()
     {
-        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 5)->where('chapter', Session::get('gakkaiuserchapter'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 11)->where('chapter', Session::get('gakkaiuserchapter'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
         return $mid;
     }
 
     public static function getMDDaimokuZoneValue()
     {
-        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 5)->where('zone', Session::get('gakkaiuserzone'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 11)->where('zone', Session::get('gakkaiuserzone'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
         return $mid;
     }
 
     public static function getMDDaimokuRegionValue()
     {
-        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 5)->where('rhq', Session::get('gakkaiuserrhq'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 11)->where('rhq', Session::get('gakkaiuserrhq'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
         return $mid;
     }
 
     public static function getMDDaimokuSHQValue()
     {
-        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 5)->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', 11)->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
         return $mid;
     }
 

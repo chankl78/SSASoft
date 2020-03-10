@@ -447,68 +447,66 @@
 						</div>
 					</div>
 				</div> <!-- Study Exam -->
-				@if ($gakkaidivision == 'MD')
-					<div hidden class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
-						<div class="widget-box widget-color-orange">
-							<div class="widget-header">
-								<h5 class="widget-title">MD Daimoku Campaign 2018 (In Minutes)</h5>
-								<div class="widget-toolbar">
-									<a href="#" data-action="fullscreen" class="orange2">
-										<i class="ace-icon fa fa-expand"></i>
-									</a>
-									<a href="#" data-action="reload" onClick=reloaddt()>
-										<i class="fa fa-refresh"></i>
-									</a>
+				<div class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
+					<div class="widget-box widget-color-orange">
+						<div class="widget-header">
+							<h5 class="widget-title">Ever Victorious Daimoku Campagin (By Hour)</h5>
+							<div class="widget-toolbar">
+								<a href="#" data-action="fullscreen" class="orange2">
+									<i class="ace-icon fa fa-expand"></i>
+								</a>
+								<a href="#" data-action="reload" onClick=reloaddt()>
+									<i class="fa fa-refresh"></i>
+								</a>
+							</div>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<div class="well well-lg">
+									<center><h1> <span id="spanmddaimokuadd">{{$mddaimoku}}</span> </h1></center>
 								</div>
 							</div>
-							<div class="widget-body">
-								<div class="widget-main">
-									<div class="well well-lg">
-										<center><h1> <span id="spanmddaimokuadd">{{$mddaimoku}}</span> </h1></center>
-									</div>
+							<div class="widget-toolbox padding-8 clearfix">
+								<div class="col-xs-12">
+									<a href="#btnemddaimokuadd" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add</a>
 								</div>
-								<div class="widget-toolbox padding-8 clearfix">
-									<div class="col-xs-12">
-										<a href="#btnemddaimokuadd" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add</a>
-									</div>
-								</div>
-								<div id="btnemddaimokuadd" class="modal" tabindex="-1">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												{{ Form::open(array('action' => 'LeadersPortalDashboardController@postMDDaimoku', 'id' => 'mddaimokuadd', 'class' => 'form-horizontal')) }}
-													<fieldset>
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal">&times;</button>
-															<h4 class="blue bigger">MD Daimoku (In Minutes)</h4>
-														</div>
-														<div class="modal-body overflow-visible">
-															<div class="row">
-																<div class="form-group">
-																	{{ Form::label('emddaimoku', 'Daimoku (Minutes):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																	<div class="col-xs-12 col-sm-8">
-																		<div class="clearfix">
-																			{{ Form::text('emddaimoku', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'emddaimoku'));}}
-																		</div>
+							</div>
+							<div id="btnemddaimokuadd" class="modal" tabindex="-1">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											{{ Form::open(array('action' => 'LeadersPortalDashboardController@postMDDaimoku', 'id' => 'mddaimokuadd', 'class' => 'form-horizontal')) }}
+												<fieldset>
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="blue bigger">MD Daimoku (In Hours)</h4>
+													</div>
+													<div class="modal-body overflow-visible">
+														<div class="row">
+															<div class="form-group">
+																{{ Form::label('emddaimoku', 'Daimoku (Hours):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		{{ Form::text('emddaimoku', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'emddaimoku'));}}
 																	</div>
 																</div>
 															</div>
 														</div>
-														<div class="modal-footer">
-															<button class="btn btn-sm" data-dismiss="modal" id="btnclose">
-																<i class="icon-remove"></i>
-																Cancel
-															</button>
-															{{ Form::button('<i class="icon-ok"></i> <strong>Save</strong>', array('type' => 'Submit', 'class' => 'btn btn-sm btn-primary', 'id' => 'mddaimokuadd')); }}
-														</div>
-													</fieldset>
-												{{ Form::close() }}
-											</div>
+													</div>
+													<div class="modal-footer">
+														<button class="btn btn-sm" data-dismiss="modal" id="btnclose">
+															<i class="icon-remove"></i>
+															Cancel
+														</button>
+														{{ Form::button('<i class="icon-ok"></i> <strong>Save</strong>', array('type' => 'Submit', 'class' => 'btn btn-sm btn-primary', 'id' => 'mddaimokuadd')); }}
+													</div>
+												</fieldset>
+											{{ Form::close() }}
 										</div>
 									</div>
-							</div>
+								</div>
 						</div>
-					</div><!-- MD Daimokukai -->
-				@endif
+					</div>
+				</div><!-- MD Daimokukai -->
 				<div class="col-sm-12 widget-container-span ui-sortable">
 					<div class="widget-box widget-color-blue">
 						<div class="widget-header">
@@ -2036,39 +2034,37 @@
 			    });
 			@endif
 
-			@if ($gakkaidivision == 'MD')
-				$('#mddaimokuadd').submit(function(e){
-			    	$.ajax({
-				        url: 'BOEPortalDashboard/postMDDaimoku',
-				        type: 'POST',
-				        data: { value: $("#emddaimoku").val()},
-				        dataType: 'json',
-				        statusCode: { 
-				        	200:function(data){
-				        		$("#spanmddaimokuadd").text(data.mddaimokutotal);
-				        		$("#emddaimoku").val(''); 
-		            			$("#btnemddaimokuadd").modal('hide');
-				        	},
-				        	400:function(data){ 
-				        		var txtMessage;
-				        		if (data.responseJSON.ErrType == "Duplicate") 
-				        			{ txtMessage = 'Record already existed!'; }
-				        		else if (data.responseJSON.ErrType == "Failed")
-				        			{ txtMessage = 'Please check your entry!'; }
-				        		else { txtMessage = 'Please check your entry!'; }
-				        		$("#emddaimoku").focus();
-				        		noty({
-									layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
-									animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
-										},
-									timeout: 4000
-								});
-				        	}
-				        }
-				    });
-				    e.preventDefault();
-			    });
-			@endif
+			$('#mddaimokuadd').submit(function(e){
+				$.ajax({
+					url: 'BOEPortalDashboard/postMDDaimoku',
+					type: 'POST',
+					data: { value: $("#emddaimoku").val()},
+					dataType: 'json',
+					statusCode: { 
+						200:function(data){
+							$("#spanmddaimokuadd").text(data.mddaimokutotal);
+							$("#emddaimoku").val(''); 
+							$("#btnemddaimokuadd").modal('hide');
+						},
+						400:function(data){ 
+							var txtMessage;
+							if (data.responseJSON.ErrType == "Duplicate") 
+								{ txtMessage = 'Record already existed!'; }
+							else if (data.responseJSON.ErrType == "Failed")
+								{ txtMessage = 'Please check your entry!'; }
+							else { txtMessage = 'Please check your entry!'; }
+							$("#emddaimoku").focus();
+							noty({
+								layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
+								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+									},
+								timeout: 4000
+							});
+						}
+					}
+				});
+				e.preventDefault();
+			});
 		});
 	</script>
 @stop
