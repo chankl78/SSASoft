@@ -40,20 +40,8 @@ class CampaignDetailController extends BaseController
 	{
 		try
 		{
-			$sEcho = (int)$_GET['draw'];
-			$iTotalRecords = CampaignmDetail::where('campaignid', CampaignmCampaign::getid($id))->count();
-	 		$iDisplayLength = (int)$_GET['length'];
-		    $iDisplayStart = (int)$_GET['start'];
-		    $sSearch = $_GET['search']['value'];
-		    $sOrderByID = $_GET['order'][0]['column'];
-		    $sOrderBy = $_GET['columns'][$sOrderByID]['data'];
-		    $sOrderdir = $_GET['order'][0]['dir'];
-		    $iTotalDisplayRecords = CampaignmDetail::where('campaignid', CampaignmCampaign::getid($id))->Search('%'.$sSearch.'%')->count();
-		    $default =  CampaignmDetail::where('campaignid', CampaignmCampaign::getid($id))->Search('%'.$sSearch.'%')
-		    	->take($iDisplayLength)->skip($iDisplayStart)
-		    	->orderBy($sOrderBy, $sOrderdir)->get()->toarray();
-			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
-				'draw' => (string)$sEcho, 'data' => $default));
+			$default =  CampaignmDetail::where('campaignid', CampaignmCampaign::getid($id))->get()->toarray();
+			return Response::json(array('data' => $default));
 		}
 		catch(\Exception $e)
 		{

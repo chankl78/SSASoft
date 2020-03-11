@@ -1079,22 +1079,20 @@
 	        	});
 
 				var oTable = $('#tdefault').DataTable({
+					dom: 'Bflrtip',
+					buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
 					displayLength: 10, // Default No of Records per page on 1st load
 			        lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
 			        pagingType: "full_numbers",
 			        responsive: false,
-			        processing: true,
+			        processing: false,
 			        stateSave: true, // Remember paging & filters
 			        autoWidth: true,
 			        scrollCollapse: true,
-			        processing: false,
-			        serverSide: true,
+			        serverSide: false,
 			        searching: true,
 			        order: [[ 0, "desc" ]],
-			        ajax: $.fn.dataTable.pipeline({
-			            url: 'getListing/' + "{{ $rid }}",
-			            pages: 5 // number of pages to cache
-			        }),
+			        ajax: 'getListing/{{ $rid }}',
 			        columnDefs: [
 			        {
 				    	"targets": [ 0 ], "data": "created_at", "width": "170px", "searchable": "true",
