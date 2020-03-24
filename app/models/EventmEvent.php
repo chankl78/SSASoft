@@ -67,7 +67,7 @@ class EventmEvent extends Eloquent {
         }
         else
         {
-            return $query;
+            return false;
         }
     }
 

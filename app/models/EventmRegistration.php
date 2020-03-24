@@ -76,10 +76,10 @@ class EventmRegistration extends Eloquent {
         {
             return $query;
         }
-        else
-        {
-            return $query;
-        }    
+        // else
+        // {
+        //     return $query;
+        // }    
     }
 
     public function scopeSearch($query, $sSearch)

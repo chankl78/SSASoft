@@ -36,10 +36,10 @@ class CampaignmCampaign extends Eloquent {
         {
             return $query->where('districtregistration', '1');
         }
-        else
-        {
-            return $query;
-        }
+        // else
+        // {
+        //     return $query;
+        // }
     }
 
     public function scopeSearch($query, $sSearch)
