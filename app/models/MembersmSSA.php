@@ -74,6 +74,10 @@ class MembersmSSA extends Eloquent {
         {
             return $query;
         }
+        else if (Auth::user()->roleid == 'Gakkai Columbarium')
+        {
+            return $query;
+        }
         else if (Session::get('gakkaiuserpositionlevel') == 'district')
         {
             return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'));
