@@ -94,10 +94,13 @@ class MembersmSSA extends Eloquent {
         {
             return $query;
         }
-        // else
-        // {
-        //     return $query;
-        // }    
+        else
+        {
+            LogsfLogs::postLogs('Logout', 4, 0, ' Session Expired - Name: ' . Session::get('gakkaiusername') . ' RHQ: ' . Session::get('gakkaiuserrhq') . ' Zone: ' . Session::get('gakkaiuserzone') . ' Chapter: ' . Session::get('gakkaiuserchapter') . ' District: ' . Session::get('gakkaiuserdistrict') . ' Division: ' . Session::get('gakkaiuserdivision') . ' Position: ' . Session::get('gakkaiuserposition') . ' - Signed Out -> Back to Login', NULL, NULL, 'Success');
+            Auth::logout();
+            Session::flush();
+            return Redirect::action('LeadersPortalLoginController@getIndex');
+        }   
     }
     
 	public function scopeSearch($query, $sSearch)

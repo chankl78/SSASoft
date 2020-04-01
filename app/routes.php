@@ -11,9 +11,18 @@
 |
 */
 
-// Login
+// Leadership Portal Login
 Route::get('/', array('before' => 'installadmin', 'uses' => 'LeadersPortalLoginController@getIndex'));
+Route::get('/boeportallogin', array('before' => 'installadmin', 'uses' => 'LeadersPortalLoginController@getIndex'));
+Route::controller('BOEPortalLogin', 'LeadersPortalLoginController');
+Route::get('/getLeadersPortalLogout', 'LeadersPortalLoginController@getLogout');
+Route::get('/public/getLeadersPortalLogout', 'LeadersPortalLoginController@getLogout');
+Route::post('/boeportallogin/postReset', 'LeadersPortalLoginController@postReset');
+
+// Login
 Route::get('/Login', array('before' => 'installadmin', 'uses' => 'LoginController@getIndex'));
+Route::get('/getLogout', 'LeadersPortalLoginController@getLogout');
+Route::get('/public/getLogout', 'LeadersPortalLoginController@getLogout');
 Route::get('/getLogout', 'LoginController@getLogout');
 Route::get('/public/getLogout', 'LoginController@getLogout');
 Route::controller('Login', 'LoginController');
@@ -554,12 +563,6 @@ Route::post('/StudentDivision/addSdMember', 'StudentDivisionController@postAddSd
 Route::post('/StudentDivision/addMemberToSdKenshu', 'StudentDivisionController@postAddMemberToSdKenshu');
 
 // Leaders Portal
-// Leadership Portal Login
-Route::get('/boeportallogin', array('before' => 'installadmin', 'uses' => 'LeadersPortalLoginController@getIndex'));
-Route::controller('BOEPortalLogin', 'LeadersPortalLoginController');
-Route::get('/getLeadersPortalLogout', 'LeadersPortalLoginController@getLogout');
-Route::get('/public/getLeadersPortalLogout', 'LeadersPortalLoginController@getLogout');
-Route::post('/boeportallogin/postReset', 'LeadersPortalLoginController@postReset');
 
 // Leaders Portal Dashboard
 Route::get('/BOEPortalDashboard', array('before' => 'auth', 'uses' => 'LeadersPortalDashboardController@getIndex'));
