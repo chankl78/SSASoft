@@ -90,14 +90,11 @@ class MembersmPubSub extends Eloquent {
                 WHERE (year(ps.startdate) = '. $currentyear . ' or year(ps.enddate) = '. $currentyear . ') and ps.pubtype = "cl"
                 ORDER BY mssa.id, ps.pubtype, year(ps.startdate))');
             
-            DB::statement('SELECT Sleep (5);');
-
             DB::statement('UPDATE ' . $tablename . ' m INNER JOIN 
                 (SELECT id, personid, SUM(pubcljan) as pubcljan, SUM(pubclfeb) as pubclfeb, SUM(pubclmar) as pubclmar, SUM(pubclapr) as pubclapr, SUM(pubclmay) as pubclmay, SUM(pubcljun) as pubcljun, SUM(pubcljul) as pubcljul, SUM(pubclaug) as pubclaug, SUM(pubclsep) as pubclsep, SUM(pubcloct) as pubcloct, SUM(pubclnov) as pubclnov, SUM(pubcldec) as pubcldec FROM zz_pub GROUP BY id, personid) ps on m.id = ps.id
                 SET m.pubcljan = ps.pubcljan, m.pubclfeb = ps.pubclfeb, m.pubclmar = ps.pubclmar, m.pubclapr = ps.pubclapr, m.pubclmay = ps.pubclmay, m.pubcljun = ps.pubcljun, m.pubcljul = ps.pubcljul, m.pubclaug = ps.pubclaug, m.pubclsep = ps.pubclsep, m.pubcloct = ps.pubcloct, m.pubclnov = ps.pubclnov, m.pubcldec = ps.pubcldec');
 
-            DB::statement('SELECT Sleep (5);');
-            DB::statement('DROP TABLE zz_Pub;');
+            DB::statement('DROP TABLE zz_pub;');
 
             LogsfLogs::postLogs('Update', 39, 0, ' - MembersmPubSub Model - ' . $tablename . ' CL Updated!', NULL, NULL, 'Success');
 
@@ -119,14 +116,11 @@ class MembersmPubSub extends Eloquent {
                 WHERE (year(ps.startdate) = '. $currentyear . ' or year(ps.enddate) = '. $currentyear . ') and ps.pubtype = "st"
                 ORDER BY mssa.id, ps.pubtype, year(ps.startdate))');
 
-            DB::statement('SELECT Sleep (5);');
-
             DB::statement('UPDATE ' . $tablename . ' m INNER JOIN 
                 (SELECT id, personid, SUM(pubstjan) as pubstjan, SUM(pubstfeb) as pubstfeb, SUM(pubstmar) as pubstmar, SUM(pubstapr) as pubstapr, SUM(pubstmay) as pubstmay, SUM(pubstjun) as pubstjun, SUM(pubstjul) as pubstjul, SUM(pubstaug) as pubstaug, SUM(pubstsep) as pubstsep, SUM(pubstoct) as pubstoct, SUM(pubstnov) as pubstnov, SUM(pubstdec) as pubstdec FROM zz_pub GROUP BY id, personid) ps on m.id = ps.id
                 SET m.pubstjan = ps.pubstjan, m.pubstfeb = ps.pubstfeb, m.pubstmar = ps.pubstmar, m.pubstapr = ps.pubstapr, m.pubstmay = ps.pubstmay, m.pubstjun = ps.pubstjun, m.pubstjul = ps.pubstjul, m.pubstaug = ps.pubstaug, m.pubstsep = ps.pubstsep, m.pubstoct = ps.pubstoct, m.pubstnov = ps.pubstnov, m.pubstdec = ps.pubstdec');
 
-            DB::statement('SELECT Sleep (5);');
-            DB::statement('DROP TABLE zz_Pub;');
+            DB::statement('DROP TABLE zz_pub;');
 
             LogsfLogs::postLogs('Update', 39, 0, ' - MembersmPubSub Model - ' . $tablename . ' ST Updated!', NULL, NULL, 'Success');
 		}
