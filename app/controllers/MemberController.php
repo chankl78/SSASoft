@@ -24,20 +24,8 @@ class MemberController extends BaseController
 	{
 		try
 		{
-			$sEcho = (int)$_GET['draw'];
-			$iTotalRecords = MembersmSSA::Role()->count();
-	 		$iDisplayLength = (int)$_GET['length'];
-		    $iDisplayStart = (int)$_GET['start'];
-		    $sSearch = $_GET['search']['value'];
-		    $sOrderByID = $_GET['order'][0]['column'];
-		    $sOrderBy = $_GET['columns'][$sOrderByID]['data'];
-		    $sOrderdir = $_GET['order'][0]['dir'];
-		    $iTotalDisplayRecords = MembersmSSA::Role()->Search('%'.$sSearch.'%')->count();
-		    $default = MembersmSSA::Role()->Search('%'.$sSearch.'%')
-				->take($iDisplayLength)->skip($iDisplayStart)
-				->orderBy($sOrderBy, $sOrderdir)->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'chinesename', 'classification', 'created_at', 'alias', 'email', 'mobile', 'division', 'dateofbirth'))->toarray();
-			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
-				'draw' => (string)$sEcho, 'data' => $default));
+			$default = MembersmSSA::Role()->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'chinesename', 'classification', 'created_at', 'alias', 'email', 'mobile', 'division', 'dateofbirth', DB::Raw('concat(chapter, " ", district) as description')))->toarray();
+			return Response::json(array('data' => $default));
 		}
 		catch(\Exception $e)
 		{

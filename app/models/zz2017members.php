@@ -621,4 +621,356 @@ class zz2017members extends Eloquent {
             }
         }
     }
+
+    public function scopePUBCLRHQStats($query, $value, $divisiontype)
+    {
+        if ( $divisiontype == 'All' or $divisiontype == "4 Division")
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'MD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'MD')->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'WD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'WD')->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'YMD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YM')->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'YWD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YW')->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Primary Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '07 to 12')->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Future Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '13 to 16')->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Student Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('studentdivision', '!=', '')->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Adult Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('MD', 'WD'))->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Youth Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('YM', 'YW'))->select('rhq', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+    }
+
+    public function scopePUBSTRHQStats($query, $value, $divisiontype)
+    {
+        if ( $divisiontype == 'All' or $divisiontype == "4 Division")
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'MD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'MD')->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'WD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'WD')->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'YMD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YM')->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'YWD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YW')->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Primary Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '07 to 12')->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Future Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '13 to 16')->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Student Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('studentdivision', '!=', '')->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Adult Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('MD', 'WD'))->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+        elseif ( $divisiontype == 'Youth Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('YM', 'YW'))->select('rhq', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq');
+        }
+    }
+    
+    public function scopePUBCLAgeGroupStats($query, $value, $divisiontype)
+    {
+        if ( $divisiontype == 'All' or $divisiontype == "4 Division")
+        {
+            return $query->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'MD')
+        {
+            return $query->where('division', 'MD')->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'WD')
+        {
+            return $query->where('division', 'WD')->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'YMD')
+        {
+            return $query->where('division', 'YM')->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'YWD')
+        {
+            return $query->where('division', 'YW')->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Primary Division')
+        {
+            return $query->where('agegroup', '07 to 12')->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Future Division')
+        {
+            return $query->where('agegroup', '13 to 16')->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Student Division')
+        {
+            return $query->where('studentdivision', '!=', '')->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Adult Division')
+        {
+            return $query->whereIn('division', array('MD', 'WD'))->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Youth Division')
+        {
+            return $query->whereIn('division', array('YM', 'YW'))->select('agegroup', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('agegroup');
+        }
+    }
+
+    public function scopePUBSTAgeGroupStats($query, $value, $divisiontype)
+    {
+        if ( $divisiontype == 'All' or $divisiontype == "4 Division")
+        {
+            return $query->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'MD')
+        {
+            return $query->where('division', 'MD')->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'WD')
+        {
+            return $query->where('division', 'WD')->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'YMD')
+        {
+            return $query->where('division', 'YM')->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'YWD')
+        {
+            return $query->where('division', 'YW')->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Primary Division')
+        {
+            return $query->where('agegroup', '07 to 12')->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Future Division')
+        {
+            return $query->where('agegroup', '13 to 16')->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Student Division')
+        {
+            return $query->where('studentdivision', '!=', '')->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Adult Division')
+        {
+            return $query->whereIn('division', array('MD', 'WD'))->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+        elseif ( $divisiontype == 'Youth Division')
+        {
+            return $query->whereIn('division', array('YM', 'YW'))->select('agegroup', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('agegroup');
+        }
+    }
+
+    public function scopePUBCLPositionLevelStats($query, $value, $divisiontype)
+    {
+        if ( $divisiontype == 'All' or $divisiontype == "4 Division")
+        {
+            return $query->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'MD')
+        {
+            return $query->where('division', 'MD')->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'WD')
+        {
+            return $query->where('division', 'WD')->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'YMD')
+        {
+            return $query->where('division', 'YM')->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'YWD')
+        {
+            return $query->where('division', 'YW')->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Primary Division')
+        {
+            return $query->where('agegroup', '07 to 12')->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Future Division')
+        {
+            return $query->where('agegroup', '13 to 16')->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Student Division')
+        {
+            return $query->where('studentdivision', '!=', '')->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Adult Division')
+        {
+            return $query->whereIn('division', array('MD', 'WD'))->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Youth Division')
+        {
+            return $query->whereIn('division', array('YM', 'YW'))->select('positionlevel', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'))->groupby('positionlevel');
+        }
+    }
+
+    public function scopePUBSTPositionLevelStats($query, $value, $divisiontype)
+    {
+        if ( $divisiontype == 'All' or $divisiontype == "4 Division")
+        {
+            return $query->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'MD')
+        {
+            return $query->where('division', 'MD')->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'WD')
+        {
+            return $query->where('division', 'WD')->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'YMD')
+        {
+            return $query->where('division', 'YM')->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'YWD')
+        {
+            return $query->where('division', 'YW')->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Primary Division')
+        {
+            return $query->where('agegroup', '07 to 12')->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Future Division')
+        {
+            return $query->where('agegroup', '13 to 16')->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Student Division')
+        {
+            return $query->where('studentdivision', '!=', '')->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Adult Division')
+        {
+            return $query->whereIn('division', array('MD', 'WD'))->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+        elseif ( $divisiontype == 'Youth Division')
+        {
+            return $query->whereIn('division', array('YM', 'YW'))->select('positionlevel', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'))->groupby('positionlevel');
+        }
+    }
+
+    public function scopePUBCLNameList($query, $value, $divisiontype)
+    {
+        if ( $divisiontype == 'All' or $divisiontype == "4 Division")
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'MD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'MD')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'WD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'WD')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'YMD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YM')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'YWD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YW')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Primary Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '07 to 12')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Future Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '13 to 16')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Student Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('studentdivision', '!=', '')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Adult Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('MD', 'WD'))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Youth Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('YM', 'YW'))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubcljan) as "jan"'), DB::Raw('SUM(pubclfeb) as "feb"'), DB::Raw('SUM(pubclmar) as "mar"'), DB::Raw('SUM(pubclapr) as "apr"'), DB::Raw('SUM(pubclmay) as "may"'), DB::Raw('SUM(pubcljun) as "jun"'), DB::Raw('SUM(pubcljul) as "jul"'), DB::Raw('SUM(pubclaug) as "aug"'), DB::Raw('SUM(pubclsep) as "sep", SUM(pubcloct) as "oct"'), DB::Raw('SUM(pubclnov) as "nov"'), DB::Raw('SUM(pubcldec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+    }
+
+    public function scopePUBSTNameList($query, $value, $divisiontype)
+    {
+        if ( $divisiontype == 'All' or $divisiontype == "4 Division")
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'MD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'MD')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'WD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'WD')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'YMD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YM')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'YWD')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('division', 'YW')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Primary Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '07 to 12')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Future Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('agegroup', '13 to 16')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Student Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->where('studentdivision', '!=', '')->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Adult Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('MD', 'WD'))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+        elseif ( $divisiontype == 'Youth Division')
+        {
+            return $query->whereIn('rhq', array('', 'H0', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9'))->whereIn('division', array('YM', 'YW'))->select('name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', DB::Raw('SUM(pubstjan) as "jan"'), DB::Raw('SUM(pubstfeb) as "feb"'), DB::Raw('SUM(pubstmar) as "mar"'), DB::Raw('SUM(pubstapr) as "apr"'), DB::Raw('SUM(pubstmay) as "may"'), DB::Raw('SUM(pubstjun) as "jun"'), DB::Raw('SUM(pubstjul) as "jul"'), DB::Raw('SUM(pubstaug) as "aug"'), DB::Raw('SUM(pubstsep) as "sep", SUM(pubstoct) as "oct"'), DB::Raw('SUM(pubstnov) as "nov"'), DB::Raw('SUM(pubstdec) as "dec"'), DB::Raw('concat(chapter, " ", district) as description'))->groupby('rhq')->groupby('zone')->groupby('chapter')->groupby('district')->groupby('name');
+        }
+    }
 }

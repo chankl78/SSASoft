@@ -461,6 +461,51 @@ View::composer('layout.master', function($view)
 		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'REVE09 - ' . $e, NULL, NULL, 'Failed'); $REVE09 = 'f';
 	}
 
+	try // Check Publication Subscription Enabled
+	{
+		$RGPUSU = AccessfCheck::getAccessAdmin(Auth::user()->roleid, 'PUSU', 'RG');
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'RGPUSU - ' . $e, NULL, NULL, 'Failed'); $RGPUSU = 'f'; 
+	}
+
+	try // Check Publication Subscription - Publication Subscription Enabled
+	{
+		$REPS01 = AccessfCheck::getResourceAccess(Auth::user()->roleid, 'PS01', 'RE', Auth::user()->id);
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'REPS01 - ' . $e, NULL, NULL, 'Failed'); $REPS01 = 'f';
+	}
+
+	try // Check Publication Subscription - Default Tables Enabled
+	{
+		$REPS02 = AccessfCheck::getResourceAccess(Auth::user()->roleid, 'PS02', 'RE', Auth::user()->id);
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'REPS02 - ' . $e, NULL, NULL, 'Failed'); $REPS02 = 'f';
+	}
+
+	try // Check Publication Subscription - Listing Enabled
+	{
+		$REPS03 = AccessfCheck::getResourceAccess(Auth::user()->roleid, 'PS03', 'RE', Auth::user()->id);
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'REPS03 - ' . $e, NULL, NULL, 'Failed'); $REPS03 = 'f';
+	}
+
+	try // Check Publication Subscription - Report Enabled
+	{
+		$REPS05 = AccessfCheck::getResourceAccess(Auth::user()->roleid, 'PS05', 'RE', Auth::user()->id);
+	}
+	catch(\Exception $e)
+	{
+		LogsfLogs::postLogs('Read', 8, 0, ' - Access Rights - ' . 'REPS05 - ' . $e, NULL, NULL, 'Failed');$REPS05 = 'f';
+	}
+
 	try // Check Certificate Enabled
 	{
 		$RGCERT = AccessfCheck::getAccessAdmin(Auth::user()->roleid, 'CERT', 'RG');
@@ -515,6 +560,7 @@ View::composer('layout.master', function($view)
 	$view->with('RGCRMA', $RGCRMA); $view->with('RECR01', $RECR01); $view->with('RECR02', $RECR02); $view->with('RECR03', $RECR03); $view->with('RECR05', $RECR05);
 	$view->with('RGVEHI', $RGVEHI); $view->with('REVE01', $REVE01); $view->with('REVE02', $REVE02); $view->with('REVE03', $REVE03); $view->with('REVE05', $REVE05); $view->with('REVE07', $REVE07); $view->with('REVE08', $REVE08); $view->with('REVE09', $REVE09);
 	$view->with('RGATTE', $RGATTE); $view->with('REAT01', $REAT01); $view->with('REAT02', $REAT02); $view->with('REAT03', $REAT03); $view->with('REAT05', $REAT05);
+	$view->with('RGPUSU', $RGPUSU); $view->with('REPS01', $REPS01); $view->with('REPS02', $REPS02); $view->with('REPS03', $REPS03); $view->with('REPS05', $REPS05);
 	$view->with('RGSSAM', $RGSSAM); $view->with('REME01', $REME01); $view->with('REME02', $REME02); $view->with('REME03', $REME03); $view->with('REME05', $REME05); $view->with('REME06', $REME06);
 	$view->with('RGCERT', $RGCERT); $view->with('RECE01', $RECE01); $view->with('RECE02', $RECE02); $view->with('RECE03', $RECE03); $view->with('RECE05', $RECE05);
 });

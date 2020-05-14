@@ -137,6 +137,7 @@
 											<th>Pos</th>
 											<th>Class</th>
 											<th>Action</th>
+											<th>Description</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -458,18 +459,14 @@
 			        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
 			        "pagingType": "full_numbers",
 			        "responsive": false,
-			        "processing": true,
 			        "stateSave": true, // Remember paging & filters
 			        "autoWidth": true,
 			        "scrollCollapse": true,
 			        "processing": false,
-			        "serverSide": true,
+			        "serverSide": false,
 			        "searching": true,
 			        "order": [[ 0, "desc" ]],
-			        "ajax": $.fn.dataTable.pipeline({
-			            url: 'Members/getMemberListing',
-			            pages: 5 // number of pages to cache
-			        }),
+			        "ajax": 'Members/getMemberListing',
 	                "aoColumnDefs": [
 	                {
 				    	"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
@@ -491,7 +488,8 @@
 				    	"render": function ( data, type, full ){
 				    		return '<button type="submit" onClick=getinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-edit bigger-120"></i></button>'
 					    }
-			    	}]
+			    	},
+					{ "targets": [ 11 ], "data": "description", "searchable": "true", visible: false }]
 			    });
 
 			    $('#cbrhq').change(function(){

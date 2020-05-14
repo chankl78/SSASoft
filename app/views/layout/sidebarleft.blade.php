@@ -721,4 +721,21 @@
 			</ul>
 		</li>
 	@endif
+	@if ($RGPUSU == 't')
+		@if (Session::get('current_resource') == 'PUSU')<li class="active open"> @else <li> @endif
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-exclamation-circle"></i><span class="menu-text"> Publication Sub</span>
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+			<ul class="submenu">
+				@if ($RECR03 == 't')
+					@if (Session::get('current_page') == 'pubsub/pubsubstatistic' )<li class="active"> @else <li> @endif
+						<a href="{{{ URL::action('PubSubStatisticController@getIndex') }}}">
+							<i class="menu-icon fa fa-double-angle-right"></i> Publication Sub Stats
+						</a>
+					</li>
+				@endif
+			</ul>
+		</li>
+	@endif
 </ul><!--/.nav-list-->

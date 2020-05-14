@@ -863,3 +863,16 @@ Route::get('/CrisisManagement/Detail/getOccurrenceListing/{id}', 'CrisisManageme
 Route::post('/CrisisManagement/Detail/postOccurrence/{id}', 'CrisisManagementDetailController@postOccurrence');
 Route::post('/CrisisManagement/Detail/deleteOccurrence/{id}', 'CrisisManagementDetailController@deleteOccurrence');
 Route::post('/CrisisManagement/Detail/putOccurrence/{id}', 'CrisisManagementDetailController@putOccurrence');
+
+// Publication Subscription Statistic
+Route::get('/PubSub', array('before' => 'auth', 'uses' => 'PubSubStatisticController@getIndex'));
+Route::post('/PubSub/postImport', 'PubSubStatisticController@postImport');
+Route::post('/PubSub/postStatsUpdate', 'PubSubStatisticController@postStatsUpdate');
+Route::get('/PubSub/getRHQCLStats/{id}/{divisiontype}', 'PubSubStatisticController@getRHQCLStats');
+Route::get('/PubSub/getRHQSTStats/{id}/{divisiontype}', 'PubSubStatisticController@getRHQSTStats');
+Route::get('/PubSub/getAgeGroupCLStats/{id}/{divisiontype}', 'PubSubStatisticController@getAgeGroupCLStats');
+Route::get('/PubSub/getAgeGroupSTStats/{id}/{divisiontype}', 'PubSubStatisticController@getAgeGroupSTStats');
+Route::get('/PubSub/getPositionLevelCLStats/{id}/{divisiontype}', 'PubSubStatisticController@getPositionLevelCLStats');
+Route::get('/PubSub/getPositionLevelSTStats/{id}/{divisiontype}', 'PubSubStatisticController@getPositionLevelSTStats');
+Route::get('/PubSub/getCLNameList/{id}/{divisiontype}', 'PubSubStatisticController@getCLNameList');
+Route::get('/PubSub/getSTNameList/{id}/{divisiontype}', 'PubSubStatisticController@getSTNameList');
