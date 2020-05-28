@@ -462,12 +462,15 @@
 			        "stateSave": true, // Remember paging & filters
 			        "autoWidth": true,
 			        "scrollCollapse": true,
-			        "processing": false,
-			        "serverSide": false,
+			        "processing": true,
+			        "serverSide": true,
 			        "searching": true,
 			        "order": [[ 0, "desc" ]],
-			        "ajax": 'Members/getMemberListing',
-	                "aoColumnDefs": [
+					"ajax": $.fn.dataTable.pipeline({
+						url: 'Members/getMemberListing',
+						pages: 5 // number of pages to cache
+					}),
+			        "aoColumnDefs": [
 	                {
 				    	"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
 				    	"render": function ( data, type, full ){

@@ -728,7 +728,7 @@
 				<b class="arrow fa fa-angle-down"></b>
 			</a>
 			<ul class="submenu">
-				@if ($RECR03 == 't')
+				@if ($REPS03 == 't')
 					@if (Session::get('current_page') == 'pubsub/pubsubstatistic' )<li class="active"> @else <li> @endif
 						<a href="{{{ URL::action('PubSubStatisticController@getIndex') }}}">
 							<i class="menu-icon fa fa-double-angle-right"></i> Publication Sub Stats

@@ -34,7 +34,7 @@ class MembersmPubSub extends Eloquent {
 
 			// Get arrary from MMS
 			$pdo = DB::connection("mysql2")->getPdo();
-			$member = $pdo->query(DB::raw('SELECT sub.id, tit.code, sub.start_date, sub.end_date, sub.stop_date, sac.use_giro, sac.person_id, sub.no_of_copies, sub.no_of_months FROM subscription sub LEFT JOIN transaction sac on sub.transaction_id = sac.id LEFT JOIN publication pub on sub.publication_id = pub.id LEFT JOIN title tit on pub.title_id = tit.id WHERE sub.no_of_months <> 0 and sac.transaction_status_id = 1 ORDER BY sac.person_id, sub.id;'));
+			$member = $pdo->query(DB::raw('SELECT sub.id, tit.code, sub.start_date, sub.end_date, sub.stop_date, sac.use_giro, sac.person_id, sub.no_of_copies, sub.no_of_months, suspended_on, terminated_date, giro_id FROM subscription sub LEFT JOIN transaction sac on sub.transaction_id = sac.id LEFT JOIN publication pub on sub.publication_id = pub.id LEFT JOIN title tit on pub.title_id = tit.id WHERE sub.no_of_months <> 0 and sac.transaction_status_id = 1 ORDER BY sac.person_id, sub.id;'));
 			// Insert into BOE
 			foreach($member as $member)
 			{
@@ -45,6 +45,9 @@ class MembersmPubSub extends Eloquent {
                 $post->startdate = $member['start_date'];
                 $post->enddate = $member['end_date'];
                 $post->stopdate = $member['stop_date'];
+                $post->terminateddate = $member['terminated_date'];
+                $post->suspendedon = $member['suspended_on'];
+                $post->giroid = $member['giro_id'];
                 $post->usegiro = $member['use_giro'];
                 $post->noofcopies = $member['no_of_copies'];
                 $post->noofmonths = $member['no_of_months'];
@@ -56,6 +59,8 @@ class MembersmPubSub extends Eloquent {
 
             DB::statement('UPDATE Members_m_PubSub ps LEFT JOIN Members_m_SSA mssa on ps.personid = mssa.personid
             SET ps.memberid = mssa.id;');
+
+            DB::statement('UPDATE Members_m_PubSub ps SET ps.giroid = 1 WHERE giroid IS NOT NULL;');
 
 			LogsfLogs::postLogs('Update', 39, 0, ' - MembersmPubSub Model - Update MemberID Successful ', NULL, NULL, 'Success');
 		}

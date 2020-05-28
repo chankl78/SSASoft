@@ -58,6 +58,25 @@ class zz2018members extends Eloquent {
         }
     }
 
+    public function scopeSearch($query, $sSearch)
+    {
+        return $query->where(function($query) use ($sSearch)
+        {
+            $query->where('name', 'Like', '%'.$sSearch.'%')
+                ->orwhere('chinesename', 'Like', '%'.$sSearch.'%')
+                ->orwhere('rhq', 'Like', '%'.$sSearch.'%')
+                ->orwhere('zone', 'Like', '%'.$sSearch.'%')
+                ->orwhere('chapter', 'Like', '%'.$sSearch.'%')
+                ->orwhere('district', 'Like', '%'.$sSearch.'%')
+                ->orwhere('description', 'Like', '%'.$sSearch.'%')
+                ->orwhere('division', 'Like', '%'.$sSearch.'%')
+                ->orwhere('position', 'Like', '%'.$sSearch.'%')
+                ->orwhere('positionlevel', 'Like', '%'.$sSearch.'%')
+                ->orwhere('agegroup', 'Like', '%'.$sSearch.'%')
+                ->orwhere('created_at', 'Like', '%'.$sSearch.'%');
+        });
+    }
+
     public function scopeRHQStats($query, $value, $divisiontype)
     {
         if ( $divisiontype == 'All' or $divisiontype == "4 Division")

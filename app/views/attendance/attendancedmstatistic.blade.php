@@ -121,13 +121,14 @@
 											<th>YWYC-B</th>
 											<th>YWYC-NF</th>
 											<th>Description</th>
+											<th>Att Desc</th>
 										</tr>
 									</thead>
 									<tbody>
 									</tbody>
 									<tfoot id="tdefaultfoot">
 										<tr>
-											<th>Total</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+											<th>Total</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
 										</tr>
 									</tfoot>
 								</table>
@@ -383,7 +384,8 @@
 						{ targets: [ 32 ], data: "memycywd", searchable: true },
 						{ targets: [ 33 ], data: "belycywd", searchable: true },
 						{ targets: [ 34 ], data: "nfycywd", searchable: true },
-						{ targets: [ 35 ], data: "description", searchable: true, visible: false }
+						{ targets: [ 35 ], data: "description", searchable: true, visible: false },
+						{ targets: [ 36 ], data: "attdescription", searchable: true, visible: false }
 					],
 	            	"footerCallback": function (row, data, start, end, display) {
 		                var api = this.api(), data
@@ -395,7 +397,7 @@
 			                    typeof i === 'number' ?
 			                        i : 0;
 			            };
-		                columns = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,]; // Add columns here
+		                columns = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]; // Add columns here
 
 		       			for (var i = 0; i < columns.length; i++) {
 		                    $('#tdefaultfoot th').eq(columns[i]).html(api.column(columns[i], {filter: 'applied'}).data().sum());
@@ -639,7 +641,8 @@
 							{ targets: [ 32 ], data: "memycywd", searchable: true },
 							{ targets: [ 33 ], data: "belycywd", searchable: true },
 							{ targets: [ 34 ], data: "nfycywd", searchable: true },
-							{ targets: [ 35 ], data: "description", searchable: true, visible: false }
+							{ targets: [ 35 ], data: "description", searchable: true, visible: false },
+							{ targets: [ 36 ], data: "attdescription", searchable: true, visible: false }
 						],
 						"footerCallback": function (row, data, start, end, display) {
 							var api = this.api(), data

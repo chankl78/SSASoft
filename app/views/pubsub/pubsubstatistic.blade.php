@@ -872,17 +872,20 @@
 					buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
 					displayLength: 10, // Default No of Records per page on 1st load
 					lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
-					pagingType: "first_last_numbers",
+					pagingType: "full_numbers",
 					responsive: true,
 					stateSave: true, // Remember paging & filters
 					autoWidth: false,
 					scrollCollapse: true,
-					processing: false,
-					serverSide: false,
+					processing: true,
+					serverSide: true,
 					searching: true,
 					order: [[ 0, "desc" ], [ 1, "asc" ]],
-			        ajax: 'PubSub/getCLNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
-			        columnDefs: [
+			        ajax: $.fn.dataTable.pipeline({
+						url: 'PubSub/getCLNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						pages: 5 // number of pages to cache
+					}),
+					columnDefs: [
 						{ responsivePriority: 1, targets: 0 },
 						{ responsivePriority: 2, targets: 1 },
 						{ responsivePriority: 3, targets: 4 },
@@ -937,12 +940,15 @@
 					stateSave: true, // Remember paging & filters
 					autoWidth: false,
 					scrollCollapse: true,
-					processing: false,
-					serverSide: false,
+					processing: true,
+					serverSide: true,
 					searching: true,
 					order: [[ 0, "desc" ], [ 1, "asc" ]],
-			        ajax: 'PubSub/getSTNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
-			        columnDefs: [
+			        ajax: $.fn.dataTable.pipeline({
+						url: 'PubSub/getSTNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						pages: 5 // number of pages to cache
+					}),
+					columnDefs: [
 						{ responsivePriority: 1, targets: 0 },
 						{ responsivePriority: 2, targets: 1 },
 						{ responsivePriority: 3, targets: 4 },
@@ -1339,16 +1345,19 @@
 						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
 						displayLength: 10, // Default No of Records per page on 1st load
 						lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
-						pagingType: "first_last_numbers",
+						pagingType: "full_numbers",
 						responsive: true,
 						stateSave: true, // Remember paging & filters
 						autoWidth: false,
 						scrollCollapse: true,
-						processing: false,
-						serverSide: false,
+						processing: true,
+						serverSide: true,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'PubSub/getCLNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						ajax: $.fn.dataTable.pipeline({
+							url: 'PubSub/getCLNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+							pages: 5 // number of pages to cache
+						}),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },
@@ -1408,11 +1417,14 @@
 						stateSave: true, // Remember paging & filters
 						autoWidth: false,
 						scrollCollapse: true,
-						processing: false,
-						serverSide: false,
+						processing: true,
+						serverSide: true,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'PubSub/getSTNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						ajax: $.fn.dataTable.pipeline({
+							url: 'PubSub/getSTNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+							pages: 5 // number of pages to cache
+						}),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },
@@ -1811,16 +1823,19 @@
 						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
 						displayLength: 10, // Default No of Records per page on 1st load
 						lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
-						pagingType: "first_last_numbers",
+						pagingType: "full_numbers",
 						responsive: true,
 						stateSave: true, // Remember paging & filters
 						autoWidth: false,
 						scrollCollapse: true,
-						processing: false,
-						serverSide: false,
+						processing: true,
+						serverSide: true,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'PubSub/getCLNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						ajax: $.fn.dataTable.pipeline({
+							url: 'PubSub/getCLNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+							pages: 5 // number of pages to cache
+						}),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },
@@ -1880,11 +1895,14 @@
 						stateSave: true, // Remember paging & filters
 						autoWidth: false,
 						scrollCollapse: true,
-						processing: false,
-						serverSide: false,
+						processing: true,
+						serverSide: true,
 						searching: true,
 						order: [[ 0, "desc" ], [ 1, "asc" ]],
-						ajax: 'PubSub/getSTNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+						ajax: $.fn.dataTable.pipeline({
+							url: 'PubSub/getSTNameList/' + $('#ddyear').val() + '/' + $('#dddivisiontype').val(),
+							pages: 5 // number of pages to cache
+						}),
 						columnDefs: [
 							{ responsivePriority: 1, targets: 0 },
 							{ responsivePriority: 2, targets: 1 },

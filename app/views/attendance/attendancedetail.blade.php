@@ -1933,6 +1933,9 @@
 					dataType: 'json',
 					statusCode: { 
 						200:function(data){
+							var oTable = $('#tdefault').DataTable();
+			        		oTable.ajax.reload(null, false);
+							
 							noty({
 								layout: 'topRight', type: 'success', text: 'Mass Insertion Successful',
 								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 

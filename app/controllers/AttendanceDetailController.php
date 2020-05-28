@@ -364,7 +364,7 @@ class AttendanceDetailController extends BaseController
 
 			foreach ($dmattendancelist as $dmattendancelist) {
 				try {
-					$dmattendancememberlist = MembersmSSA::where('rhq', $dmattendancelist['rhq'])->where('zone', $dmattendancelist['zone'])->where('chapter', $dmattendancelist['chapter'])->where('district', $dmattendancelist['district'])->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('id', 'name', 'chinesename', 'rhq', 'zone', 'chapter', 'district', 'division', 'position'))->toarray();
+					$dmattendancememberlist = MembersmSSA::where('rhq', $dmattendancelist['rhq'])->where('zone', $dmattendancelist['zone'])->where('chapter', $dmattendancelist['chapter'])->where('district', $dmattendancelist['district'])->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('id', 'name', 'chinesename', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', 'positionlevel'))->toarray();
 
 					foreach ($dmattendancememberlist as $dmattendancememberlist) {
 						try {
@@ -382,6 +382,7 @@ class AttendanceDetailController extends BaseController
 							$postm->district = $dmattendancememberlist['district'];
 							$postm->division = $dmattendancememberlist['division'];
 							$postm->position = $dmattendancememberlist['position'];
+							$postm->positionlevel = $dmattendancememberlist['positionlevel'];
 							if ($dmattendancememberlist['position'] == 'NF') {
 								$postm->noofnewfriend = 1;
 							}

@@ -152,7 +152,8 @@ class AttendanceController extends BaseController
 
 				if($post->save())
 				{
-					$dmattendancememberlist = MembersmSSA::where('rhq', $dmattendancelist['rhqabbv'])->where('zone', $dmattendancelist['zoneabbv'])->where('chapter', $dmattendancelist['chapabbv'])->where('district', $dmattendancelist['district'])->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('id', 'name', 'chinesename', 'rhq', 'zone', 'chapter', 'district', 'division', 'position'))->toarray();
+
+					$dmattendancememberlist = MembersmSSA::where('rhq', $dmattendancelist['rhqabbv'])->where('zone', $dmattendancelist['zoneabbv'])->where('chapter', $dmattendancelist['chapabbv'])->where('district', $dmattendancelist['district'])->orderby('rhq')->orderby('zone')->orderby('chapter')->orderby('district')->orderby('division')->orderby('position')->orderby('name')->get(array('id', 'name', 'chinesename', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', 'positionlevel'))->toarray();
 					
 					foreach($dmattendancememberlist as $dmattendancememberlist)
 					{

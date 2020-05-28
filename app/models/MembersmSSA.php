@@ -127,7 +127,8 @@ class MembersmSSA extends Eloquent {
                 ->orwhere('dateofbirth', 'Like', '%'.$sSearch.'%')
                 ->orwhere('address', 'Like', '%'.$sSearch.'%')
                 ->orwhere('postalcode', 'Like', '%'.$sSearch.'%')
-                ->orwhere('created_at', 'Like', '%'.$sSearch.'%');
+                ->orwhere('created_at', 'Like', '%'.$sSearch.'%')
+                ->orwhere('description', 'Like', '%'.$sSearch.'%');
         });
     }
 

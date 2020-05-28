@@ -49,6 +49,7 @@ class MembersmImportSSA extends Eloquent {
 					$post->zone = $member['zone'];
 					$post->chapter = $member['chapter'];
 					$post->district = $member['dist'];
+					$post->description = $member['chapter'] . " " . $member['dist'];
 					$post->position = $member['position'];
 					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
@@ -111,6 +112,7 @@ class MembersmImportSSA extends Eloquent {
 					$post->zone = $member['zone'];
 					$post->chapter = $member['chapter'];
 					$post->district = $member['dist'];
+					$post->description = $member['chapter'] . " " . $member['dist'];
 					$post->position = $member['position'];
 					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
@@ -200,6 +202,7 @@ class MembersmImportSSA extends Eloquent {
 					$post->zone = $member['zone'];
 					$post->chapter = $member['chapter'];
 					$post->district = $member['dist'];
+					$post->description = $member['chapter'] . " " . $member['dist'];
 					$post->position = $member['position'];
 					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }
@@ -262,6 +265,7 @@ class MembersmImportSSA extends Eloquent {
 					$post->zone = $member['zone'];
 					$post->chapter = $member['chapter'];
 					$post->district = $member['dist'];
+					$post->description = $member['chapter'] . " " . $member['dist'];
 					$post->position = $member['position'];
 					if ($member['position'] == 'BEL') { $positionlevel = 'bel'; }
 					elseif ($member['position'] == 'MEM') { $positionlevel = 'mem'; }

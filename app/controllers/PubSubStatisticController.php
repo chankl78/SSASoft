@@ -249,28 +249,80 @@ class PubSubStatisticController extends BaseController
 		{
 			if ($id == 2017)
 			{
-				$default = zz2017members::PUBCLNameList($id, $divisiontype)->get()->toarray();
-				return Response::json(array('data' => $default));
+				$sEcho = (int)$_GET['draw'];
+				$iTotalRecords = zz2017members::count();
+				$iDisplayLength = (int)$_GET['length'];
+				$iDisplayStart = (int)$_GET['start'];
+				$sSearch = $_GET['search']['value'];
+				$sOrderByID = $_GET['order'][0]['column'];
+				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
+				$sOrderdir = $_GET['order'][0]['dir'];
+				$iTotalDisplayRecords = zz2017members::Search('%'.$sSearch.'%')->count();
+				
+				$default =zz2017members::PUBCLNameList($id, $divisiontype)->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
+					->orderby('name')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'positionlevel', 'chinesename', 'created_at', 'division', DB::Raw('concat(chapter, " ", district) as description'), 'pubcljan', 'pubclfeb', 'pubclmar', 'pubclapr', 'pubclmay', 'pubcljun', 'pubcljul', 'pubclaug', 'pubclsep', 'pubcloct', 'pubclnov', 'pubcldec'));
+				
+				return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
+					'draw' => (string)$sEcho, 'data' => $default));
 			}
 			else if ($id == 2018)
 			{
-				$default = zz2018members::PUBCLNameList($id, $divisiontype)->get()->toarray();
-				return Response::json(array('data' => $default));
+				$sEcho = (int)$_GET['draw'];
+				$iTotalRecords = zz2018members::count();
+				$iDisplayLength = (int)$_GET['length'];
+				$iDisplayStart = (int)$_GET['start'];
+				$sSearch = $_GET['search']['value'];
+				$sOrderByID = $_GET['order'][0]['column'];
+				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
+				$sOrderdir = $_GET['order'][0]['dir'];
+				$iTotalDisplayRecords = zz2018members::Search('%'.$sSearch.'%')->count();
+				
+				$default =zz2018members::PUBCLNameList($id, $divisiontype)->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
+					->orderby('name')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'positionlevel', 'chinesename', 'created_at', 'division', DB::Raw('concat(chapter, " ", district) as description'), 'pubcljan', 'pubclfeb', 'pubclmar', 'pubclapr', 'pubclmay', 'pubcljun', 'pubcljul', 'pubclaug', 'pubclsep', 'pubcloct', 'pubclnov', 'pubcldec'));
+				
+				return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
+					'draw' => (string)$sEcho, 'data' => $default));
 			}
 			else if ($id == 2019)
 			{
-				$default = zz2019members::PUBCLNameList($id, $divisiontype)->get()->toarray();
-				return Response::json(array('data' => $default));
+				$sEcho = (int)$_GET['draw'];
+				$iTotalRecords = zz2019members::count();
+				$iDisplayLength = (int)$_GET['length'];
+				$iDisplayStart = (int)$_GET['start'];
+				$sSearch = $_GET['search']['value'];
+				$sOrderByID = $_GET['order'][0]['column'];
+				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
+				$sOrderdir = $_GET['order'][0]['dir'];
+				$iTotalDisplayRecords = zz2019members::Search('%'.$sSearch.'%')->count();
+				
+				$default =zz2019members::PUBCLNameList($id, $divisiontype)->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
+					->orderby('name')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'positionlevel', 'chinesename', 'created_at', 'division', DB::Raw('concat(chapter, " ", district) as description'), 'pubcljan', 'pubclfeb', 'pubclmar', 'pubclapr', 'pubclmay', 'pubcljun', 'pubcljul', 'pubclaug', 'pubclsep', 'pubcloct', 'pubclnov', 'pubcldec'));
+				
+				return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
+					'draw' => (string)$sEcho, 'data' => $default));
 			}
 			else if ($id == 2020)
 			{
-				$default = zz2020members::PUBCLNameList($id, $divisiontype)->get()->toarray();
-				return Response::json(array('data' => $default));
+				$sEcho = (int)$_GET['draw'];
+				$iTotalRecords = zz2020members::count();
+				$iDisplayLength = (int)$_GET['length'];
+				$iDisplayStart = (int)$_GET['start'];
+				$sSearch = $_GET['search']['value'];
+				$sOrderByID = $_GET['order'][0]['column'];
+				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
+				$sOrderdir = $_GET['order'][0]['dir'];
+				$iTotalDisplayRecords = zz2020members::Search('%'.$sSearch.'%')->count();
+				
+				$default =zz2020members::PUBCLNameList($id, $divisiontype)->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
+					->orderby('name')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'positionlevel', 'chinesename', 'created_at', 'division', DB::Raw('concat(chapter, " ", district) as description'), 'pubcljan', 'pubclfeb', 'pubclmar', 'pubclapr', 'pubclmay', 'pubcljun', 'pubcljul', 'pubclaug', 'pubclsep', 'pubcloct', 'pubclnov', 'pubcldec'));
+				
+				return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
+					'draw' => (string)$sEcho, 'data' => $default));
 			}
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Read', 27, 0, ' - Publication Subscription Statistic Listing NameList [DT] - ' . $e, NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Read', 27, 0, ' - Publication Subscription Statistic Listing NameList CL [DT] - ' . $e, NULL, NULL, 'Failed');
 		}
 	}
 
@@ -280,28 +332,80 @@ class PubSubStatisticController extends BaseController
 		{
 			if ($id == 2017)
 			{
-				$default = zz2017members::PUBSTNameList($id, $divisiontype)->get()->toarray();
-				return Response::json(array('data' => $default));
+				$sEcho = (int)$_GET['draw'];
+				$iTotalRecords = zz2017members::count();
+				$iDisplayLength = (int)$_GET['length'];
+				$iDisplayStart = (int)$_GET['start'];
+				$sSearch = $_GET['search']['value'];
+				$sOrderByID = $_GET['order'][0]['column'];
+				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
+				$sOrderdir = $_GET['order'][0]['dir'];
+				$iTotalDisplayRecords = zz2017members::Search('%'.$sSearch.'%')->count();
+				
+				$default =zz1720members::PUBSTNameList($id, $divisiontype)->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
+					->orderby('name')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'positionlevel', 'chinesename', 'created_at', 'division', DB::Raw('concat(chapter, " ", district) as description'), 'pubstjan', 'pubstfeb', 'pubstmar', 'pubstapr', 'pubstmay', 'pubstjun', 'pubstjul', 'pubstaug', 'pubstsep', 'pubstoct', 'pubstnov', 'pubstdec'));
+				
+				return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
+					'draw' => (string)$sEcho, 'data' => $default));
 			}
 			else if ($id == 2018)
 			{
-				$default = zz2018members::PUBSTNameList($id, $divisiontype)->get()->toarray();
-				return Response::json(array('data' => $default));
+				$sEcho = (int)$_GET['draw'];
+				$iTotalRecords = zz2018members::count();
+				$iDisplayLength = (int)$_GET['length'];
+				$iDisplayStart = (int)$_GET['start'];
+				$sSearch = $_GET['search']['value'];
+				$sOrderByID = $_GET['order'][0]['column'];
+				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
+				$sOrderdir = $_GET['order'][0]['dir'];
+				$iTotalDisplayRecords = zz2018members::Search('%'.$sSearch.'%')->count();
+				
+				$default =zz2018members::PUBSTNameList($id, $divisiontype)->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
+					->orderby('name')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'positionlevel', 'chinesename', 'created_at', 'division', DB::Raw('concat(chapter, " ", district) as description'), 'pubstjan', 'pubstfeb', 'pubstmar', 'pubstapr', 'pubstmay', 'pubstjun', 'pubstjul', 'pubstaug', 'pubstsep', 'pubstoct', 'pubstnov', 'pubstdec'));
+				
+				return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
+					'draw' => (string)$sEcho, 'data' => $default));
 			}
 			else if ($id == 2019)
 			{
-				$default = zz2019members::PUBSTNameList($id, $divisiontype)->get()->toarray();
-				return Response::json(array('data' => $default));
+				$sEcho = (int)$_GET['draw'];
+				$iTotalRecords = zz2019members::count();
+				$iDisplayLength = (int)$_GET['length'];
+				$iDisplayStart = (int)$_GET['start'];
+				$sSearch = $_GET['search']['value'];
+				$sOrderByID = $_GET['order'][0]['column'];
+				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
+				$sOrderdir = $_GET['order'][0]['dir'];
+				$iTotalDisplayRecords = zz2019members::Search('%'.$sSearch.'%')->count();
+				
+				$default =zz2019members::PUBSTNameList($id, $divisiontype)->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
+					->orderby('name')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'positionlevel', 'chinesename', 'created_at', 'division', DB::Raw('concat(chapter, " ", district) as description'), 'pubstjan', 'pubstfeb', 'pubstmar', 'pubstapr', 'pubstmay', 'pubstjun', 'pubstjul', 'pubstaug', 'pubstsep', 'pubstoct', 'pubstnov', 'pubstdec'));
+				
+				return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
+					'draw' => (string)$sEcho, 'data' => $default));
 			}
 			else if ($id == 2020)
 			{
-				$default = zz2020members::PUBSTNameList($id, $divisiontype)->get()->toarray();
-				return Response::json(array('data' => $default));
+				$sEcho = (int)$_GET['draw'];
+				$iTotalRecords = zz2020members::count();
+				$iDisplayLength = (int)$_GET['length'];
+				$iDisplayStart = (int)$_GET['start'];
+				$sSearch = $_GET['search']['value'];
+				$sOrderByID = $_GET['order'][0]['column'];
+				$sOrderBy = $_GET['columns'][$sOrderByID]['data'];
+				$sOrderdir = $_GET['order'][0]['dir'];
+				$iTotalDisplayRecords = zz2020members::Search('%'.$sSearch.'%')->count();
+				
+				$default =zz2020members::PUBSTNameList($id, $divisiontype)->Search('%'.$sSearch.'%')->take($iDisplayLength)->skip($iDisplayStart)
+					->orderby('name')->get(array('uniquecode', 'name', 'rhq', 'chapter', 'district', 'zone', 'position', 'positionlevel', 'chinesename', 'created_at', 'division', DB::Raw('concat(chapter, " ", district) as description'), 'pubstjan', 'pubstfeb', 'pubstmar', 'pubstapr', 'pubstmay', 'pubstjun', 'pubstjul', 'pubstaug', 'pubstsep', 'pubstoct', 'pubstnov', 'pubstdec'));
+				
+				return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
+					'draw' => (string)$sEcho, 'data' => $default));
 			}
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Read', 27, 0, ' - Publication Subscription Statistic Listing NameList [DT] - ' . $e, NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Read', 27, 0, ' - Publication Subscription Statistic Listing ST NameList [DT] - ' . $e, NULL, NULL, 'Failed');
 		}
 	}
 }
