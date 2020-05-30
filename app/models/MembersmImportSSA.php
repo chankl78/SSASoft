@@ -37,6 +37,7 @@ class MembersmImportSSA extends Eloquent {
 					$post->language = $member['language_name'];
 					$post->gender = $member['gender'];
 					$post->dateofbirth = $member['date_of_birth'];
+					if($member['date_of_birth'] <> ''){$post->currentage = date('Y') - date('Y', strtotime($member['date_of_birth']));}
 					$post->countryofbirth = $member['country_of_birth'];
 					if($member['tel_home'] == ''){$post->tel = 'NIL';} else {$post->tel = $member['tel_home'];}
 					if($member['tel_mobile'] == ''){$post->mobile = 'NIL';} else {$post->mobile = $member['tel_mobile'];}
@@ -100,6 +101,7 @@ class MembersmImportSSA extends Eloquent {
 					$post->language = $member['language_name'];
 					$post->gender = $member['gender'];
 					$post->dateofbirth = $member['date_of_birth'];
+					if($member['date_of_birth'] <> ''){$post->currentage = date('Y') - date('Y', strtotime($member['date_of_birth']));}
 					$post->countryofbirth = $member['country_of_birth'];
 					if($member['tel_home'] == ''){$post->tel = 'NIL';} else {$post->tel = $member['tel_home'];}
 					if($member['tel_mobile'] == ''){$post->mobile = 'NIL';} else {$post->mobile = $member['tel_mobile'];}
@@ -190,6 +192,7 @@ class MembersmImportSSA extends Eloquent {
 					$post->language = $member['language_name'];
 					$post->gender = $member['gender'];
 					$post->dateofbirth = $member['date_of_birth'];
+					if($member['date_of_birth'] <> ''){$post->currentage = date('Y') - date('Y', strtotime($member['date_of_birth']));}
 					$post->countryofbirth = $member['country_of_birth'];
 					if($member['tel_home'] == ''){$post->tel = 'NIL';} else {$post->tel = $member['tel_home'];}
 					if($member['tel_mobile'] == ''){$post->mobile = 'NIL';} else {$post->mobile = $member['tel_mobile'];}
@@ -253,6 +256,7 @@ class MembersmImportSSA extends Eloquent {
 					$post->language = $member['language_name'];
 					$post->gender = $member['gender'];
 					$post->dateofbirth = $member['date_of_birth'];
+					if($member['date_of_birth'] <> ''){$post->currentage = date('Y') - date('Y', strtotime($member['date_of_birth']));}
 					$post->countryofbirth = $member['country_of_birth'];
 					if($member['tel_home'] == ''){$post->tel = 'NIL';} else {$post->tel = $member['tel_home'];}
 					if($member['tel_mobile'] == ''){$post->mobile = 'NIL';} else {$post->mobile = $member['tel_mobile'];}
