@@ -48,6 +48,8 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>Action</th>
+												<th>description</th>
+												<th>Age</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -91,6 +93,8 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>Action</th>
+												<th>description</th>
+												<th>Age</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -134,6 +138,8 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>Action</th>
+												<th>description</th>
+												<th>Age</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -177,6 +183,8 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>Action</th>
+												<th>description</th>
+												<th>Age</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -220,6 +228,8 @@
 												<th>Division</th>
 												<th>Position</th>
 												<th>Action</th>
+												<th>description</th>
+												<th>Age</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -338,28 +348,29 @@
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
-					    	}
+					    	},
+					    	{ "targets": [ 10 ], "data": "description", "searchable": "true", visible: false },
+							{ "targets": [ 11 ], "data": "currentage", "searchable": "true", visible: false }
 					    ]
 				    });
 				@endif
 
 				@if ($gakkairegion == 't')
 					var oRhqTable = $('#trhq').DataTable({
+						dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
 				        "displayLength": 10, // Default No of Records per page on 1st load
 				        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
 				        "pagingType": "full_numbers",
 				        "responsive": false,
-				        "processing": true,
+				        "processing": false,
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "serverSide": true,
+				        "serverSide": false,
 				        "searching": true,
 				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
-				        "ajax": $.fn.dataTable.pipeline({
-				            url: 'BOEPortalMembers/getMembersListingRHQ',
-				            pages: 5 // number of pages to cache
-				        }),
+				        "ajax": 'BOEPortalMembers/getMembersListingRHQ',
 				        "columnDefs": [
 							{
 								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
@@ -380,28 +391,29 @@
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
-					    	}
+					    	},
+					    	{ "targets": [ 10 ], "data": "description", "searchable": "true", visible: false },
+							{ "targets": [ 11 ], "data": "currentage", "searchable": "true", visible: false }
 					    ]
 				    });
 				@endif
 
 				@if ($gakkaizone == 't')
 					var oZoneTable = $('#tzone').DataTable({
+				        dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
 				        "displayLength": 10, // Default No of Records per page on 1st load
 				        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
 				        "pagingType": "full_numbers",
 				        "responsive": false,
-				        "processing": true,
+				        "processing": false,
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "serverSide": true,
+				        "serverSide": false,
 				        "searching": true,
 				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
-				        "ajax": $.fn.dataTable.pipeline({
-				            url: 'BOEPortalMembers/getMembersListingZone',
-				            pages: 5 // number of pages to cache
-				        }),
+				        "ajax": 'BOEPortalMembers/getMembersListingZone',
 				        "columnDefs": [
 							{
 								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
@@ -422,28 +434,29 @@
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
-					    	}
+					    	},
+					    	{ "targets": [ 10 ], "data": "description", "searchable": "true", visible: false },
+							{ "targets": [ 11 ], "data": "currentage", "searchable": "true", visible: false }
 					    ]
 				    });
 				@endif
 
 				@if ($gakkaichapter == 't')
 					var oChapterTable = $('#tchapter').DataTable({
+				        dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
 				        "displayLength": 10, // Default No of Records per page on 1st load
 				        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
 				        "pagingType": "full_numbers",
 				        "responsive": false,
-				        "processing": true,
+				        "processing": false,
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "serverSide": true,
+				        "serverSide": false,
 				        "searching": true,
 				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
-				        "ajax": $.fn.dataTable.pipeline({
-				            url: 'BOEPortalMembers/getMembersListingChapter',
-				            pages: 5 // number of pages to cache
-				        }),
+				        "ajax": 'BOEPortalMembers/getMembersListingChapter',
 				        "columnDefs": [
 							{
 								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
@@ -464,28 +477,29 @@
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
-					    	}
+					    	},
+					    	{ "targets": [ 10 ], "data": "description", "searchable": "true", visible: false },
+							{ "targets": [ 11 ], "data": "currentage", "searchable": "true", visible: false }
 					    ]
 				    });
 				@endif
 
 				@if ($gakkaidistrict == 't')
 					var oDistrictTable = $('#tdistrict').DataTable({
+				        dom: 'Bflrtip',
+						buttons: [ 'copyHtml5', 'excelHtml5', 'pdfHtml5' ],
 				        "displayLength": 10, // Default No of Records per page on 1st load
 				        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
 				        "pagingType": "full_numbers",
 				        "responsive": false,
-				        "processing": true,
+				        "processing": false,
 				        "stateSave": true, // Remember paging & filters
 				        "autoWidth": true,
 				        "scrollCollapse": true,
-				        "serverSide": true,
+				        "serverSide": false,
 				        "searching": true,
 				        "order": [[ 3, "asc" ],[ 4, "asc" ],[ 5, "asc" ],[ 6, "asc" ],[ 7, "asc" ],[ 8, "asc" ],[ 1, "asc" ]],
-				        "ajax": $.fn.dataTable.pipeline({
-				            url: 'BOEPortalMembers/getMembersListingDistrict',
-				            pages: 5 // number of pages to cache
-				        }),
+				        "ajax": 'BOEPortalMembers/getMembersListingDistrict',
 				        "columnDefs": [
 							{
 								"targets": [ 0 ], "data": "created_at", "width": "100px", "searchable": "true",
@@ -506,7 +520,9 @@
 						    	"render": function ( data, type, full ){
 						    		return '<button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-puzzle-piece bigger-120"></i></button>'
 							    }
-					    	}
+					    	},
+					    	{ "targets": [ 10 ], "data": "description", "searchable": "true", visible: false },
+							{ "targets": [ 11 ], "data": "currentage", "searchable": "true", visible: false }
 					    ]
 				    });
 				@endif
