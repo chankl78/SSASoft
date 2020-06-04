@@ -30,6 +30,19 @@ class AttendanceDMStatisticController extends BaseController
 		}
 	}
 
+	public function getRHQFullStats($id, $divisiontype)
+	{
+		try
+		{
+			$default = AttendancemAttendance::DMFullStatsListing($id, $divisiontype)->get()->toarray();
+			return Response::json(array('data' => $default));
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Read', 27, 0, ' - Discussion Meeting Full Statistic Listing RHQStats [DT] - ' . $e, NULL, NULL, 'Failed');
+		}
+	}
+
 	public function getRHQStats($id, $divisiontype)
 	{
 		try
