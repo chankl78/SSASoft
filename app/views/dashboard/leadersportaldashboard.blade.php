@@ -191,66 +191,68 @@
 						</div><!-- Homevisit Campaign 2019 (To remove after campaign finished) -->
 					@endif
 				@endif
-				<div class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
-					<div class="widget-box widget-color-blue">
-						<div class="widget-header">
-							<h5 class="widget-title">Together We Dialogue </h5>
-							<div class="widget-toolbar">
-								<a href="#" data-action="fullscreen" class="orange2">
-									<i class="ace-icon fa fa-expand"></i>
-								</a>
-								<a href="#" data-action="reload" onClick=reloaddt()>
-									<i class="fa fa-refresh"></i>
-								</a>
-							</div>
-						</div>
-						<div class="widget-body">
-							<div class="widget-main">
-								<div class="well well-lg">
-									<center><h1> <span id="spanboe">{{$boe}}</span> </h1></center>
+				@if ($dialoguecampaign == 1)
+					<div class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
+						<div class="widget-box widget-color-blue">
+							<div class="widget-header">
+								<h5 class="widget-title">Together We Dialogue </h5>
+								<div class="widget-toolbar">
+									<a href="#" data-action="fullscreen" class="orange2">
+										<i class="ace-icon fa fa-expand"></i>
+									</a>
+									<a href="#" data-action="reload" onClick=reloaddt()>
+										<i class="fa fa-refresh"></i>
+									</a>
 								</div>
 							</div>
-							<div class="widget-toolbox padding-8 clearfix">
-								<div class="col-xs-12">
-									<a href="#btnboeedit" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add</a>
+							<div class="widget-body">
+								<div class="widget-main">
+									<div class="well well-lg">
+										<center><h1> <span id="spanboe">{{$boe}}</span> </h1></center>
+									</div>
 								</div>
-							</div>
-							<div id="btnboeedit" class="modal" tabindex="-1">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										{{ Form::open(array('action' => 'LeadersPortalDashboardController@putBOEedit', 'id' => 'boeedit', 'class' => 'form-horizontal')) }}
-											<fieldset>
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="blue bigger">Add the number of Dialogue you do?</h4>
-												</div>
-												<div class="modal-body overflow-visible">
-													<div class="row">
-														<div class="form-group">
-															{{ Form::label('eboe', 'No. of Dialogue:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-															<div class="col-xs-12 col-sm-8">
-																<div class="clearfix">
-																	{{ Form::text('eboe', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eboe'));}}
+								<div class="widget-toolbox padding-8 clearfix">
+									<div class="col-xs-12">
+										<a href="#btnboeedit" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add</a>
+									</div>
+								</div>
+								<div id="btnboeedit" class="modal" tabindex="-1">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											{{ Form::open(array('action' => 'LeadersPortalDashboardController@putBOEedit', 'id' => 'boeedit', 'class' => 'form-horizontal')) }}
+												<fieldset>
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="blue bigger">Add the number of Dialogue you do?</h4>
+													</div>
+													<div class="modal-body overflow-visible">
+														<div class="row">
+															<div class="form-group">
+																{{ Form::label('eboe', 'No. of Dialogue:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		{{ Form::text('eboe', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eboe'));}}
+																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="modal-footer">
-													<button class="btn btn-sm" data-dismiss="modal" id="btnclose">
-														<i class="icon-remove"></i>
-														Cancel
-													</button>
-													{{ Form::button('<i class="icon-ok"></i> <strong>Save</strong>', array('type' => 'Submit', 'class' => 'btn btn-sm btn-primary', 'id' => 'boeedit')); }}
-												</div>
-											</fieldset>
-										{{ Form::close() }}
+													<div class="modal-footer">
+														<button class="btn btn-sm" data-dismiss="modal" id="btnclose">
+															<i class="icon-remove"></i>
+															Cancel
+														</button>
+														{{ Form::button('<i class="icon-ok"></i> <strong>Save</strong>', array('type' => 'Submit', 'class' => 'btn btn-sm btn-primary', 'id' => 'boeedit')); }}
+													</div>
+												</fieldset>
+											{{ Form::close() }}
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div> <!-- Bodhisattvas of the Earth -->
+					</div> <!-- Bodhisattvas of the Earth -->
+				@endif
 				<div hidden class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
 					<div class="widget-box widget-color-red">
 						<div class="widget-header">

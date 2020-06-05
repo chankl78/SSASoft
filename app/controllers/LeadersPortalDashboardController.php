@@ -12,7 +12,7 @@ class LeadersPortalDashboardController extends BaseController
 		$gakkaidistrict = AccessfCheck::getDistrictUser();
 		$gakkaidivision = Session::get('gakkaiuserdivision');
 		$boe = ''; $youthsubmit = ''; $discussionmeeting = ''; $studyexam = ''; $mddaimoku = '0';
-		$mdhomevisit = ''; $wdhomevisit = ''; $ymhomevisit = ''; $ywhomevisit = ''; $homevisitcampaign = '';
+		$mdhomevisit = ''; $wdhomevisit = ''; $ymhomevisit = ''; $ywhomevisit = ''; $homevisitcampaign = 0; $dialoguecampaign = 0;
 		$RGACRI = AccessfCheck::getSoftwareAdmin(Auth::user()->roleid, 'ACRI'); 
 
 		if ($gakkaidistrict == 't')
@@ -23,6 +23,7 @@ class LeadersPortalDashboardController extends BaseController
 			$studyexam = CampaignmDetail::getStudyExamDistrictValue();
 			$mddaimoku = CampaignmDetail::getMDDaimokuDistrictValue();
 			$homevisitcampaign = CampaignmCampaign:: getleadersportalcampaignaccess('districtregistration');
+			$dialoguecampaign = CampaignmCampaign:: getleadersportalcampaignpositionlevelaccess('districtregistration');
 			$mdhomevisit = CampaignmDetail::getHomeVisitMDDistrictValue();
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDDistrictValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMDistrictValue();
@@ -36,6 +37,7 @@ class LeadersPortalDashboardController extends BaseController
 			$studyexam = CampaignmDetail::getStudyExamChapterValue();
 			$mddaimoku = CampaignmDetail::getMDDaimokuChapterValue();
 			$homevisitcampaign = CampaignmCampaign::getleadersportalcampaignaccess('chapterregistration');
+			$dialoguecampaign = CampaignmCampaign:: getleadersportalcampaignpositionlevelaccess('chapterregistration');
 			$mdhomevisit = CampaignmDetail::getHomeVisitMDChapterValue();
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDChapterValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMChapterValue();
@@ -49,6 +51,7 @@ class LeadersPortalDashboardController extends BaseController
 			$studyexam = CampaignmDetail::getStudyExamZoneValue();
 			$mddaimoku = CampaignmDetail::getMDDaimokuZoneValue();
 			$homevisitcampaign = CampaignmCampaign::getleadersportalcampaignaccess('zoneregistration');
+			$dialoguecampaign = CampaignmCampaign:: getleadersportalcampaignpositionlevelaccess('zoneregistration');
 			$mdhomevisit = CampaignmDetail::getHomeVisitMDZoneValue();
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDZoneValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMZoneValue();
@@ -62,6 +65,7 @@ class LeadersPortalDashboardController extends BaseController
 			$studyexam = CampaignmDetail::getStudyExamRegionValue();
 			$mddaimoku = CampaignmDetail::getMDDaimokuRegionValue();
 			$homevisitcampaign = CampaignmCampaign::getleadersportalcampaignaccess('regionregistration');
+			$dialoguecampaign = CampaignmCampaign:: getleadersportalcampaignpositionlevelaccess('regionregistration');
 			$mdhomevisit = CampaignmDetail::getHomeVisitMDRegionValue();
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDRegionValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMRegionValue();
@@ -75,6 +79,7 @@ class LeadersPortalDashboardController extends BaseController
 			$studyexam = CampaignmDetail::getStudyExamSHQValue();
 			$mddaimoku = CampaignmDetail::getMDDaimokuSHQValue();
 			$homevisitcampaign = CampaignmCampaign::getleadersportalcampaignaccess('shqregistration');
+			$dialoguecampaign = CampaignmCampaign:: getleadersportalcampaignpositionlevelaccess('shqregistration');
 			$mdhomevisit = CampaignmDetail::getHomeVisitMDSHQValue();
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDSHQValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMSHQValue();
@@ -92,7 +97,7 @@ class LeadersPortalDashboardController extends BaseController
 			->with('studyexam', $studyexam)->with('mddaimoku', $mddaimoku)
 			->with('mdhomevisit', $mdhomevisit)->with('wdhomevisit', $wdhomevisit)
 			->with('ymhomevisit', $ymhomevisit)->with('ywhomevisit', $ywhomevisit)
-			->with( 'homevisitcampaign', $homevisitcampaign);
+			->with('homevisitcampaign', $homevisitcampaign)->with('dialoguecampaign', $dialoguecampaign);
 		$view->title = 'BOE Portal Dashboard';
 		return $view;
 	}

@@ -102,6 +102,12 @@ class CampaignmCampaign extends Eloquent {
         return $mid;
     }
 
+    public static function getleadersportalcampaignpositionlevelaccess($value)
+    {
+        $mid = DB::table('Campaign_m_Campaign')->where('id', 12)->pluck($value);
+        return $mid;
+    }
+
     public static function getFindDuplicateValue($value)
     {
         if (CampaignmCampaign::where('description', '=', $value)->count() >= 1) { return true; } else { return false; }
