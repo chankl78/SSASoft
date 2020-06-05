@@ -11,7 +11,7 @@ class LeadersPortalDashboardController extends BaseController
 		$gakkaichapter = AccessfCheck::getChapterUser();
 		$gakkaidistrict = AccessfCheck::getDistrictUser();
 		$gakkaidivision = Session::get('gakkaiuserdivision');
-		$boe = ''; $youthsubmit = ''; $discussionmeeting = ''; $studyexam = ''; $mddaimoku = '';
+		$boe = ''; $youthsubmit = ''; $discussionmeeting = ''; $studyexam = ''; $mddaimoku = '0';
 		$mdhomevisit = ''; $wdhomevisit = ''; $ymhomevisit = ''; $ywhomevisit = ''; $homevisitcampaign = '';
 		$RGACRI = AccessfCheck::getSoftwareAdmin(Auth::user()->roleid, 'ACRI'); 
 
@@ -487,21 +487,47 @@ class LeadersPortalDashboardController extends BaseController
 	}
 
 	// To be deleted after campaign
-	public function putBOEedit()
+	public function putBOEedit() // 20200605 Reuse for Together we dialogue Campaign
 	{
 		try
 		{
-			$post = CampaignmDetail::find(CampaignmDetail::getBOEid());
+			$gakkaishq = AccessfCheck::getSHQUser();
+			$gakkairegion = AccessfCheck::getRegionUser();
+			$gakkaizone = AccessfCheck::getZoneUser();
+			$gakkaichapter = AccessfCheck::getChapterUser();
+			$gakkaidistrict = AccessfCheck::getDistrictUser();
+			$campaignvalue = '';
+
+			$post = new CampaignmDetail;
+			$post->campaignid = 12;
+			$post->uniquecode = uniqid('',TRUE);
+			$post->campaigndetaildate = date('Y-m-d H:i:s');
+			$post->rhq = Session::get('gakkaiuserrhq');
+			$post->zone = Session::get('gakkaiuserzone');
+			$post->chapter = Session::get('gakkaiuserchapter');
+			$post->district = Session::get('gakkaiuserdistrict');
+			$post->division = Session::get('gakkaiuserdivision');
+			$post->position = Session::get('gakkaiuserposition');
+			$post->name = Session::get('gakkaiusername');
+			$post->personid = MembersmSSA::getpersonid(Session::get('gakkaiuseruc'));
+			$post->memberid = MembersmSSA::getid1(Session::get('gakkaiuseruc'));
 			$post->value = Input::get('value');
+			$post->campaigndetailtype = 'Actual';
+
 			$post->save();
 
 			if($post->save())
 			{
-				return Response::json(array('info' => 'Success'), 200);
+				if ($gakkaishq == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueSHQValue(); }
+				elseif ($gakkairegion == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueRegionValue(); }
+				elseif ($gakkaizone == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueZoneValue(); }
+				elseif ($gakkaichapter == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueChapterValue(); }
+				elseif ($gakkaidistrict == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueDistrictValue(); }
+				return Response::json(array('info' => 'Success', 'campaignvalue' => $campaignvalue), 200);
 			}
 			else
 			{
-				LogsfLogs::postLogs('Update', 26, 0, ' - Dashboard - BOE Failed to Update ' . CampaignmDetail::getBOEid() . Input::get('value'), NULL, NULL, 'Failed');
+				LogsfLogs::postLogs('Insert', 26, 0, ' - Dashboard - Togehter We Dialogue 2020 to Update ' . Input::get('value'), NULL, NULL, 'Failed');
 				return Response::json(array('info' => 'Failed'), 400);
 			}
 		}

@@ -757,6 +757,7 @@ Route::get('/BOEPortalCampaignListing/getListing', 'LeadersPortalCampaignListing
 Route::get('/BOEPortalCampaign/{id}', array('before' => 'auth', 'uses' => 'LeadersPortalCampaignController@getIndex'));
 Route::get('/BOEPortalCampaign/getModuleDetail/{id}', 'LeadersPortalCampaignController@getModuleDetail');
 Route::post('/BOEPortalCampaign/postEditModuleDetail/{id}', 'LeadersPortalCampaignController@postEditModuleDetail');
+Route::post('/BOEPortalCampaign/deleteModuleDetail/{id}', 'LeadersPortalCampaignController@deleteModuleDetail');
 
 // Leaders Portal Pre MAD Kenshu Training Listing
 Route::get('/BOEPortalPastPreMADTrainingListing', array('before' => 'auth', 'uses' => 'LeadersPortalPastPreMADTrainingListingController@getIndex'));

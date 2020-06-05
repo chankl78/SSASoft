@@ -64,4 +64,21 @@ class LeadersPortalCampaignController extends BaseController
 			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown', 'value' => $id), 400);
 		}
 	}
+
+	public function deleteModuleDetail($id)
+	{
+		try
+		{
+			$post = CampaignmDetail::where('uniquecode', $id);
+			$post->Delete();
+
+			LogsfLogs::postLogs('Delete', 34, $id,  ' Name: ' . Session::get('gakkaiusername') . ' RHQ: ' . Session::get('gakkaiuserrhq') . ' Zone: ' . Session::get('gakkaiuserzone') . ' Chapter: ' . Session::get('gakkaiuserchapter') . ' District: ' . Session::get('gakkaiuserdistrict') . ' Division: ' . Session::get('gakkaiuserdivision') . ' Position: ' . Session::get('gakkaiuserposition') . ' - BOE Event - Participant - ' . $id , NULL, NULL, 'Success');
+			return Response::json(array('info' => 'Success'), 200);
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Delete', 34, $id, ' - Campaign Detail - ' . $e, NULL, NULL, 'Failed');
+			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown', 'value' => $id), 400);
+		}
+	}
 }

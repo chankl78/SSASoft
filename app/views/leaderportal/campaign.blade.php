@@ -233,7 +233,7 @@
 				    	{
 					    	targets: [ 10 ], data: "uniquecode",
 					    	render: function ( data, type, full ){
-					    		return '@if ($readonly == false)<button type="submit" onClick=editrow("'+ data +'") class="btn btn-xs btn-info"><i class="fa fa-edit bigger-120"></i></button>@endif'
+					    		return '@if ($readonly == false)<button type="submit" onClick=editrow("'+ data +'") class="btn btn-xs btn-info"><i class="fa fa-edit bigger-120"></i></button> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button>@endif'
 						    }
 				    	}
 				    ]
@@ -258,6 +258,62 @@
 
                 $("#btnresourceedit").modal('show');
             });
+	    }
+
+		function deleterow(submit){ 
+	        noty({
+				layout: 'center', type: 'confirm', text: 'Do you want to delete record?',
+				animation: { open: 'animated tada', close: 'animated lightSpeedOut', easing: 'swing', speed: 500 },
+				timeout: 4000,
+				buttons: [
+				    {addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+				    	$noty.close();
+				    	noty({
+							layout: 'topRight', type: 'warning', text: 'Deleting Record ...',
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
+							timeout: 4000
+						});
+				    	$.ajax({
+					        url: 'deleteModuleDetail/' + submit,
+					        type: 'POST',
+					        data: { deletevalue: submit },
+					        dataType: 'json',
+					        statusCode: { 
+					        	200:function(){
+					        		var oDistrictTable = $('#tdistrict').DataTable();
+		        					oDistrictTable.ajax.reload(null, false);
+			            			noty({
+										layout: 'topRight', type: 'success', text: 'Record Deleted!!',
+										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500
+											},
+										timeout: 4000
+									}); 
+					        	},
+					        	400:function(data){ 
+					        		var txtMessage;
+					        		noty({
+										layout: 'topRight', type: 'error', text: 'Failed to Delete Record!! ' + " " + data.responseJSON.value,
+										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+											},
+										timeout: 4000
+									}); 
+					        	}
+					        }
+					    });
+				      }
+				    },
+				    {addClass: 'btn btn-danger', text: 'Cancel', onClick: function($noty) {
+				        $noty.close();
+				        noty({
+							layout: 'topRight', type: 'success', text: 'Delete Cancelled.',
+							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+				      }
+				    }
+				  ]
+			});
 	    }
 
 	    $('#resourceedit').submit(function(e){
