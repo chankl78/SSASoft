@@ -309,11 +309,11 @@ class MembersmImportSSA extends Eloquent {
 				}
 			}
 
-			LogsfLogs::postLogs('Update', 39, 0, ' - MembersmImportSSA Model - MMS to BOE Success ', NULL, NULL, 'Success');
+			LogsfLogs::postLogs('Update', 39, 0, ' - MembersmImportSSA Model DESC - MMS to BOE Success ', NULL, NULL, 'Success');
 		}
 		catch(\Exception $e) 
 		{
-			LogsfLogs::postLogs('Create', 39, 0, ' - MembersmImportSSA Model - MMS to BOE Failed - ' . $member['id'] . ' ' . $e, NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Create', 39, 0, ' - MembersmImportSSA Model DESC - MMS to BOE Failed - ' . $member['id'] . ' ' . $e, NULL, NULL, 'Failed');
 		}
 	}
 }
