@@ -84,27 +84,27 @@ class CampaignmDetail extends Eloquent {
     {
         if ($value2 == 'shq')
         {
-            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->selectRaw('sum(value) as value')->pluck('value');
+            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
             return $mid;
         }
         elseif ($value2 == 'rhq')
         {
-            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->where('rhq', Session::get('gakkaiuserrhq'))->selectRaw('sum(value) as value')->pluck('value');
+            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->where('deleted_at', NULL)->where('rhq', Session::get('gakkaiuserrhq'))->selectRaw('sum(value) as value')->pluck('value');
             return $mid;
         }
         elseif ($value2 == 'zone')
         {
-            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->where('zone', Session::get('gakkaiuserzone'))->selectRaw('sum(value) as value')->pluck('value');
+            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->where('deleted_at', NULL)->where('zone', Session::get('gakkaiuserzone'))->selectRaw('sum(value) as value')->pluck('value');
             return $mid;
         }
         elseif ($value2 == 'chapter')
         {
-            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->where('chapter', Session::get('gakkaiuserchapter'))->selectRaw('sum(value) as value')->pluck('value');
+            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->where('deleted_at', NULL)->where('chapter', Session::get('gakkaiuserchapter'))->selectRaw('sum(value) as value')->pluck('value');
             return $mid;
         }
         elseif ($value2 == 'district')
         {
-            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->selectRaw('sum(value) as value')->pluck('value');
+            $mid = DB::table('Campaign_m_Detail')->where('campaignid', $value)->where('deleted_at', NULL)->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->selectRaw('sum(value) as value')->pluck('value');
             return $mid;
         }
     }
