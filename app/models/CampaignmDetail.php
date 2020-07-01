@@ -343,6 +343,36 @@ class CampaignmDetail extends Eloquent {
         return $mid;
     }
 
+    public static function getHomeVisitYouthDistrictValue()
+    {
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('HOME')))->whereIn('division', array('YM', 'YW'))->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        return $mid;
+    }
+
+    public static function getHomeVisitYouthChapterValue()
+    {
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('HOME')))->whereIn('division', array('YM', 'YW'))->where('chapter', Session::get('gakkaiuserchapter'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        return $mid;
+    }
+
+    public static function getHomeVisitYouthZoneValue()
+    {
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('HOME')))->whereIn('division', array('YM', 'YW'))->where('zone', Session::get('gakkaiuserzone'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        return $mid;
+    }
+
+    public static function getHomeVisitYouthRegionValue()
+    {
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('HOME')))->whereIn('division', array('YM', 'YW'))->where('rhq', Session::get('gakkaiuserrhq'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        return $mid;
+    }
+
+    public static function getHomeVisitYouthSHQValue()
+    {
+        $mid = DB::table('Campaign_m_Detail')->where('campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('HOME')))->whereIn('division', array('YM', 'YW'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        return $mid;
+    }
+
     public static function getHomeVisitYWDistrictValue()
     {
         $mid = DB::table('Campaign_m_Detail')->where('campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('Home')))->where('division', 'YW')->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
@@ -423,13 +453,13 @@ class CampaignmDetail extends Eloquent {
 
     public static function getHomeVisitWDRegionValue()
     {
-        $mid = DB::table('Campaign_m_Detail')->where( 'campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('Home')))->where('division', 'WD')->where('rhq', Session::get('gakkaiuserrhq'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        $mid = DB::table('Campaign_m_Detail')->where( 'campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('HOME')))->where('division', 'WD')->where('rhq', Session::get('gakkaiuserrhq'))->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
         return $mid;
     }
 
     public static function getHomeVisitWDSHQValue()
     {
-        $mid = DB::table('Campaign_m_Detail')->where( 'campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('Home')))->where('division', 'WD')->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
+        $mid = DB::table('Campaign_m_Detail')->where( 'campaignid', CampaignmCampaign::getid(ConfigurationmDefault::DefaultCode('HOME')))->where('division', 'WD')->where('deleted_at', NULL)->selectRaw('sum(value) as value')->pluck('value');
         return $mid;
     }
 

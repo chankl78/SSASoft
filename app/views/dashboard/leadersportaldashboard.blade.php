@@ -62,7 +62,7 @@
 						</div>
 					</div>
 				@endif
-				@if ($homevisitcampaign == 1)
+				@if ($homevisitcampaign == 2)
 					@if ($gakkaishq == 't' or $gakkairegion == 't' or $gakkaizone == 't' or $gakkaichapter == 't' or $gakkaidistrict == 't')
 						<div class="col-xs-12 col-sm-12  widget-container-span ui-sortable">
 							<div class="widget-box widget-color-green">
@@ -192,10 +192,10 @@
 					@endif
 				@endif
 				@if ($dialoguecampaign == 1)
-					<div class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
+					<div class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
 						<div class="widget-box widget-color-blue">
 							<div class="widget-header">
-								<h5 class="widget-title">Together We Dialogue </h5>
+								<h5 class="widget-title">Together We Dialogue (MD) </h5>
 								<div class="widget-toolbar">
 									<a href="#" data-action="fullscreen" class="orange2">
 										<i class="ace-icon fa fa-expand"></i>
@@ -208,12 +208,12 @@
 							<div class="widget-body">
 								<div class="widget-main">
 									<div class="well well-lg">
-										<center><h1> <span id="spanboe">{{$boe}}</span> </h1></center>
+										<center><h1> <span id="spanboe">{{$mdhomevisit}}</span> </h1></center>
 									</div>
 								</div>
 								<div class="widget-toolbox padding-8 clearfix">
 									<div class="col-xs-12">
-										<a href="#btnboeedit" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add</a>
+										<a href="#btnboeedit" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add MD </a>
 									</div>
 								</div>
 								<div id="btnboeedit" class="modal" tabindex="-1">
@@ -228,7 +228,7 @@
 													<div class="modal-body overflow-visible">
 														<div class="row">
 															<div class="form-group">
-																{{ Form::label('eboe', 'No. of Dialogue:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																{{ Form::label('eboe', 'No. of Dialogue (MD):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																<div class="col-xs-12 col-sm-8">
 																	<div class="clearfix">
 																		{{ Form::text('eboe', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eboe'));}}
@@ -252,34 +252,30 @@
 							</div>
 						</div>
 					</div> <!-- Bodhisattvas of the Earth -->
-				@endif
-				<div hidden class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
-					<div class="widget-box widget-color-red">
-						<div class="widget-header">
-							<h5 class="widget-title">Youth Successors</h5>
-							<div class="widget-toolbar">
-								<a href="#" data-action="fullscreen" class="orange2">
-									<i class="ace-icon fa fa-expand"></i>
-								</a>
-								<a href="#" data-action="reload" onClick=reloaddt()>
-									<i class="fa fa-refresh"></i>
-								</a>
-							</div>
-						</div>
-						<div class="widget-body">
-							<div class="widget-main">
-								<div class="well well-lg">
-									<center><h1> <span id="spanyouthsubmit">{{$youthsubmit}}</span> </h1></center>
+					<div class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
+						<div class="widget-box widget-color-red">
+							<div class="widget-header">
+								<h5 class="widget-title">Together We Dialogue (WD)</h5>
+								<div class="widget-toolbar">
+									<a href="#" data-action="fullscreen" class="orange2">
+										<i class="ace-icon fa fa-expand"></i>
+									</a>
+									<a href="#" data-action="reload" onClick=reloaddt()>
+										<i class="fa fa-refresh"></i>
+									</a>
 								</div>
 							</div>
-							<div class="widget-toolbox padding-8 clearfix">
-								<div class="col-xs-12">
-									@if ($gakkaidistrict == 't')
-										<a href="#btnyouthsubmitedit" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-edit add bigger-120"></i> Edit</a>
-									@endif
+							<div class="widget-body">
+								<div class="widget-main">
+									<div class="well well-lg">
+										<center><h1> <span id="spanyouthsubmit">{{$wdhomevisit}}</span> </h1></center>
+									</div>
 								</div>
-							</div>
-							@if ($gakkaidistrict == 't')
+								<div class="widget-toolbox padding-8 clearfix">
+									<div class="col-xs-12">
+										<a href="#btnyouthsubmitedit" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add WD</a>
+									</div>
+								</div>
 								<div id="btnyouthsubmitedit" class="modal" tabindex="-1">
 									<div class="modal-dialog">
 										<div class="modal-content">
@@ -287,12 +283,12 @@
 												<fieldset>
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="blue bigger">Youth Successors Target</h4>
+														<h4 class="blue bigger">Add the number of Dialogue you do?</h4>
 													</div>
 													<div class="modal-body overflow-visible">
 														<div class="row">
 															<div class="form-group">
-																{{ Form::label('eyouthsubmit', 'Youth Successors:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																{{ Form::label('eyouthsubmit', 'No. of Dialogue (WD):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																<div class="col-xs-12 col-sm-8">
 																	<div class="clearfix">
 																		{{ Form::text('eyouthsubmit', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eyouthsubmit'));}}
@@ -313,37 +309,33 @@
 										</div>
 									</div>
 								</div>
-							@endif
-						</div>
-					</div>
-				</div> <!-- Youth Submit -->
-				<div hidden class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
-					<div class="widget-box widget-color-green">
-						<div class="widget-header">
-							<h5 class="widget-title">Discussion Meeting</h5>
-							<div class="widget-toolbar">
-								<a href="#" data-action="fullscreen" class="orange2">
-									<i class="ace-icon fa fa-expand"></i>
-								</a>
-								<a href="#" data-action="reload" onClick=reloaddt()>
-									<i class="fa fa-refresh"></i>
-								</a>
 							</div>
 						</div>
-						<div class="widget-body">
-							<div class="widget-main">
-								<div class="well well-lg">
-									<center><h1> <span id="spandiscussionmeeting">{{$discussionmeeting}}</span> </h1></center>
+					</div> <!-- Youth Submit -->
+					<div class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
+						<div class="widget-box widget-color-green">
+							<div class="widget-header">
+								<h5 class="widget-title">Together We Dialogue (Youth)</h5>
+								<div class="widget-toolbar">
+									<a href="#" data-action="fullscreen" class="orange2">
+										<i class="ace-icon fa fa-expand"></i>
+									</a>
+									<a href="#" data-action="reload" onClick=reloaddt()>
+										<i class="fa fa-refresh"></i>
+									</a>
 								</div>
 							</div>
-							<div class="widget-toolbox padding-8 clearfix">
-								<div class="col-xs-12">
-									@if ($gakkaidistrict == 't')
-										<a href="#btndiscussionmeetingedit" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-edit add bigger-120"></i> Edit</a>
-									@endif
+							<div class="widget-body">
+								<div class="widget-main">
+									<div class="well well-lg">
+										<center><h1> <span id="spandiscussionmeeting">{{$youthhomevisit}}</span> </h1></center>
+									</div>
 								</div>
-							</div>
-							@if ($gakkaidistrict == 't')
+								<div class="widget-toolbox padding-8 clearfix">
+									<div class="col-xs-12">
+										<a href="#btndiscussionmeetingedit" role="button" class="btn btn-xs btn-info pull-right" data-toggle="modal"><i class="fa fa-plus add bigger-120"></i> Add Youth</a>
+									</div>
+								</div>
 								<div id="btndiscussionmeetingedit" class="modal" tabindex="-1">
 									<div class="modal-dialog">
 										<div class="modal-content">
@@ -351,12 +343,12 @@
 												<fieldset>
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="blue bigger">Discussion Meeting Target</h4>
+														<h4 class="blue bigger">Add the number of Dialogue you do?</h4>
 													</div>
 													<div class="modal-body overflow-visible">
 														<div class="row">
 															<div class="form-group">
-																{{ Form::label('ediscussionmeeting', 'Discussion Meeting:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																{{ Form::label('ediscussionmeeting', 'No. of Dialogue (Youth):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																<div class="col-xs-12 col-sm-8">
 																	<div class="clearfix">
 																		{{ Form::text('ediscussionmeeting', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ediscussionmeeting'));}}
@@ -377,10 +369,10 @@
 										</div>
 									</div>
 								</div>
-							@endif
+							</div>
 						</div>
-					</div>
-				</div> <!-- Discussion Meeting -->
+					</div> <!-- Discussion Meeting -->
+				@endif
 				<div hidden class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
 					<div class="widget-box widget-color-purple">
 						<div class="widget-header">
@@ -1903,70 +1895,6 @@
 			});
 			
 			@if ($gakkaidistrict == 't')
-			    $('#youthsubmitedit').submit(function(e){
-			    	$.ajax({
-				        url: 'BOEPortalDashboard/putYouthSubmitedit',
-				        type: 'POST',
-				        data: { value: $("#eyouthsubmit").val()},
-				        dataType: 'json',
-				        statusCode: { 
-				        	200:function(){
-				        		$("#spanyouthsubmit").text($("#eyouthsubmit").val());
-				        		$("#eyouthsubmit").val(''); 
-		            			$("#btnyouthsubmitedit").modal('hide');
-				        	},
-				        	400:function(data){ 
-				        		var txtMessage;
-				        		if (data.responseJSON.ErrType == "Duplicate") 
-				        			{ txtMessage = 'Record already existed!'; }
-				        		else if (data.responseJSON.ErrType == "Failed")
-				        			{ txtMessage = 'Please check your entry!'; }
-				        		else { txtMessage = 'Please check your entry!'; }
-				        		$("#eyouthsubmit").focus();
-				        		noty({
-									layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
-									animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
-										},
-									timeout: 4000
-								});
-				        	}
-				        }
-				    });
-				    e.preventDefault();
-			    });
-
-			    $('#discussionmeetingedit').submit(function(e){
-			    	$.ajax({
-				        url: 'BOEPortalDashboard/putDiscussionMeetingedit',
-				        type: 'POST',
-				        data: { value: $("#ediscussionmeeting").val()},
-				        dataType: 'json',
-				        statusCode: { 
-				        	200:function(){
-				        		$("#spandiscussionmeeting").text($("#ediscussionmeeting").val());
-				        		$("#ediscussionmeeting").val(''); 
-		            			$("#btndiscussionmeetingedit").modal('hide');
-				        	},
-				        	400:function(data){ 
-				        		var txtMessage;
-				        		if (data.responseJSON.ErrType == "Duplicate") 
-				        			{ txtMessage = 'Record already existed!'; }
-				        		else if (data.responseJSON.ErrType == "Failed")
-				        			{ txtMessage = 'Please check your entry!'; }
-				        		else { txtMessage = 'Please check your entry!'; }
-				        		$("#ediscussionmeeting").focus();
-				        		noty({
-									layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
-									animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
-										},
-									timeout: 4000
-								});
-				        	}
-				        }
-				    });
-				    e.preventDefault();
-			    });
-
 			    $('#studyexamedit').submit(function(e){
 			    	$.ajax({
 				        url: 'BOEPortalDashboard/putStudyExamedit',
@@ -2059,6 +1987,82 @@
 								{ txtMessage = 'Please check your entry!'; }
 							else { txtMessage = 'Please check your entry!'; }
 							$("#eboe").focus();
+							noty({
+								layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
+								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+									},
+								timeout: 4000
+							});
+						}
+					}
+				});
+				e.preventDefault();
+			});
+			
+			$('#youthsubmitedit').submit(function(e){
+				$.ajax({
+					url: 'BOEPortalDashboard/putYouthSubmitedit',
+					type: 'POST',
+					data: { value: $("#eyouthsubmit").val()},
+					dataType: 'json',
+					statusCode: { 
+						200:function(data){
+							$("#spanyouthsubmit").text(data.campaignvalue);
+							$("#eyouthsubmit").val(''); 
+							noty({
+								layout: 'topRight', type: 'success', text: 'Thank you very much for your wonderful dialogue efforts in encouraging your members!',
+								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 300 
+									},
+								timeout: 4000
+							});
+							$("#btnyouthsubmitedit").modal('hide');
+						},
+						400:function(data){ 
+							var txtMessage;
+							if (data.responseJSON.ErrType == "Duplicate") 
+								{ txtMessage = 'Record already existed!'; }
+							else if (data.responseJSON.ErrType == "Failed")
+								{ txtMessage = 'Please check your entry!'; }
+							else { txtMessage = 'Please check your entry!'; }
+							$("#eyouthsubmit").focus();
+							noty({
+								layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
+								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+									},
+								timeout: 4000
+							});
+						}
+					}
+				});
+				e.preventDefault();
+			});
+
+			$('#discussionmeetingedit').submit(function(e){
+				$.ajax({
+					url: 'BOEPortalDashboard/putDiscussionMeetingedit',
+					type: 'POST',
+					data: { value: $("#ediscussionmeeting").val()},
+					dataType: 'json',
+					statusCode: { 
+						200:function(data){
+							$("#spandiscussionmeeting").text(data.campaignvalue);
+							$("#ediscussionmeeting").val('');
+							noty({
+								layout: 'topRight', type: 'success', text: 'Thank you very much for your wonderful dialogue efforts in encouraging your members!',
+								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 300 
+									},
+								timeout: 4000
+							});
+							$("#btndiscussionmeetingedit").modal('hide');
+						},
+						400:function(data){ 
+							var txtMessage;
+							if (data.responseJSON.ErrType == "Duplicate") 
+								{ txtMessage = 'Record already existed!'; }
+							else if (data.responseJSON.ErrType == "Failed")
+								{ txtMessage = 'Please check your entry!'; }
+							else { txtMessage = 'Please check your entry!'; }
+							$("#ediscussionmeeting").focus();
 							noty({
 								layout: 'topRight', type: 'error', text: 'Failed to Create!! ' + txtMessage,
 								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 

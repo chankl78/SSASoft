@@ -12,7 +12,7 @@ class LeadersPortalDashboardController extends BaseController
 		$gakkaidistrict = AccessfCheck::getDistrictUser();
 		$gakkaidivision = Session::get('gakkaiuserdivision');
 		$boe = ''; $youthsubmit = ''; $discussionmeeting = ''; $studyexam = ''; $mddaimoku = '0';
-		$mdhomevisit = ''; $wdhomevisit = ''; $ymhomevisit = ''; $ywhomevisit = ''; $homevisitcampaign = 0; $dialoguecampaign = 0;
+		$mdhomevisit = ''; $wdhomevisit = ''; $ymhomevisit = ''; $ywhomevisit = ''; $youthhomevisit = ''; $homevisitcampaign = 0; $dialoguecampaign = 0;
 		$RGACRI = AccessfCheck::getSoftwareAdmin(Auth::user()->roleid, 'ACRI'); 
 
 		if ($gakkaidistrict == 't')
@@ -28,6 +28,7 @@ class LeadersPortalDashboardController extends BaseController
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDDistrictValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMDistrictValue();
 			$ywhomevisit = CampaignmDetail::getHomeVisitYWDistrictValue();
+			$youthhomevisit = CampaignmDetail::getHomeVisitYouthDistrictValue();
 		}
 		elseif ($gakkaichapter == 't')
 		{
@@ -42,6 +43,7 @@ class LeadersPortalDashboardController extends BaseController
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDChapterValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMChapterValue();
 			$ywhomevisit = CampaignmDetail::getHomeVisitYWChapterValue();
+			$youthhomevisit = CampaignmDetail::getHomeVisitYouthChapterValue();
 		}
 		elseif ($gakkaizone == 't')
 		{
@@ -56,6 +58,7 @@ class LeadersPortalDashboardController extends BaseController
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDZoneValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMZoneValue();
 			$ywhomevisit = CampaignmDetail::getHomeVisitYWZoneValue();
+			$youthhomevisit = CampaignmDetail::getHomeVisitYouthZoneValue();
 		}
 		elseif ($gakkairegion == 't')
 		{
@@ -70,6 +73,7 @@ class LeadersPortalDashboardController extends BaseController
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDRegionValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMRegionValue();
 			$ywhomevisit = CampaignmDetail::getHomeVisitYWRegionValue();
+			$youthhomevisit = CampaignmDetail::getHomeVisitYouthRegionValue();
 		}
 		elseif ($gakkaishq == 't')
 		{
@@ -84,6 +88,7 @@ class LeadersPortalDashboardController extends BaseController
 			$wdhomevisit = CampaignmDetail::getHomeVisitWDSHQValue();
 			$ymhomevisit = CampaignmDetail::getHomeVisitYMSHQValue();
 			$ywhomevisit = CampaignmDetail::getHomeVisitYWSHQValue();
+			$youthhomevisit = CampaignmDetail::getHomeVisitYouthSHQValue();
 		}
 		
 		$view = View::make('dashboard/leadersportaldashboard')
@@ -97,6 +102,7 @@ class LeadersPortalDashboardController extends BaseController
 			->with('studyexam', $studyexam)->with('mddaimoku', $mddaimoku)
 			->with('mdhomevisit', $mdhomevisit)->with('wdhomevisit', $wdhomevisit)
 			->with('ymhomevisit', $ymhomevisit)->with('ywhomevisit', $ywhomevisit)
+			->with('youthhomevisit', $youthhomevisit)
 			->with('homevisitcampaign', $homevisitcampaign)->with('dialoguecampaign', $dialoguecampaign);
 		$view->title = 'BOE Portal Dashboard';
 		return $view;
@@ -511,7 +517,7 @@ class LeadersPortalDashboardController extends BaseController
 			$post->zone = Session::get('gakkaiuserzone');
 			$post->chapter = Session::get('gakkaiuserchapter');
 			$post->district = Session::get('gakkaiuserdistrict');
-			$post->division = Session::get('gakkaiuserdivision');
+			$post->division = 'MD';
 			$post->position = Session::get('gakkaiuserposition');
 			$post->name = Session::get('gakkaiusername');
 			$post->personid = MembersmSSA::getpersonid(Session::get('gakkaiuseruc'));
@@ -523,72 +529,124 @@ class LeadersPortalDashboardController extends BaseController
 
 			if($post->save())
 			{
-				if ($gakkaishq == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueSHQValue(); }
-				elseif ($gakkairegion == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueRegionValue(); }
-				elseif ($gakkaizone == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueZoneValue(); }
-				elseif ($gakkaichapter == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueChapterValue(); }
-				elseif ($gakkaidistrict == 't') { $campaignvalue = CampaignmDetail::getCampaignDetailValueDistrictValue(); }
+				if ($gakkaishq == 't') { $campaignvalue = CampaignmDetail::getHomeVisitMDSHQValue(); }
+				elseif ($gakkairegion == 't') { $campaignvalue = CampaignmDetail::getHomeVisitMDRegionValue(); }
+				elseif ($gakkaizone == 't') { $campaignvalue = CampaignmDetail::getHomeVisitMDZoneValue(); }
+				elseif ($gakkaichapter == 't') { $campaignvalue = CampaignmDetail::getHomeVisitMDChapterValue(); }
+				elseif ($gakkaidistrict == 't') { $campaignvalue = CampaignmDetail::getHomeVisitMDDistrictValue(); }
 				return Response::json(array('info' => 'Success', 'campaignvalue' => $campaignvalue), 200);
 			}
 			else
 			{
-				LogsfLogs::postLogs('Insert', 26, 0, ' - Dashboard - Togehter We Dialogue 2020 to Update ' . Input::get('value'), NULL, NULL, 'Failed');
+				LogsfLogs::postLogs('Insert', 26, 12, ' - Dashboard - Togehter We Dialogue 2020 to Update ', NULL, NULL, 'Failed');
 				return Response::json(array('info' => 'Failed'), 400);
 			}
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Update', 26, CampaignmDetail::getBOEid(), ' - Dashboard - BOE - ' . $e, NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Update', 26, 12, ' - Dashboard - Togehter We Dialogue 2020 to Update - ' . $e, NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown', 'Value' => 'NULL'), 400);
 		}
 	}
 
-	public function putYouthSubmitedit()
+	public function putYouthSubmitedit() // 20200605 Reuse for Together we dialogue Campaign
 	{
 		try
 		{
-			$post = CampaignmDetail::find(CampaignmDetail::getYouthSubmitid());
+			$gakkaishq = AccessfCheck::getSHQUser();
+			$gakkairegion = AccessfCheck::getRegionUser();
+			$gakkaizone = AccessfCheck::getZoneUser();
+			$gakkaichapter = AccessfCheck::getChapterUser();
+			$gakkaidistrict = AccessfCheck::getDistrictUser();
+			$campaignvalue = '';
+
+			$post = new CampaignmDetail;
+			$post->campaignid = 12;
+			$post->uniquecode = uniqid('',TRUE);
+			$post->campaigndetaildate = date('Y-m-d H:i:s');
+			$post->rhq = Session::get('gakkaiuserrhq');
+			$post->zone = Session::get('gakkaiuserzone');
+			$post->chapter = Session::get('gakkaiuserchapter');
+			$post->district = Session::get('gakkaiuserdistrict');
+			$post->division = 'WD';
+			$post->position = Session::get('gakkaiuserposition');
+			$post->name = Session::get('gakkaiusername');
+			$post->personid = MembersmSSA::getpersonid(Session::get('gakkaiuseruc'));
+			$post->memberid = MembersmSSA::getid1(Session::get('gakkaiuseruc'));
 			$post->value = Input::get('value');
+			$post->campaigndetailtype = 'Actual';
+
 			$post->save();
 
 			if($post->save())
 			{
-				return Response::json(array('info' => 'Success'), 200);
+				if ($gakkaishq == 't') { $campaignvalue = CampaignmDetail::getHomeVisitWDSHQValue(); }
+				elseif ($gakkairegion == 't') { $campaignvalue = CampaignmDetail::getHomeVisitWDRegionValue(); }
+				elseif ($gakkaizone == 't') { $campaignvalue = CampaignmDetail::getHomeVisitWDZoneValue(); }
+				elseif ($gakkaichapter == 't') { $campaignvalue = CampaignmDetail::getHomeVisitWDChapterValue(); }
+				elseif ($gakkaidistrict == 't') { $campaignvalue = CampaignmDetail::getHomeVisitWDDistrictValue(); }
+				return Response::json(array('info' => 'Success', 'campaignvalue' => $campaignvalue), 200);
 			}
 			else
 			{
-				LogsfLogs::postLogs('Update', 26, 0, ' - Dashboard - Youth Submit Failed to Update ' . CampaignmDetail::getYouthSubmitid() . Input::get('value'), NULL, NULL, 'Failed');
+				LogsfLogs::postLogs('Update', 26, 12, ' - Dashboard - Togehter We Dialogue 2020 to Update Failed to Update ', NULL, NULL, 'Failed');
 				return Response::json(array('info' => 'Failed'), 400);
 			}
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Update', 26, CampaignmDetail::getYouthSubmitid(), ' - Dashboard - Youth Submit - ' . $e, NULL, NULL, 'Failed');
-			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown', 'Value' => $id), 400);
+			LogsfLogs::postLogs('Update', 26, 12, ' - Dashboard - Togehter We Dialogue 2020 to Update - ' . $e, NULL, NULL, 'Failed');
+			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown', 'Value' => 'NULL'), 400);
 		}
 	}
 
-	public function putDiscussionMeetingedit()
+	public function putDiscussionMeetingedit() // 20200605 Reuse for Together we dialogue Campaign
 	{
 		try
 		{
-			$post = CampaignmDetail::find(CampaignmDetail::getDiscussionMeetingid());
+			$gakkaishq = AccessfCheck::getSHQUser();
+			$gakkairegion = AccessfCheck::getRegionUser();
+			$gakkaizone = AccessfCheck::getZoneUser();
+			$gakkaichapter = AccessfCheck::getChapterUser();
+			$gakkaidistrict = AccessfCheck::getDistrictUser();
+			$campaignvalue = '';
+
+			$post = new CampaignmDetail;
+			$post->campaignid = 12;
+			$post->uniquecode = uniqid('',TRUE);
+			$post->campaigndetaildate = date('Y-m-d H:i:s');
+			$post->rhq = Session::get('gakkaiuserrhq');
+			$post->zone = Session::get('gakkaiuserzone');
+			$post->chapter = Session::get('gakkaiuserchapter');
+			$post->district = Session::get('gakkaiuserdistrict');
+			$post->division = 'YM';
+			$post->position = Session::get('gakkaiuserposition');
+			$post->name = Session::get('gakkaiusername');
+			$post->personid = MembersmSSA::getpersonid(Session::get('gakkaiuseruc'));
+			$post->memberid = MembersmSSA::getid1(Session::get('gakkaiuseruc'));
 			$post->value = Input::get('value');
+			$post->campaigndetailtype = 'Actual';
+
 			$post->save();
 
 			if($post->save())
 			{
-				return Response::json(array('info' => 'Success'), 200);
+				if ($gakkaishq == 't') { $campaignvalue = CampaignmDetail::getHomeVisitYouthSHQValue(); }
+				elseif ($gakkairegion == 't') { $campaignvalue = CampaignmDetail::getHomeVisitYouthRegionValue(); }
+				elseif ($gakkaizone == 't') { $campaignvalue = CampaignmDetail::getHomeVisitYouthZoneValue(); }
+				elseif ($gakkaichapter == 't') { $campaignvalue = CampaignmDetail::getHomeVisitYouthChapterValue(); }
+				elseif ($gakkaidistrict == 't') { $campaignvalue = CampaignmDetail::getHomeVisitYouthDistrictValue(); }
+				return Response::json(array('info' => 'Success', 'campaignvalue' => $campaignvalue), 200);
 			}
 			else
 			{
-				LogsfLogs::postLogs('Update', 26, 0, ' - Dashboard - Discussion Meeting Failed to Update ' . CampaignmDetail::getDiscussionMeetingid() . Input::get('value'), NULL, NULL, 'Failed');
+				LogsfLogs::postLogs('Update', 26, 12, ' - Dashboard - Togehter We Dialogue 2020 to Update Failed to Update ', NULL, NULL, 'Failed');
 				return Response::json(array('info' => 'Failed'), 400);
 			}
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Update', 26, CampaignmDetail::getDiscussionMeetingid(), ' - Dashboard - Discussion Meeting - ' . $e, NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Update', 26, 12, ' - Dashboard - Togehter We Dialogue 2020 to Update - ' . $e, NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown', 'Value' => 'NULL'), 400);
 		}
 	}
