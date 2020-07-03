@@ -585,6 +585,7 @@ class AttendanceController extends BaseController
 				SET aa.tokangmembership = ap.TokangMembership, aa.md = ap.md, aa.wd = ap.wd, aa.ymd = ap.ymd, aa.ywd = ap.ywd, aa.pd = ap.pd, aa.yc = ap.yc, aa.attendancetotal = ap.DivisionAttendanceTotal, aa.ldr = ap.LDR, aa.mem = ap.MEM, aa.bel = ap.BEL, aa.nf = ap.NF, aa.ldrmd = ap.ldrmd, aa.memmd = ap.memmd, aa.belmd = ap.belmd, aa.nfmd = ap.nfmd, aa.ldrwd = ap.ldrwd, aa.memwd = ap.memwd, aa.belwd = ap.belwd, aa.nfwd = ap.nfwd, aa.ldrymd = ap.ldrymd, aa.memymd = ap.memymd, aa.belymd = ap.belymd, aa.nfymd = ap.nfymd, aa.ldrywd = ap.ldrywd, aa.memywd = ap.memywd, aa.belywd = ap.belywd, aa.nfywd = ap.nfywd, aa.mempdymd = ap.mempdymd, aa.belpdymd = ap.belpdymd, aa.nfpdymd = ap.nfpdymd, aa.mempdywd = ap.mempdywd, aa.belpdywd = ap.belpdywd, aa.nfpdywd = ap.nfpdywd, aa.memycymd = ap.memycymd, aa.belycymd = ap.belycymd, aa.nfycymd = ap.nfycymd, aa.memycywd = ap.memycywd, aa.belycywd = ap.belycywd, aa.nfycywd = ap.nfycywd WHERE aa.id = ap.id;';
 			DB::Statement($statement);
 
+			LogsfLogs::postLogs('Update', 34, 0, ' - Attendance Statistic Detail for DM Updated Successfully ', NULL, NULL, 'Success');
 			return Response::json(array('info' => 'Success'), 200);
 		}
 		catch(\Exception $e)
