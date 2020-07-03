@@ -223,7 +223,7 @@
 												<fieldset>
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="blue bigger">Add the number of Dialogue you do?</h4>
+														<h4 class="blue bigger">Number of Dialogue to Record</h4>
 													</div>
 													<div class="modal-body overflow-visible">
 														<div class="row">
@@ -253,7 +253,7 @@
 						</div>
 					</div> <!-- Bodhisattvas of the Earth -->
 					<div class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
-						<div class="widget-box widget-color-red">
+						<div class="widget-box widget-color-orange">
 							<div class="widget-header">
 								<h5 class="widget-title">Together We Dialogue (WD)</h5>
 								<div class="widget-toolbar">
@@ -283,7 +283,7 @@
 												<fieldset>
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="blue bigger">Add the number of Dialogue you do?</h4>
+														<h4 class="blue bigger">Number of Dialogue to Record</h4>
 													</div>
 													<div class="modal-body overflow-visible">
 														<div class="row">
@@ -313,7 +313,7 @@
 						</div>
 					</div> <!-- Youth Submit -->
 					<div class="col-xs-12 col-sm-3  widget-container-span ui-sortable">
-						<div class="widget-box widget-color-green">
+						<div class="widget-box widget-color-red">
 							<div class="widget-header">
 								<h5 class="widget-title">Together We Dialogue (Youth)</h5>
 								<div class="widget-toolbar">
@@ -343,12 +343,20 @@
 												<fieldset>
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="blue bigger">Add the number of Dialogue you do?</h4>
+														<h4 class="blue bigger">Number of Dialogue to Record</h4>
 													</div>
 													<div class="modal-body overflow-visible">
 														<div class="row">
 															<div class="form-group">
-																{{ Form::label('ediscussionmeeting', 'No. of Dialogue (Youth):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																{{ Form::label('edivision', 'Division:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		{{ Form::select('edivision', array('YM' => 'YMD', 'YW' => 'YWD'), 'YM', array('class' => 'col-xs-12 col-sm-11', 'id' => 'edivision'));}}
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																{{ Form::label('ediscussionmeeting', 'No. of Dialogue:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																<div class="col-xs-12 col-sm-8">
 																	<div class="clearfix">
 																		{{ Form::text('ediscussionmeeting', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ediscussionmeeting'));}}
@@ -438,7 +446,7 @@
 					</div>
 				</div> <!-- Study Exam -->
 				<div class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
-					<div class="widget-box widget-color-orange">
+					<div class="widget-box widget-color-green">
 						<div class="widget-header">
 							<h5 class="widget-title">Ever Victorious Daimoku Campagin (By Hour)</h5>
 							<div class="widget-toolbar">
@@ -2041,12 +2049,12 @@
 				$.ajax({
 					url: 'BOEPortalDashboard/putDiscussionMeetingedit',
 					type: 'POST',
-					data: { value: $("#ediscussionmeeting").val()},
+					data: { value: $("#ediscussionmeeting").val(), division: $("#edivision").val()},
 					dataType: 'json',
 					statusCode: { 
 						200:function(data){
 							$("#spandiscussionmeeting").text(data.campaignvalue);
-							$("#ediscussionmeeting").val('');
+							$("#ediscussionmeeting").val(''); $("#edivision").val('YM');
 							noty({
 								layout: 'topRight', type: 'success', text: 'Thank you very much for your wonderful dialogue efforts in encouraging your members!',
 								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 300 

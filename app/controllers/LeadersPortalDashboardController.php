@@ -619,7 +619,7 @@ class LeadersPortalDashboardController extends BaseController
 			$post->zone = Session::get('gakkaiuserzone');
 			$post->chapter = Session::get('gakkaiuserchapter');
 			$post->district = Session::get('gakkaiuserdistrict');
-			$post->division = 'YM';
+			$post->division = Input::get('division');
 			$post->position = Session::get('gakkaiuserposition');
 			$post->name = Session::get('gakkaiusername');
 			$post->personid = MembersmSSA::getpersonid(Session::get('gakkaiuseruc'));
