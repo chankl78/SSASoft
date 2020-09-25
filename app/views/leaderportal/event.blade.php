@@ -1578,7 +1578,7 @@
 															{{ Form::label('district', 'District:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">
-																	{{ Form::select('division', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'district'));}}
+																	{{ Form::select('district', array('' => '', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'district'));}}
 																</div>
 															</div>
 														</div>
