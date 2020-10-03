@@ -640,11 +640,18 @@ class LeadersPortalEventController extends BaseController
 	{
 		try
 		{
+			$personid = 0; $memberid = 0;
+			if (Input::get('uniquecode') != "")
+			{
+				$personid = MembersmSSA::getpersonid(Input::get('uniquecode'));
+				$memberid = MembersmSSA::getid1(Input::get('uniquecode'));
+			}
+
 			$post = new EventmRegistration;
 			$post->eventid = EventmEvent::getid(Input::get('id'));
 			$post->eventname = EventmEvent::geteventdescription(Input::get('id'));
-			$post->personid = 0;
-			$post->memberid = 0;
+			$post->personid = $personid;
+			$post->memberid = $memberid;
 			$post->name = Input::get('name');
 			$post->chinesename = Input::get('cname');
 			$post->rhq = Input::get('rhq');

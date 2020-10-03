@@ -4072,7 +4072,7 @@
 					$.ajax({
 				        url: 'postEventParticipantOthers/{{ $rid }}',
 				        type: 'POST',
-				        data: { name: $("#name").val(), cname: $("#cname").val(), mobile: $("#mobile").val(), position: $("#position").val(), division: $("#division").val(), rhq: $("#cbrhq").val(), zone: $("#cbzone").val(), chapter: $("#cbchapter").val(), district: $("#district").val(), id: "{{ $rid }}", introducer: $("#introducer").val(), language: $("#language").val(), country: $("#country").val(), session: $("#session").val(), dateofbirthtxt: $("#dateofbirthtxt").val(), remarks: $("#remarks").val()},
+				        data: { name: $("#name").val(), cname: $("#cname").val(), mobile: $("#mobile").val(), position: $("#position").val(), division: $("#division").val(), rhq: $("#cbrhq").val(), zone: $("#cbzone").val(), chapter: $("#cbchapter").val(), district: $("#district").val(), id: "{{ $rid }}", introducer: $("#introducer").val(), language: $("#language").val(), country: $("#country").val(), session: $("#session").val(), dateofbirthtxt: $("#dateofbirthtxt").val(), remarks: $("#remarks").val(), uniquecode: $("#uniquecode").val()},
 				        dataType: 'json',
 				        statusCode: { 
 				        	200:function(){
@@ -4451,6 +4451,7 @@
 								$("#division").val(data.division); $("#position").val(data.position);
 								$("#ecountry").val(data.nationality); $("#elanguage").val(data.language);
 								$("#session").val(data.session); $("#dateofbirthtxt").val(moment(data.dateofbirth).format("DD-MMM"));
+								$("#uniquecode").val(data.uniquecode);
 				        	},
 				        	400:function(data){ 
 				        		var txtMessage;
