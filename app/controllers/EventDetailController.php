@@ -39,6 +39,8 @@ class EventDetailController extends BaseController
 		$eventitem_options = array('' => 'Please Select an Item') + EventmEventItem::where('eventid', EventmEvent::getid($id))->orderBy('name', 'ASC')->lists('name', 'name');
 		$eventitemprint_options = array('' => 'Please Select an Item') + EventmEventItem::Role()
 			->where('eventid', EventmEvent::getid($id))->orderBy('name', 'ASC')->lists('name', 'name');
+		$eventsessionprint_options = array('' => 'Please Select Session') + EventmEventShow::Role()
+			->where('eventid', EventmEvent::getid($id))->orderBy('value', 'ASC')->lists('value', 'value');
 		$view->title = $pagetitle;
 		$view->with('REEV06A', $REEV06A)->with('rid', $id)->with('result', $query)->with('REEV02R', $REEV02R)
 			->with('REEV05R', $REEV05R)->with('REEV01R', $REEV01R)->with('REEV04A', $REEV04A)->with('REEVRRR', $REEVRRR)
@@ -50,7 +52,7 @@ class EventDetailController extends BaseController
 			->with('eventitem_options', $eventitem_options)->with('eventitemprint_options', $eventitemprint_options)
 			->with('ssagroup_options', $ssaeventgroup_options)->with('ssagroupprint_options', $ssaeventgroupprint_options)
 			->with('attendancetype_options', $attendancetype_options)->with('event_options', $event_options)
-			->with('eventregstatus_options', $eventregstatus_options)
+			->with('eventregstatus_options', $eventregstatus_options)->with('eventsessionprint_options', $eventsessionprint_options)
 			->with('division_options', $division_options)->with('divisiontype_options', $divisiontype_options);
 		return $view;
 	}
@@ -995,6 +997,9 @@ class EventDetailController extends BaseController
 					$post->event = EventmEvent::geteventnamepart($id);
 					$post->attendancedate = $datDate;
 					$post->eventitem = Input::get('atteventitem');
+					$post->eventsession = Input::get('atteventsession');
+					$post->byevent = Input::get('attbyevent');
+					$post->byeventsession = Input::get('attbyeventsession');
 					$post->description = Input::get('attdescription');
 					$post->attendancetype = Input::get('attendancetype');
 					$post->createbyname = Auth::user()->name;

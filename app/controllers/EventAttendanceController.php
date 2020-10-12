@@ -70,7 +70,8 @@ class EventAttendanceController extends BaseController
 
 	public function postNricSearchExpress($id)
 	{
-		$memberid = 0; $eventregid = 0;
+		$memberid = 0; $eventregid = 0; $byevent = 0; $byeventsession = 0; $samesession = 0;
+
 		// Step 1 - Search membership
 		try
 		{
@@ -93,15 +94,35 @@ class EventAttendanceController extends BaseController
 		try
 		{
 			$eventregid = EventmRegistration::getregidbymemberid(AttendancemAttendance::geteventid(Input::get('attendanceid')), $memberid);
+			LogsfLogs::postLogs('Debug', 34, 0, ' - Attendance Detail EventReg ID - ' . $eventregid, NULL, NULL, 'Failed');
 		}
 		catch(\Exception $e){ $eventregid = 0; }
 
 		// Step 3 - Insert Record into Attendance
+		LogsfLogs::postLogs('Debug', 34, 0, ' - Attendance Detail EventID - ' . AttendancemAttendance::geteventid(Input::get('attendanceid')), NULL, NULL, 'Failed');
+		LogsfLogs::postLogs('Debug', 34, 0, ' - Attendance Detail Member ID - ' . $memberid, NULL, NULL, 'Failed');
+		LogsfLogs::postLogs('Debug', 34, 0, ' - Attendance Detail EventReg ID 2 - ' . $eventregid, NULL, NULL, 'Failed');
+		
+		$byevent = AttendancemAttendance::getbyevent($id);
+		$byeventsession = AttendancemAttendance::getbyeventsession($id);
+
+		LogsfLogs::postLogs('Debug', 34, 0, ' - Attendance Detail By code - ' . $id, NULL, NULL, 'Failed');
+		LogsfLogs::postLogs('Debug', 34, 0, ' - Attendance Detail By Event - ' . $byevent, NULL, NULL, 'Failed');
+		LogsfLogs::postLogs('Debug', 34, 0, ' - Attendance Detail By Event Session - ' . $byeventsession, NULL, NULL, 'Failed');
+
 		if($memberid != 0 and $eventregid != 0)
 		{
-			$member = EventmRegistration::findorfail($eventregid, array('uniquecode', 'name', 'chinesename', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', 'memberid'));
+			$member = EventmRegistration::findorfail($eventregid, array('uniquecode', 'name', 'chinesename', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', 'memberid', 'session'));
 			$memberssa = MembersmSSA::findorfail($memberid, array('name', 'chinesename', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', 'id'));
 
+			if ($byeventsession == 1)
+			{
+				if ($memberssa['session'] != AttendancemAttendance::getsession(AttendancemAttendance::getid(Input::get('attendanceid'))))
+				{
+					LogsfLogs::postLogs('Create', 34, 0, ' - Attendance Detail - Different Session', NULL, NULL, 'Failed');
+					return Response::json(array('info' => 'Different Session'), 400);
+				}
+			}
 			if(AttendancemPerson::getEventAttendanceDuplicate($memberid, AttendancemAttendance::getid(Input::get('attendanceid')), $eventregid) == false)
 			{
 				$post = new AttendancemPerson;
@@ -137,40 +158,49 @@ class EventAttendanceController extends BaseController
 		}
 		else if ($memberid != 0 and $eventregid == 0)
 		{
-			$memberssa = MembersmSSA::findorfail($memberid, array('name', 'chinesename', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', 'id'));
-
-			if(AttendancemPerson::getEventAttendanceDuplicate($memberid, AttendancemAttendance::getid(Input::get('attendanceid')), $eventregid) == false)
+			if ($byevent == 1)
 			{
-				$post = new AttendancemPerson;
-				$post->attendanceid = AttendancemAttendance::getid(Input::get('attendanceid'));
-				$post->memberid = $memberid;
-				$post->eventid = AttendancemAttendance::geteventid(Input::get('attendanceid'));
-				$post->eventregid = 0;
-				$post->name = $memberssa['name'];
-				$post->chinesename = $memberssa['chinesename'];
-				$post->rhq = $memberssa['rhq'];
-				$post->zone = $memberssa['zone'];
-				$post->chapter = $memberssa['chapter'];
-				$post->district = $memberssa['district'];
-				$post->position = $memberssa['position'];
-				$post->positionlevel = $memberssa['positionlevel'];
-				$post->division = $memberssa['division'];
-				$post->noofnewfriend = 0;
-				$post->remarks = 'Attendee is not registered in the event.';
-				$post->uniquecode = uniqid('', TRUE);
-				$post->attendancestatus = 'Attended';
-				$post->save();
+				LogsfLogs::postLogs('Create', 34, 0, ' - Attendance Detail - Not Registered in Event', NULL, NULL, 'Failed');
+				return Response::json(array('info' => 'Not Registered'), 400);
+			}
+			else
+			{
+				$memberssa = MembersmSSA::findorfail($memberid, array('name', 'chinesename', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', 'id'));
 
-				if($post->save())
+				if(AttendancemPerson::getEventAttendanceDuplicate($memberid, AttendancemAttendance::getid(Input::get('attendanceid')), $eventregid) == false)
 				{
-					return Response::json(array('info' => 'Success', 'attendeename' => $memberssa['name']), 200);
-				}
-				else
-				{
-					LogsfLogs::postLogs('Create', 34, 0, ' - Attendance Detail - New Member - Failed to Save', NULL, NULL, 'Failed');
-					return Response::json(array('info' => 'Duplicate'), 400);
-				}
-			} else { return Response::json(array('info' => 'Failed', 'ErrType' => 'Duplicate'), 400); }
+					$post = new AttendancemPerson;
+					$post->attendanceid = AttendancemAttendance::getid(Input::get('attendanceid'));
+					$post->memberid = $memberid;
+					$post->eventid = AttendancemAttendance::geteventid(Input::get('attendanceid'));
+					$post->eventregid = 0;
+					$post->name = $memberssa['name'];
+					$post->chinesename = $memberssa['chinesename'];
+					$post->rhq = $memberssa['rhq'];
+					$post->zone = $memberssa['zone'];
+					$post->chapter = $memberssa['chapter'];
+					$post->district = $memberssa['district'];
+					$post->position = $memberssa['position'];
+					$post->positionlevel = $memberssa['positionlevel'];
+					$post->division = $memberssa['division'];
+					$post->noofnewfriend = 0;
+					$post->remarks = 'Attendee is not registered in the event.';
+					$post->uniquecode = uniqid('', TRUE);
+					$post->attendancestatus = 'Attended';
+					$post->save();
+
+					if($post->save())
+					{
+						return Response::json(array('info' => 'Success', 'attendeename' => $memberssa['name']), 200);
+					}
+					else
+					{
+						LogsfLogs::postLogs('Create', 34, 0, ' - Attendance Detail - New Member - Failed to Save', NULL, NULL, 'Failed');
+						return Response::json(array('info' => 'Duplicate'), 400);
+					}
+				} else { return Response::json(array('info' => 'Failed', 'ErrType' => 'Duplicate'), 400); }
+			}
+			
 		} 
 		else if ($memberid == 0 and $eventregid != 0)
 		{
@@ -490,7 +520,7 @@ class EventAttendanceController extends BaseController
 		    	->orderBy($sOrderBy, $sOrderdir)
 		    	->get(array('created_at', 'name', 'rhq', 'zone', 'chapter', 
 					'nric', 'division', 'status', 'uniquecode', 'dateofbirth', 'role', 'groupcode', 'auditioncode', 
-					'eventitem', 'costume9', 'cardno'))->toarray();
+					'eventitem', 'costume9', 'cardno', 'session'))->toarray();
 
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $default));

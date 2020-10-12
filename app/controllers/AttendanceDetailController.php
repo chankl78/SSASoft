@@ -523,6 +523,9 @@ class AttendanceDetailController extends BaseController
 				$post->attendancedate = $datDate;
 				$post->eventid = EventmEvent::getdescid(Input::get('eventattendance'));
 				$post->event = Input::get('eventattendance');
+				$post->byevent = Input::get('byevent');
+				$post->byeventsession = Input::get('byeventsession');
+				$post->eventsession = Input::get('atteventsession');
 				$post->groupid = GroupmGroup::getidbyname(Input::get('groupattendance'));
 				$post->groupname = Input::get('groupattendance');
 				$post->eventitem = Input::get('atteventitem');

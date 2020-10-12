@@ -108,6 +108,33 @@
 													</div>
 													<div class="space-2"></div>
 													<div class="form-group">
+														{{ Form::label('byevent', 'By Event', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-9">
+															<div class="clearfix">
+																{{ Form::checkbox('byevent', 'false', $result->byevent, array('id' => 'byevent'));}}
+															</div>
+														</div>
+													</div>
+													<div class="space-2"></div>
+													<div class="form-group">
+														{{ Form::label('byeventsession', 'By Event Session', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-9">
+															<div class="clearfix">
+																{{ Form::checkbox('byeventsession', 'false', $result->byeventsession, array('id' => 'byeventsession'));}}
+															</div>
+														</div>
+													</div>
+													<div class="space-2"></div>
+													<div class="form-group">
+														{{ Form::label('atteventsession', 'Event Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-9">
+															<div class="clearfix">
+																{{ Form::textarea('atteventsession', $result->eventsession, array('class' => 'col-xs-12 col-sm-9', 'rows' => '3'));}}
+															</div>
+														</div>
+													</div>
+													<div class="space-2"></div>
+													<div class="form-group">
 														{{ Form::label('groupattendance', 'Group:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-9">
 															<div class="clearfix">
@@ -1559,6 +1586,8 @@
 			});
 
 			$('#resourceupdate').submit(function(e){
+				if ($("#byevent").is(':checked')) { $("#byevent").val('1'); } else {$("#byevent").val('0'); }
+				if ($("#byeventsession").is(':checked')) { $("#byeventsession").val('1'); } else {$("#byeventsession").val('0'); }
 		    	noty({
 					layout: 'topRight', type: 'warning', text: 'Updating Record ...',
 					animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
@@ -1567,7 +1596,7 @@
 				$.ajax({
 			        url: 'putAttendance/' + $("#moduleid").val(),
 			        type: 'POST',
-			        data: { attendancedate: $("#attendancedate").val(), description: $("#description").val(), eventattendance: $("#eventattendance").val(), attendancetype: $("#attendancetype").val(), status: $("#status").val(), atteventitem: $("#atteventitem").val(), groupattendance: $("#groupattendance").val(), srmd: $("#srmd").val(), srwd: $("#srwd").val(), srymd: $("#srymd").val(), srywd: $("#srywd").val(), srmd: $("#hvmd").val(), srwd: $("#hvwd").val(), hvymd: $("#hvymd").val(), hvywd: $("#hvywd").val() },
+			        data: { attendancedate: $("#attendancedate").val(), description: $("#description").val(), byevent: $("#byevent").val(), byeventsession: $("#byeventsession").val(), eventattendance: $("#eventattendance").val(), attendancetype: $("#attendancetype").val(), status: $("#status").val(), atteventitem: $("#atteventitem").val(), atteventsession: $("#atteventsession").val(), groupattendance: $("#groupattendance").val(), srmd: $("#srmd").val(), srwd: $("#srwd").val(), srymd: $("#srymd").val(), srywd: $("#srywd").val(), srmd: $("#hvmd").val(), srwd: $("#hvwd").val(), hvymd: $("#hvymd").val(), hvywd: $("#hvywd").val() },
 			        dataType: 'json',
 			        statusCode: { 
 			        	200:function(){

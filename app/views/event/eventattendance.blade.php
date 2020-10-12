@@ -109,6 +109,15 @@
 													</div>
 													<div class="space-2"></div>
 													<div class="form-group">
+														{{ Form::label('atteventsession', 'Event Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-9">
+															<div class="clearfix">
+																{{ Form::textarea('atteventsession', $result->eventsession, array('class' => 'col-xs-12 col-sm-9', 'rows' => '3'));}}
+															</div>
+														</div>
+													</div>
+													<div class="space-2"></div>
+													<div class="form-group">
 														{{ Form::label('attendancetype', 'Attendance Type:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-9">
 															<div class="clearfix">
@@ -422,16 +431,17 @@
 											<table id="teventparticipant" class="table table-striped table-bordered table-hover">
 												<thead>
 													<tr>
-														<th class="hidden-480">Created At</th>
-														<th class="hidden-480">Name</th>
-														<th class="hidden-480">Item</th>
-														<th class="hidden-480">Code</th>
-														<th class="hidden-480">RHQ</th>
-														<th class="hidden-480">Div</th>
-														<th class="hidden-480">Role</th>
-														<th class="hidden-480">Status</th>
-														<th class="hidden-480">Aud Code</th>
-														<th class="hidden-480">Action</th>
+														<th>Created At</th>
+														<th>Name</th>
+														<th>Item</th>
+														<th>Session</th>
+														<th>Code</th>
+														<th>RHQ</th>
+														<th>Div</th>
+														<th>Role</th>
+														<th>Status</th>
+														<th>Aud Code</th>
+														<th>Action</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -1485,17 +1495,18 @@
 			    	},
 			    	{ "targets": [ 1 ], "data": "name", "searchable": "true" },
 			    	{ "targets": [ 2 ], "data": "eventitem", "searchable": "true" },
-			    	{ "targets": [ 3 ], "data": "groupcode", "searchable": "true" },
-			    	{ "targets": [ 4 ], "data": "rhq", "searchable": "true" },
-			    	{ "targets": [ 5 ], "data": "division", "searchable": "true" },
+					{ "targets": [ 3 ], "data": "session", "searchable": "true" },
+			    	{ "targets": [ 4 ], "data": "groupcode", "searchable": "true" },
+			    	{ "targets": [ 5 ], "data": "rhq", "searchable": "true" },
+			    	{ "targets": [ 6 ], "data": "division", "searchable": "true" },
 			    	{
-				    	"targets": [ 6 ], "data": "role",
+				    	"targets": [ 7 ], "data": "role",
 				    	"render": function ( data, type, full ){
 				    		return data.substring(0, 3) + '...';
 					    }
 			    	},
 			    	{
-				    	"targets": [ 7 ], "data": "status",
+				    	"targets": [ 8 ], "data": "status",
 				    	"render": function ( data, type, full ){
 						    if (data === 'Rejected'){
 						    	return '<span class="label label-danger arrowed-in">'+data+'</span>';
@@ -1520,9 +1531,9 @@
 						    }
 			    		}
 		    		},
-		    		{ "targets": [ 8 ], "data": "auditioncode", "searchable": "true" },
+		    		{ "targets": [ 9 ], "data": "auditioncode", "searchable": "true" },
 			    	{
-				    	"targets": [ 9 ], "data": "uniquecode",
+				    	"targets": [ 10 ], "data": "uniquecode",
 				    	"render": function ( data, type, full ){
 				    		// return '<span class="label label-danger arrowed-in">'+data+'</span>';
 				    		return '<button type="submit" onClick=attendaddrow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-thumbs-up bigger-120"></i></button> <button type="submit" onClick=absentaddrow("'+ data +'") class="btn btn-xs btn-warning"><i class="fa fa-thumbs-down bigger-120"></i></button>'
@@ -1694,6 +1705,8 @@
 			        		if (data.responseJSON.ErrType == "NoAccess") { txtMessage = 'You do not have access to Update!'; }
 		        			else if (data.responseJSON.ErrType == "Does Not Exist") { txtMessage = 'NRIC does not Exist!  Please check again'; }
 		        			else if (data.responseJSON.ErrType == "NOT IN Database and Event") { txtMessage = 'NRIC does not Exist in Membership database and event!  Please check again'; }
+							else if (data.responseJSON.ErrType == "Not Registered") { txtMessage = 'Attendee DID NOT registered in Event'; }
+							else if (data.responseJSON.ErrType == "Different Session") { txtMessage = 'Attendee registered in Another Session'; }
 		        			else if (data.responseJSON.ErrType == "Duplicate") { txtMessage = 'Attendee had already been added earlier!'; }
 			        		else { txtMessage = 'Please check your entry!'; }
 			        		noty({

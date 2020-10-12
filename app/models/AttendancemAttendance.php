@@ -96,6 +96,12 @@ class AttendancemAttendance extends Eloquent {
         return $mid;
     }
 
+    public static function getsession($value)
+    {
+        $mid = DB::table('Attendance_m_Attendance')->where('uniquecode', $value)->pluck('eventsession');
+        return $mid;
+    }
+
     public static function geteventid($value)
     {
         $mid = DB::table('Attendance_m_Attendance')->where('uniquecode', $value)->pluck('eventid');
@@ -231,6 +237,19 @@ class AttendancemAttendance extends Eloquent {
     public function scopeDistrictIndividualDMNotSubmittedStats($query)
     {
         return $query->where('rhq', Session::get('gakkaiuserrhq'))->where('zone', Session::get('gakkaiuserzone'))->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->where('status', 'Active')->where('attendancetotal', '<=', 5);
+    }
+
+    public static function getbyevent($value)
+    {
+        $mid = DB::table('Attendance_m_Attendance')->where('uniquecode', $value)->pluck('byevent');
+        LogsfLogs::postLogs('Debug', 34, 0, ' - getbyevent - ' . $mid . ' - ' . $value, NULL, NULL, 'Failed');
+        return $mid;
+    }
+
+    public static function getbyeventsession($value)
+    {
+        $mid = DB::table('Attendance_m_Attendance')->where('uniquecode', $value)->pluck('byeventsession');
+        return $mid;
     }
 
     public static function boot()

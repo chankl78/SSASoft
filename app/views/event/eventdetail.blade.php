@@ -1056,11 +1056,11 @@
 												<table id="tattendance" class="table table-striped table-bordered table-hover">
 													<thead>
 														<tr>
-															<th class="hidden-480">Training Date</th>
-															<th class="hidden-480">Event</th>
-															<th class="hidden-480">Event Item</th>
-															<th class="hidden-480">Description</th>
-															<th class="hidden-480">Action</th>
+															<th>Training Date</th>
+															<th>Event</th>
+															<th>Event Item</th>
+															<th>Description</th>
+															<th>Action</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -1107,6 +1107,30 @@
 																<div class="col-xs-12 col-sm-9">
 																	<div class="clearfix">
 																		{{ Form::select('atteventitem', $eventitemprint_options, array('class' => 'col-xs-12 col-sm-12', 'id' => 'atteventitem'));}}
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																{{ Form::label('attbyevent', 'Register By Event', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																<div class="col-xs-12 col-sm-9">
+																	<div class="clearfix">
+																		{{ Form::checkbox('attbyevent', 'false', 0, array('id' => 'attbyevent'));}}
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																{{ Form::label('attbyeventsession', 'By Event Show', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																<div class="col-xs-12 col-sm-9">
+																	<div class="clearfix">
+																		{{ Form::checkbox('attbyeventsession', 'false', 0, array('id' => 'attbyeventsession'));}}
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																{{ Form::label('atteventsession', 'Event Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																<div class="col-xs-12 col-sm-9">
+																	<div class="clearfix">
+																		{{ Form::select('atteventsession', $eventsessionprint_options, array('class' => 'col-xs-12 col-sm-12', 'id' => 'atteventsession'));}}
 																	</div>
 																</div>
 															</div>
@@ -2425,6 +2449,8 @@
 		})
 
 		$('#attendanceadd').submit(function(e){
+			if ($("#attbyevent").is(':checked')) { $("#attbyevent").val('1'); } else {$("#attbyevent").val('0'); }
+			if ($("#attbyeventsession").is(':checked')) { $("#attbyeventsession").val('1'); } else {$("#attbyeventsession").val('0'); }
 	    	noty({
 				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
 				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
@@ -2433,7 +2459,7 @@
 			$.ajax({
 		        url: 'postEventAttendance/' + $("#eventid").val(),
 		        type: 'POST',
-		        data: { attendancedate: $("#attendancedate").val(), attdescription: $("#attdescription").val(), atteventitem: $("#atteventitem").val(), attendancetype: $("#attendancetype").val()},
+		        data: { attendancedate: $("#attendancedate").val(), attdescription: $("#attdescription").val(), atteventitem: $("#atteventitem").val(), atteventsession: $("#atteventsession").val(), attbyevent: $("#attbyevent").val(), attbyeventsession: $("#attbyeventsession").val(), attendancetype: $("#attendancetype").val()},
 		        dataType: 'json',
 		        statusCode: { 
 		        	200:function(){
@@ -2441,7 +2467,8 @@
 		        		oattTable.clearPipeline().draw();
 		        		$("#btnattendanceeadd").modal('hide');
 		        		$("#attendancedate").val(''); $("#eventtype").val(''); $("#atteventitem").val('');
-		        		$("#attdescription").val('');
+		        		$("#attdescription").val(''); $("#atteventsession").val(''); 
+						$("#attbyevent").val(''); $("#attbyeventsession").val('');
 		        		$("#btnattendanceadd").modal('hide');
             			noty({
 							layout: 'topRight', type: 'success', text: 'Record Created!!',
