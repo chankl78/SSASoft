@@ -289,6 +289,14 @@
 														</div>
 													</div>
 													<div class="form-group" @if ($REEVGKA == 'f') hidden @endif>
+														{{ Form::label('sessionsizelimit', 'Session Size Limit', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-9">
+															<div class="clearfix">
+																{{ Form::checkbox('sessionsizelimit', 'false', $result->sessionsizelimit, array('id' => 'sessionsizelimit'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group" @if ($REEVGKA == 'f') hidden @endif>
 														{{ Form::label('languageselect', 'Select Language', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-9">
 															<div class="clearfix">
@@ -325,6 +333,14 @@
 														<div class="col-xs-12 col-sm-9">
 															<div class="clearfix">
 																{{ Form::checkbox('directaccept', 'false', $result->directaccept, array('id' => 'directaccept'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group" @if ($REEVGKA == 'f') hidden @endif>
+														{{ Form::label('mmsregistered', 'Only MMS Data', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-9">
+															<div class="clearfix">
+																{{ Form::checkbox('mmsregistered', 'false', $result->mmsregistered, array('id' => 'mmsregistered'));}}
 															</div>
 														</div>
 													</div>
@@ -1460,7 +1476,7 @@
 								<div class="col-xs-12 col-sm-12 widget-container-col ui-sortable">
 									<div class="widget-box widget-color-blue">
 										<div class="widget-header">
-											<h5 class="widget-title">Event Show</h5>
+											<h5 class="widget-title">Event Session</h5>
 											<div class="widget-toolbar">
 												<a href="#" data-action="reload">
 													<i class="fa fa-refresh"></i>
@@ -1474,7 +1490,9 @@
 														<tr>
 															<th>Created At</th>
 															<th>Line No</th>
-															<th>Event Show Date</th>
+															<th>Session Date</th>
+															<th>Size Capacity</th>
+															<th>Hide Value</th>
 															<th>Action</th>
 														</tr>
 													</thead>
@@ -1485,13 +1503,16 @@
 											<div class="widget-toolbox padding-8 clearfix">
 												{{ Form::open(array('action' => 'EventDetailController@postEventShow', 'id' => 'fEventShowAdd', 'class' => 'form-horizontal')) }}
 													<fieldset>
-															<div class="col-sm-offset-2 col-xs-2">
+															<div class="col-sm-offset-1 col-xs-2">
 																<div>
 																	{{ Form::text('txtESlineno', '', array('class' => 'form-control', 'placeholder' => 'Line No', 'id' => 'txtESlineno' )); }}
 																</div>
 															</div>
-															<div class="col-sm-offset-2 col-xs-5">
+															<div class="col-sm-offset-1 col-xs-5">
 																{{ Form::text('txtESvalue', '', array('class' => 'form-control', 'placeholder' => 'Please enter a value for new record', 'id' => 'txtESvalue' )); }}
+															</div>
+															<div class="col-sm-offset-1 col-xs-1">
+																{{ Form::text('txtESsize', '0', array('class' => 'form-control', 'placeholder' => 'Size Limit', 'id' => 'txtESsize' )); }}
 															</div>
 															<div hidden>
 																{{ Form::text('txtESeventid', $rid, array('class' => 'form-control', 'placeholder' => 'Please enter a value for new record', 'id' => 'txtESeventid' )); }}
@@ -1537,6 +1558,22 @@
 																<div class="col-xs-12 col-sm-9">
 																	<div class="clearfix">
 																		{{ Form::text('eESvalue', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eESvalue'));}}
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																{{ Form::label('eESsize', 'Size Limit:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																<div class="col-xs-12 col-sm-9">
+																	<div class="clearfix">
+																		{{ Form::text('eESsize', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eESsize'));}}
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																{{ Form::label('eEShidden', 'Hide Value', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																<div class="col-xs-12 col-sm-9">
+																	<div class="clearfix">
+																		{{ Form::checkbox('eEShidden', '', array('class' => 'col-xs-12 col-sm-11','id' => 'eEShidden'));}}
 																	</div>
 																</div>
 															</div>
@@ -4608,6 +4645,8 @@
                 RowID = oESTable.row(position).data();
                 $("#eESvalue").val(RowID.value);
 				$("#eESlineno").val(RowID.lineno);
+				$("#eESsize").val(RowID.sizelimit);
+				$("#eEShidden").val(RowID.hidden);
                 $("#eESvalueid").val(submit);
                 $("#resourceesedit").modal('show');
             });
@@ -5215,8 +5254,10 @@
 			    	},
 					{ "targets": [ 1 ], "data": "lineno", "searchable": "true" },
 			    	{ "targets": [ 2 ], "data": "value", "searchable": "true" },
+					{ "targets": [ 3 ], "data": "sizelimit", "searchable": "true" },
+					{ "targets": [ 4 ], "data": "hidden", "searchable": "true" },
 			    	{
-				    	"targets": [ 3 ], "data": "uniquecode",
+				    	"targets": [ 5 ], "data": "uniquecode",
 				    	"render": function ( data, type, full ){
 				    		return '<button type="submit" onClick=editesrow("'+ data +'") class="btn btn-xs btn-info"><i class="fa fa-edit bigger-120"></i></button> <button type="submit" onClick=deleteesrow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button>'
 					    }
@@ -5342,11 +5383,13 @@
 			if ($("#deleteonly").is(':checked')) { $("#deleteonly").val('1'); } else {$("#deleteonly").val('0'); }
 			if ($("#viewattendance").is(':checked')) { $("#viewattendance").val('1'); } else {$("#viewattendance").val('0'); }
 			if ($("#sessionselect").is(':checked')) { $("#sessionselect").val('1'); } else {$("#sessionselect").val('0'); }
+			if ($("#sessionsizelimit").is(':checked')) { $("#sessionsizelimit").val('1'); } else {$("#sessionsizelimit").val('0'); }
 			if ($("#languageselect").is(':checked')) { $("#languageselect").val('1'); } else {$("#languageselect").val('0'); }
 			if ($("#nationalityselect").is(':checked')) { $("#nationalityselect").val('1'); } else {$("#nationalityselect").val('0'); }
 			if ($("#moredetailselect").is(':checked')) { $("#moredetailselect").val('1'); } else {$("#moredetailselect").val('0'); }
 			if ($("#addnontokang").is(':checked')) { $("#addnontokang").val('1'); } else {$("#addnontokang").val('0'); }
 			if ($("#directaccept").is(':checked')) { $("#directaccept").val('1'); } else {$("#directaccept").val('0'); }
+			if ($("#mmsregistered").is(':checked')) { $("#mmsregistered").val('1'); } else {$("#mmsregistered").val('0'); }
 	    	noty({
 				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
 				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
@@ -5355,7 +5398,7 @@
 			$.ajax({
 		        url: 'putEvent/' + $("#eventid").val(),
 		        type: 'POST',
-		        data: { eventdate: $("#eventdate").val(), description: $("#description").val(), location: $("#location").val(), divisiontype: $("#divisiontype").val(), eventtype: $("#eventtype").val(), status: $("#status").val(), allowshqregistration: $("#allowshqregistration").val(), allowmemregistration: $("#allowmemregistration").val(), allowregionregistration: $("#allowregionregistration").val(), allowzoneregistration: $("#allowzoneregistration").val(), allowchapterregistration: $("#allowchapterregistration").val(), allowdistrictregistration: $("#allowdistrictregistration").val(), special: $("#allowspecialregistration").val(), readonly: $("#readonly").val(), addonly: $("#addonly").val(), editonly: $("#editonly").val(), deleteonly: $("#deleteonly").val(), viewattendance: $("#viewattendance").val(), sessionselect: $("#sessionselect").val(), languageselect: $("#languageselect").val(), moredetailselect: $("#moredetailselect").val(), addnontokang: $("#addnontokang").val(), directaccept: $("#directaccept").val() },
+		        data: { eventdate: $("#eventdate").val(), description: $("#description").val(), location: $("#location").val(), divisiontype: $("#divisiontype").val(), eventtype: $("#eventtype").val(), status: $("#status").val(), allowshqregistration: $("#allowshqregistration").val(), allowmemregistration: $("#allowmemregistration").val(), allowregionregistration: $("#allowregionregistration").val(), allowzoneregistration: $("#allowzoneregistration").val(), allowchapterregistration: $("#allowchapterregistration").val(), allowdistrictregistration: $("#allowdistrictregistration").val(), special: $("#allowspecialregistration").val(), readonly: $("#readonly").val(), addonly: $("#addonly").val(), editonly: $("#editonly").val(), deleteonly: $("#deleteonly").val(), viewattendance: $("#viewattendance").val(), sessionselect: $("#sessionselect").val(), sessionsizelimit: $("#sessionsizelimit").val(), languageselect: $("#languageselect").val(), moredetailselect: $("#moredetailselect").val(), addnontokang: $("#addnontokang").val(), directaccept: $("#directaccept").val(), mmsregistered: $("#mmsregistered").val() },
 		        dataType: 'json',
 		        statusCode: { 
 		        	200:function(){
@@ -5477,7 +5520,7 @@
 			$.ajax({
 		        url: 'postEventShow',
 		        type: 'POST',
-		        data: { txtESvalue: $("#txtESvalue").val(), txtESlineno: $("#txtESlineno").val(), txtESeventid: $("#txtESeventid").val() },
+		        data: { txtESvalue: $("#txtESvalue").val(), txtESlineno: $("#txtESlineno").val(), txtESsize: $("#txtESsize").val(), txtESeventid: $("#txtESeventid").val() },
 		        dataType: 'json',
 		        statusCode: { 
 		        	200:function(){
@@ -5485,6 +5528,7 @@
 						oESTable.clearPipeline().draw();
 						$("#txtESvalue").val('');
 						$("#txtESlineno").val('');
+						$("#txtESsize").val('');
 						$("#txtESvalueid").val('');
 		        		noty({
 							layout: 'topRight', type: 'success', text: 'Record Created!!',
@@ -5514,6 +5558,7 @@
 	    });
 
 		$('#resourceesupdate').submit(function(e){
+			if ($("#eEShidden").is(':checked')) { $("#eEShidden").val('1'); } else {$("#eEShidden").val('0'); }
 	    	noty({
 				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
 				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
@@ -5522,7 +5567,7 @@
 			$.ajax({
 		        url: 'putEventShow/' + $("#eESvalueid").val(),
 		        type: 'POST',
-		        data: { eESvalue: $("#eESvalue").val(), eESlineno: $("#eESlineno").val() },
+		        data: { eESvalue: $("#eESvalue").val(), eESlineno: $("#eESlineno").val(), eESsize: $("#eESsize").val(), eEShidden: $("#eEShidden").val() },
 		        dataType: 'json',
 		        statusCode: { 
 		        	200:function(){

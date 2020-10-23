@@ -1180,7 +1180,7 @@ class EventDetailController extends BaseController
 		    $iTotalDisplayRecords = EventmEventShow::Event($id)->Search('%'.$sSearch.'%', $id)->count();
 		    $default = EventmEventShow::Event($id)->Search('%'.$sSearch.'%', $id)
 		    	->take($iDisplayLength)->skip($iDisplayStart)
-		    	->orderBy($sOrderBy, $sOrderdir)->get(array('created_at', 'lineno', 'value', 'uniquecode'))->toarray();
+		    	->orderBy($sOrderBy, $sOrderdir)->get(array('created_at', 'lineno', 'value', 'sizelimit', 'hidden', 'uniquecode'))->toarray();
 
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $default));
@@ -1218,6 +1218,7 @@ class EventDetailController extends BaseController
 				$post->eventid = EventmEvent::getid(Input::get('txtESeventid'));
 				$post->lineno = Input::get('txtESlineno');
 				$post->value = Input::get('txtESvalue');
+				$post->sizelimit = Input::get('txtESsize');
 				$post->uniquecode = uniqid('', TRUE);
 				$post->save();
 
@@ -1252,6 +1253,8 @@ class EventDetailController extends BaseController
 			$post = EventmEventShow::find(EventmEventShow::getid($id));
 			$post->lineno = Input::get('eESlineno');
 			$post->value = Input::get('eESvalue');
+			$post->sizelimit = Input::get('eESsize');
+			$post->hidden = Input::get('eEShidden');
 			$post->save();
 
 			if($post->save())

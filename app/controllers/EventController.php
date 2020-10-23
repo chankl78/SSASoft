@@ -163,11 +163,13 @@ class EventController extends BaseController
 				$post->deleteonly = Input::get('deleteonly');
 				$post->viewattendance = Input::get('viewattendance');
 				$post->sessionselect = Input::get('sessionselect');
+				$post->sessionsizelimit = Input::get('sessionsizelimit');
 				$post->languageselect = Input::get('languageselect');
 				$post->nationalityselect = Input::get('nationalityselect');
 				$post->moredetailselect = Input::get('moredetailselect');
 				$post->addnontokang = Input::get('addnontokang');
 				$post->directaccept = Input::get('directaccept');
+				$post->mmsregistered = Input::get('mmsregistered');
 
 				$post->save();
 
