@@ -2437,50 +2437,50 @@
 								@endif
 							@endif
 							@if ($sessionsizelimit == 1)
-							<div class="col-xs-12 col-sm-4 widget-container-span ui-sortable">
-								<div class="widget-box widget-color-purple">
-									<div class="widget-header">
-										<h5 class="widget-title">Session Total</h5>
-										<div class="widget-toolbar">
-											<a href="#" data-action="fullscreen" class="orange2">
-												<i class="ace-icon fa fa-expand"></i>
-											</a>
-											<a href="#" data-action="reload" onClick=reloaddt()>
-												<i class="fa fa-refresh"></i>
-											</a>
-										</div>
-									</div>
-									<div class="widget-body">
-										<div class="widget-toolbox padding-8 clearfix">
-											<div class="col-xs-12">
+								<div class="col-xs-12 col-sm-4 widget-container-span ui-sortable">
+									<div class="widget-box widget-color-purple">
+										<div class="widget-header">
+											<h5 class="widget-title">Session Total</h5>
+											<div class="widget-toolbar">
+												<a href="#" data-action="fullscreen" class="orange2">
+													<i class="ace-icon fa fa-expand"></i>
+												</a>
+												<a href="#" data-action="reload" onClick=reloaddt()>
+													<i class="fa fa-refresh"></i>
+												</a>
 											</div>
 										</div>
-										<div class="widget-main">
-											<table id="tsessiontotalstats" class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th>Session</th>
-														<th>Capacity</th>
-														<th>Registered</th>
-														<th>Available</th>
-													</tr>
-												</thead>
-												<tbody>
-												</tbody>
-												<tfoot id="tsessiontotalstatsfoot">
-													<tr>
-														<th>Total</th><th></th><th></th><th></th>
-													</tr>
-												</tfoot>
-											</table>
-										</div>
-										<div class="widget-toolbox padding-8 clearfix">
-											<div class="col-xs-12">
+										<div class="widget-body">
+											<div class="widget-toolbox padding-8 clearfix">
+												<div class="col-xs-12">
+												</div>
+											</div>
+											<div class="widget-main">
+												<table id="tsessiontotalstats" class="table table-striped table-bordered table-hover">
+													<thead>
+														<tr>
+															<th>Session</th>
+															<th>Capacity</th>
+															<th>Registered</th>
+															<th>Available</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>
+													<tfoot id="tsessiontotalstatsfoot">
+														<tr>
+															<th>Total</th><th></th><th></th><th></th>
+														</tr>
+													</tfoot>
+												</table>
+											</div>
+											<div class="widget-toolbox padding-8 clearfix">
+												<div class="col-xs-12">
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</div> <!-- Session Total Stats -->
+								</div> <!-- Session Total Stats -->
 							@endif
 						</div>
 					</div>
