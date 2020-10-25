@@ -26,6 +26,23 @@ class EventmEventShow extends Eloquent {
         return $query->where('eventid', EventmEvent::getid($value));
     }
 
+    public function scopeEventSessionSizeNotExceedMax($query, $id)
+    {
+        return $query->leftjoin('Event_m_Registration', 'Event_m_EventShow.value', '=', 'Event_m_Registration.session')
+        ->where('Event_m_EventShow.eventid', $id)
+        ->havingRaw('count(Event_m_Registration.name) < Event_m_EventShow.sizelimit')
+        ->groupby('Event_m_EventShow.value')
+        ->select(DB::raw('Event_m_EventShow.value, Event_m_EventShow.sizelimit, Count(Event_m_Registration.name) as "total", Event_m_EventShow.sizelimit - Count(Event_m_Registration.name) as "reminder"'));
+    }
+
+    public function scopeEventSessionSizeWithTotal($query, $id)
+    {
+        return $query->leftjoin('Event_m_Registration', 'Event_m_EventShow.value', '=', 'Event_m_Registration.session')
+        ->where('Event_m_EventShow.eventid', $id)
+        ->groupby('Event_m_EventShow.value')
+        ->select(DB::raw('Event_m_EventShow.value, Event_m_EventShow.sizelimit, Count(Event_m_Registration.name) as "total", Event_m_EventShow.sizelimit - Count(Event_m_Registration.name) as "reminder"'));
+    }
+
     public static function getid($value)
     {
         $mid = DB::table('Event_m_EventShow')->where('uniquecode', $value)->pluck('id');

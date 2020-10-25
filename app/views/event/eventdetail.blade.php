@@ -337,6 +337,14 @@
 														</div>
 													</div>
 													<div class="form-group" @if ($REEVGKA == 'f') hidden @endif>
+														{{ Form::label('noyoungchildren', 'No Young Children', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+														<div class="col-xs-12 col-sm-9">
+															<div class="clearfix">
+																{{ Form::checkbox('noyoungchildren', 'false', $result->noyoungchildren, array('id' => 'noyoungchildren'));}}
+															</div>
+														</div>
+													</div>
+													<div class="form-group" @if ($REEVGKA == 'f') hidden @endif>
 														{{ Form::label('mmsregistered', 'Only MMS Data', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-9">
 															<div class="clearfix">
@@ -5389,6 +5397,7 @@
 			if ($("#moredetailselect").is(':checked')) { $("#moredetailselect").val('1'); } else {$("#moredetailselect").val('0'); }
 			if ($("#addnontokang").is(':checked')) { $("#addnontokang").val('1'); } else {$("#addnontokang").val('0'); }
 			if ($("#directaccept").is(':checked')) { $("#directaccept").val('1'); } else {$("#directaccept").val('0'); }
+			if ($("#noyoungchildren").is(':checked')) { $("#noyoungchildren").val('1'); } else {$("#noyoungchildren").val('0'); }
 			if ($("#mmsregistered").is(':checked')) { $("#mmsregistered").val('1'); } else {$("#mmsregistered").val('0'); }
 	    	noty({
 				layout: 'topRight', type: 'warning', text: 'Updating Record ...',
@@ -5398,7 +5407,7 @@
 			$.ajax({
 		        url: 'putEvent/' + $("#eventid").val(),
 		        type: 'POST',
-		        data: { eventdate: $("#eventdate").val(), description: $("#description").val(), location: $("#location").val(), divisiontype: $("#divisiontype").val(), eventtype: $("#eventtype").val(), status: $("#status").val(), allowshqregistration: $("#allowshqregistration").val(), allowmemregistration: $("#allowmemregistration").val(), allowregionregistration: $("#allowregionregistration").val(), allowzoneregistration: $("#allowzoneregistration").val(), allowchapterregistration: $("#allowchapterregistration").val(), allowdistrictregistration: $("#allowdistrictregistration").val(), special: $("#allowspecialregistration").val(), readonly: $("#readonly").val(), addonly: $("#addonly").val(), editonly: $("#editonly").val(), deleteonly: $("#deleteonly").val(), viewattendance: $("#viewattendance").val(), sessionselect: $("#sessionselect").val(), sessionsizelimit: $("#sessionsizelimit").val(), languageselect: $("#languageselect").val(), moredetailselect: $("#moredetailselect").val(), addnontokang: $("#addnontokang").val(), directaccept: $("#directaccept").val(), mmsregistered: $("#mmsregistered").val() },
+		        data: { eventdate: $("#eventdate").val(), description: $("#description").val(), location: $("#location").val(), divisiontype: $("#divisiontype").val(), eventtype: $("#eventtype").val(), status: $("#status").val(), allowshqregistration: $("#allowshqregistration").val(), allowmemregistration: $("#allowmemregistration").val(), allowregionregistration: $("#allowregionregistration").val(), allowzoneregistration: $("#allowzoneregistration").val(), allowchapterregistration: $("#allowchapterregistration").val(), allowdistrictregistration: $("#allowdistrictregistration").val(), special: $("#allowspecialregistration").val(), readonly: $("#readonly").val(), addonly: $("#addonly").val(), editonly: $("#editonly").val(), deleteonly: $("#deleteonly").val(), viewattendance: $("#viewattendance").val(), sessionselect: $("#sessionselect").val(), sessionsizelimit: $("#sessionsizelimit").val(), languageselect: $("#languageselect").val(), moredetailselect: $("#moredetailselect").val(), addnontokang: $("#addnontokang").val(), directaccept: $("#directaccept").val(), noyoungchildren: $("#noyoungchildren").val(), mmsregistered: $("#mmsregistered").val() },
 		        dataType: 'json',
 		        statusCode: { 
 		        	200:function(){

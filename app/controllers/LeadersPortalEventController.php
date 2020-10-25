@@ -27,6 +27,7 @@ class LeadersPortalEventController extends BaseController
 		$deleteonly = EventmEvent::getdeleteonly($id);
 		$addnontokang = EventmEvent::getaddnontokang($id);
 		$directaccept = EventmEvent::getdirectaccept($id);
+		$sessionsizelimit = EventmEvent::getsessionsizelimit($id);
 		$rhq_options = MemberszOrgChart::Rhq()->lists('rhq', 'rhqabbv');
 		$zone_options = array('' => 'Please Select a Zone') + MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
 		$chapter_options = array('' => 'Please Select a Chapter') + MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
@@ -36,7 +37,14 @@ class LeadersPortalEventController extends BaseController
 		else { $language_options = array('' => 'Please Select a Language') + EventzLanguage::Role()->where('studyexam', 0)->lists('value', 'value'); }
 		$country_options = array('' => 'Please Select a Country') + EventzCountry::Role()->lists('value', 'value');
 		$position_options = MemberszPosition::Role()->whereIn('level', array('bel', 'nf', 'mem', 'district'))->orderBy('name', 'ASC')->lists('name', 'code');
-		$sessionshow_options = array('' => 'Please Select a Session') + EventmEventShow::Role()->where('eventid', EventmEvent::getid($id))->lists('value', 'value');
+		if ($sessionsizelimit == 0)
+		{
+			$sessionshow_options = array('' => 'Please Select a Session') + EventmEventShow::Role()->where('eventid', EventmEvent::getid($id))->where('hidden', 0)->lists('value', 'value');
+		}
+		else
+		{
+			$sessionshow_options = array('' => 'Please Select a Session') + EventmEventShow::EventSessionSizeNotExceedMax(EventmEvent::getid($id))->lists('value', 'value');
+		}
 		$division_options = MemberszDivision::Role()->lists('name', 'code');
 		$rhq = Session::get('gakkaiuserrhq');
 		$zone = Session::get('gakkaiuserzone');
@@ -124,7 +132,8 @@ class LeadersPortalEventController extends BaseController
 			->with('youthsummittickets', $youthsummittickets)->with('youthsummit', $youthsummit)
 			->with('languageselect', $languageselect)->with('nationalityselect', $nationalityselect)
 			->with('addnontokang', $addnontokang)->with('directaccept', $directaccept)
-			->with('moredetailselect', $moredetailselect)->with('division_options', $division_options);
+			->with('moredetailselect', $moredetailselect)->with('division_options', $division_options)
+			->with('sessionsizelimit', $sessionsizelimit);
 	}
 
 	public function getZone($id)
@@ -169,6 +178,19 @@ class LeadersPortalEventController extends BaseController
 			{
 				$result = MembersmSSA::MADEligibleListing()->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
 				return Response::json(array('data' => $result));
+			}
+			else if (EventmEvent::getmmsregistered($id) == true)
+			{
+				if (EventmEvent::getnoyoungchildren($id) == false)
+				{
+					$result = MembersmSSA::Role()->where('personid', '!=', 0)->EventType(EventmEvent::getdivisiontype($id))->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
+					return Response::json(array('data' => $result));
+				}
+				else
+				{
+					$result = MembersmSSA::Role()->where('personid', '!=', 0)->whereNotIn('division', array('YCYM', 'YCYW'))->EventType(EventmEvent::getdivisiontype($id))->get(array('name', 'chinesename', 'division', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode'));
+					return Response::json(array('data' => $result));
+				}
 			}
 			else 
 			{
@@ -486,6 +508,19 @@ class LeadersPortalEventController extends BaseController
 		}
 	}
 
+	public function getSessionTotalStats($id) // Server-Side Datatable
+	{
+		try
+		{
+			$result = EventmEventShow::EventSessionSizeWithTotal(EventmEvent::getid($id))->get();
+		    return Response::json(array('data' => $result));
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Read', 34, 0, ' - Leaders Portal - Session Total Listing [DT] - ' . $e, NULL, NULL, 'Failed');
+		}
+	}
+
 	public function getRHQEventTrainingStats($id) // Server-Side Datatable
 	{
 		try
@@ -641,10 +676,20 @@ class LeadersPortalEventController extends BaseController
 		try
 		{
 			$personid = 0; $memberid = 0;
+			if (EventmEvent::getsessionsizelimit($id) == 1)
+			{
+
+			}
+
 			if (Input::get('uniquecode') != "")
 			{
 				$personid = MembersmSSA::getpersonid(Input::get('uniquecode'));
 				$memberid = MembersmSSA::getid1(Input::get('uniquecode'));
+
+				if (EventmRegistration::getEventMemberDuplicate(MembersmSSA::getid1(Input::get('uniquecode')), EventmEvent::getid($id)) == true)
+				{
+					return Response::json(array('info' => 'Duplicate'), 400);
+				}
 			}
 
 			$post = new EventmRegistration;

@@ -169,6 +169,7 @@ class EventController extends BaseController
 				$post->moredetailselect = Input::get('moredetailselect');
 				$post->addnontokang = Input::get('addnontokang');
 				$post->directaccept = Input::get('directaccept');
+				$post->noyoungchildren = Input::get('noyoungchildren');
 				$post->mmsregistered = Input::get('mmsregistered');
 
 				$post->save();

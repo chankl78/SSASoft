@@ -249,6 +249,12 @@ class EventmEvent extends Eloquent {
         return $mid;
     }
 
+    public static function getsessionsizelimit($value)
+    {
+        $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('sessionsizelimit');
+        return $mid;
+    }
+
     public static function getlanguageselect($value)
     {
         $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('languageselect');
@@ -276,6 +282,18 @@ class EventmEvent extends Eloquent {
     public static function getdirectaccept($value)
     {
         $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('directaccept');
+        return $mid;
+    }
+
+    public static function getnoyoungchildren($value)
+    {
+        $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('noyoungchildren');
+        return $mid;
+    }
+
+    public static function getmmsregistered($value)
+    {
+        $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('mmsregistered');
         return $mid;
     }
 

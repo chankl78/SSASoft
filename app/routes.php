@@ -730,7 +730,7 @@ Route::get('/BOEPortalEvent/getStatusDivisionDistrictStats/{id}', 'LeadersPortal
 Route::get('/BOEPortalEvent/getRSVPShowRHQStats/{id}', 'LeadersPortalEventController@getRSVPShowRHQStats');
 Route::get('/BOEPortalEvent/getRSVPShowZoneStats/{id}', 'LeadersPortalEventController@getRSVPShowZoneStats');
 Route::get('/BOEPortalEvent/getRSVPShowChapterStats/{id}', 'LeadersPortalEventController@getRSVPShowChapterStats');
-Route::get('/BOEPortalEvent/getRSVPShowDistrictStats/{id}', 'LeadersPortalEventController@getRSVPShowDistrictStats');
+Route::get('/BOEPortalEvent/getSessionTotalStats/{id}', 'LeadersPortalEventController@getSessionTotalStats');
 
 // Youth Summit Event, to be deleted after the event.
 Route::get('/BOEPortalEvent/getYSParticipants/{id}', 'LeadersPortalEventController@getYSParticipants');
