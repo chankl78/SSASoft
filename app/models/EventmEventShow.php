@@ -28,19 +28,19 @@ class EventmEventShow extends Eloquent {
 
     public function scopeEventSessionSizeNotExceedMax($query, $id)
     {
-        return $query->leftjoin('Event_m_Registration', 'Event_m_EventShow.value', '=', 'Event_m_Registration.session')
-        ->where('Event_m_EventShow.eventid', $id)
-        ->havingRaw('count(Event_m_Registration.name) < Event_m_EventShow.sizelimit')
-        ->groupby('Event_m_EventShow.value')
-        ->select(DB::raw('Event_m_EventShow.value, Event_m_EventShow.sizelimit, Count(Event_m_Registration.name) as "total", Event_m_EventShow.sizelimit - Count(Event_m_Registration.name) as "reminder"'));
+        return $query->leftjoin(DB::raw('(SELECT session, count(name) as "total" FROM Event_m_Registration WHERE eventid = ' . $id . ' and deleted_at IS NULL GROUP BY session) er'), 'Event_m_EventShow.value' , '=', 'er.session')
+            ->where('Event_m_EventShow.eventid', $id)->groupby('Event_m_EventShow.value')
+            ->select(DB::raw('Event_m_EventShow.value, Event_m_EventShow.sizelimit, CASE WHEN er.total IS NULL Then 0 ELSE er.total END as "total", CASE WHEN er.total IS NULL Then Event_m_EventShow.sizelimit - 0 ELSE Event_m_EventShow.sizelimit - er.total END as "reminder"'))
+            ->havingRaw('total < Event_m_EventShow.sizelimit')
+            ->orderby('Event_m_EventShow.lineno');
     }
 
     public function scopeEventSessionSizeWithTotal($query, $id)
     {
-        return $query->leftjoin('Event_m_Registration', 'Event_m_EventShow.value', '=', 'Event_m_Registration.session')
-        ->where('Event_m_EventShow.eventid', $id)
-        ->groupby('Event_m_EventShow.value')
-        ->select(DB::raw('Event_m_EventShow.value, Event_m_EventShow.sizelimit, Count(Event_m_Registration.name) as "total", Event_m_EventShow.sizelimit - Count(Event_m_Registration.name) as "reminder"'));
+        return $query->leftjoin(DB::raw('(SELECT session, count(name) as "total" FROM Event_m_Registration WHERE eventid = ' . $id . ' and deleted_at IS NULL GROUP BY session) er'), 'Event_m_EventShow.value' , '=', 'er.session')
+            ->where('Event_m_EventShow.eventid', $id)->groupby('Event_m_EventShow.value')
+            ->select(DB::raw('Event_m_EventShow.value, Event_m_EventShow.sizelimit, CASE WHEN er.total IS NULL Then 0 ELSE er.total END as "total", CASE WHEN er.total IS NULL Then Event_m_EventShow.sizelimit - 0 ELSE Event_m_EventShow.sizelimit - er.total END as "reminder"'))
+            ->orderby('Event_m_EventShow.lineno');
     }
 
     public static function getid($value)
