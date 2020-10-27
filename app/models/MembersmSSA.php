@@ -230,13 +230,13 @@ class MembersmSSA extends Eloquent {
             }
         } else {
             if (Session::get('gakkaiuserposition') == 'H1' or Session::get('gakkaiuserposition') == 'H2' or Session::get('gakkaiuserposition') == 'H3' or Session::get('gakkaiuserposition') == 'H5') {
-                return $query->where('rhq', Session::get('gakkaiuserrhq'))->whereNotIn('division', array('PD', 'YC'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+                return $query->where('rhq', Session::get('gakkaiuserrhq'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
             } else if (Session::get('gakkaiuserposition') == 'Z1' or Session::get('gakkaiuserposition') == 'Z2' or Session::get('gakkaiuserposition') == 'Z3' or Session::get('gakkaiuserposition') == 'Z5') {
-                return $query->where('zone', Session::get('gakkaiuserzone'))->whereNotIn('division', array('PD', 'YC'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+                return $query->where('zone', Session::get('gakkaiuserzone'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
             } else if (Session::get('gakkaiuserposition') == 'C1' or Session::get('gakkaiuserposition') == 'C1V' or Session::get('gakkaiuserposition') == 'C2' or Session::get('gakkaiuserposition') == 'C2V' or Session::get('gakkaiuserposition') == 'C3' or Session::get('gakkaiuserposition') == 'C5') {
-                return $query->where('chapter', Session::get('gakkaiuserchapter'))->whereNotIn('division', array('PD', 'YC'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+                return $query->where('chapter', Session::get('gakkaiuserchapter'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
             } else if (Session::get('gakkaiuserposition') == 'D1' or Session::get('gakkaiuserposition') == 'D1V' or Session::get('gakkaiuserposition') == 'D2' or Session::get('gakkaiuserposition') == 'D2V' or Session::get('gakkaiuserposition') == 'D3' or Session::get('gakkaiuserposition') == 'D5' or Session::get('gakkaiuserposition') == 'DA') {
-                return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->whereNotIn('division', array('PD', 'YC'))->whereRaw('TIMESTAMPDIFF(YEAR, dateofbirth, CURDATE()) >= 16')->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
+                return $query->where('chapter', Session::get('gakkaiuserchapter'))->where('district', Session::get('gakkaiuserdistrict'))->orderby('rhq', 'zone', 'chapter', 'district', 'division', 'position', 'name');
             }
         }
     }
