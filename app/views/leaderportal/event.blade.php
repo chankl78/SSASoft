@@ -4307,7 +4307,9 @@
 				        	400:function(data){ 
 				        		var txtMessage = 'Please check your entry!!';
 				        		if (data.responseJSON.ErrType == "NoAccess") 
-			        			{ txtMessage = 'You do not have access to Update!'; }
+			        				{ txtMessage = 'You do not have access to Update!'; }
+								else if (data.responseJSON.info == "Full Capacity")
+				        			{ txtMessage = 'The session is Full!  Please select another session'; }
 				        		else { txtMessage = 'Please check your entry!'; }
 				        		noty({
 									layout: 'topRight', type: 'error', text: 'Failed to Update!! ' + txtMessage,

@@ -255,6 +255,12 @@ class EventmEvent extends Eloquent {
         return $mid;
     }
 
+    public static function getsessionsizelimitbyid($value)
+    {
+        $mid = DB::table('Event_m_Event')->where('id', $value)->pluck('sessionsizelimit');
+        return $mid;
+    }
+
     public static function getlanguageselect($value)
     {
         $mid = DB::table('Event_m_Event')->where('uniquecode', $value)->pluck('languageselect');

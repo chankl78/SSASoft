@@ -955,6 +955,15 @@ class LeadersPortalEventController extends BaseController
 	{
 		try
 		{
+			if (EventmEvent::getsessionsizelimitbyid(EventmEvent::geteventid($id)))
+			{
+				if (EventmEventShow::checkEventSessionSizeAvailabity(EventmEvent::geteventid($id), Input::get('session')) == false)
+				{
+					LogsfLogs::postLogs('Debug', 34, 0, ' - Leaders Portal Event - Step 2', NULL, NULL, 'Failed');
+					return Response::json(array('info' => 'Full Capacity'), 400);
+				}
+			}
+
 			$post = EventmRegistration::find(EventmRegistration::getid($id));
 
 			$post->costume6 = Input::get('costume6');
