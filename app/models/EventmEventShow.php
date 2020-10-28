@@ -43,6 +43,15 @@ class EventmEventShow extends Eloquent {
             ->orderby('Event_m_EventShow.lineno');
     }
 
+    public static function checkEventSessionSizeAvailabity($eventid, $session)
+    {
+        $mid = DB::table('Event_m_EventShow')->where('eventid', $eventid)->where('value', $session)->pluck('sizelimit');
+        if (EventmRegistration::where('eventid', $eventid)->where('session', $session)->count() < $mid) 
+        { return true; } 
+        else 
+        { return false; }
+    }
+
     public static function getid($value)
     {
         $mid = DB::table('Event_m_EventShow')->where('uniquecode', $value)->pluck('id');

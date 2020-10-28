@@ -4219,6 +4219,8 @@
 				        			{ txtMessage = 'Record already existed!'; }
 				        		else if (data.responseJSON.info == "Failed")
 				        			{ txtMessage = 'Please check your entry!'; }
+								else if (data.responseJSON.info == "Full Capacity")
+				        			{ txtMessage = 'The session is Full!  Please select another session'; }
 								else if (data.responseJSON.ErrType == "Unknown")
 				        			{ txtMessage = 'Unknown Error! Please check your entry'; }
 				        		else { txtMessage = 'Please check your entry!!'; }

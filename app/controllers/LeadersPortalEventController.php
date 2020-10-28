@@ -678,7 +678,10 @@ class LeadersPortalEventController extends BaseController
 			$personid = 0; $memberid = 0;
 			if (EventmEvent::getsessionsizelimit($id) == 1)
 			{
-
+				if (EventmEventShow::checkEventSessionSizeAvailabity(EventmEvent::getid(Input::get('id')), Input::get('session')) == false)
+				{
+					return Response::json(array('info' => 'Full Capacity'), 400);
+				}
 			}
 
 			if (Input::get('uniquecode') != "")
