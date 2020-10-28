@@ -46,7 +46,6 @@ class EventmEventShow extends Eloquent {
     public static function checkEventSessionSizeAvailabity($eventid, $session)
     {
         $mid = DB::table('Event_m_EventShow')->where('eventid', $eventid)->where('value', $session)->pluck('sizelimit');
-        LogsfLogs::postLogs('Debug', 34, 0, ' - Model ' . $eventid . ' session - ' . $session . ' count - ' . EventmRegistration::where('eventid', $eventid)->where('session', $session)->count(), NULL, NULL, 'Failed');
         if (EventmRegistration::where('eventid', $eventid)->where('session', $session)->count() < $mid) 
         { return true; } 
         else 
