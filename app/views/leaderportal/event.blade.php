@@ -4568,11 +4568,11 @@
 				$("#tmembership tbody tr").click(function () {
 					var position = oTable.row(this).index();
 	                RowID = oTable.row(position).data();
-	                $("#euniquecode").val(RowID.uniquecode);
+	                $("#uniquecode").val(RowID.uniquecode);
 	                $.ajax({
-				        url: 'getMemberInfo/' + $("#euniquecode").val(),
+				        url: 'getMemberInfo/' + $("#uniquecode").val(),
 				        type: 'POST',
-				        data: { uniquecode: $("#euniquecode").val() },
+				        data: { uniquecode: $("#uniquecode").val() },
 				        dataType: 'json',
 				        statusCode: { 
 				        	200:function(data){
