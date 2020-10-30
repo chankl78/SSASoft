@@ -203,189 +203,193 @@
 											</div> <!-- Buttons for Tickets RSVP, Read Only and Normal Usage -->
 										</div>
 										@if ($studyeventtype == true)
-											<div id="resourceedit" class="modal" tabindex="-1">
-												<div class="modal-dialog">
-													<div class="modal-content">
-														{{ Form::open(array('action' => 'LeadersPortalEventController@putEventAddInfo', 'id' => 'resourceupdate', 'class' => 'form-horizontal')) }}
-															<fieldset>
-																<div class="modal-header">
-																	<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h4 class="blue bigger">Edit Record</h4>
-																</div>
-																<div class="modal-body overflow-visible">
-																	<div class="row">
-																		<div hidden>
-																			<div class="form-group">
-																				{{ Form::label('euniquecode', 'uniquecode:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																				<div class="col-xs-12 col-sm-9">
-																					<div class="clearfix">
-																						{{ Form::text('euniquecode', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'euniquecode', 'disabled'));}}
+											@if ($editonly == 1)
+												<div id="resourceedit" class="modal" tabindex="-1">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															{{ Form::open(array('action' => 'LeadersPortalEventController@putEventAddInfo', 'id' => 'resourceupdate', 'class' => 'form-horizontal')) }}
+																<fieldset>
+																	<div class="modal-header">
+																		<button type="button" class="close" data-dismiss="modal">&times;</button>
+																		<h4 class="blue bigger">Edit Record</h4>
+																	</div>
+																	<div class="modal-body overflow-visible">
+																		<div class="row">
+																			<div hidden>
+																				<div class="form-group">
+																					{{ Form::label('euniquecode', 'uniquecode:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																					<div class="col-xs-12 col-sm-9">
+																						<div class="clearfix">
+																							{{ Form::text('euniquecode', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'euniquecode', 'disabled'));}}
+																						</div>
+																					</div>
+																				</div>
+																				<div class="form-group">
+																					{{ Form::label('eCostume6', 'MD:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																					<div class="col-xs-12 col-sm-9">
+																						<div class="clearfix">
+																							{{ Form::text('eCostume6', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eCostume6'));}}
+																						</div>
+																					</div>
+																				</div>
+																				<div class="form-group">
+																					{{ Form::label('eCostume9', 'Show:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																					<div class="col-xs-12 col-sm-9">
+																						<div class="clearfix">
+																							{{ Form::select('eCostume9', array('' => '', 'Full Dress Rehearsal (22 Aug 2018)' => 'Full Dress Rehearsal (22 Aug 2018)', 'Show 1 (25 Aug 2018)' => 'Show 1 (25 Aug 2018)', 'Show 2 (26 Aug 2018)' => 'Show 2 (26 Aug 2018)'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eCostume9'));}}
+																						</div>
 																					</div>
 																				</div>
 																			</div>
 																			<div class="form-group">
-																				{{ Form::label('eCostume6', 'MD:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				{{ Form::label('eName', 'Name:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																				<div class="col-xs-12 col-sm-9">
 																					<div class="clearfix">
-																						{{ Form::text('eCostume6', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eCostume6'));}}
+																						{{ Form::text('eName', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eName'));}}
 																					</div>
 																				</div>
 																			</div>
 																			<div class="form-group">
-																				{{ Form::label('eCostume9', 'Show:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				{{ Form::label('eDateofBirth', 'Date of Birth:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																				<div class="col-xs-12 col-sm-9">
 																					<div class="clearfix">
-																						{{ Form::select('eCostume9', array('' => '', 'Full Dress Rehearsal (22 Aug 2018)' => 'Full Dress Rehearsal (22 Aug 2018)', 'Show 1 (25 Aug 2018)' => 'Show 1 (25 Aug 2018)', 'Show 2 (26 Aug 2018)' => 'Show 2 (26 Aug 2018)'), '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eCostume9'));}}
+																						{{ Form::text('eDateofBirth', '', array('class' => 'col-xs-12 col-sm-11 date-picker', 'id' => 'eDateofBirth'));}}
 																					</div>
 																				</div>
 																			</div>
-																		</div>
-																		<div class="form-group">
-																			{{ Form::label('eName', 'Name:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-9">
-																				<div class="clearfix">
-																					{{ Form::text('eName', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eName'));}}
+																			<div class="form-group" @if ($sessionselect== false) hidden @endif>
+																				{{ Form::label('esession', 'Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				<div class="col-xs-12 col-sm-8">
+																					<div class="clearfix">
+																						{{ Form::select('esession', $sessionshow_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'esession'));}}
+																					</div>
 																				</div>
 																			</div>
-																		</div>
-																		<div class="form-group">
-																			{{ Form::label('eDateofBirth', 'Date of Birth:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-9">
-																				<div class="clearfix">
-																					{{ Form::text('eDateofBirth', '', array('class' => 'col-xs-12 col-sm-11 date-picker', 'id' => 'eDateofBirth'));}}
+																			<div class="form-group" @if ($nationalityselect == false) hidden @endif>
+																				{{ Form::label('ecountry', 'Country:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				<div class="col-xs-12 col-sm-8">
+																					<div class="clearfix">
+																						{{ Form::select('ecountry', $country_options, 'Singapore', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ecountry'));}}
+																					</div>
 																				</div>
 																			</div>
-																		</div>
-																		<div class="form-group" @if ($sessionselect== false) hidden @endif>
-																			{{ Form::label('esession', 'Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-8">
-																				<div class="clearfix">
-																					{{ Form::select('esession', $sessionshow_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'esession'));}}
-																				</div>
-																			</div>
-																		</div>
-																		<div class="form-group" @if ($nationalityselect == false) hidden @endif>
-																			{{ Form::label('ecountry', 'Country:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-8">
-																				<div class="clearfix">
-																					{{ Form::select('ecountry', $country_options, 'Singapore', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ecountry'));}}
-																				</div>
-																			</div>
-																		</div>
-																		<div class="form-group" @if ($languageselect == false) hidden @endif>
-																			{{ Form::label('elanguage', 'Language:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-8">
-																				<div class="clearfix">
-																					{{ Form::select('elanguage', $language_options, 'Chinese', array('class' => 'col-xs-12 col-sm-11', 'id' => 'elanguage'));}}
+																			<div class="form-group" @if ($languageselect == false) hidden @endif>
+																				{{ Form::label('elanguage', 'Language:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				<div class="col-xs-12 col-sm-8">
+																					<div class="clearfix">
+																						{{ Form::select('elanguage', $language_options, 'Chinese', array('class' => 'col-xs-12 col-sm-11', 'id' => 'elanguage'));}}
+																					</div>
 																				</div>
 																			</div>
 																		</div>
 																	</div>
-																</div>
-																<div class="modal-footer">
-																	<button class="btn btn-sm" data-dismiss="modal" id="btnclose">
-																		<i class="icon-remove"></i>
-																		Cancel
-																	</button>
-																	{{ Form::button('<i class="icon-ok"></i> <strong>Save</strong>', array('type' => 'Submit', 'class' => 'btn btn-sm btn-primary', 'id' => 'btnresourceupdate')); }}
-																</div>
-															</fieldset>
-														{{ Form::close() }}
+																	<div class="modal-footer">
+																		<button class="btn btn-sm" data-dismiss="modal" id="btnclose">
+																			<i class="icon-remove"></i>
+																			Cancel
+																		</button>
+																		{{ Form::button('<i class="icon-ok"></i> <strong>Save</strong>', array('type' => 'Submit', 'class' => 'btn btn-sm btn-primary', 'id' => 'btnresourceupdate')); }}
+																	</div>
+																</fieldset>
+															{{ Form::close() }}
+														</div>
 													</div>
 												</div>
-											</div>
+											@endif
 										@else
-											<div id="resourceedit" class="modal" tabindex="-1">
-												<div class="modal-dialog">
-													<div class="modal-content">
-														{{ Form::open(array('action' => 'LeadersPortalEventController@putEventAddInfo', 'id' => 'resourceupdate', 'class' => 'form-horizontal')) }}
-															<fieldset>
-																<div class="modal-header">
-																	<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h4 class="blue bigger">Edit Record</h4>
-																</div>
-																<div class="modal-body overflow-visible">
-																	<div class="row">
-																		<div hidden>
-																			<div class="form-group">
-																				{{ Form::label('euniquecode', 'uniquecode:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																				<div class="col-xs-12 col-sm-9">
-																					<div class="clearfix">
-																						{{ Form::text('euniquecode', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'euniquecode', 'disabled'));}}
+											@if ($editonly == 1)
+												<div id="resourceedit" class="modal" tabindex="-1">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															{{ Form::open(array('action' => 'LeadersPortalEventController@putEventAddInfo', 'id' => 'resourceupdate', 'class' => 'form-horizontal')) }}
+																<fieldset>
+																	<div class="modal-header">
+																		<button type="button" class="close" data-dismiss="modal">&times;</button>
+																		<h4 class="blue bigger">Edit Record</h4>
+																	</div>
+																	<div class="modal-body overflow-visible">
+																		<div class="row">
+																			<div hidden>
+																				<div class="form-group">
+																					{{ Form::label('euniquecode', 'uniquecode:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																					<div class="col-xs-12 col-sm-9">
+																						<div class="clearfix">
+																							{{ Form::text('euniquecode', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'euniquecode', 'disabled'));}}
+																						</div>
+																					</div>
+																				</div>
+																				<div class="form-group">
+																					{{ Form::label('eCostume6', 'MD:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																					<div class="col-xs-12 col-sm-9">
+																						<div class="clearfix">
+																							{{ Form::text('eCostume6', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eCostume6'));}}
+																						</div>
+																					</div>
+																				</div>
+																				<div class="form-group">
+																					{{ Form::label('eCostume7', 'WD:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																					<div class="col-xs-12 col-sm-9">
+																						<div class="clearfix">
+																							{{ Form::text('eCostume7', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eCostume7'));}}
+																						</div>
 																					</div>
 																				</div>
 																			</div>
 																			<div class="form-group">
-																				{{ Form::label('eCostume6', 'MD:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				{{ Form::label('eName', 'Name:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																				<div class="col-xs-12 col-sm-9">
 																					<div class="clearfix">
-																						{{ Form::text('eCostume6', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eCostume6'));}}
+																						{{ Form::text('eName', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eName'));}}
 																					</div>
 																				</div>
 																			</div>
 																			<div class="form-group">
-																				{{ Form::label('eCostume7', 'WD:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				{{ Form::label('eRegisteredSession', 'Registered Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																				<div class="col-xs-12 col-sm-9">
 																					<div class="clearfix">
-																						{{ Form::text('eCostume7', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eCostume7'));}}
+																						{{ Form::text('eRegisteredSession', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eRegisteredSession'));}}
 																					</div>
 																				</div>
 																			</div>
-																		</div>
-																		<div class="form-group">
-																			{{ Form::label('eName', 'Name:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-9">
-																				<div class="clearfix">
-																					{{ Form::text('eName', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eName'));}}
+																			<div class="form-group" @if ($sessionselect== false) hidden @endif>
+																				{{ Form::label('esession', 'Change Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				<div class="col-xs-12 col-sm-8">
+																					<div class="clearfix">
+																						{{ Form::select('esession', $sessionshow_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'esession'));}}
+																					</div>
 																				</div>
 																			</div>
-																		</div>
-																		<div class="form-group">
-																			{{ Form::label('eRegisteredSession', 'Registered Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-9">
-																				<div class="clearfix">
-																					{{ Form::text('eRegisteredSession', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eRegisteredSession'));}}
+																			<div class="form-group" @if ($nationalityselect == false) hidden @endif>
+																				{{ Form::label('ecountry', 'Country:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				<div class="col-xs-12 col-sm-8">
+																					<div class="clearfix">
+																						{{ Form::select('ecountry', $country_options, 'Singapore', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ecountry'));}}
+																					</div>
 																				</div>
 																			</div>
-																		</div>
-																		<div class="form-group" @if ($sessionselect== false) hidden @endif>
-																			{{ Form::label('esession', 'Change Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-8">
-																				<div class="clearfix">
-																					{{ Form::select('esession', $sessionshow_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'esession'));}}
-																				</div>
-																			</div>
-																		</div>
-																		<div class="form-group" @if ($nationalityselect == false) hidden @endif>
-																			{{ Form::label('ecountry', 'Country:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-8">
-																				<div class="clearfix">
-																					{{ Form::select('ecountry', $country_options, 'Singapore', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ecountry'));}}
-																				</div>
-																			</div>
-																		</div>
-																		<div class="form-group" @if ($languageselect == false) hidden @endif>
-																			{{ Form::label('elanguage', 'Language:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																			<div class="col-xs-12 col-sm-8">
-																				<div class="clearfix">
-																					{{ Form::select('elanguage', $language_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'elanguage'));}}
+																			<div class="form-group" @if ($languageselect == false) hidden @endif>
+																				{{ Form::label('elanguage', 'Language:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				<div class="col-xs-12 col-sm-8">
+																					<div class="clearfix">
+																						{{ Form::select('elanguage', $language_options, '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'elanguage'));}}
+																					</div>
 																				</div>
 																			</div>
 																		</div>
 																	</div>
-																</div>
-																<div class="modal-footer">
-																	<button class="btn btn-sm" data-dismiss="modal" id="btnclose">
-																		<i class="icon-remove"></i>
-																		Cancel
-																	</button>
-																	{{ Form::button('<i class="icon-ok"></i> <strong>Save</strong>', array('type' => 'Submit', 'class' => 'btn btn-sm btn-primary', 'id' => 'btnresourceupdate')); }}
-																</div>
-															</fieldset>
-														{{ Form::close() }}
+																	<div class="modal-footer">
+																		<button class="btn btn-sm" data-dismiss="modal" id="btnclose">
+																			<i class="icon-remove"></i>
+																			Cancel
+																		</button>
+																		{{ Form::button('<i class="icon-ok"></i> <strong>Save</strong>', array('type' => 'Submit', 'class' => 'btn btn-sm btn-primary', 'id' => 'btnresourceupdate')); }}
+																	</div>
+																</fieldset>
+															{{ Form::close() }}
+														</div>
 													</div>
 												</div>
-											</div>
+											@endif
 										@endif
 									</div>
 								</div> <!-- Event Detail Listing -->
@@ -2596,7 +2600,7 @@
 					    	{
 						    	targets: [ 11 ], data: "uniquecode",
 						    	render: function ( data, type, full ){
-									return '@if ($gakkaidistrict == 't' or $gakkaichapter == 't' or $gakkaizone == 't' or $gakkairegion == 't' or $gakkaishq == 't')<button type="submit" onClick=attendrow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-thumbs-up bigger-120"></i></button> <button type="submit" onClick=absentrow("'+ data +'") class="btn btn-xs btn-warning"><i class="fa fa-thumbs-down bigger-120"></i></button> <button type="submit" onClick=editrow("'+ data +'") class="btn btn-xs btn-info"><i class="fa fa-edit bigger-120"></i></button> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button>@endif'
+									return '@if ($gakkaidistrict == 't' or $gakkaichapter == 't' or $gakkaizone == 't' or $gakkairegion == 't' or $gakkaishq == 't')<button type="submit" onClick=attendrow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-thumbs-up bigger-120"></i></button> <button type="submit" onClick=absentrow("'+ data +'") class="btn btn-xs btn-warning"><i class="fa fa-thumbs-down bigger-120"></i></button> @if ($editonly == 1)<button type="submit" onClick=editrow("'+ data +'") class="btn btn-xs btn-info"><i class="fa fa-edit bigger-120"></i></button> @endif <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button>@endif'
 							    }
 					    	}@endif 
 							@if ($youthsummit == 1),
@@ -4718,90 +4722,92 @@
 		    });
 	    }
 
-		function editrow(submit){ 
-			@if ($special == 1)
-				var RowID = "";
-		        var oTable = $('#tspecial').DataTable();
-		        $("#tspecial tbody tr").click(function () {
-	                var position = oTable.row(this).index();
-	                RowID = oTable.row(position).data();
-	                $("#euniquecode").val(RowID.uniquecode);
-	                $.ajax({
-				        url: 'getEventAddInfo/' + $("#euniquecode").val(),
-				        type: 'POST',
-				        data: { uniquecode: $("#euniquecode").val() },
-				        dataType: 'json',
-				        statusCode: { 
-				        	200:function(data){
-				        		$("#eCostume6").val(data.costume6); $("#eCostume7").val(data.costume7);
-				        		$("#eCostume8").val(data.costume8); $("#eCostume9").val(data.costume9);
-				        	},
-				        	400:function(data){ 
-				        		var txtMessage;
-				        		if (data.responseJSON.ErrType == "Duplicate") 
-				        			{ txtMessage = 'Record already existed!'; }
-				        		else if (data.responseJSON.ErrType == "Failed")
-				        			{ txtMessage = 'Please check your entry!'; }
-				        		else if (data.responseJSON.ErrType == "NoAccess") 
-				        			{ txtMessage = 'You do not have Access Rights!'; }
-				        		else { txtMessage = 'Please check your entry!'; }
-				        		$("#role").focus();
-				        		noty({
-									layout: 'topRight', type: 'error', text: txtMessage,
-									animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
-										},
-									timeout: 4000
-								});
-				        	}
-				        }
-				    });
-	                $("#resourceedit").modal('show');
-	            });
-			@else
-				var RowID = "";
-		        var oTable = $('#tdistrict').DataTable();
-		        $("#tdistrict tbody tr").click(function () {
-	                var position = oTable.row(this).index();
-	                RowID = oTable.row(position).data();
-	                $("#euniquecode").val(RowID.uniquecode);
-	                $.ajax({
-				        url: 'getEventAddInfo/' + $("#euniquecode").val(),
-				        type: 'POST',
-				        data: { uniquecode: $("#euniquecode").val() },
-				        dataType: 'json',
-				        statusCode: { 
-				        	200:function(data){
-				        		$("#eCostume6").val(data.costume6); $("#eCostume7").val(data.costume7);
-				        		$("#eName").val(data.name); $("#eCostume9").val(data.costume9);
-								$("#ecountry").val(data.countryofbirth); $("#elanguage").val(data.language);
-								$("#esession").val(data.session); $("#eDateofBirth").val(data.dateofbirth);
-								$("#eRegisteredSession").val(data.session);
-								$("#eDateofBirth").datepicker('setDate', data.dateofbirth);
-				        	},
-				        	400:function(data){ 
-				        		var txtMessage;
-				        		if (data.responseJSON.ErrType == "Duplicate") 
-				        			{ txtMessage = 'Record already existed!'; }
-				        		else if (data.responseJSON.ErrType == "Failed")
-				        			{ txtMessage = 'Please check your entry!'; }
-				        		else if (data.responseJSON.ErrType == "NoAccess") 
-				        			{ txtMessage = 'You do not have Access Rights!'; }
-				        		else { txtMessage = 'Please check your entry!'; }
-				        		$("#role").focus();
-				        		noty({
-									layout: 'topRight', type: 'error', text: txtMessage,
-									animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
-										},
-									timeout: 4000
-								});
-				        	}
-				        }
-				    });
-	                $("#resourceedit").modal('show');
-	            });
+		@if ($editonly == 1)
+			function editrow(submit){ 
+				@if ($special == 1)
+					var RowID = "";
+					var oTable = $('#tspecial').DataTable();
+					$("#tspecial tbody tr").click(function () {
+						var position = oTable.row(this).index();
+						RowID = oTable.row(position).data();
+						$("#euniquecode").val(RowID.uniquecode);
+						$.ajax({
+							url: 'getEventAddInfo/' + $("#euniquecode").val(),
+							type: 'POST',
+							data: { uniquecode: $("#euniquecode").val() },
+							dataType: 'json',
+							statusCode: { 
+								200:function(data){
+									$("#eCostume6").val(data.costume6); $("#eCostume7").val(data.costume7);
+									$("#eCostume8").val(data.costume8); $("#eCostume9").val(data.costume9);
+								},
+								400:function(data){ 
+									var txtMessage;
+									if (data.responseJSON.ErrType == "Duplicate") 
+										{ txtMessage = 'Record already existed!'; }
+									else if (data.responseJSON.ErrType == "Failed")
+										{ txtMessage = 'Please check your entry!'; }
+									else if (data.responseJSON.ErrType == "NoAccess") 
+										{ txtMessage = 'You do not have Access Rights!'; }
+									else { txtMessage = 'Please check your entry!'; }
+									$("#role").focus();
+									noty({
+										layout: 'topRight', type: 'error', text: txtMessage,
+										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+											},
+										timeout: 4000
+									});
+								}
+							}
+						});
+						$("#resourceedit").modal('show');
+					});
+				@else
+					var RowID = "";
+					var oTable = $('#tdistrict').DataTable();
+					$("#tdistrict tbody tr").click(function () {
+						var position = oTable.row(this).index();
+						RowID = oTable.row(position).data();
+						$("#euniquecode").val(RowID.uniquecode);
+						$.ajax({
+							url: 'getEventAddInfo/' + $("#euniquecode").val(),
+							type: 'POST',
+							data: { uniquecode: $("#euniquecode").val() },
+							dataType: 'json',
+							statusCode: { 
+								200:function(data){
+									$("#eCostume6").val(data.costume6); $("#eCostume7").val(data.costume7);
+									$("#eName").val(data.name); $("#eCostume9").val(data.costume9);
+									$("#ecountry").val(data.countryofbirth); $("#elanguage").val(data.language);
+									$("#esession").val(data.session); $("#eDateofBirth").val(data.dateofbirth);
+									$("#eRegisteredSession").val(data.session);
+									$("#eDateofBirth").datepicker('setDate', data.dateofbirth);
+								},
+								400:function(data){ 
+									var txtMessage;
+									if (data.responseJSON.ErrType == "Duplicate") 
+										{ txtMessage = 'Record already existed!'; }
+									else if (data.responseJSON.ErrType == "Failed")
+										{ txtMessage = 'Please check your entry!'; }
+									else if (data.responseJSON.ErrType == "NoAccess") 
+										{ txtMessage = 'You do not have Access Rights!'; }
+									else { txtMessage = 'Please check your entry!'; }
+									$("#role").focus();
+									noty({
+										layout: 'topRight', type: 'error', text: txtMessage,
+										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+											},
+										timeout: 4000
+									});
+								}
+							}
+						});
+						$("#resourceedit").modal('show');
+					});
 
-			@endif
-		}
+				@endif
+			}
+		@endif
 
 	    @if ($special == 1)
 	    	function check1yesrow(submit){
