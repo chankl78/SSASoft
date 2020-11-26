@@ -486,7 +486,7 @@ class MemberController extends BaseController
 			SUM(CASE WHEN ap.attendancestatus = "Attended" THEN 1 ELSE 0 END) as dmtotal,
 			CASE WHEN (SUM(CASE WHEN ap.attendancestatus = "Attended" THEN 1 ELSE 0 END) > 0) THEN 1 ELSE 0 END as dmunique
 			FROM Attendance_m_Person ap LEFT JOIN Attendance_m_Attendance aa on ap.attendanceid = aa.id LEFT JOIN Members_m_SSA mssa on mssa.id = ap.memberid
-			WHERE aa.attendancetype IN ("Discussion Meeting") and aa.deleted_at IS NULL and year(aa.attendancedate) = 2020 and ap.deleted_at IS NULL and ap.memberid != 0 and ap.division in ("MD", "WD", "YM", "YW", "PD", "YC")
+			WHERE aa.attendancetype IN ("Discussion Meeting") and aa.deleted_at IS NULL and year(aa.attendancedate) = 2020 and ap.deleted_at IS NULL and ap.memberid != 0 and ap.division in ("MD", "WD", "YM", "YW", "PDYM", "PDYW", "YCYM", "YCYW")
 			GROUP BY ap.memberid ORDER BY ap.memberid);');
 		
 		DB::statement('UPDATE zz_2020_Members m INNER JOIN zz_2020_dm mdm on m.id = mdm.memberid
