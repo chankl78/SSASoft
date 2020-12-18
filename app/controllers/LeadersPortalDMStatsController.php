@@ -61,6 +61,11 @@ class LeadersPortalDMStatsController extends BaseController
 				$default = zz2020members::LPRHQStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
+			else if ($id == 2021)
+			{
+				$default = zz2021members::LPRHQStats($id, $divisiontype)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
 		}
 		catch(\Exception $e)
 		{
@@ -92,6 +97,11 @@ class LeadersPortalDMStatsController extends BaseController
 				$default = zz2020members::LPRHQAgeGroupStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
+			else if ($id == 2021)
+			{
+				$default = zz2021members::LPRHQAgeGroupStats($id, $divisiontype)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
 		}
 		catch(\Exception $e)
 		{
@@ -121,6 +131,11 @@ class LeadersPortalDMStatsController extends BaseController
 			else if ($id == 2020)
 			{
 				$default = zz2020members::LPNameList($id, $divisiontype)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
+			else if ($id == 2021)
+			{
+				$default = zz2021members::LPNameList($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 		}

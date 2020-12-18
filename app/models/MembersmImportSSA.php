@@ -81,7 +81,25 @@ class MembersmImportSSA extends Eloquent {
 					$post->memsigned = $member['mem_signed'];
 					$post->belsigned = $member['bel_signed'];
 					if($member['bel_signed'] == 1){$post->believersigned = 1;}
-					
+					if($member['position'] == "MEM" or $member['position'] == "BEL")
+					{
+						try
+						{
+							$post->dmpostaldistrict = MemberszOrgChart::getPostalDistrict($member['chapter'], $member['dist']);
+							$post->dmpostalsector = MemberszOrgChart::getPostalSector($member['chapter'], $member['dist']);
+						}
+						catch(\Exception $e)  {}
+					}
+					elseif (MemberszPosition::getPositionLevel($member['position']) == "district")
+					{
+						try
+						{
+							$post->dmpostaldistrict = MemberszOrgChart::getPostalDistrict($member['chapter'], $member['dist']);
+							$post->dmpostalsector = MemberszOrgChart::getPostalSector($member['chapter'], $member['dist']);
+						}
+						catch(\Exception $e)  {}
+					}
+
 					$post->save();
 				}
 				else
@@ -147,6 +165,24 @@ class MembersmImportSSA extends Eloquent {
 					$post->memsigned = $member['mem_signed'];
 					$post->belsigned = $member['bel_signed'];
 					if($member['bel_signed'] == 1){$post->believersigned = 1;}
+					if($member['position'] == "MEM" or $member['position'] == "BEL")
+					{
+						try
+						{
+							$post->dmpostaldistrict = MemberszOrgChart::getPostalDistrict($member['chapter'], $member['dist']);
+							$post->dmpostalsector = MemberszOrgChart::getPostalSector($member['chapter'], $member['dist']);
+						}
+						catch(\Exception $e)  {}
+					}
+					elseif (MemberszPosition::getPositionLevel($member['position']) == "district")
+					{
+						try
+						{
+							$post->dmpostaldistrict = MemberszOrgChart::getPostalDistrict($member['chapter'], $member['dist']);
+							$post->dmpostalsector = MemberszOrgChart::getPostalSector($member['chapter'], $member['dist']);
+						}
+						catch(\Exception $e)  {}
+					}
 
 					$post->save();
 				}
@@ -240,7 +276,25 @@ class MembersmImportSSA extends Eloquent {
 					$post->memsigned = $member['mem_signed'];
 					$post->belsigned = $member['bel_signed'];
 					if($member['bel_signed'] == 1){$post->believersigned = 1;}
-					
+					if($member['position'] == "MEM" or $member['position'] == "BEL")
+					{
+						try
+						{
+							$post->dmpostaldistrict = MemberszOrgChart::getPostalDistrict($member['chapter'], $member['dist']);
+							$post->dmpostalsector = MemberszOrgChart::getPostalSector($member['chapter'], $member['dist']);
+						}
+						catch(\Exception $e)  {}
+					}
+					elseif (MemberszPosition::getPositionLevel($member['position']) == "district")
+					{
+						try
+						{
+							$post->dmpostaldistrict = MemberszOrgChart::getPostalDistrict($member['chapter'], $member['dist']);
+							$post->dmpostalsector = MemberszOrgChart::getPostalSector($member['chapter'], $member['dist']);
+						}
+						catch(\Exception $e)  {}
+					}
+
 					$post->save();
 				}
 				else
@@ -306,6 +360,24 @@ class MembersmImportSSA extends Eloquent {
 					$post->memsigned = $member['mem_signed'];
 					$post->belsigned = $member['bel_signed'];
 					if($member['bel_signed'] == 1){$post->believersigned = 1;}
+					if($member['position'] == "MEM" or $member['position'] == "BEL")
+					{
+						try
+						{
+							$post->dmpostaldistrict = MemberszOrgChart::getPostalDistrict($member['chapter'], $member['dist']);
+							$post->dmpostalsector = MemberszOrgChart::getPostalSector($member['chapter'], $member['dist']);
+						}
+						catch(\Exception $e)  {}
+					}
+					elseif (MemberszPosition::getPositionLevel($member['position']) == "district")
+					{
+						try
+						{
+							$post->dmpostaldistrict = MemberszOrgChart::getPostalDistrict($member['chapter'], $member['dist']);
+							$post->dmpostalsector = MemberszOrgChart::getPostalSector($member['chapter'], $member['dist']);
+						}
+						catch(\Exception $e)  {}
+					}
 
 					$post->save();
 				}

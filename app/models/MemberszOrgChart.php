@@ -25,6 +25,18 @@ class MemberszOrgChart extends Eloquent {
         return $mid;
     }
 
+    public static function getPostalSector($chapter, $district)
+    {
+        $mid = DB::table('Members_z_OrgChart')->where('chapabbv', $chapter)->where('district', $district)->pluck('postalsector');
+        return $mid;
+    }
+
+    public static function getPostalDistrict($chapter, $district)
+    {
+        $mid = DB::table('Members_z_OrgChart')->where('chapabbv', $chapter)->where('district', $district)->pluck('postaldistrict');
+        return $mid;
+    }
+
     public function getZoneChapterAttribute()
     {
         return $this->attributes['zone'] . ' - ' . $this->attributes['chapter'];
