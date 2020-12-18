@@ -70,7 +70,9 @@ class MembersmImportSSA extends Eloquent {
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
 					if($member['address2'] == ''){$post->unitno = 'NIL';} else {$post->unitno = $member['address2'];}
-					if($member['address3'] == ''){$post->postalcode = 'NIL';} else {$post->postalcode = substr($member['address3'],2);}
+					if($member['address3'] == ''){$post->postalcode = 'NA';} else {$post->postalcode = substr($member['address3'],1);}
+					if($member['address3'] == ''){$post->postalsector = 'NA';} else {$post->postalsector = substr($member['address3'],1,2);}
+					if($member['address3'] == ''){$post->postaldistrict = 'NA';} else {$post->postaldistrict = MemberszPostal::getPostalDistrict(substr($member['address3'],1,2));}
 					$post->emergencytel = 'NIL'; 
 					$post->emergencymobile = 'NIL';
 					$post->introducermobile = 'NIL';
@@ -134,7 +136,9 @@ class MembersmImportSSA extends Eloquent {
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
 					if($member['address2'] == ''){$post->unitno = 'NIL';} else {$post->unitno = $member['address2'];}
-					if($member['address3'] == ''){$post->postalcode = 'NIL';} else {$post->postalcode = substr($member['address3'],2);}
+					if($member['address3'] == ''){$post->postalcode = 'NIL';} else {$post->postalcode = substr($member['address3'],1);}
+					if($member['address3'] == ''){$post->postalsector = 'NA';} else {$post->postalsector = substr($member['address3'],1,2);}
+					if($member['address3'] == ''){$post->postaldistrict = 'NA';} else {$post->postaldistrict = MemberszPostal::getPostalDistrict(substr($member['address3'],1,2));}
 					$post->emergencytel = 'NIL'; 
 					$post->emergencymobile = 'NIL';
 					$post->introducermobile = 'NIL';
@@ -225,7 +229,9 @@ class MembersmImportSSA extends Eloquent {
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
 					if($member['address2'] == ''){$post->unitno = 'NIL';} else {$post->unitno = $member['address2'];}
-					if($member['address3'] == ''){$post->postalcode = 'NIL';} else {$post->postalcode = substr($member['address3'],2);}
+					if($member['address3'] == ''){$post->postalcode = 'NIL';} else {$post->postalcode = substr($member['address3'],1);}
+					if($member['address3'] == ''){$post->postalsector = 'NA';} else {$post->postalsector = substr($member['address3'],1,2);}
+					if($member['address3'] == ''){$post->postaldistrict = 'NA';} else {$post->postaldistrict = MemberszPostal::getPostalDistrict(substr($member['address3'],1,2));}
 					$post->emergencytel = 'NIL'; 
 					$post->emergencymobile = 'NIL';
 					$post->introducermobile = 'NIL';
@@ -289,7 +295,9 @@ class MembersmImportSSA extends Eloquent {
 					if($member['address1'] == ''){$post->address = 'NIL';} else {$post->address = $member['address1'];}
 					if($member['buildingName'] == ''){$post->buildingname = 'NIL';} else {$post->buildingname = $member['buildingName'];}
 					if($member['address2'] == ''){$post->unitno = 'NIL';} else {$post->unitno = $member['address2'];}
-					if($member['address3'] == ''){$post->postalcode = 'NIL';} else {$post->postalcode = substr($member['address3'],2);}
+					if($member['address3'] == ''){$post->postalcode = 'NIL';} else {$post->postalcode = substr($member['address3'],1);}
+					if($member['address3'] == ''){$post->postalsector = 'NA';} else {$post->postalsector = substr($member['address3'],1,2);}
+					if($member['address3'] == ''){$post->postaldistrict = 'NA';} else {$post->postaldistrict = MemberszPostal::getPostalDistrict(substr($member['address3'],1,2));}
 					$post->emergencytel = 'NIL'; 
 					$post->emergencymobile = 'NIL';
 					$post->introducermobile = 'NIL';
