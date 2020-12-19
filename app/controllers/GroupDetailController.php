@@ -349,7 +349,7 @@ class GroupDetailController extends BaseController
 		// Search membership
 		try
 		{
-			$searchresult = MembersmSSA::findorfail(MembersmSSA::getidbynrichash(Input::get('nricsearch')), array('uniquecode', 'name', 'rhq', 'zone', 'chapter', 'district', 'nric', 'division', 'position'));
+			$searchresult = MembersmSSA::findorfail(MembersmSSA::getid1(Input::get('nricsearch')), array('uniquecode', 'name', 'rhq', 'zone', 'chapter', 'district', 'nric', 'division', 'position'));
 		    
 		    LogsfLogs::postLogs('Read', 28, $id, ' - Group - NRIC Search - ' . md5(Input::get('nricsearch')), NULL, NULL, 'Success');
 		    return Response::json($searchresult, 200);
@@ -642,10 +642,10 @@ class GroupDetailController extends BaseController
 	public function getNameSearch()
 	{
 		$membercode = Input::get('term');
-		$member = MembersmSSA::where('name','LIKE','%'. $membercode .'%')->orwhere('nric', 'Like', '%'. $membercode .'%')->orderBy('name', 'ASC')->get(array('id', 'nric', 'name', 'rhq', 'zone', 'chapter', 'district', 'position'))->take(10)->toarray();
+		$member = MembersmSSA::where('name','LIKE','%'. $membercode .'%')->orwhere('nric', 'Like', '%'. $membercode .'%')->orderBy('name', 'ASC')->get(array('id', 'nric', 'name', 'alias', 'rhq', 'zone', 'chapter', 'district', 'position', 'uniquecode', 'mobile'))->take(10)->toarray();
 		$memberlist = array();
 		foreach($member as $member){
-			$memberlist[] = array('id'=>$member['nric'], 'label'=>$member['name'].' - '.$member['nric'].', '.$member['rhq'].', '.$member['zone'].', '.$member['chapter'].', '.$member['district'].', '.$member['position'], 'value' => $member['nric']);
+			$memberlist[] = array('id'=>$member['nric'], 'label'=>$member['name'].' - '.$member['alias'].' - '.$member['uniquecode'].', '.$member['rhq'].', '.$member['zone'].', '.$member['chapter'].', '.$member['district'].', '.$member['position'].' - '.$member['mobile'], 'value' => $member['uniquecode']);
 		}
 		return Response::json($memberlist);
 	}

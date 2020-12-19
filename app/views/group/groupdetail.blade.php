@@ -387,7 +387,7 @@
 										<div class="widget-header widget-header-small">
 											<h6 class="widget-title">
 												<i class="icon-sort"></i>
-												Register Member By Name and NRIC
+												Register Member By Name
 											</h6>
 											<div class="widget-toolbar">
 												<a href="#" data-action="fullscreen" class="orange2">
@@ -406,7 +406,7 @@
 												{{ Form::open(array('action' => 'GroupDetailController@postNricSearch', 'id' => 'resourcenamesearch', 'class' => 'form-horizontal')) }}
 													<br />
 													<div class="form-group">
-														{{ Form::label('namesearch', 'Search (Name / NRIC):', array('class' => 'control-label col-xs-12 col-sm-4 no-padding-right')); }}
+														{{ Form::label('namesearch', 'Search (Name):', array('class' => 'control-label col-xs-12 col-sm-4 no-padding-right')); }}
 														<div class="col-xs-12 col-sm-8">
 															<div class="clearfix">
 																{{ Form::text('namesearch', '', array('class' => 'ui-autocomplete-input col-xs-12 col-sm-9 ', 'id' => 'namesearch', 'autocomplete' => 'off'));}}
