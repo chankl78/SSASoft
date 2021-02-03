@@ -44,12 +44,12 @@ class GroupmMember extends Eloquent {
         return $query->where('groupid', '=', $value);
     }
 
-    public function scopeStatusActive($query, $value)
+    public function scopeStatusActive($query)
     {
         return $query->where('status', 'Active');
     }
 
-    public function scopeStatusOthers($query, $value)
+    public function scopeStatusOthers($query)
     {
         return $query->where('status', '!=', 'Active');
     }

@@ -82,7 +82,7 @@
 						<div class="footer-content">
 							<span class="bigger-120">
 								<span class="blue bolder">SSASoft</span>
-								Singapore Soka Association &copy; 2013 - 2020
+								Singapore Soka Association &copy; 2013 - 2021
 							</span>
 						</div>
 						<!-- /section:basics/footer -->

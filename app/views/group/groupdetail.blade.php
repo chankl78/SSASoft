@@ -573,6 +573,12 @@
 														<th>Contact Group</th>
 														<th>Status</th>
 														<th>Action</th>
+														<th>F RHQ</th>
+														<th>F Zone</th>
+														<th>F Chapter</th>
+														<th>F District</th>
+														<th>F Division</th>
+														<th>F Org Position</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -1173,6 +1179,12 @@
 														<th>Position</th>
 														<th>Status</th>
 														<th>Action</th>
+														<th>F RHQ</th>
+														<th>F Zone</th>
+														<th>F Chapter</th>
+														<th>F District</th>
+														<th>F Division</th>
+														<th>F Org Position</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -2780,34 +2792,32 @@
 		$(document).ready(function () {
 			$(function() {
 				var oTable = $('#tdefault').DataTable({
+					dom: 'Bflrtip',
+					buttons: [ 'copy', 'excel', 'pdf' ],
 					displayLength: 10, // Default No of Records per page on 1st load
 			        lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
 			        pagingType: "full_numbers",
 			        responsive: false,
-			        processing: true,
+			        processing: false,
 			        stateSave: true, // Remember paging & filters
 			        autoWidth: true,
 			        scrollCollapse: true,
-			        processing: false,
-			        serverSide: true,
+			        serverSide: false,
 			        searching: true,
 			        order: [[ 0, "desc" ]],
-			        ajax: $.fn.dataTable.pipeline({
-			            url: 'getMemberListing/' + "{{ $rid }}",
-			            pages: 5 // number of pages to cache
-			        }),
+			        ajax: 'getMemberListing/{{ $rid }}',
 			        columnDefs: [
-			        { targets: [ 0 ], "data": "name", "searchable": "true" },
+			        { targets: [ 0 ], data: "name", searchable: "true" },
 	            	{
-				    	targets: [ 1 ], "data": "enrolleddate", "width": "150px", "searchable": "true",
+				    	targets: [ 1 ], data: "enrolleddate", width: "150px", searchable: "true",
 				    	render: function ( data, type, full ){
-				    		return moment(data).format("DD-MMM-YYYY");
+				    		return moment(data).format("DD-MM-YYYY");
 					    }
 			    	},
-			    	{ targets: [ 2 ], "data": "position", "searchable": "true" },
-			    	{ targets: [ 3 ], "data": "contactgroup", "searchable": "true" },
+			    	{ targets: [ 2 ], data: "position", searchable: "true" },
+			    	{ targets: [ 3 ], data: "contactgroup", searchable: "true" },
 			    	{
-				    	targets: [ 4 ], "data": "status",
+				    	targets: [ 4 ], data: "status",
 				    	render: function ( data, type, full ){
 						    if (data === 'Rejected'){
 						    	return '<span class="label label-danger arrowed-in">'+data+'</span>';
@@ -2833,49 +2843,53 @@
 			    		}
 		    		},
 			    	{
-				    	targets: [ 5 ], "data": "uniquecode",
+				    	targets: [ 5 ], data: "uniquecode",
 				    	render: function ( data, type, full ){
 				    		// return '<span class="label label-danger arrowed-in">'+data+'</span>';
 				    		return '<a href="#resourceedit" role="button" onClick=editrow("'+ data +'") class="btn btn-xs btn-info" data-toggle="modal"><i class="fa fa-edit bigger-120"></i></a> <button type="submit" onClick=deleterow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button> <button type="submit" onClick=printrow("'+ data +'") class="btn btn-xs btn-success"><i class="fa fa-print bigger-120"></i></button> <button type="submit" onClick=memberinforow("'+ data +'") class="btn btn-xs btn-inverse"><i class="fa fa-legal bigger-120"></i></button> <button type="submit" onClick=forwardrow("'+ data +'") class="btn btn-xs btn-pink"><i class="fa fa-mail-forward bigger-120"></i></button> <button type="submit" onClick=forwardrowgroup("'+ data +'") class="btn btn-xs btn-purple"><i class="fa fa-mail-forward bigger-120"></i></button>'
 					    }
-			    	}]
+			    	},
+					{ targets: [ 6 ], data: "rhq", searchable: "true", visible: false },
+					{ targets: [ 7 ], data: "zone", searchable: "true", visible: false },
+					{ targets: [ 8 ], data: "chapter", searchable: "true", visible: false },
+					{ targets: [ 9 ], data: "district", searchable: "true", visible: false },
+					{ targets: [ 10 ], data: "division", searchable: "true", visible: false },
+					{ targets: [ 11 ], data: "positionorg", searchable: "true", visible: false }]
 			    }); // Group Members
 				
 				var oTableOthers = $('#tdefaultothers').DataTable({
-			        "displayLength": 10, // Default No of Records per page on 1st load
-			        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
-			        "pagingType": "full_numbers",
-			        "responsive": false,
-			        "processing": true,
-			        "stateSave": true, // Remember paging & filters
-			        "autoWidth": true,
-			        "scrollCollapse": true,
-			        "processing": false,
-			        "serverSide": true,
-			        "searching": true,
-			        "order": [[ 0, "desc" ]],
-			        "ajax": $.fn.dataTable.pipeline({
-			            url: 'getMemberListingOthers/' + "{{ $rid }}",
-			            pages: 5 // number of pages to cache
-			        }),
-			        "columnDefs": [
-			        { "targets": [ 0 ], "data": "name", "searchable": "true" },
+					dom: 'Bflrtip',
+					buttons: [ 'copy', 'excel', 'pdf' ],
+			        displayLength: 10, // Default No of Records per page on 1st load
+			        lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]], // Set no of records in per page
+			        pagingType: "full_numbers",
+			        responsive: false,
+			        processing: false,
+			        stateSave: true, // Remember paging & filters
+			        autoWidth: true,
+			        scrollCollapse: true,
+			        serverSide: false,
+			        searching: true,
+			        order: [[ 0, "desc" ]],
+			        ajax: 'getMemberListingOthers/{{ $rid }}',
+			        columnDefs: [
+			        { targets: [ 0 ], data: "name", searchable: "true" },
 	            	{
-				    	"targets": [ 1 ], "data": "enrolleddate", "width": "150px", "searchable": "true",
+				    	targets: [ 1 ], data: "enrolleddate", width: "150px", searchable: "true",
 				    	"render": function ( data, type, full ){
-				    		return moment(data).format("DD-MMM-YYYY");
+				    		return moment(data).format("DD-MM-YYYY");
 					    }
 			    	},
 			    	{
-				    	"targets": [ 2 ], "data": "graduationdate", "width": "150px", "searchable": "true",
+				    	targets: [ 2 ], data: "graduationdate", width: "150px", searchable: "true",
 				    	"render": function ( data, type, full ){
-				    		return moment(data).format("DD-MMM-YYYY");
+				    		return moment(data).format("DD-MM-YYYY");
 					    }
 			    	},
-			    	{ "targets": [ 3 ], "data": "position", "searchable": "true" },
+			    	{ targets: [ 3 ], data: "position", searchable: "true" },
 			    	{
-				    	"targets": [ 4 ], "data": "status",
-				    	"render": function ( data, type, full ){
+				    	targets: [ 4 ], data: "status",
+				    	render: function ( data, type, full ){
 						    if (data === 'Rejected'){
 						    	return '<span class="label label-danger arrowed-in">'+data+'</span>';
 						    }
@@ -2900,12 +2914,18 @@
 			    		}
 		    		},
 			    	{
-				    	"targets": [ 5 ], "data": "uniquecode",
-				    	"render": function ( data, type, full ){
+				    	targets: [ 5 ], data: "uniquecode",
+				    	render: function ( data, type, full ){
 				    		// return '<span class="label label-danger arrowed-in">'+data+'</span>';
 				    		return '<button type="submit" onClick=editothersrow("'+ data +'") class="btn btn-xs btn-info"><i class="fa fa-edit bigger-120"></i></button> <button type="submit" onClick=deleteothersrow("'+ data +'") class="btn btn-xs btn-danger"><i class="fa fa-trash-o bigger-120"></i></button>'
 					    }
-			    	}]
+			    	},
+					{ targets: [ 6 ], data: "rhq", searchable: "true", visible: false },
+					{ targets: [ 7 ], data: "zone", searchable: "true", visible: false },
+					{ targets: [ 8 ], data: "chapter", searchable: "true", visible: false },
+					{ targets: [ 9 ], data: "district", searchable: "true", visible: false },
+					{ targets: [ 10 ], data: "division", searchable: "true", visible: false },
+					{ targets: [ 11 ], data: "positionorg", searchable: "true", visible: false }]
 			    }); // Group Members (Others)
 			
 				var oGroupTable = $('#tgroup').DataTable({

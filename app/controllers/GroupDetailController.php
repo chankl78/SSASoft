@@ -48,20 +48,8 @@ class GroupDetailController extends BaseController
 	{
 		try
 		{
-			$sEcho = (int)$_GET['draw'];
-			$iTotalRecords = GroupmMember::Group(GroupmGroup::getid($id))->StatusActive(GroupmGroup::getid($id))->count();
-	 		$iDisplayLength = (int)$_GET['length'];
-		    $iDisplayStart = (int)$_GET['start'];
-		    $sSearch = $_GET['search']['value'];
-		    $sOrderByID = $_GET['order'][0]['column'];
-		    $sOrderBy = $_GET['columns'][$sOrderByID]['data'];
-		    $sOrderdir = $_GET['order'][0]['dir'];
-		    $iTotalDisplayRecords = GroupmMember::Group(GroupmGroup::getid($id))->StatusActive(GroupmGroup::getid($id))->Search('%'.$sSearch.'%')->count();
-		    $default =  GroupmMember::Group(GroupmGroup::getid($id))->StatusActive(GroupmGroup::getid($id))->Search('%'.$sSearch.'%')
-		    	->take($iDisplayLength)->skip($iDisplayStart)
-		    	->orderBy($sOrderBy, $sOrderdir)->get()->toarray();
-			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
-				'draw' => (string)$sEcho, 'data' => $default));
+			$default =  GroupmMember::Group(GroupmGroup::getid($id))->StatusActive()->get()->toarray();
+			return Response::json(array('data' => $default));
 		}
 		catch(\Exception $e)
 		{
@@ -73,20 +61,8 @@ class GroupDetailController extends BaseController
 	{
 		try
 		{
-			$sEcho = (int)$_GET['draw'];
-			$iTotalRecords = GroupmMember::Group(GroupmGroup::getid($id))->StatusOthers(GroupmGroup::getid($id))->count();
-	 		$iDisplayLength = (int)$_GET['length'];
-		    $iDisplayStart = (int)$_GET['start'];
-		    $sSearch = $_GET['search']['value'];
-		    $sOrderByID = $_GET['order'][0]['column'];
-		    $sOrderBy = $_GET['columns'][$sOrderByID]['data'];
-		    $sOrderdir = $_GET['order'][0]['dir'];
-		    $iTotalDisplayRecords = GroupmMember::Group(GroupmGroup::getid($id))->StatusOthers(GroupmGroup::getid($id))->Search('%'.$sSearch.'%')->count();
-		    $default =  GroupmMember::Group(GroupmGroup::getid($id))->StatusOthers(GroupmGroup::getid($id))->Search('%'.$sSearch.'%')
-		    	->take($iDisplayLength)->skip($iDisplayStart)
-		    	->orderBy($sOrderBy, $sOrderdir)->get()->toarray();
-			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
-				'draw' => (string)$sEcho, 'data' => $default));
+			$default =  GroupmMember::Group(GroupmGroup::getid($id))->StatusOthers()->get()->toarray();
+			return Response::json(array('data' => $default));
 		}
 		catch(\Exception $e)
 		{
