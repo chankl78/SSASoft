@@ -384,7 +384,7 @@
 																						{{ Form::label('height', 'Height (cm):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																						<div class="col-xs-12 col-sm-8">
 																							<div class="clearfix">
-																								{{ Form::text('height', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'height'));}}
+																								{{ Form::text('height', '', array('class' => 'col-xs-12 col-sm-11 input-mask-numbers', 'id' => 'height'));}}
 																							</div>
 																						</div>
 																					</div>
@@ -763,7 +763,7 @@
 																							</div>
 																						</div>
 																						<div class="form-group">
-																							{{ Form::label('vaccineotherdate', 'If Yes, Indicate the date of your last vaccination:', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
+																							{{ Form::label('vaccineotherdate', 'If Yes, Indicate the date of your last vaccination (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
 																									{{ Form::text('vaccineotherdate', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'vaccineotherdate'));}}
@@ -1055,6 +1055,9 @@
 							required: true,
 							minlength: 5
 						},
+						email: {
+							email: true
+						},
 						occupation: {
 							required: true,
 							minlength: 3
@@ -1070,7 +1073,8 @@
 						},
 						height: {
 							required: true,
-							minlength: 2
+							minlength: 2,
+							digits: true
 						}
 					},
 			
