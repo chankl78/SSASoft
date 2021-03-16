@@ -39,4 +39,10 @@ class ConfigurationmDefault extends Eloquent {
         $mid = DB::table('Configuration_m_Default')->where('key', $value)->pluck('value');
         return $mid;
     }
+
+    public function scopeNDPDefaultCode($query)
+    {
+        $mid = DB::table('Configuration_m_Default')->where('key', 'NDP')->pluck('value');
+        return $mid;
+    }
 }

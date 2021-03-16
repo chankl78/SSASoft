@@ -177,6 +177,10 @@ Route::post('/eventregistration/postAddMemberSD/{id}', 'EventMemRegistrationCont
 Route::post('/eventregistration/postRegisterForEvent', 'EventMemRegistrationController@postRegisterForEvent');
 Route::get('/friendshipmeeting', 'EventMemRegistrationController@getFriendshipMeetingIndex');
 Route::get('/studentdivisioneventregistration', 'EventMemRegistrationController@getStudentDivisionIndex');
+Route::get('/ndp2021registration', 'EventMemRegistrationController@getndp2021Index');
+Route::post('/ndp2021registration/postAuthorizationCheck', 'EventMemRegistrationController@postAuthorizationCheck');
+Route::post('/ndp2021registration/postPostalSearch', 'EventMemRegistrationController@postPostalSearch');
+Route::post('/ndp2021registration/postNDPMember', 'EventMemRegistrationController@postNDPMember');
 Route::get('/concertregistration', 'EventMemRegistrationController@getConcertIndex');
 
 // Event

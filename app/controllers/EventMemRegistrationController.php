@@ -456,4 +456,149 @@ class EventMemRegistrationController extends BaseController {
 			->with('memposition_options', $memposition_options)->with('groupcontact_options', $groupcontact_options);
 		return $view;
 	}
+
+	public function getndp2021Index()
+	{
+		$view = View::make('eventregistration/eventndpregistration');
+		$view->title = 'NDP 2021 Registration';
+		$rhq_options = MemberszOrgChart::Rhq()->lists('rhq', 'rhqabbv');
+		$zone_options = MemberszOrgChart::Zone()->lists('zone', 'zoneabbv');
+		$chapter_options = MemberszOrgChart::Chapter()->lists('chapter', 'chapabbv');
+		$memposition_options = MemberszPosition::orderBy('code', 'ASC')->lists('name', 'code');
+		$country_options = array('' => 'Please Select a Country') + EventzCountry::lists('value', 'value');
+		$view->with('rhq_options', $rhq_options)->with('country_options', $country_options)
+			->with('zone_options', $zone_options)->with('chapter_options', $chapter_options)
+			->with('memposition_options', $memposition_options);
+		return $view;
+	}
+
+	public function postAuthorizationCheck()
+	{
+		try
+		{
+			$eventid = ConfigurationmDefault::NDPDefaultCode();
+			
+			if (EventmRegistration::getEventAuthorizationCheckCount(EventmEvent::getid($eventid), Input::get('auditioncode'), Input::get('mobile')) == 1)
+			{
+				$eventregid = EventmRegistration::getEventAuthorizationCheckCountEventRegID(EventmEvent::getid($eventid), Input::get('auditioncode'), Input::get('mobile'));
+				$searchresult = EventmRegistration::findorfail($eventregid, array('uniquecode', 'name', 'rhq', 'zone', 'chapter', 'district', 'division', 'position', 'positionlevel', 'dateofbirth', 'tel', 'mobile', 'email', 'address', 'buildingname', 'unitno', 'postalcode', 'occupation', 'bloodgroup', 'countryofbirth', 'nationality'));
+				return Response::json($searchresult, 200);
+			}
+			else 
+			{ 
+				$eventid = ConfigurationmDefault::NDPDefaultCode();
+
+				LogsfLogs::postLogs('Create', 28, EventmEvent::getid($eventid), ' - Event NDP Registration - Authorization Check Failed - ' . Input::get('auditioncode'), NULL, NULL, 'Failed');
+				return Response::json(array('info' => 'Failed', 'ErrType' => 'Failed'), 400); 
+			}
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Create', 28, 0, ' - Event NDP Registration - Authorization Check Failed - ' . $e, NULL, NULL, 'Failed');
+			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown'), 400);
+		}
+	}
+
+	public function postPostalSearch()
+	{
+		try
+		{
+			$searchresult = ConfigurationmBuildingPostal::findorfail(ConfigurationmBuildingPostal::getid(Input::get('postalcode')), array('bldgno', 'streetname', 'bldgname'));
+			return Response::json($searchresult, 200);
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Create', 28, 0, ' - Event NDP Registration - Postal Code Search Failed - ' . $e, NULL, NULL, 'Failed');
+			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown'), 400);
+		}
+	}
+
+	public function postNDPMember()
+	{
+		try
+		{
+			if(EventmRegistration::getCheckSignature(EventmRegistration::getid(Input::get('memberid'))) == false)
+			{
+				$post = EventmRegistration::find(EventmRegistration::getid(Input::get('memberid')));
+				$post->name = Input::get('membername');
+				$post->rhq = Input::get('rhq');
+				$post->zone = Input::get('zone');
+				$post->chapter = Input::get('chapter');
+				$post->district = Input::get('district');
+				$post->position = Input::get('position');
+				$post->positionlevel = Input::get('positionlevel');
+				$post->division = Input::get('division');
+
+				$post->nric = Input::get('nric');
+				$post->dateofbirth = Input::get('dateofbirth');
+				$post->address = Input::get('address');
+				if(Input::get('buildingname') == ''){$post->buildingname = 'NIL';} else {$post->buildingname = Input::get('buildingname');}
+				$post->unitno = Input::get('unitno');
+				$post->postalcode = Input::get('postalcode');
+
+				$post->tel = Input::get('tel');
+				$post->mobile = Input::get('mobile');
+				$post->email = Input::get('email');
+
+				$post->emergencyname = Input::get('emergencyname');
+				$post->emergencyrelationship = Input::get('emergencyrelationship');
+				$post->emergencymobile = Input::get('emergencymobile');
+				
+				$post->countryofbirth = Input::get('countryofbirth');
+				$post->nationality = Input::get('nationality');
+
+				$post->danceexperience = Input::get('danceexperience');
+				$post->dancetype = Input::get('dancetype');
+				$post->height = Input::get('height');
+
+				$post->drugallergy = Input::get('drugallergy');
+				$post->hypertension = Input::get('hypertension');
+				$post->heartdisease = Input::get('heartdisease');
+				$post->longtermmedication = Input::get('longtermmedication');
+				$post->asthmahistory = Input::get('asthmahistory');
+				$post->goodhealth = Input::get('goodhealth');
+
+				$post->vaccinewillingtake = Input::get('vaccinewillingtake');
+				$post->vaccinetaken = Input::get('vaccinetaken');
+				$post->vaccineschedule = Input::get('vaccineschedule');
+				$post->vaccineotherpast = Input::get('vaccineotherpast');
+				$post->vaccineotherdate = Input::get('vaccineotherdate');
+				$post->vaccineseverlyimmunocompromised = Input::get('vaccineseverlyimmunocompromised');
+				$post->vaccinehistoryofanaphylaxissevereallergise = Input::get('vaccinehistoryofanaphylaxissevereallergise');
+				$post->vaccineconsent = Input::get('vaccineconsent');
+				
+				$post->pregnant = Input::get('pregnant');
+				$post->conceivenextsixmonths = Input::get('conceivenextsixmonths');
+				
+				$post->signature = Input::get('signature');
+				$post->signaturesigned = date('Y-m-d H:i:s');
+
+				$post->commitwedsat = Input::get('commitwedsat');
+				$post->travelperiod = Input::get('travelperiod');
+
+
+				$post->save();
+
+				if($post->save())
+				{
+					return Response::json(array('info' => 'Success'), 200);
+				}
+				else
+				{
+					LogsfLogs::postLogs('Update', 28, 0, ' - Event Member Registration - Failed to Save', NULL, NULL, 'Failed');
+					return Response::json(array('info' => 'Duplicate'), 400);
+				}
+			}
+			else
+			{
+				LogsfLogs::postLogs('Update', 28, EventmRegistration::getid(Input::get('memberid')), ' - Event Member Registration - Already Signed', NULL, NULL, 'Failed');
+				return Response::json(array('info' => 'Failed', 'ErrType' => 'AlreadySigned'), 400);
+			}
+		}
+		catch(\Exception $e)
+		{
+			LogsfLogs::postLogs('Create', 28, 0, ' - Event Member Registration - New Member - ' . $e, NULL, NULL, 'Failed');
+			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown'), 400);
+		}
+	}
 }

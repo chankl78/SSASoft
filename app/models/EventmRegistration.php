@@ -588,6 +588,26 @@ class EventmRegistration extends Eloquent {
         return $query->where('eventid', $value)->Role()->select(DB::raw('rhq, zone, chapter, district, status, SUM(CASE WHEN division IN ("MD") THEN 1 ELSE 0 End) as "MD", SUM(CASE WHEN division IN ("WD") THEN 1 ELSE 0 End) as "WD", SUM(CASE WHEN division IN ("YM") THEN 1 ELSE 0 End) as "YMD", SUM(CASE WHEN division IN ("YW") THEN 1 ELSE 0 End) as "YWD", SUM(CASE WHEN division IN ("PD") THEN 1 ELSE 0 End) as "PD", SUM(CASE WHEN division IN ("YC") THEN 1 ELSE 0 End) as "YC", SUM(CASE WHEN division NOT IN ("MD", "WD", "YM", "YW", "PD", "YC") THEN 1 ELSE 0 End) as "Others", SUM(CASE WHEN division NOT IN (":") THEN 1 ELSE 0 End) as "Total"'))->groupBy('status', 'rhq', 'zone', 'chapter', 'district')->orderby('rhq', 'zone', 'chapter', 'district');
     }
 
+    public function getEventAuthorizationCheckCount($eventid, $auditioncode, $mobile)
+    {
+        $mid = 0;
+        $eventmobile = DB::table('Event_m_Registration')->where('eventid', $eventid)->where('auditioncode', $auditioncode)->where('deleted_at', NULL)->pluck('mobile');
+        if (Crypt::decrypt($eventmobile) == $mobile)  { $mid = 1; }
+        return $mid;
+    }
+
+    public function getEventAuthorizationCheckCountEventRegID($eventid, $auditioncode, $mobile)
+    {
+        $mid = DB::table('Event_m_Registration')->where('eventid', $eventid)->where('auditioncode', $auditioncode)->where('deleted_at', NULL)->pluck('id');
+        return $mid;
+    }
+
+    public function getCheckSignature($id)
+    {
+        $mid = DB::table('Event_m_Registration')->where('id', $id)->pluck('signature');
+        if ($mid == "") { return false; } else { return true; }
+    }
+
     public static function boot()
     {
         parent::boot();
