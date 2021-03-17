@@ -602,7 +602,7 @@ class EventmRegistration extends Eloquent {
         return $mid;
     }
 
-    public function getCheckSignature($id)
+    public static function getCheckSignature($id)
     {
         $mid = DB::table('Event_m_Registration')->where('id', $id)->pluck('signature');
         if ($mid == "") { return false; } else { return true; }
