@@ -805,11 +805,27 @@
 												</div>
 											</div>
 										</div>
+										<div class="form-group">
+											{{ Form::label('danceexperience', 'Dance Experience:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::checkbox('danceexperience', 'false', $result->danceexperience, array('id' => 'danceexperience'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('dancetype', 'Dance Type:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::textarea('dancetype', $result->dancetype, array('class' => 'col-xs-12 col-sm-9', 'rows' => '2'));}}
+												</div>
+											</div>
+										</div>
 									{{ Form::close() }}
 								</div>
 							</div>
 						</div>
-					</div> <!-- Training & Committment Information -->
+					</div> <!-- Training & Committment & Dance Information -->
 					<div class="col-xs-12 col-sm-6 widget-container-span ui-sortable">
 						<div class="widget-box widget-color-blue">
 							<div class="widget-header widget-header-small">
@@ -885,7 +901,7 @@
 											{{ Form::label('medicalhistory', 'Medical History:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::textarea('medicalallergy', $result->medicalhistory, array('class' => 'col-xs-12 col-sm-9', 'id' => 'medicalhistory'));}}
+													{{ Form::textarea('medicalallergy', $result->medicalhistory, array('class' => 'col-xs-12 col-sm-9', 'rows' => '2', 'id' => 'medicalhistory'));}}
 												</div>
 											</div>
 										</div>
@@ -914,10 +930,35 @@
 											</div>
 										</div>
 										<div class="form-group">
+											{{ Form::label('asthmahistory', 'Asthma History:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::checkbox('asthmahistory', $result->asthmahistory, $result->asthmahistory, array('id' => 'asthmahistory'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
 											{{ Form::label('goodhealth', 'Good Health:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::checkbox('goodhealth', $result->goodhealth, array('id' => 'goodhealth'));}}
+													{{ Form::checkbox('goodhealth', $result->goodhealth, $result->goodhealth, array('id' => 'goodhealth'));}}
+												</div>
+											</div>
+										</div>
+										<hr>
+										<div class="form-group">
+											{{ Form::label('pregnant', 'Pregnant:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::checkbox('pregnant', $result->pregnant, $result->pregnant, array('id' => 'pregnant'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('conceivenextsixmonths', 'Planning Conveive?:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::checkbox('conceivenextsixmonths', $result->conceivenextsixmonths, $result->conceivenextsixmonths, array('id' => 'conceivenextsixmonths'));}}
 												</div>
 											</div>
 										</div>
@@ -993,7 +1034,7 @@
 											{{ Form::label('medicalremarks', 'Medical Remarks:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::textarea('medicalremarks', $result->medicalremarks, array('class' => 'col-xs-12 col-sm-9', 'id' => 'medicalremarks'));}}
+													{{ Form::textarea('medicalremarks', $result->medicalremarks, array('class' => 'col-xs-12 col-sm-9', 'rows' => '2', 'id' => 'medicalremarks'));}}
 												</div>
 											</div>
 										</div>
@@ -1001,7 +1042,7 @@
 											{{ Form::label('medicalofficer', 'Medical Officer:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::text('medicalofficer', $result->medicalofficer, array('class' => 'col-xs-12 col-sm-9'));}}
+													{{ Form::text('medicalofficer', $result->medicalofficer, array('class' => 'col-xs-12 col-sm-9', 'rows' => '2'));}}
 												</div>
 											</div>
 										</div>
@@ -1038,7 +1079,7 @@
 											{{ Form::label('drugallergy', 'Drug Allegry:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::textarea('drugallergy', $result->drugallergy, array('class' => 'col-xs-12 col-sm-9'));}}
+													{{ Form::textarea('drugallergy', $result->drugallergy, array('class' => 'col-xs-12 col-sm-9', 'rows' => '2'));}}
 												</div>
 											</div>
 										</div>
@@ -1048,6 +1089,98 @@
 							</div>
 						</div>
 					</div> <!-- Drug Allegry Information -->
+					<div class="col-xs-12 col-sm-6 widget-container-span ui-sortable">
+						<div class="widget-box widget-color-blue">
+							<div class="widget-header widget-header-small">
+								<h6 class="widget-title">
+									<i class="icon-sort"></i>
+									Vaccine Information
+								</h6>
+								<div class="widget-toolbar">
+									<a href="#" data-action="fullscreen" class="orange2">
+										<i class="ace-icon fa fa-expand"></i>
+									</a>
+									<a href="#" data-action="reload">
+										<i class="fa fa-refresh"></i>
+									</a>
+									<a href="#" data-action="collapse">
+										<i class="ace-icon fa fa-chevron-down"></i>
+									</a>
+								</div>
+							</div>
+							<div class="widget-body">
+								<div class="widget-main no-padding">
+									{{ Form::open(array('class' => 'form-horizontal')) }}
+										<br />
+										<div class="form-group">
+											{{ Form::label('vaccinewillingtake', 'Willing to Take Vaccine:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::checkbox('vaccinewillingtake', $result->vaccinewillingtake, $result->vaccinewillingtake, array('id' => 'vaccinewillingtake'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('vaccinetaken', 'Taken Vaccine?:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::checkbox('vaccinetaken', $result->vaccinetaken, $result->vaccinetaken, array('id' => 'vaccinetaken'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('vaccineschedule', 'Vaccine Status:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::text('vaccineschedule', $result->vaccineschedule, array('class' => 'col-xs-12 col-sm-9'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('vaccineotherpast', 'Taken Other Vaccinations in 2 weeks:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::checkbox('vaccineotherpast', $result->vaccineotherpast, $result->vaccineotherpast, array('id' => 'vaccineotherpast'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('vaccineotherdate', 'Last Vaccine Date (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::text('vaccineotherdate', $result->vaccineotherdate, array('class' => 'col-xs-12 col-sm-9'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('vaccineseverlyimmunocompromised', 'Severly Immuno Compromised:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::checkbox('vaccineseverlyimmunocompromised', $result->vaccineseverlyimmunocompromised, $result->vaccineseverlyimmunocompromised, array('id' => 'asthmahistory'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('vaccinehistoryofanaphylaxissevereallergise', 'Anaphylaxis Severe Allergise:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::checkbox('vaccinehistoryofanaphylaxissevereallergise', $result->vaccinehistoryofanaphylaxissevereallergise, $result->vaccinehistoryofanaphylaxissevereallergise, array('id' => 'vaccinehistoryofanaphylaxissevereallergise'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('vaccineconsent', 'Vaccine Consent:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::checkbox('vaccineconsent', $result->vaccineconsent, $result->vaccineconsent, array('id' => 'vaccineconsent'));}}
+												</div>
+											</div>
+										</div>
+									{{ Form::close() }}
+								</div>
+							</div>
+						</div>
+					</div> <!-- Vaccine Information -->
 					<div class="col-xs-12 col-sm-6 widget-container-span ui-sortable">
 						<div class="widget-box widget-color-green">
 							<div class="widget-header widget-header-small">
@@ -1083,7 +1216,7 @@
 											{{ Form::label('auditionremarks', 'Audition Remarks:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::textarea('auditionremarks', $result->auditionremarks, array('class' => 'col-xs-12 col-sm-9', 'id' => 'auditionremarks'));}}
+													{{ Form::textarea('auditionremarks', $result->auditionremarks, array('class' => 'col-xs-12 col-sm-9', 'rows' => '2', 'id' => 'auditionremarks'));}}
 												</div>
 											</div>
 										</div>
@@ -1172,10 +1305,10 @@
 											</div>
 										</div>
 										<div class="form-group">
-											{{ Form::label('costume6', 'Height (cm):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											{{ Form::label('height', 'Height (cm):', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::text('costume6', $result->costume6, array('class' => 'col-xs-12 col-sm-9'));}}
+													{{ Form::text('height', $result->height, array('class' => 'col-xs-12 col-sm-9', 'id' => 'height'));}}
 												</div>
 											</div>
 										</div>
@@ -1261,7 +1394,7 @@
 											{{ Form::label('otherremarks', 'Official Remarks:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
-													{{ Form::textarea('otherremarks', $result->otherremarks, array('class' => 'col-xs-12 col-sm-9', 'id' => 'otherremarks'));}}
+													{{ Form::textarea('otherremarks', $result->otherremarks, array('class' => 'col-xs-12 col-sm-9', 'rows' => '2', 'id' => 'otherremarks'));}}
 												</div>
 											</div>
 										</div>
@@ -1306,6 +1439,22 @@
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
 													{{ Form::text('eventid', $result->eventid, array('class' => 'col-xs-12 col-sm-9'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('created_at', 'Created At:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::text('created_at', $result->created_at, array('class' => 'col-xs-12 col-sm-9'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('updated_at', 'Updated At:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::text('updated_at', $result->updated_at, array('class' => 'col-xs-12 col-sm-9'));}}
 												</div>
 											</div>
 										</div>
@@ -1462,11 +1611,21 @@
 			if ($("#hypertension").is(':checked')) { $("#hypertension").val('1'); } else {$("#hypertension").val('0'); }
 			if ($("#heartdisease").is(':checked')) { $("#heartdisease").val('1'); } else {$("#heartdisease").val('0'); }
 			if ($("#longtermmedication").is(':checked')) { $("#longtermmedication").val('1'); } else {$("#longtermmedication").val('0'); }
+			if ($("#asthmahistory").is(':checked')) { $("#asthmahistory").val('1'); } else {$("#asthmahistory").val('0'); }
 			if ($("#goodhealth").is(':checked')) { $("#goodhealth").val('1'); } else {$("#goodhealth").val('0'); }
 			if ($("#commitwedsat").is(':checked')) { $("#commitwedsat").val('1'); } else {$("#commitwedsat").val('0'); }
 			if ($("#subscriptionst").is(':checked')) { $("#subscriptionst").val('1'); } else {$("#subscriptionst").val('0'); }
 			if ($("#subscriptioncl").is(':checked')) { $("#subscriptioncl").val('1'); } else {$("#subscriptioncl").val('0'); }
 			if ($("#pdpa").is(':checked')) { $("#pdpa").val('1'); } else {$("#pdpa").val('0'); }
+			if ($("#danceexperience").is(':checked')) { $("#danceexperience").val('1'); } else {$("#danceexperience").val('0'); }
+			if ($("#pregnant").is(':checked')) { $("#pregnant").val('1'); } else {$("#pregnant").val('0'); }
+			if ($("#conceivenextsixmonths").is(':checked')) { $("#conceivenextsixmonths").val('1'); } else {$("#conceivenextsixmonths").val('0'); }
+			if ($("#vaccinewillingtake").is(':checked')) { $("#vaccinewillingtake").val('1'); } else {$("#vaccinewillingtake").val('0'); }
+			if ($("#vaccinetaken").is(':checked')) { $("#vaccinetaken").val('1'); } else {$("#vaccinetaken").val('0'); }
+			if ($("#vaccineotherpast").is(':checked')) { $("#vaccineotherpast").val('1'); } else {$("#vaccineotherpast").val('0'); }
+			if ($("#vaccineseverlyimmunocompromised").is(':checked')) { $("#vaccineseverlyimmunocompromised").val('1'); } else {$("#vaccineseverlyimmunocompromised").val('0'); }
+			if ($("#vaccinehistoryofanaphylaxissevereallergise").is(':checked')) { $("#vaccinehistoryofanaphylaxissevereallergise").val('1'); } else {$("#vaccinehistoryofanaphylaxissevereallergise").val('0'); }
+			if ($("#vaccineconsent").is(':checked')) { $("#vaccineconsent").val('1'); } else {$("#vaccineconsent").val('0'); }
 			noty({
 				layout: 'topRight', type: 'warning', text: 'Updating Record. Please wait for a moment ...',
 				animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
@@ -1514,11 +1673,26 @@
 		        	hypertension: $('#hypertension').val(), 
 		        	heartdisease: $('#heartdisease').val(), 
 		        	longtermmedication: $('#longtermmedication').val(), 
+					asthmahistory: $('#asthmahistory').val(), 
 		        	goodhealth: $('#goodhealth').val(), 
+
 		        	menstrual: $('#menstrual').val(), 
+					pregnant: $('#pregnant').val(), 
+					conceivenextsixmonths: $('#conceivenextsixmonths').val(), 
+
+					vaccinewillingtake: $('#vaccinewillingtake').val(), 
+		        	vaccinetaken: $('#vaccinetaken').val(), 
+		        	vaccineschedule: $('#vaccineschedule').val(), 
+		        	vaccineotherpast: $('#vaccineotherpast').val(), 
+					vaccineotherdate: $('#vaccineotherdate').val(), 
+		        	vaccineseverlyimmunocompromised: $('#vaccineseverlyimmunocompromised').val(),
+					vaccinehistoryofanaphylaxissevereallergise: $('#vaccinehistoryofanaphylaxissevereallergise').val(), 
+		        	vaccineconsent: $('#vaccineconsent').val(),
 
 		        	commitwedsat: $('#commitwedsat').val(),
 		        	travelperiod: $('#travelperiod').val(), 
+					danceexperience: $('#danceexperience').val(),
+		        	dancetype: $('#dancetype').val(), 
 
 		        	introducername: $('#introducername').val(), 
 		        	introducermobile: $('#introducermobile').val(),
@@ -1554,7 +1728,7 @@
 		        	costume3: $('#costume3').val(), 
 		        	costume4: $('#costume4').val(), 
 		        	costume5: $('#costume5').val(), 
-		        	costume6: $('#costume6').val(),
+		        	height: $('#height').val(),
 		        	costume7: $('#costume7').val(),
 		        	costume8: $('#costume8').val(),
 		        	costume9: $('#costume9').val(),

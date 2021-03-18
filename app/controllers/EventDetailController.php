@@ -1359,8 +1359,7 @@ class EventDetailController extends BaseController
 		try
 		{
 			$default = EventmRegistration::Event(EventmEvent::getid($id))
-		    	->get(array('created_at', 'name', 'rhq', 'zone', 'chapter', 
-					'nric', 'division', 'status', 'uniquecode', 'dateofbirth', 'role', 'groupcode', 'auditioncode', 
+		    	->get(array('created_at', 'name', 'rhq', 'zone', 'chapter', 'division', 'status', 'uniquecode', 'dateofbirth', 'role', 'groupcode', 'auditioncode', 
 					'eventitem', 'costume9'))->toarray();
 
 			return Response::json(array('data' => $default));

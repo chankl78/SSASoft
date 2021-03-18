@@ -73,6 +73,7 @@ class EventDetailParticipantController extends BaseController
 						if(Input::get('address') == ''){$post->address = 'NIL';} else {$post->address = Input::get('address');}
 						if(Input::get('unitno') == ''){$post->unitno = 'NIL';} else {$post->unitno = Input::get('unitno');}
 						if(Input::get('postalcode') == ''){$post->postalcode = 'NIL';} else {$post->postalcode = Input::get('postalcode');}
+						
 						$post->rhq =Input::get('region');
 						$post->zone = Input::get('zone');
 						$post->chapter = Input::get('chapter');
@@ -93,11 +94,26 @@ class EventDetailParticipantController extends BaseController
 						$post->hypertension = Input::get('hypertension');
 						$post->heartdisease = Input::get('heartdisease');
 						$post->longtermmedication = Input::get('longtermmedication');
+						$post->asthmahistory = Input::get('asthmahistory');
 						$post->goodhealth = Input::get('goodhealth');
+
 						$post->menstrual = Input::get('menstrual');
+						$post->pregnant = Input::get('pregnant');
+						$post->conceivenextsixmonths = Input::get('conceivenextsixmonths');
+
+						$post->vaccinewillingtake = Input::get('vaccinewillingtake');
+						$post->vaccinetaken = Input::get('vaccinetaken');
+						$post->vaccineschedule = Input::get('vaccineschedule');
+						$post->vaccineotherpast = Input::get('vaccineotherpast');
+						$post->vaccineotherdate = Input::get('vaccineotherdate');
+						$post->vaccineseverlyimmunocompromised = Input::get('vaccineseverlyimmunocompromised');
+						$post->vaccinehistoryofanaphylaxissevereallergise = Input::get('vaccinehistoryofanaphylaxissevereallergise');
+						$post->vaccineconsent = Input::get('vaccineconsent');
 
 						$post->commitwedsat = Input::get('commitwedsat');
 						$post->travelperiod = Input::get('travelperiod');
+						$post->danceexperience = Input::get('danceexperience');
+						$post->dancetype = Input::get('dancetype');
 
 						$post->introducer = Input::get('introducername');
 						if(Input::get('introducermobile') == ''){$post->introducermobile = 'NIL';} else {$post->introducermobile = Input::get('introducermobile');}
@@ -143,7 +159,7 @@ class EventDetailParticipantController extends BaseController
 						$post->costume3 = Input::get('costume3');
 						$post->costume4 = Input::get('costume4');
 						$post->costume5 = Input::get('costume5');
-						$post->costume6 = Input::get('costume6');
+						$post->height = Input::get('height');
 						$post->costume7 = Input::get('costume7');
 						$post->costume8 = Input::get('costume8');
 						$post->costume9 = Input::get('costume9');
@@ -206,11 +222,13 @@ class EventDetailParticipantController extends BaseController
 					if(Input::get('address') == ''){$post->address = 'NIL';} else {$post->address = Input::get('address');}
 					if(Input::get('unitno') == ''){$post->unitno = 'NIL';} else {$post->unitno = Input::get('unitno');}
 					if(Input::get('postalcode') == ''){$post->postalcode = 'NIL';} else {$post->postalcode = Input::get('postalcode');}
+					
 					$post->rhq =Input::get('region');
 					$post->zone = Input::get('zone');
 					$post->chapter = Input::get('chapter');
 					$post->district = Input::get('district');
 					$post->position = Input::get('position');
+					$post->positionlevel = MemberszPosition::getPositionLevel(Input::get('position'));
 					$post->division = Input::get('division');
 					$post->discussionmeetingday = Input::get('discussionmeetingday');
 
@@ -225,11 +243,26 @@ class EventDetailParticipantController extends BaseController
 					$post->hypertension = Input::get('hypertension');
 					$post->heartdisease = Input::get('heartdisease');
 					$post->longtermmedication = Input::get('longtermmedication');
+					$post->asthmahistory = Input::get('asthmahistory');
 					$post->goodhealth = Input::get('goodhealth');
+
 					$post->menstrual = Input::get('menstrual');
+					$post->pregnant = Input::get('pregnant');
+					$post->conceivenextsixmonths = Input::get('conceivenextsixmonths');
+
+					$post->vaccinewillingtake = Input::get('vaccinewillingtake');
+					$post->vaccinetaken = Input::get('vaccinetaken');
+					$post->vaccineschedule = Input::get('vaccineschedule');
+					$post->vaccineotherpast = Input::get('vaccineotherpast');
+					$post->vaccineotherdate = Input::get('vaccineotherdate');
+					$post->vaccineseverlyimmunocompromised = Input::get('vaccineseverlyimmunocompromised');
+					$post->vaccinehistoryofanaphylaxissevereallergise = Input::get('vaccinehistoryofanaphylaxissevereallergise');
+					$post->vaccineconsent = Input::get('vaccineconsent');
 
 					$post->commitwedsat = Input::get('commitwedsat');
 					$post->travelperiod = Input::get('travelperiod');
+					$post->danceexperience = Input::get('danceexperience');
+					$post->dancetype = Input::get('dancetype');
 
 					$post->introducer = Input::get('introducername');
 					if(Input::get('introducermobile') == ''){$post->introducermobile = 'NIL';} else {$post->introducermobile = Input::get('introducermobile');}
@@ -276,7 +309,7 @@ class EventDetailParticipantController extends BaseController
 					$post->costume3 = Input::get('costume3');
 					$post->costume4 = Input::get('costume4');
 					$post->costume5 = Input::get('costume5');
-					$post->costume6 = Input::get('costume6');
+					$post->height = Input::get('height');
 					$post->costume7 = Input::get('costume7');
 					$post->costume8 = Input::get('costume8');
 					$post->costume9 = Input::get('costume9');
