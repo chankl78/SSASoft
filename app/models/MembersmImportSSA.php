@@ -22,11 +22,11 @@ class MembersmImportSSA extends Eloquent {
 				{
 					$post = new MembersmSSA;
 					$post->personid = $member['id'];
-					$post->nric = substr($member['nric'], 2);
+					$post->nric = substr($member['nric'], 1);
 					if ($member['nric'] <> NULL)
 					{
-						$post->nrichash = md5(substr($member['nric'], 2));
-						$post->searchcode = substr($member['nric'], 3, 3);
+						$post->nrichash = md5(substr($member['nric'], 1));
+						$post->searchcode = substr($member['nric'], 2, 3);
 					}
 					$post->mmsuuid = $member['uuid'];
 					$post->name = $member['name'];
@@ -106,11 +106,11 @@ class MembersmImportSSA extends Eloquent {
 				{
 					$post = MembersmSSA::find(MembersmSSA::getIdByPersonID($member['id']));
 					$post->personid = $member['id'];
-					$post->nric = substr($member['nric'], 2);
+					$post->nric = substr($member['nric'], 1);
 					if ($member['nric'] <> NULL)
 					{
-						$post->nrichash = md5(substr($member['nric'], 2));
-						$post->searchcode = substr($member['nric'], 3, 3);
+						$post->nrichash = md5(substr($member['nric'], 1));
+						$post->searchcode = substr($member['nric'], 2, 3);
 					}
 					$post->mmsuuid = $member['uuid'];
 					$post->name = $member['name'];
@@ -217,11 +217,11 @@ class MembersmImportSSA extends Eloquent {
 				{
 					$post = new MembersmSSA;
 					$post->personid = $member['id'];
-					$post->nric = substr($member['nric'], 2);
+					$post->nric = substr($member['nric'], 1);
 					if ($member['nric'] <> NULL)
 					{
-						$post->nrichash = md5(substr($member['nric'], 2));
-						$post->searchcode = substr($member['nric'], 3, 3);
+						$post->nrichash = md5(substr($member['nric'], 1));
+						$post->searchcode = substr($member['nric'], 2, 3);
 					}
 					$post->mmsuuid = $member['uuid'];
 					$post->name = $member['name'];
@@ -301,11 +301,11 @@ class MembersmImportSSA extends Eloquent {
 				{
 					$post = MembersmSSA::find(MembersmSSA::getIdByPersonID($member['id']));
 					$post->personid = $member['id'];
-					$post->nric = substr($member['nric'], 2);
+					$post->nric = substr($member['nric'], 1);
 					if ($member['nric'] <> NULL)
 					{
-						$post->nrichash = md5(substr($member['nric'], 2));
-						$post->searchcode = substr($member['nric'], 3, 3);
+						$post->nrichash = md5(substr($member['nric'], 1));
+						$post->searchcode = substr($member['nric'], 2, 3);
 					}
 					$post->mmsuuid = $member['uuid'];
 					$post->name = $member['name'];
