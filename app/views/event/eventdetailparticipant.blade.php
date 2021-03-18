@@ -1391,6 +1391,23 @@
 									{{ Form::open(array('class' => 'form-horizontal')) }}
 										<br />
 										<div class="form-group">
+											{{ Form::label('signature', 'Participant Signature:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::text('signature', $result->signature, array('class' => 'col-xs-12 col-sm-9'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('signaturesigned', 'Signature Date/Time:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::text('signaturesigned', $result->signaturesigned, array('class' => 'col-xs-12 col-sm-9'));}}
+												</div>
+											</div>
+										</div>
+										<hr>
+										<div class="form-group">
 											{{ Form::label('otherremarks', 'Official Remarks:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
