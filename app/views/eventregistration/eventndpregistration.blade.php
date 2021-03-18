@@ -165,7 +165,7 @@
 														<div class="widget-box transparent">
 															<div class="widget-body">
 																<div class="widget-main no-padding">
-																	<div class="col-md-offset-1 col-xs-12 col-sm-11 widget-container-span ui-sortable">
+																	<div class="col-md-offset-1 col-xs-12 col-sm-10 widget-container-span ui-sortable">
 																		<div class="widget-box transparent">
 																			<div class="widget-body">
 																				<div class="widget-main no-padding">
@@ -184,6 +184,10 @@
 																						<ul>
 																							<li>For Singaporeans and PRs only.</li>
 																							<li>Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings on alternate Mondays from April 2021 onwards.</li>
+																						</ul>
+																						<h3 class="green">Consent for usage of your personal data</h3>
+																						<ul>
+																							<li>I consent to disclose the above-stated information to Singapore Soka Association to facilitate my participation in this event; and I agree to the organizing committee’s use of this information for the purpose of the event’s management and operation.</li>
 																						</ul>
 																					</p>
 																				</div>
@@ -698,7 +702,7 @@
 																							{{ Form::label('drugallergy', 'Pls State Clearly any DRUG ALLERGY if you may have:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-7">
 																								<div class="clearfix">
-																									{{ Form::textarea('drugallergy', '', array('class' => 'col-xs-12 col-sm-11', 'rows' => '2', 'id' => 'drugallergy'));}}
+																									{{ Form::textarea('drugallergy', '', array('class' => 'col-xs-12 col-sm-11', 'rows' => '2', 'id' => 'drugallergy', 'placeholder' => 'Please put "NA" if you do not have any drug allegary '));}}
 																								</div>
 																							</div>
 																						</div>
@@ -755,7 +759,24 @@
 																							</div>
 																						</div>
 																						<div class="form-group">
-																							{{ Form::label('vaccineotherpast', 'Have you taken any other vaccinations in the past 2 weeks  (e.g. ALIVE, Pre-departure vaccinations)?', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
+																							{{ Form::label('vaccinefirstdose', 'If Scheduled, When is your 1st Dose Vaccine (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
+																							<div class="col-xs-12 col-sm-4">
+																								<div class="clearfix">
+																									{{ Form::text('vaccinefirstdose', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'vaccinefirstdose'));}}
+																								</div>
+																							</div>
+																						</div>
+																						<div class="form-group">
+																							{{ Form::label('vaccineseconddose', 'If Scheduled, When is your 2nd Dose Vaccine (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
+																							<div class="col-xs-12 col-sm-4">
+																								<div class="clearfix">
+																									{{ Form::text('vaccineseconddose', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'vaccineseconddose'));}}
+																								</div>
+																							</div>
+																						</div>
+																						<hr>
+																						 <div class="form-group">
+																							{{ Form::label('vaccineotherpast', 'Have you taken any other vaccinations in the past recent 2 weeks  (e.g. ALIVE, Pre-departure vaccinations)?', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
 																									{{ Form::select('vaccineotherpast', array('0' => 'No', '1' => 'Yes'), '0', array('class' => 'col-xs-12 col-sm-11', 'id' => 'vaccineotherpast'));}}
@@ -770,6 +791,7 @@
 																								</div>
 																							</div>
 																						</div>
+																						<hr>
 																						<div class="form-group">
 																							{{ Form::label('vaccineseverlyimmunocompromised', 'Are you severly immuno-compromised?', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
@@ -942,10 +964,10 @@
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+		</script>
+		<![endif]-->
 
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
@@ -1220,6 +1242,51 @@
 					}
 				});
 
+				$('#resourceHealth').validate({
+					errorElement: 'div',
+					errorClass: 'help-block',
+					focusInvalid: false,
+					rules: {
+						drugallergy: {
+							required: true,
+							minlength: 2
+						}
+					},
+			
+					messages: {
+						
+					},
+			
+					invalidHandler: function (event, validator) { //display error alert on form submit   
+						$('.alert-danger', $('.resourceintroducerinfo')).show();
+					},
+			
+					highlight: function (e) {
+						$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+					},
+			
+					success: function (e) {
+						$(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+						$(e).remove();
+					},
+			
+					errorPlacement: function (error, element) {
+						if(element.is(':checkbox') || element.is(':radio')) {
+							var controls = element.closest('div[class*="col-"]');
+							if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+							else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+						}
+						else if(element.is('.select2')) {
+							error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+						}
+						else if(element.is('.chosen-select')) {
+							error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+						}
+						else error.insertAfter(element.parent());
+					}
+				});
+
+
 				$('#resourceDeclaration').validate({
 					errorElement: 'div',
 					errorClass: 'help-block',
@@ -1391,6 +1458,18 @@
 							return false;
 						}
 					}
+					else if (info.step == 7)
+					{
+						if(!$('#resourceHealth').valid())
+						{
+							noty({
+								layout: 'topRight', type: 'warning', text: 'Please confirm if you have drug allergy.',
+								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
+								timeout: 4000
+							});
+							return false;
+						}
+					}
 				})
 				.on('finished', function(e) {
 					var wizard = $('#fuelux-wizard').data('wizard');
@@ -1408,7 +1487,7 @@
 						$.ajax({
 							url: 'ndp2021registration/postNDPMember',
 							type: 'POST',
-							data: { membername: $("#membername").val(), memberid: $("#memberid").val(), nric: $("#nric").val(), division: $("#division").val(), position: $("#position").val(), rhq: $("#rhq").val(), zone: $("#zone").val(), chapter: $("#chapter").val(), district: $("#district").val(), tel: $("#tel").val(), mobile: $("#mobile").val(), email: $("#email").val(), dateofbirth: $("#dateofbirth").val(), occupation: $("#occupation").val(), nationality: $("#nationality").val(), countryofbirth: $("#countryofbirth").val(), address: $("#address").val(), buildingname: $("#buildingname").val(), unitno: $("#unitno").val(), postalcode: $("#postalcode").val(), height: $("#height").val(), emergencyname: $("#emergencyname").val(), emergencyrelationship: $("#emergencyrelationship").val(), emergencymobile: $("#emergencymobile").val(), danceexperience: $("#danceexperience").val(), dancetype: $("#dancetype").val(), commitwedsat: $("#commitwedsat").val(), travelperiod: $("#travelperiod").val(), goodhealth: $("#goodhealth").val(), hypertension: $("#hypertension").val(), heartdisease: $("#heartdisease").val(), longtermmedication: $("#longtermmedication").val(), asthmahistory: $("#asthmahistory").val(), drugallergy: $("#drugallergy").val(), vaccinewillingtake: $("#vaccinewillingtake").val(), vaccinetaken: $("#vaccinetaken").val(), vaccineschedule: $("#vaccineschedule").val(), vaccineotherpast: $("#vaccineotherpast").val(), vaccineotherdate: $("#vaccineotherdate").val(), vaccineseverlyimmunocompromised: $("#vaccineseverlyimmunocompromised").val(), vaccinehistoryofanaphylaxissevereallergise: $("#vaccinehistoryofanaphylaxissevereallergise").val(), vaccineconsent: $("#vaccineconsent").val(), pregnant: $("#pregnant").val(), conceivenextsixmonths: $("#conceivenextsixmonths").val(), signature: $("#signature").val()},
+							data: { membername: $("#membername").val(), memberid: $("#memberid").val(), nric: $("#nric").val(), division: $("#division").val(), position: $("#position").val(), rhq: $("#rhq").val(), zone: $("#zone").val(), chapter: $("#chapter").val(), district: $("#district").val(), tel: $("#tel").val(), mobile: $("#mobile").val(), email: $("#email").val(), dateofbirth: $("#dateofbirth").val(), occupation: $("#occupation").val(), nationality: $("#nationality").val(), countryofbirth: $("#countryofbirth").val(), address: $("#address").val(), buildingname: $("#buildingname").val(), unitno: $("#unitno").val(), postalcode: $("#postalcode").val(), height: $("#height").val(), emergencyname: $("#emergencyname").val(), emergencyrelationship: $("#emergencyrelationship").val(), emergencymobile: $("#emergencymobile").val(), danceexperience: $("#danceexperience").val(), dancetype: $("#dancetype").val(), commitwedsat: $("#commitwedsat").val(), travelperiod: $("#travelperiod").val(), goodhealth: $("#goodhealth").val(), hypertension: $("#hypertension").val(), heartdisease: $("#heartdisease").val(), longtermmedication: $("#longtermmedication").val(), asthmahistory: $("#asthmahistory").val(), drugallergy: $("#drugallergy").val(), vaccinewillingtake: $("#vaccinewillingtake").val(), vaccinetaken: $("#vaccinetaken").val(), vaccineschedule: $("#vaccineschedule").val(), vaccinefirstdose: $("#vaccinefirstdose").val(), vaccineseconddose: $("#vaccineseconddose").val(), vaccineotherpast: $("#vaccineotherpast").val(), vaccineotherdate: $("#vaccineotherdate").val(), vaccineseverlyimmunocompromised: $("#vaccineseverlyimmunocompromised").val(), vaccinehistoryofanaphylaxissevereallergise: $("#vaccinehistoryofanaphylaxissevereallergise").val(), vaccineconsent: $("#vaccineconsent").val(), pregnant: $("#pregnant").val(), conceivenextsixmonths: $("#conceivenextsixmonths").val(), signature: $("#signature").val()},
 							dataType: 'json',
 							statusCode: { 
 								200:function(){
@@ -1430,6 +1509,16 @@
 									$("#occupation").val("");
 									$("#memberid").val("");
 									$("#height").val("");
+									$("#vaccinefirstdose").val("");
+									$("#vaccineseconddose").val("");
+									$("#vaccineotherdate").val("");
+									$("#emergencyname").val("");
+									$("#emergencymobile").val("");
+									$("#emergencyrelationship").val("");
+									$("#drugallergy").val("");
+									$("#signature").val("");
+									$("#dancetype").val("");
+									$("#travelperiod").val("");
 									$("#regauditioncode").val("");
 									$("#regmobile").val("");
 
@@ -1437,7 +1526,7 @@
 									wizard.setState();
 
 									noty({
-										layout: 'center', type: 'success', text: 'Thank you very much for your Registration!',
+										layout: 'center', type: 'success', text: 'Thank you very much for your Registration! Welcome to NDP 2021! NDP Admin will contact you soon for the 1st Training!',
 										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
 									},
 										closeWith: ['click']
@@ -1462,6 +1551,16 @@
 									$("#occupation").val("");
 									$("#memberid").val("");
 									$("#height").val("");
+									$("#vaccinefirstdose").val("");
+									$("#vaccineseconddose").val("");
+									$("#vaccineotherdate").val("");
+									$("#emergencyname").val("");
+									$("#emergencymobile").val("");
+									$("#emergencyrelationship").val("");
+									$("#drugallergy").val("");
+									$("#signature").val("");
+									$("#dancetype").val("");
+									$("#travelperiod").val("");
 									$("#regauditioncode").val("");
 									$("#regmobile").val("");
 
@@ -1481,7 +1580,7 @@
 									
 									noty({
 										layout: 'topRight', type: 'error', text: txtMessage,
-										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
+										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 700 
 											},
 										timeout: 4000
 									});

@@ -1137,6 +1137,23 @@
 											</div>
 										</div>
 										<div class="form-group">
+											{{ Form::label('vaccinefirstdose', '1st Vaccine Date (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::text('vaccinefirstdose', $result->vaccinefirstdose, array('class' => 'col-xs-12 col-sm-9'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('vaccineseconddose', '2nd Vaccine Date (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::text('vaccineseconddose', $result->vaccineseconddose, array('class' => 'col-xs-12 col-sm-9'));}}
+												</div>
+											</div>
+										</div>
+										<hr>
+										<div class="form-group">
 											{{ Form::label('vaccineotherpast', 'Taken Other Vaccinations in 2 weeks:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-7">
 												<div class="clearfix">
@@ -1152,6 +1169,7 @@
 												</div>
 											</div>
 										</div>
+										<hr>
 										<div class="form-group">
 											{{ Form::label('vaccineseverlyimmunocompromised', 'Severly Immuno Compromised:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-7">
@@ -1700,6 +1718,8 @@
 					vaccinewillingtake: $('#vaccinewillingtake').val(), 
 		        	vaccinetaken: $('#vaccinetaken').val(), 
 		        	vaccineschedule: $('#vaccineschedule').val(), 
+					vaccinefirstdose: $('#vaccinefirstdose').val(), 
+					vaccineseconddose: $('#vaccineseconddose').val(), 
 		        	vaccineotherpast: $('#vaccineotherpast').val(), 
 					vaccineotherdate: $('#vaccineotherdate').val(), 
 		        	vaccineseverlyimmunocompromised: $('#vaccineseverlyimmunocompromised').val(),
