@@ -1526,7 +1526,7 @@
 									wizard.setState();
 
 									noty({
-										layout: 'center', type: 'success', text: 'Thank you very much for your Registration! Welcome to NDP 2021! NDP Admin will contact you soon for the 1st Training!',
+										layout: 'center', type: 'success', text: 'Thank you very much for your Registration!',
 										animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 
 									},
 										closeWith: ['click']
