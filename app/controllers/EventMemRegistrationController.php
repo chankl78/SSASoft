@@ -577,7 +577,7 @@ class EventMemRegistrationController extends BaseController {
 
 				$post->commitwedsat = Input::get('commitwedsat');
 				$post->travelperiod = Input::get('travelperiod');
-
+				$post->occupation = Input::get('occupation');
 
 				$post->save();
 
