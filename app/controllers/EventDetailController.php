@@ -331,54 +331,131 @@ class EventDetailController extends BaseController
 			{
 				$mid = EventmRegistration::getid($id);
 				$eventregistrationrecord = EventmRegistration::find($mid)->toarray();
-				$member = MembersmSSA::find($eventregistrationrecord['memberid'])->toarray();
 				$forwardeventid = EventmEvent::getforwardid(Input::get('eventforward'));
-				if(EventmRegistration::getEventMemberDuplicate($member['id'], $forwardeventid) == false)
+				if (MembersmSSA::getcheckmemberidexist($eventregistrationrecord['memberid']) == true)
+				{
+					$member = MembersmSSA::find($eventregistrationrecord['memberid'])->toarray();
+					if(EventmRegistration::getEventMemberDuplicate($member['id'], $forwardeventid) == false)
+					{
+						$post = new EventmRegistration;
+						$post->eventid = $forwardeventid;
+						$post->eventname= Input::get('eventforward');
+						$post->personid = $member['personid'];
+						$post->memberid = $member['id'];
+						$post->name = $member['name'];
+						$post->chinesename = $member['chinesename'];
+						$post->rhq = $member['rhq'];
+						$post->zone = $member['zone'];
+						$post->chapter = $member['chapter'];
+						$post->district = $member['district'];
+						$post->position = $member['position'];
+						$post->positionlevel = $member['positionlevel'];
+						$post->division = $member['division'];
+						$post->nric = $member['nric'];
+						$post->nrichash = $member['nrichash'];
+						$post->dateofbirth = $member['dateofbirth'];
+
+						$post->tel = $member['tel'];
+						$post->mobile = $member['mobile'];
+						$post->email = $member['email'];
+
+						$post->emergencyname = $member['emergencyname'];
+						$post->emergencyrelationship = $member['emergencyrelationship'];
+						$post->emergencytel = $member['emergencytel'];
+						$post->emergencymobile = $member['emergencymobile'];
+
+						$post->drugallergy = $member['drugallergy'];
+						$post->bloodgroup = $member['bloodgroup'];
+						$post->nationality = $member['nationality'];
+						$post->occupation = $member['occupation'];
+						
+						$post->race = $member['race'];
+						$post->gender = $member['gender'];
+
+						$post->countryofbirth = $member['countryofbirth'];
+
+						$post->address = $member['address'];
+						$post->buildingname = $member['buildingname'];
+						$post->unitno = $member['unitno'];
+						$post->postalcode = $member['postalcode'];
+
+						$post->introducer = $member['introducer'];
+						$post->introducermobile = $member['introducermobile'];
+
+						$post->role = "Participant";
+						$post->ssagroupid = $eventregistrationrecord['ssagroupid'];
+						$post->ssagroup = $eventregistrationrecord['ssagroup'];
+						$post->eventregidforward = $eventregistrationrecord['id'];
+						$post->eventidforward = $eventregistrationrecord['eventid'];
+						if (Input::get('eventitemforward') == 1) { $post->eventitem = $eventregistrationrecord['eventname']; }
+						else { $post->auditioncode = $eventregistrationrecord['eventitem']; }
+						$post->status = "Accepted";
+						$post->uniquecode = uniqid('', TRUE);
+						$post->save();
+
+						if($post->save())
+						{
+							LogsfLogs::postLogs('Create', 28, $post->id, ' - Event - New Member - ' . Input::get('membername'), NULL, NULL, 'Success');
+							return Response::json(array('info' => 'Success'), 200);
+						}
+						else
+						{
+							LogsfLogs::postLogs('Create', 28, 0, ' - Event - New Member - Failed to Save', NULL, NULL, 'Failed');
+							return Response::json(array('info' => 'Duplicate'), 400);
+						}
+					}
+					else
+					{
+						LogsfLogs::postLogs('Create', 28, 0, ' - Event - New Member Duplicate Value', NULL, NULL, 'Failed');
+						return Response::json(array('info' => 'Failed', 'ErrType' => 'Duplicate'), 400);
+					}
+				}
+				else
 				{
 					$post = new EventmRegistration;
 					$post->eventid = $forwardeventid;
 					$post->eventname= Input::get('eventforward');
-					$post->personid = $member['personid'];
-					$post->memberid = $member['id'];
-					$post->name = $member['name'];
-					$post->chinesename = $member['chinesename'];
-					$post->rhq = $member['rhq'];
-					$post->zone = $member['zone'];
-					$post->chapter = $member['chapter'];
-					$post->district = $member['district'];
-					$post->position = $member['position'];
-					$post->positionlevel = $member['positionlevel'];
-					$post->division = $member['division'];
-					$post->nric = $member['nric'];
-					$post->nrichash = $member['nrichash'];
-					$post->dateofbirth = $member['dateofbirth'];
+					$post->personid = $eventregistrationrecord['personid'];
+					$post->memberid = $eventregistrationrecord['id'];
+					$post->name = $eventregistrationrecord['name'];
+					$post->chinesename = $eventregistrationrecord['chinesename'];
+					$post->rhq = $eventregistrationrecord['rhq'];
+					$post->zone = $eventregistrationrecord['zone'];
+					$post->chapter = $eventregistrationrecord['chapter'];
+					$post->district = $eventregistrationrecord['district'];
+					$post->position = $eventregistrationrecord['position'];
+					$post->positionlevel = $eventregistrationrecord['positionlevel'];
+					$post->division = $eventregistrationrecord['division'];
+					$post->nric = $eventregistrationrecord['nric'];
+					$post->nrichash = $eventregistrationrecord['nrichash'];
+					$post->dateofbirth = $eventregistrationrecord['dateofbirth'];
 
-					$post->tel = $member['tel'];
-					$post->mobile = $member['mobile'];
-					$post->email = $member['email'];
+					$post->tel = $eventregistrationrecord['tel'];
+					$post->mobile = $eventregistrationrecord['mobile'];
+					$post->email = $eventregistrationrecord['email'];
 
-					$post->emergencyname = $member['emergencyname'];
-					$post->emergencyrelationship = $member['emergencyrelationship'];
-					$post->emergencytel = $member['emergencytel'];
-					$post->emergencymobile = $member['emergencymobile'];
+					$post->emergencyname = $eventregistrationrecord['emergencyname'];
+					$post->emergencyrelationship = $eventregistrationrecord['emergencyrelationship'];
+					$post->emergencytel = $eventregistrationrecord['emergencytel'];
+					$post->emergencymobile = $eventregistrationrecord['emergencymobile'];
 
-					$post->drugallergy = $member['drugallergy'];
-					$post->bloodgroup = $member['bloodgroup'];
-					$post->nationality = $member['nationality'];
-					$post->occupation = $member['occupation'];
+					$post->drugallergy = $eventregistrationrecord['drugallergy'];
+					$post->bloodgroup = $eventregistrationrecord['bloodgroup'];
+					$post->nationality = $eventregistrationrecord['nationality'];
+					$post->occupation = $eventregistrationrecord['occupation'];
 					
-					$post->race = $member['race'];
-					$post->gender = $member['gender'];
+					$post->race = $eventregistrationrecord['race'];
+					$post->gender = $eventregistrationrecord['gender'];
 
-					$post->countryofbirth = $member['countryofbirth'];
+					$post->countryofbirth = $eventregistrationrecord['countryofbirth'];
 
-					$post->address = $member['address'];
-					$post->buildingname = $member['buildingname'];
-					$post->unitno = $member['unitno'];
-					$post->postalcode = $member['postalcode'];
+					$post->address = $eventregistrationrecord['address'];
+					$post->buildingname = $eventregistrationrecord['buildingname'];
+					$post->unitno = $eventregistrationrecord['unitno'];
+					$post->postalcode = $eventregistrationrecord['postalcode'];
 
-					$post->introducer = $member['introducer'];
-					$post->introducermobile = $member['introducermobile'];
+					$post->introducer = $eventregistrationrecord['introducer'];
+					$post->introducermobile = $eventregistrationrecord['introducermobile'];
 
 					$post->role = "Participant";
 					$post->ssagroupid = $eventregistrationrecord['ssagroupid'];
@@ -402,11 +479,7 @@ class EventDetailController extends BaseController
 						return Response::json(array('info' => 'Duplicate'), 400);
 					}
 				}
-				else
-				{
-					LogsfLogs::postLogs('Create', 28, 0, ' - Event - New Member Duplicate Value', NULL, NULL, 'Failed');
-					return Response::json(array('info' => 'Failed', 'ErrType' => 'Duplicate'), 400);
-				}
+				
 			}
 			catch(\Exception $e)
 			{
@@ -1359,7 +1432,8 @@ class EventDetailController extends BaseController
 		try
 		{
 			$default = EventmRegistration::Event(EventmEvent::getid($id))
-		    	->get(array('created_at', 'name', 'rhq', 'zone', 'chapter', 'division', 'status', 'uniquecode', 'dateofbirth', 'role', 'groupcode', 'auditioncode', 
+		    	->get(array('created_at', 'name', 'rhq', 'zone', 'chapter', 
+					'nric', 'division', 'status', 'uniquecode', 'dateofbirth', 'role', 'groupcode', 'auditioncode', 
 					'eventitem', 'costume9'))->toarray();
 
 			return Response::json(array('data' => $default));

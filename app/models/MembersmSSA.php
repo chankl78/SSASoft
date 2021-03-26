@@ -349,6 +349,15 @@ class MembersmSSA extends Eloquent {
         else { return false; }
     }
 
+    public static function getcheckmemberidexist($value)
+    {
+        if (DB::table('Members_m_SSA')->where('id', $value)->where('deleted_at', NULL)->count() >= 1)
+        {
+            return true;
+        }
+        else { return false; }
+    }
+
     public static function getIdByPersonID($value)
     {
         $mid = DB::table('Members_m_SSA')->where('personid', $value)->pluck('id');
