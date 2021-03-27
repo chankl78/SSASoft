@@ -1336,7 +1336,7 @@
 				$.ajax({
 					url: 'ndp2021registration/postPostalSearch',
 					type: 'POST',
-					data: { postalcode: $("#postalcode").val() },
+					data: { postalcode: $("#postalcode").val(), membername: $("#membername").val() },
 					dataType: 'json',
 					statusCode: { 
 						200:function(data){
@@ -1348,7 +1348,15 @@
 							var txtMessage = 'Please check your entry!!';
 							if (data.responseJSON.ErrType == "NoAccess") 
 							{ txtMessage = 'You do not have access to Update!'; }
+							else if ( data.responseJSON.ErrType == "WrongPostalCode" )
+							{ txtMessage = 'You have entered an invaild Singapore Postal Code.'; }
 							else { txtMessage = 'Please check your entry!'; }
+
+							noty({
+								layout: 'topRight', type: 'error', text: txtMessage,
+								animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 },
+								timeout: 4000
+							});
 						}
 					}
 				});

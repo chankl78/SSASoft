@@ -508,8 +508,8 @@ class EventMemRegistrationController extends BaseController {
 		}
 		catch(\Exception $e)
 		{
-			LogsfLogs::postLogs('Create', 28, 0, ' - Event NDP Registration - Postal Code Search Failed - ' . $e, NULL, NULL, 'Failed');
-			return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown'), 400);
+			LogsfLogs::postLogs('Create', 28, 0, ' - Event NDP Registration - Postal Code Search Failed - ' . Input::get('membername') . ' - ' . Input::get('postalcode') . ' - ' . $e, NULL, NULL, 'Failed');
+			return Response::json(array('info' => 'Failed', 'ErrType' => 'WrongPostalCode'), 400);
 		}
 	}
 
