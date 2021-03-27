@@ -325,13 +325,13 @@ class EventDetailController extends BaseController
 
 	public function postforwardparticipanttoevent($id)
 	{
+		$forwardeventid = EventmEvent::getforwardid(Input::get('eventforward'));
 		if (AccessfCheck::getResourceCRUDAccess(Auth::user()->roleid, 'EV04', 'create') == 't')
 		{
 			try
 			{
 				$mid = EventmRegistration::getid($id);
 				$eventregistrationrecord = EventmRegistration::find($mid)->toarray();
-				$forwardeventid = EventmEvent::getforwardid(Input::get('eventforward'));
 				if (MembersmSSA::getcheckmemberidexist($eventregistrationrecord['memberid']) == true)
 				{
 					$member = MembersmSSA::find($eventregistrationrecord['memberid'])->toarray();
@@ -395,101 +395,109 @@ class EventDetailController extends BaseController
 
 						if($post->save())
 						{
-							LogsfLogs::postLogs('Create', 28, $post->id, ' - Event - New Member - ' . Input::get('membername'), NULL, NULL, 'Success');
+							LogsfLogs::postLogs('Create', 28, $post->id, ' - Event Forward - New Participant - ' . $member['name'], NULL, NULL, 'Success');
 							return Response::json(array('info' => 'Success'), 200);
 						}
 						else
 						{
-							LogsfLogs::postLogs('Create', 28, 0, ' - Event - New Member - Failed to Save', NULL, NULL, 'Failed');
+							LogsfLogs::postLogs('Create', 28, 0, ' - Event Forward - New Participant - Failed to Save', NULL, NULL, 'Failed');
 							return Response::json(array('info' => 'Duplicate'), 400);
 						}
 					}
 					else
 					{
-						LogsfLogs::postLogs('Create', 28, 0, ' - Event - New Member Duplicate Value', NULL, NULL, 'Failed');
+						LogsfLogs::postLogs('Create', 28, $forwardeventid, ' - Event Forward - Duplicate Value - ' . $member['name'], NULL, NULL, 'Failed');
 						return Response::json(array('info' => 'Failed', 'ErrType' => 'Duplicate'), 400);
 					}
 				}
 				else
 				{
-					$post = new EventmRegistration;
-					$post->eventid = $forwardeventid;
-					$post->eventname= Input::get('eventforward');
-					$post->personid = $eventregistrationrecord['personid'];
-					$post->memberid = $eventregistrationrecord['id'];
-					$post->name = $eventregistrationrecord['name'];
-					$post->chinesename = $eventregistrationrecord['chinesename'];
-					$post->rhq = $eventregistrationrecord['rhq'];
-					$post->zone = $eventregistrationrecord['zone'];
-					$post->chapter = $eventregistrationrecord['chapter'];
-					$post->district = $eventregistrationrecord['district'];
-					$post->position = $eventregistrationrecord['position'];
-					$post->positionlevel = $eventregistrationrecord['positionlevel'];
-					$post->division = $eventregistrationrecord['division'];
-					$post->nric = $eventregistrationrecord['nric'];
-					$post->nrichash = $eventregistrationrecord['nrichash'];
-					$post->dateofbirth = $eventregistrationrecord['dateofbirth'];
-
-					$post->tel = $eventregistrationrecord['tel'];
-					$post->mobile = $eventregistrationrecord['mobile'];
-					$post->email = $eventregistrationrecord['email'];
-
-					$post->emergencyname = $eventregistrationrecord['emergencyname'];
-					$post->emergencyrelationship = $eventregistrationrecord['emergencyrelationship'];
-					$post->emergencytel = $eventregistrationrecord['emergencytel'];
-					$post->emergencymobile = $eventregistrationrecord['emergencymobile'];
-
-					$post->drugallergy = $eventregistrationrecord['drugallergy'];
-					$post->bloodgroup = $eventregistrationrecord['bloodgroup'];
-					$post->nationality = $eventregistrationrecord['nationality'];
-					$post->occupation = $eventregistrationrecord['occupation'];
-					
-					$post->race = $eventregistrationrecord['race'];
-					$post->gender = $eventregistrationrecord['gender'];
-
-					$post->countryofbirth = $eventregistrationrecord['countryofbirth'];
-
-					$post->address = $eventregistrationrecord['address'];
-					$post->buildingname = $eventregistrationrecord['buildingname'];
-					$post->unitno = $eventregistrationrecord['unitno'];
-					$post->postalcode = $eventregistrationrecord['postalcode'];
-
-					$post->introducer = $eventregistrationrecord['introducer'];
-					$post->introducermobile = $eventregistrationrecord['introducermobile'];
-
-					$post->role = "Participant";
-					$post->ssagroupid = $eventregistrationrecord['ssagroupid'];
-					$post->ssagroup = $eventregistrationrecord['ssagroup'];
-					$post->eventregidforward = $eventregistrationrecord['id'];
-					$post->eventidforward = $eventregistrationrecord['eventid'];
-					if (Input::get('eventitemforward') == 1) { $post->eventitem = $eventregistrationrecord['eventname']; }
-					else { $post->auditioncode = $eventregistrationrecord['eventitem']; }
-					$post->status = "Accepted";
-					$post->uniquecode = uniqid('', TRUE);
-					$post->save();
-
-					if($post->save())
+					if(EventmRegistration::getEventMemberForwardDuplicate($eventregistrationrecord['id'], $forwardeventid) == false)
 					{
-						LogsfLogs::postLogs('Create', 28, $post->id, ' - Event - New Member - ' . Input::get('membername'), NULL, NULL, 'Success');
-						return Response::json(array('info' => 'Success'), 200);
+						$post = new EventmRegistration;
+						$post->eventid = $forwardeventid;
+						$post->eventname= Input::get('eventforward');
+						$post->personid = $eventregistrationrecord['personid'];
+						$post->memberid = $eventregistrationrecord['id'];
+						$post->name = $eventregistrationrecord['name'];
+						$post->chinesename = $eventregistrationrecord['chinesename'];
+						$post->rhq = $eventregistrationrecord['rhq'];
+						$post->zone = $eventregistrationrecord['zone'];
+						$post->chapter = $eventregistrationrecord['chapter'];
+						$post->district = $eventregistrationrecord['district'];
+						$post->position = $eventregistrationrecord['position'];
+						$post->positionlevel = $eventregistrationrecord['positionlevel'];
+						$post->division = $eventregistrationrecord['division'];
+						$post->nric = $eventregistrationrecord['nric'];
+						$post->nrichash = $eventregistrationrecord['nrichash'];
+						$post->dateofbirth = $eventregistrationrecord['dateofbirth'];
+
+						$post->tel = $eventregistrationrecord['tel'];
+						$post->mobile = $eventregistrationrecord['mobile'];
+						$post->email = $eventregistrationrecord['email'];
+
+						$post->emergencyname = $eventregistrationrecord['emergencyname'];
+						$post->emergencyrelationship = $eventregistrationrecord['emergencyrelationship'];
+						$post->emergencytel = $eventregistrationrecord['emergencytel'];
+						$post->emergencymobile = $eventregistrationrecord['emergencymobile'];
+
+						$post->drugallergy = $eventregistrationrecord['drugallergy'];
+						$post->bloodgroup = $eventregistrationrecord['bloodgroup'];
+						$post->nationality = $eventregistrationrecord['nationality'];
+						$post->occupation = $eventregistrationrecord['occupation'];
+						
+						$post->race = $eventregistrationrecord['race'];
+						$post->gender = $eventregistrationrecord['gender'];
+
+						$post->countryofbirth = $eventregistrationrecord['countryofbirth'];
+
+						$post->address = $eventregistrationrecord['address'];
+						$post->buildingname = $eventregistrationrecord['buildingname'];
+						$post->unitno = $eventregistrationrecord['unitno'];
+						$post->postalcode = $eventregistrationrecord['postalcode'];
+
+						$post->introducer = $eventregistrationrecord['introducer'];
+						$post->introducermobile = $eventregistrationrecord['introducermobile'];
+
+						$post->role = "Participant";
+						$post->ssagroupid = $eventregistrationrecord['ssagroupid'];
+						$post->ssagroup = $eventregistrationrecord['ssagroup'];
+						$post->eventregidforward = $eventregistrationrecord['id'];
+						$post->eventidforward = $eventregistrationrecord['eventid'];
+						if (Input::get('eventitemforward') == 1) { $post->eventitem = $eventregistrationrecord['eventname']; }
+						else { $post->auditioncode = $eventregistrationrecord['eventitem']; }
+						$post->status = "Accepted";
+						$post->uniquecode = uniqid('', TRUE);
+						$post->save();
+
+						if($post->save())
+						{
+							LogsfLogs::postLogs('Create', 28, $post->id, ' - Event Forward - New Participant - ' . $eventregistrationrecord['name'], NULL, NULL, 'Success');
+							return Response::json(array('info' => 'Success'), 200);
+						}
+						else
+						{
+							LogsfLogs::postLogs('Create', 28, $forwardeventid, ' - Event Forward - New Participant - Failed to Save', NULL, NULL, 'Failed');
+							return Response::json(array('info' => 'Duplicate'), 400);
+						}
 					}
 					else
 					{
-						LogsfLogs::postLogs('Create', 28, 0, ' - Event - New Member - Failed to Save', NULL, NULL, 'Failed');
-						return Response::json(array('info' => 'Duplicate'), 400);
+						LogsfLogs::postLogs('Create', 28, $forwardeventid, ' - Event Forward - Duplicate Value - ' . $eventregistrationrecord['name'], NULL, NULL, 'Failed');
+						return Response::json(array('info' => 'Failed', 'ErrType' => 'Duplicate'), 400);
 					}
 				}
 				
 			}
 			catch(\Exception $e)
 			{
-				LogsfLogs::postLogs('Create', 28, 0, ' - Event - New Member - ' . $e, NULL, NULL, 'Failed');
+				LogsfLogs::postLogs('Create', 28, $forwardeventid, ' - Event - New Member - ' . $e, NULL, NULL, 'Failed');
 				return Response::json(array('info' => 'Failed', 'ErrType' => 'Unknown'), 400);
 			}
 		}
 		else
 		{
-			LogsfLogs::postLogs('Create', 28, 0, ' - Event - New Member - No Access Rights', NULL, NULL, 'Failed');
+			LogsfLogs::postLogs('Create', 28, $forwardeventid, ' - Event - New Member - No Access Rights', NULL, NULL, 'Failed');
 			return Response::json(array('info' => 'Failed', 'ErrType' => 'NoAccess'), 400);
 		}
 	}

@@ -1385,12 +1385,12 @@
 						        		$("#membername").val(data.name);
 										$("#nric").val("");
 						        		$("#mobile").val($("#regmobile").val());
-										$("#tel").val(data.tel);
-						        		$("#email").val(data.email);
-										$("#address").val(data.address);
-						        		$("#buildingname").val(data.buildingname);
-						        		$("#unitno").val(data.unitno);
-						        		$("#postalcode").val(data.postalcode);
+										if (data.tel == "NIL") { $("#tel").val(""); } else { $("#tel").val(data.tel); }
+						        		if (data.email == "NIL") { $("#email").val(""); } else { $("#email").val(data.email); }
+										if (data.address == "NIL") { $("#address").val(""); } else { $("#address").val(data.address); }
+						        		if (data.buildingname == "NIL") { $("#buildingname").val(""); } else { $("#buildingname").val(data.buildingname); }
+						        		if (data.unitno == "NIL") { $("#unitno").val(""); } else { $("#unitno").val(data.unitno); }
+						        		if (data.postalcode == "NIL") { $("#postalcode").val(""); } else { $("#postalcode").val(data.postalcode); }
 										$("#memberid").val(data.uniquecode);
 										$("#height").val(data.height);
 										$("#occupation").val(data.occupation);
