@@ -466,7 +466,8 @@ class EventDetailController extends BaseController
 						$post->eventregidforward = $eventregistrationrecord['id'];
 						$post->eventidforward = $eventregistrationrecord['eventid'];
 						if (Input::get('eventitemforward') == 1) { $post->eventitem = $eventregistrationrecord['eventname']; }
-						else { $post->auditioncode = $eventregistrationrecord['eventitem']; }
+						// else { $post->auditioncode = $eventregistrationrecord['eventitem']; }
+						$post->auditioncode = $eventregistrationrecord['auditioncode'];
 						$post->status = "Accepted";
 						$post->uniquecode = uniqid('', TRUE);
 						$post->save();
