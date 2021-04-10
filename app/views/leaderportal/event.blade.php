@@ -4171,8 +4171,7 @@
 					division: { required: true },
 					country: { required: true },
 					session: { required: true },
-					language: { required: true },
-					dateofbirthtxt: { required: true }
+					language: { required: true }
 				},
 				messages: { },
 				invalidHandler: function (event, validator) { ('.alert-danger', $('.resourceaddothers')).show(); },
