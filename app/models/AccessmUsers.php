@@ -57,7 +57,11 @@ class AccessmUsers extends Eloquent implements UserInterface, RemindableInterfac
 
     public function scopeSearch($query, $value)
     {
-        return $query->where('username', 'Like', $value);
+        return $query->where(function($query) use ($value)
+        {
+            $query->where('username', 'Like', '%'.$value.'%')
+                ->orwhere('name', 'Like', '%'.$value.'%');
+        });
     }
 
     public function scopeEvent($query, $value)

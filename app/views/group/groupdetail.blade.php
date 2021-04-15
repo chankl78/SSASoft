@@ -929,15 +929,6 @@
 																			<div id="mpersonalcontact" class="tab-pane">
 																				<div class="scrollable" data-size="100">
 																					<div class="form-group">
-																						{{ Form::label('tbnric', 'NRIC:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
-																						<div class="col-xs-12 col-sm-9">
-																							<div class="clearfix">
-																								{{ Form::text('tbnric', '', array('class' => 'col-xs-12 col-sm-9', 'id' => 'tbnric'));}}
-																							</div>
-																						</div>
-																					</div>
-																					<div class="space-2"></div>
-																					<div class="form-group">
 																						{{ Form::label('tbdateofbirth', 'DOB:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																						<div class="col-xs-12 col-sm-9">
 																							<div class="clearfix">
@@ -2220,7 +2211,6 @@
 		        		$("#tbdistrict").val(data.district);
 		        		$("#tbposition").val(data.position);
 		        		$("#tbdiscussionmeetingday").val(data.discussionmeetingday);
-		        		$("#tbnric").val(data.nric);
 		        		$("#tbdateofbirth").val(data.dateofbirth);
 		        		$("#tbemail").val(data.email);
 		        		$("#tbtel").val(data.tel);

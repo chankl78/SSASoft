@@ -318,8 +318,6 @@ class AccessRightsController extends BaseController
 		    	->take($iDisplayLength)->skip($iDisplayStart)
 				->orderBy($sOrderBy, $sOrderdir)->get()->toarray();
 
-			LogsfLogs::postLogs('Read', 7, 0, ' - Access Rights - Users [DT]', NULL, NULL, 'Success');
-
 			return Response::json(array('recordsTotal' => $iTotalRecords, 'recordsFiltered' => $iTotalDisplayRecords, 
 				'draw' => (string)$sEcho, 'data' => $default));;
 		}
