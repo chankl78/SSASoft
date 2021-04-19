@@ -579,6 +579,16 @@
 														<th>F District</th>
 														<th>F Division</th>
 														<th>F Org Position</th>
+														<th>Current RHQ</th>
+														<th>Current Zone</th>
+														<th>Current Chapter</th>
+														<th>Current District</th>
+														<th>Current Division</th>
+														<th>Current Org Position</th>
+														<th>Age</th>
+														<th>DOB</th>
+														<th>campusfaculty</th>
+														<th>course</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -779,6 +789,23 @@
 															<div class="col-xs-12 col-sm-9">
 																<div class="clearfix">
 																	{{ Form::textarea('eremarks' , '', array('class' => 'col-xs-12 col-sm-11', 'rows' => '3', 'id' => 'eremarks'));}}
+																</div>
+															</div>
+														</div>
+														<hr>
+														<div class="form-group">
+															{{ Form::label('ecampusfaculty', 'Campus / Faculty:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	{{ Form::text('ecampusfaculty', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ecampusfaculty'));}}
+																</div>
+															</div>
+														</div>
+														<div class="form-group">
+															{{ Form::label('ecourse', 'Course:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+															<div class="col-xs-12 col-sm-9">
+																<div class="clearfix">
+																	{{ Form::text('ecourse', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'ecourse'));}}
 																</div>
 															</div>
 														</div>
@@ -1176,6 +1203,16 @@
 														<th>F District</th>
 														<th>F Division</th>
 														<th>F Org Position</th>
+														<th>Current RHQ</th>
+														<th>Current Zone</th>
+														<th>Current Chapter</th>
+														<th>Current District</th>
+														<th>Current Division</th>
+														<th>Current Org Position</th>
+														<th>Age</th>
+														<th>DOB</th>
+														<th>campusfaculty</th>
+														<th>course</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -2431,8 +2468,11 @@
 			        dataType: 'json',
 			        statusCode: { 
 			        	200:function(data){
-			        		$("#egraduationdate").val(moment(data.graduationdate).format("DD-MM-YYYY"));
 			        		$("#eremarks").val(data.remark);
+							$("#ecampusfaculty").val(data.campusfaculty); $("#ecourse").val(data.course);
+							if (data.graduationdate == "") { $("#egraduationdate").val(""); }
+							else if (data.graduationdate == "0000-00-00") { $("#egraduationdate").val(""); }
+							else { $("#egraduationdate").val(moment(data.graduationdate).format("DD-MM-YYYY")); }
 			        	},
 			        	400:function(data){ 
 			        		var txtMessage;
@@ -2844,7 +2884,17 @@
 					{ targets: [ 8 ], data: "chapter", searchable: "true", visible: false },
 					{ targets: [ 9 ], data: "district", searchable: "true", visible: false },
 					{ targets: [ 10 ], data: "division", searchable: "true", visible: false },
-					{ targets: [ 11 ], data: "positionorg", searchable: "true", visible: false }]
+					{ targets: [ 11 ], data: "positionorg", searchable: "true", visible: false },
+					{ targets: [ 12 ], data: "currentrhq", searchable: "true", visible: false },
+					{ targets: [ 13 ], data: "currentzone", searchable: "true", visible: false },
+					{ targets: [ 14 ], data: "currentchapter", searchable: "true", visible: false },
+					{ targets: [ 15 ], data: "currentdistrict", searchable: "true", visible: false },
+					{ targets: [ 16 ], data: "currentdivision", searchable: "true", visible: false },
+					{ targets: [ 17 ], data: "currentposition", searchable: "true", visible: false },
+					{ targets: [ 18 ], data: "age", searchable: "true", visible: false },
+					{ targets: [ 19 ], data: "dateofbirth", searchable: "true", visible: false },
+					{ targets: [ 20 ], data: "campusfaculty", searchable: "true", visible: false },
+					{ targets: [ 21 ], data: "course", searchable: "true", visible: false }]
 			    }); // Group Members
 				
 				var oTableOthers = $('#tdefaultothers').DataTable({
@@ -2915,7 +2965,17 @@
 					{ targets: [ 8 ], data: "chapter", searchable: "true", visible: false },
 					{ targets: [ 9 ], data: "district", searchable: "true", visible: false },
 					{ targets: [ 10 ], data: "division", searchable: "true", visible: false },
-					{ targets: [ 11 ], data: "positionorg", searchable: "true", visible: false }]
+					{ targets: [ 11 ], data: "positionorg", searchable: "true", visible: false },
+					{ targets: [ 12 ], data: "currentrhq", searchable: "true", visible: false },
+					{ targets: [ 13 ], data: "currentzone", searchable: "true", visible: false },
+					{ targets: [ 14 ], data: "currentchapter", searchable: "true", visible: false },
+					{ targets: [ 15 ], data: "currentdistrict", searchable: "true", visible: false },
+					{ targets: [ 16 ], data: "currentdivision", searchable: "true", visible: false },
+					{ targets: [ 17 ], data: "currentposition", searchable: "true", visible: false },
+					{ targets: [ 18 ], data: "age", searchable: "true", visible: false },
+					{ targets: [ 19 ], data: "dateofbirth", searchable: "true", visible: false },
+					{ targets: [ 20 ], data: "campusfaculty", searchable: "true", visible: false },
+					{ targets: [ 21 ], data: "course", searchable: "true", visible: false }]
 			    }); // Group Members (Others)
 			
 				var oGroupTable = $('#tgroup').DataTable({
@@ -3342,7 +3402,7 @@
 			$.ajax({
 		        url: 'putGroupMember/' + $('#emoduledetailid').val(),
 		        type: 'POST',
-		        data: { emoduledetailid: $('#emoduledetailid').val(), ename: $("#ename").val(), eenrolleddate: $("#eenrolleddate").val(), egraduationdate: $("#egraduationdate").val(), estatus: $("#estatus").val(), egrpposition: $("#egrpposition").val(), egrpcontactgroup: $("#egrpcontactgroup").val(), eremarks: $("#eremarks").val() },
+		        data: { emoduledetailid: $('#emoduledetailid').val(), ename: $("#ename").val(), eenrolleddate: $("#eenrolleddate").val(), egraduationdate: $("#egraduationdate").val(), estatus: $("#estatus").val(), egrpposition: $("#egrpposition").val(), egrpcontactgroup: $("#egrpcontactgroup").val(), eremarks: $("#eremarks").val(), ecampusfaculty: $("#ecampusfaculty").val(), ecourse: $("#ecourse").val() },
 		        dataType: 'json',
 		        statusCode: {
 		        	200:function(){
@@ -3358,6 +3418,9 @@
 		        		$("#egraduationdate").val('');
 		        		$("#egrpposition").val('');
 		        		$("#egrpcontactgroup").val('');
+						$("#ecampusfaculty").val('');
+						$("#ecourse").val('');
+
             			noty({
 							layout: 'topRight', type: 'success', text: 'Record Updated!!',
 							animation: { open: 'animated tada', close: 'animated hinge', easing: 'swing', speed: 500 

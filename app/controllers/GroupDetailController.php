@@ -48,7 +48,7 @@ class GroupDetailController extends BaseController
 	{
 		try
 		{
-			$default =  GroupmMember::Group(GroupmGroup::getid($id))->StatusActive()->get()->toarray();
+			$default = GroupmViewMember::Group(GroupmGroup::getid($id))->StatusActive()->get()->toarray();
 			return Response::json(array('data' => $default));
 		}
 		catch(\Exception $e)
@@ -61,7 +61,7 @@ class GroupDetailController extends BaseController
 	{
 		try
 		{
-			$default =  GroupmMember::Group(GroupmGroup::getid($id))->StatusOthers()->get()->toarray();
+			$default =  GroupmViewMember::Group(GroupmGroup::getid($id))->StatusOthers()->get()->toarray();
 			return Response::json(array('data' => $default));
 		}
 		catch(\Exception $e)
@@ -769,7 +769,9 @@ class GroupDetailController extends BaseController
 
 			return Response::json(array(
 				'graduationdate' => $member['graduationdate'],
-				'remark' => $member['remark']
+				'remark' => $member['remark'],
+				'campusfaculty' => $member['campusfaculty'],
+				'course' => $member['course']
 				), 200);
 		}
 		catch(\Exception $e) 
@@ -788,13 +790,16 @@ class GroupDetailController extends BaseController
 				$datGraduationDate = DateTime::createFromFormat('d-m-Y', Input::get('egraduationdate'));
 				$post = GroupmMember::find(GroupmMember::getid(Input::get('emoduledetailid')));
 				$post->enrolleddate = $datDate;
-				if (Input::get('egraduationdate') == '') { $post->graduationdate = ''; }
+				if (Input::get('egraduationdate') == '') { }
+				else if (Input::get('egraduationdate') == 'Invalid Date') { }
 				else { $post->graduationdate = $datGraduationDate; }
 				$post->name = Input::get('ename');
 				$post->position = Input::get('egrpposition');
 				$post->contactgroup = Input::get('egrpcontactgroup');
 				$post->status = Input::get('estatus');
 				$post->remark = Input::get('eremarks');
+				$post->campusfaculty = Input::get('ecampusfaculty');
+				$post->course = Input::get('ecourse');
 				$post->save();
 
 				if($post->save())
