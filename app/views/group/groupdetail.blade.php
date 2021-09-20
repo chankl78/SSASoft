@@ -589,6 +589,8 @@
 														<th>DOB</th>
 														<th>campusfaculty</th>
 														<th>course</th>
+														<th>created_at</th>
+														<th>updated_at</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -1213,6 +1215,8 @@
 														<th>DOB</th>
 														<th>campusfaculty</th>
 														<th>course</th>
+														<th>created_at</th>
+														<th>updated_at</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -2894,7 +2898,9 @@
 					{ targets: [ 18 ], data: "age", searchable: "true", visible: false },
 					{ targets: [ 19 ], data: "dateofbirth", searchable: "true", visible: false },
 					{ targets: [ 20 ], data: "campusfaculty", searchable: "true", visible: false },
-					{ targets: [ 21 ], data: "course", searchable: "true", visible: false }]
+					{ targets: [ 21 ], data: "course", searchable: "true", visible: false },
+					{ targets: [ 22 ], data: "created_at", searchable: "true", visible: false },
+					{ targets: [ 23 ], data: "updated_at", searchable: "true", visible: false }]
 			    }); // Group Members
 				
 				var oTableOthers = $('#tdefaultothers').DataTable({
@@ -2975,7 +2981,9 @@
 					{ targets: [ 18 ], data: "age", searchable: "true", visible: false },
 					{ targets: [ 19 ], data: "dateofbirth", searchable: "true", visible: false },
 					{ targets: [ 20 ], data: "campusfaculty", searchable: "true", visible: false },
-					{ targets: [ 21 ], data: "course", searchable: "true", visible: false }]
+					{ targets: [ 21 ], data: "course", searchable: "true", visible: false },
+					{ targets: [ 22 ], data: "created_at", searchable: "true", visible: false },
+					{ targets: [ 23 ], data: "updated_at", searchable: "true", visible: false }]
 			    }); // Group Members (Others)
 			
 				var oGroupTable = $('#tgroup').DataTable({
