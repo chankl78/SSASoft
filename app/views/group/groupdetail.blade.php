@@ -629,7 +629,7 @@
 																</div>
 															</div>
 														</div>
-														<div class="form-group">
+														<div class="form-group" hidden>
 															{{ Form::label('nric', 'Nric:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 															<div class="col-xs-12 col-sm-8">
 																<div class="clearfix">

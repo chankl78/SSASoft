@@ -45,4 +45,10 @@ class ConfigurationmDefault extends Eloquent {
         $mid = DB::table('Configuration_m_Default')->where('key', 'NDP')->pluck('value');
         return $mid;
     }
+
+    public function scopeChingayDefaultCode($query)
+    {
+        $mid = DB::table('Configuration_m_Default')->where('key', 'CHIN')->pluck('value');
+        return $mid;
+    }
 }

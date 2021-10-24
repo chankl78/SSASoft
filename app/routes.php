@@ -181,6 +181,10 @@ Route::get('/ndp2021registration', 'EventMemRegistrationController@getndp2021Ind
 Route::post('/ndp2021registration/postAuthorizationCheck', 'EventMemRegistrationController@postAuthorizationCheck');
 Route::post('/ndp2021registration/postPostalSearch', 'EventMemRegistrationController@postPostalSearch');
 Route::post('/ndp2021registration/postNDPMember', 'EventMemRegistrationController@postNDPMember');
+Route::get('/chingayregistration', 'EventMemRegistrationController@getChingayIndex');
+Route::post('/chingayregistration/postChingayAuthorizationCheck', 'EventMemRegistrationController@postChingayAuthorizationCheck');
+Route::post('/chingayregistration/postPostalSearch', 'EventMemRegistrationController@postPostalSearch');
+Route::post('/chingayregistration/postChingayMember', 'EventMemRegistrationController@postChingayMember');
 Route::get('/concertregistration', 'EventMemRegistrationController@getConcertIndex');
 
 // Event
