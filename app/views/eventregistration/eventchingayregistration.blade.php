@@ -60,7 +60,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							2021 - NDP Registration
+							2022 - Chingay Registration
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
