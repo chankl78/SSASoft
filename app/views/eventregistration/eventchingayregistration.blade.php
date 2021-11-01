@@ -155,7 +155,7 @@
 																<div class="widget-main no-padding">
 																	<center><h1>CHINGAY 2022</h1></center>
 																	<center><h1>12th February 2022</h1></center>
-																	<center><h2 class="blue">Participant Registration</h2></center>
+																	<center><h2 class="blue">Courageous Musician and Kotekitai</h2></center>
 																	<center><h4>Singapore Soka Association</h4></center>
 																</div>
 															</div>
@@ -181,7 +181,7 @@
 																						</ul>
 																						<h3 class="green">Others</h3>
 																						<ul>
-																							<li>Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings on alternate Mondays from November 2021 onwards.</li>
+																							<li>Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings from 13th November 2021 onwards.</li>
 																						</ul>
 																						<h3 class="green">Consent for usage of your personal data</h3>
 																						<ul>
