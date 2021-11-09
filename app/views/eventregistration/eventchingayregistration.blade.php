@@ -182,7 +182,7 @@
 																						<h3 class="green">Others</h3>
 																						<ul>
 																							<li>Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings from 13th November 2021 onwards.</li>
-																							<li>To undergo Antigen Rapid Test (ART) or Pre-Event Testing (PET) every trainings and rehearsals</li>
+																							<li>To undergo Antigen Rapid Test (ART) or Pre-Event Testing (PET) every trainings and rehearsals.</li>
 																						</ul>
 																						<h3 class="green">Consent for usage of your personal data</h3>
 																						<ul>
