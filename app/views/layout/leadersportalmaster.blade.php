@@ -80,8 +80,7 @@
 						<!-- #section:basics/footer -->
 						<div class="footer-content">
 							<span class="bigger-120">
-								<span class="blue bolder">SSASoft</span>
-								Singapore Soka Association &copy; 2013 - 2021
+								Soka Gakkai Singapore &copy; 2013 - 2022
 							</span>
 						</div>
 						<!-- /section:basics/footer -->

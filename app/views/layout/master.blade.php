@@ -5,7 +5,7 @@
 		<meta charset="utf-8" />
 		<title>{{ $title }}</title>
 
-		<meta name="description" content="Singapore Soka Association Office Automation.">
+		<meta name="description" content="Soka Gakkai Singapore Office Automation.">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="author" content="Chan Kuan Leang">
 		
@@ -81,8 +81,7 @@
 						<!-- #section:basics/footer -->
 						<div class="footer-content">
 							<span class="bigger-120">
-								<span class="blue bolder">SSASoft</span>
-								Singapore Soka Association &copy; 2013 - 2021
+								Soka Gakkai Singapore &copy; 2013 - 2022
 							</span>
 						</div>
 						<!-- /section:basics/footer -->

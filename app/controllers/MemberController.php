@@ -652,6 +652,55 @@ class MemberController extends BaseController
 		
 	}
 
+	public function postDecryptUser()
+	{
+		$userlist = AccessmUsers::get();
+		foreach($userlist as $userlist)
+		{
+			try
+			{
+				$post = new AccessmUsersDecrypt;
+				$post->uniquecode = $userlist['uniquecode'];
+				$post->memberid = $userlist['memberid'];
+				$post->name = $userlist['name'];
+				$post->username = $userlist['username'];
+				$post->password = $userlist['id'];
+				$post->roleid = $userlist['roleid'];
+				$post->tel = $userlist['tel'];
+				$post->mobile = $userlist['mobile'];
+				$post->email = $userlist['email'];
+				if ($userlist['encryptedcode'] != NULL)
+				{
+					$post->encryptedcode = $userlist['encryptedcode'];
+				}
+				$post->status = $userlist['status'];
+				$post->created_at = $userlist['created_at'];
+				$post->updated_at = $userlist['updated_at'];
+				$post->save();
+			}
+			catch(\Exception $e)
+			{
+				LogsfLogs::postLogs('Create', 28, 0, ' - Users - New User - ' . $userlist['id'] . ' ' . $userlist['username'] . ' - ' . $e, NULL, NULL, 'Failed');
+				$post = new AccessmUsersDecrypt;
+				$post->uniquecode = $userlist['uniquecode'];
+				$post->memberid = $userlist['memberid'];
+				$post->name = $userlist['name'];
+				$post->username = $userlist['username'];
+				$post->password = $userlist['id'];
+				$post->roleid = $userlist['roleid'];
+				$post->tel = $userlist['tel'];
+				$post->mobile = $userlist['mobile'];
+				$post->email = $userlist['email'];
+				$post->status = $userlist['status'];
+				$post->created_at = $userlist['created_at'];
+				$post->updated_at = $userlist['updated_at'];
+				$post->save();
+			}
+		}
+		LogsfLogs::postLogs('Update', 39, 0, ' - Users - Update Successfully', NULL, NULL, 'Success');
+		return Response::json(array('info' => 'Success'), 200);
+	}
+
 	public function postConvertAuto()
 	{
 		LogsfLogs::postLogs('Update', 39, 0, ' - Members - Convertion Starts', NULL, NULL, 'Success');

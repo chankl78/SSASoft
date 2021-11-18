@@ -59,9 +59,9 @@
 							<div class="center">
 								<h1>
 									<i class="fa fa-leaf green"></i>
-									<span class="blue">SSA BOE Portal</span>
+									<span class="blue">BOE Portal</span>
 								</h1>
-								<h4 class="white">&copy; Singapore Soka Association</h4>
+								<h4 class="white">&copy; Soka Gakkai Singapore</h4>
 							</div>
 
 							<div class="space-6"></div>
@@ -193,7 +193,7 @@
 												Re-Verification
 											</h4>
 											<div class="space-6"></div>
-											<p> Enter your email address registered with SSA: </p>
+											<p> Enter your email address registered with Soka Gakkai Singapore: </p>
 											{{ Form::open(array('action' => 'LeadersPortalLoginController@postVerification', 'id' => 'register')) }}
 												<fieldset>
 													<div class="form-group">
