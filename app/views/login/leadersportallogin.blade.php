@@ -348,7 +348,7 @@
 		        		else if (data.responseJSON.ErrType == "Failed")
 		        			{ txtMessage = 'Please check your entry!'; }
 		        		else if (data.responseJSON.ErrType == "Email")
-		        			{ txtMessage = 'Email does not exist!  Please check your email with gakkai department or email ssahq@ssabuddhist.org!'; }
+		        			{ txtMessage = 'Email does not exist!  Please check your email with gakkai department or email info@soka.sg!'; }
 		        		else { txtMessage = 'Please check your entry!'; }
 		        		$("#search").focus();
 		        		noty({
