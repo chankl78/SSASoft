@@ -506,6 +506,7 @@ Route::post('/Members/postConvertAuto', 'MemberController@postConvertAuto');
 Route::post('/Members/post2019Members', 'MemberController@post2019Members');
 Route::post('/Members/post2020Members', 'MemberController@post2020Members');
 Route::post('/Members/post2021Members', 'MemberController@post2021Members');
+Route::post('/Members/post2022Members', 'MemberController@post2022Members');
 Route::post('/Members/postConvertNricHash', 'MemberController@postConvertNricHash');
 Route::post('/Members/postConvertFront/{id}', 'MemberController@postConvertFront');
 Route::post('/Members/putCNameDOB', 'MemberController@putCNameDOB');
