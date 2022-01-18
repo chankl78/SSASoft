@@ -3,11 +3,11 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>SSASoft - NDP 2021 Registration</title>
+		<title>SGS - NDP 2022 Registration</title>
 
-		<meta name="description" content="SSASoft.">
+		<meta name="description" content="SGS.">
 		<meta name="author" content="Chan Kuan Leang">
-		<meta name="keyword" content="SSA, Office Automation, Singapore Soka Association, Soka, Soka Gakkai, SGI">
+		<meta name="keyword" content="SSA, Office Automation, Soka Gakkai Singapore, Soka, Soka Gakkai, SGI">
 		
 		<!-- start: Mobile Specific -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -102,7 +102,7 @@
 							<div class="col-xs-12 col-sm-12 widget-container-span ui-sortable">
 								<div class="widget-box widget-color-blue">
 									<div class="widget-header widget-header-blue widget-header-flat">
-										<h4 class="widget-title lighter">NDP 2021 Registration</h4>
+										<h4 class="widget-title lighter">NDP 2022 Registration</h4>
 									</div>
 									<div class="widget-body">
 										<div class="widget-main">
@@ -112,7 +112,7 @@
 												<ul class="wizard-steps">
 													<li data-target="#step1" class="active">
 														<span class="step">1</span>
-														<span class="title">NDP 2021 </span>
+														<span class="title">NDP 2022 </span>
 													</li>
 													<li data-target="#step2">
 														<span class="step">2</span>
@@ -154,9 +154,9 @@
 															<div class="widget-body">
 																<div class="widget-main no-padding">
 																	<center><h1>National Day Parade</h1></center>
-																	<center><h1>9th August 2021</h1></center>
+																	<center><h1>9th August 2022</h1></center>
 																	<center><h2 class="blue">Participant Registration</h2></center>
-																	<center><h4>Singapore Soka Association</h4></center>
+																	<center><h4>Soka Gakkai Singapore</h4></center>
 																</div>
 															</div>
 														</div> <!-- Introduction Page -->
@@ -177,13 +177,12 @@
 																						<ul>
 																							<li>Participants must be in good health and able to stand for long hours.</li>
 																							<li>Anyone under regular medication and/or have pre-existing medical conditions will need to declare on the Application Form accordingly.</li>
-																							<li>Keen and eligible for the COVID-19 vaccination (can consult healthcare professionals for advice on suitability for the vaccination).</li>
-																							<li>Shortlisted participants will be required to complete a Ministry of Health (MOH) declaration form at the vaccination centre prior to vaccination.</li>
+																							<li>Have received the full regimen of COVID-19 Vaccine at least 14 days before participation.</li>
 																						</ul>
 																						<h3 class="green">Others</h3>
 																						<ul>
-																							<li>For Singaporeans and PRs only.</li>
-																							<li>Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings on alternate Mondays from April 2021 onwards.</li>
+																							<li>Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings from 20th January 2022 onwards.</li>
+																							<li>To undergo Antigen Rapid Test (ART) or Pre-Event Testing (PET) every trainings and rehearsals.</li>
 																						</ul>
 																						<h3 class="green">Consent for usage of your personal data</h3>
 																						<ul>
@@ -750,7 +749,7 @@
 																								</div>
 																							</div>
 																						</div>
-																						<div class="form-group">
+																						<div class="form-group" hidden>
 																							{{ Form::label('vaccineschedule', 'Vaccination Status:', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -758,7 +757,7 @@
 																								</div>
 																							</div>
 																						</div>
-																						<div class="form-group">
+																						<div class="form-group" hidden>
 																							{{ Form::label('vaccinefirstdose', 'If Scheduled, When is your 1st Dose Vaccine (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -766,7 +765,7 @@
 																								</div>
 																							</div>
 																						</div>
-																						<div class="form-group">
+																						<div class="form-group" hidden>
 																							{{ Form::label('vaccineseconddose', 'If Scheduled, When is your 2nd Dose Vaccine (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -775,7 +774,7 @@
 																							</div>
 																						</div>
 																						<hr>
-																						 <div class="form-group">
+																						 <div class="form-group" hidden>
 																							{{ Form::label('vaccineotherpast', 'Have you taken any other vaccinations in the past recent 2 weeks  (e.g. ALIVE, Pre-departure vaccinations)?', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -783,7 +782,7 @@
 																								</div>
 																							</div>
 																						</div>
-																						<div class="form-group">
+																						<div class="form-group" hidden>
 																							{{ Form::label('vaccineotherdate', 'If Yes, Indicate the date of your last vaccination (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -792,7 +791,7 @@
 																							</div>
 																						</div>
 																						<hr>
-																						<div class="form-group">
+																						<div class="form-group" hidden>
 																							{{ Form::label('vaccineseverlyimmunocompromised', 'Are you severly immuno-compromised?', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -800,7 +799,7 @@
 																								</div>
 																							</div>
 																						</div>
-																						<div class="form-group">
+																						<div class="form-group" hidden>
 																							{{ Form::label('vaccinehistoryofanaphylaxissevereallergise', 'Do you have a history of anaphylaxis or severe allergise?', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -808,7 +807,7 @@
 																								</div>
 																							</div>
 																						</div>
-																						<div class="form-group">
+																						<div class="form-group" hidden>
 																							{{ Form::label('vaccineconsent', 'Consent to take Vaccination?', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -874,7 +873,7 @@
 																			<p>
 																				<ul>
 																					<ol>
-																						<li>I consent to disclose the above-stated information to Singapore Soka Association to facilitate my participation in this event; and I agree to the organizing committee’s use of this information for the purpose of the event’s management and operation.</li>
+																						<li>I consent to disclose the above-stated information to Soka Gakkai Singapore to facilitate my participation in this event; and I agree to the organizing committee’s use of this information for the purpose of the event’s management and operation.</li>
 																						<li>I understand that my application will be subject to a selection process by the organizing committee.</li>
 																						<li> I will abide by the organizing committee’s decision to withdraw my participation should I infringe on any of the rules and regulations of the organization including conduct and discipline.</li>
 																						<li>I will not hold the Association liable in the event of any injury sustained in the event of my participation.</li>
@@ -941,8 +940,8 @@
 					<!-- #section:basics/footer -->
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">SSASoft</span>
-							Singapore Soka Association &copy; 2013-2021
+							<span class="blue bolder">SGS</span>
+							Soka Gakkai Singapore &copy; 2013-2022
 						</span>
 					</div>
 					<!-- /section:basics/footer -->

@@ -334,6 +334,14 @@
 																						</div>
 																					</div>
 																				</div>
+																				<div class="form-group">
+																					{{ Form::label('eRegisteredSession', 'Registered Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																					<div class="col-xs-12 col-sm-9">
+																						<div class="clearfix">
+																							{{ Form::text('eRegisteredSession', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eRegisteredSession'));}}
+																						</div>
+																					</div>
+																				</div>
 																			</div>
 																			<div class="form-group">
 																				{{ Form::label('eName', 'Name:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
@@ -344,10 +352,18 @@
 																				</div>
 																			</div>
 																			<div class="form-group">
-																				{{ Form::label('eRegisteredSession', 'Registered Session:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				{{ Form::label('eTel', 'Tel:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 																				<div class="col-xs-12 col-sm-9">
 																					<div class="clearfix">
-																						{{ Form::text('eRegisteredSession', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eRegisteredSession'));}}
+																						{{ Form::text('eTel', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eTel'));}}
+																					</div>
+																				</div>
+																			</div>
+																			<div class="form-group">
+																				{{ Form::label('eMobile', 'Mobile:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+																				<div class="col-xs-12 col-sm-9">
+																					<div class="clearfix">
+																						{{ Form::text('eMobile', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'eMobile'));}}
 																					</div>
 																				</div>
 																			</div>
@@ -4291,7 +4307,7 @@
 					$.ajax({
 				        url: 'putEventAddInfo/' + $("#euniquecode").val(),
 				        type: 'POST',
-				        data: { uniquecode: $("#euniquecode").val(), costume6: $("#eCostume6").val(), costume7: $("#eCostume7").val(), name: $("#eName").val(), costume9: $("#eCostume9").val(), country: $("#ecountry").val(), language: $("#elanguage").val(), session: $("#eRegisteredSession").val(), dateofbirth: $("#eDateofBirth").val() },
+				        data: { uniquecode: $("#euniquecode").val(), costume6: $("#eCostume6").val(), costume7: $("#eCostume7").val(), name: $("#eName").val(), costume9: $("#eCostume9").val(), country: $("#ecountry").val(), language: $("#elanguage").val(), session: $("#eRegisteredSession").val(), dateofbirth: $("#eDateofBirth").val(), tel: $("#eTel").val(), mobile: $("#eMobile").val() },
 				        dataType: 'json',
 				        statusCode: { 
 				        	200:function(){
@@ -4779,7 +4795,8 @@
 									$("#eName").val(data.name); $("#eCostume9").val(data.costume9);
 									$("#ecountry").val(data.countryofbirth); $("#elanguage").val(data.language);
 									$("#esession").val(data.session); $("#eDateofBirth").val(data.dateofbirth);
-									$("#eRegisteredSession").val(data.session);
+									$("#eRegisteredSession").val(data.session); $("#eTel").val(data.tel);
+									$("#eMobile").val(data.mobile);
 									$("#eDateofBirth").datepicker('setDate', data.dateofbirth);
 								},
 								400:function(data){ 

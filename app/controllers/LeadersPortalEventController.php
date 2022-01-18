@@ -942,7 +942,7 @@ class LeadersPortalEventController extends BaseController
 			$search=EventmRegistration::find(EventmRegistration::getid($id))->toarray();
 
 			return Response::json(array(
-				'costume6' => $search['costume6'], 'costume7' => $search['costume7'], 'costume8' => $search['costume8'], 'costume9' => $search['costume9'], 'name' => $search['name'], 'dateofbirthtxt' => $search['dateofbirthtxt'], 'dateofbirth' => $search['dateofbirth'], 'session' => $search['session'], 'language' => $search['language'], 'countryofbirth' => $search['countryofbirth'], 'nationality' => $search['nationality'], 'uniquecode' => $search['uniquecode']), 200);
+				'costume6' => $search['costume6'], 'costume7' => $search['costume7'], 'costume8' => $search['costume8'], 'costume9' => $search['costume9'], 'name' => $search['name'], 'dateofbirthtxt' => $search['dateofbirthtxt'], 'dateofbirth' => $search['dateofbirth'], 'session' => $search['session'], 'language' => $search['language'], 'countryofbirth' => $search['countryofbirth'], 'nationality' => $search['nationality'], 'uniquecode' => $search['uniquecode'], 'tel' => $search['tel'], 'mobile' => $search['mobile']), 200);
 		}
 		catch(\Exception $e)
 		{
@@ -971,6 +971,8 @@ class LeadersPortalEventController extends BaseController
 			$post->costume9 = Input::get('costume9');
 
 			$post->name = Input::get('name');
+			$post->tel = Input::get('tel');
+			$post->mobile = Input::get('mobile');
 			
 			$post->language = Input::get('language');
 			$post->nationality = Input::get('country');
