@@ -590,6 +590,7 @@ class EventMemRegistrationController extends BaseController {
 				$post->nationality = Input::get('nationality');
 
 				$post->danceexperience = Input::get('danceexperience');
+				$post->check1 = Input::get('check1'); // Drum Experience
 				$post->dancetype = Input::get('dancetype');
 				$post->height = Input::get('height');
 
@@ -605,6 +606,7 @@ class EventMemRegistrationController extends BaseController {
 				$post->vaccineschedule = Input::get('vaccineschedule');
 				$post->vaccinefirstdose = Input::get('vaccinefirstdose');
 				$post->vaccineseconddose = Input::get('vaccineseconddose');
+				$post->vaccinethirddose = Input::get('vaccinethirddose');
 				$post->vaccineotherpast = Input::get('vaccineotherpast');
 				$post->vaccineotherdate = Input::get('vaccineotherdate');
 				$post->vaccineseverlyimmunocompromised = Input::get('vaccineseverlyimmunocompromised');

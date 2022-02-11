@@ -60,7 +60,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							2021 - NDP Registration
+							2022 - NDP Registration
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -177,16 +177,16 @@
 																						<ul>
 																							<li>Participants must be in good health and able to stand for long hours.</li>
 																							<li>Anyone under regular medication and/or have pre-existing medical conditions will need to declare on the Application Form accordingly.</li>
-																							<li>Have received the full regimen of COVID-19 Vaccine at least 14 days before participation.</li>
+																							<li>•	Have received the full regimen (including Booster shot) of COVID-19 Vaccine at least 14 days before participation.</li>
 																						</ul>
 																						<h3 class="green">Others</h3>
 																						<ul>
-																							<li>Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings from 20th January 2022 onwards.</li>
+																							<li>•	Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings from 26 March 2022 onwards.</li>
 																							<li>To undergo Antigen Rapid Test (ART) or Pre-Event Testing (PET) every trainings and rehearsals.</li>
 																						</ul>
 																						<h3 class="green">Consent for usage of your personal data</h3>
 																						<ul>
-																							<li>I consent to disclose the above-stated information to Singapore Soka Association to facilitate my participation in this event; and I agree to the organizing committee’s use of this information for the purpose of the event’s management and operation.</li>
+																							<li>•	I consent to disclose the above-stated information to Soka Gakkai Singapore to facilitate my participation in this event; and I agree to the organizing committee’s use of this information for the purpose of the event’s management and operation.</li>
 																						</ul>
 																					</p>
 																				</div>
@@ -580,7 +580,15 @@
 																							</div>
 																						</div>
 																						<div class="form-group">
-																							{{ Form::label('dancetype', 'If Yes, Pls State Dance Type:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+																							{{ Form::label('check1', 'Do you have Drum Experience?', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+																							<div class="col-xs-12 col-sm-7">
+																								<div class="clearfix">
+																									{{ Form::select('check1', array('0' => 'No', '1' => 'Yes'), '0', array('class' => 'col-xs-12 col-sm-11', 'id' => 'check1'));}}
+																								</div>
+																							</div>
+																						</div>
+																						<div class="form-group">
+																							{{ Form::label('dancetype', 'If Yes, Pls State Dance / Drum Type:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-7">
 																								<div class="clearfix">
 																									{{ Form::textarea('dancetype', '', array('class' => 'col-xs-12 col-sm-11', 'rows' => '2', 'id' => 'dancetype'));}}
@@ -733,7 +741,7 @@
 																				<div class="widget-main no-padding">
 																					{{ Form::open(array('id' => 'resourceVaccine', 'class' => 'form-horizontal')) }}
 																						<br />
-																						<div class="form-group">
+																						<div class="form-group" hidden>
 																							{{ Form::label('vaccinewillingtake', 'Are you willing to take the Vaccine', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -757,7 +765,7 @@
 																								</div>
 																							</div>
 																						</div>
-																						<div class="form-group" hidden>
+																						<div class="form-group">
 																							{{ Form::label('vaccinefirstdose', 'If Scheduled, When is your 1st Dose Vaccine (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
@@ -765,11 +773,19 @@
 																								</div>
 																							</div>
 																						</div>
-																						<div class="form-group" hidden>
+																						<div class="form-group">
 																							{{ Form::label('vaccineseconddose', 'If Scheduled, When is your 2nd Dose Vaccine (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-4">
 																								<div class="clearfix">
 																									{{ Form::text('vaccineseconddose', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'vaccineseconddose'));}}
+																								</div>
+																							</div>
+																						</div>
+																						<div class="form-group">
+																							{{ Form::label('vaccinethirddose', 'If Scheduled, When is your Booster (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-8 no-padding-right')); }}
+																							<div class="col-xs-12 col-sm-4">
+																								<div class="clearfix">
+																									{{ Form::text('vaccinethirddose', '', array('class' => 'col-xs-12 col-sm-11', 'id' => 'vaccinethirddose'));}}
 																								</div>
 																							</div>
 																						</div>
@@ -1494,7 +1510,7 @@
 						$.ajax({
 							url: 'ndp2021registration/postNDPMember',
 							type: 'POST',
-							data: { membername: $("#membername").val(), memberid: $("#memberid").val(), nric: $("#nric").val(), division: $("#division").val(), position: $("#position").val(), rhq: $("#rhq").val(), zone: $("#zone").val(), chapter: $("#chapter").val(), district: $("#district").val(), tel: $("#tel").val(), mobile: $("#mobile").val(), email: $("#email").val(), dateofbirth: $("#dateofbirth").val(), occupation: $("#occupation").val(), nationality: $("#nationality").val(), countryofbirth: $("#countryofbirth").val(), address: $("#address").val(), buildingname: $("#buildingname").val(), unitno: $("#unitno").val(), postalcode: $("#postalcode").val(), height: $("#height").val(), emergencyname: $("#emergencyname").val(), emergencyrelationship: $("#emergencyrelationship").val(), emergencymobile: $("#emergencymobile").val(), danceexperience: $("#danceexperience").val(), dancetype: $("#dancetype").val(), commitwedsat: $("#commitwedsat").val(), travelperiod: $("#travelperiod").val(), goodhealth: $("#goodhealth").val(), hypertension: $("#hypertension").val(), heartdisease: $("#heartdisease").val(), longtermmedication: $("#longtermmedication").val(), asthmahistory: $("#asthmahistory").val(), drugallergy: $("#drugallergy").val(), vaccinewillingtake: $("#vaccinewillingtake").val(), vaccinetaken: $("#vaccinetaken").val(), vaccineschedule: $("#vaccineschedule").val(), vaccinefirstdose: $("#vaccinefirstdose").val(), vaccineseconddose: $("#vaccineseconddose").val(), vaccineotherpast: $("#vaccineotherpast").val(), vaccineotherdate: $("#vaccineotherdate").val(), vaccineseverlyimmunocompromised: $("#vaccineseverlyimmunocompromised").val(), vaccinehistoryofanaphylaxissevereallergise: $("#vaccinehistoryofanaphylaxissevereallergise").val(), vaccineconsent: $("#vaccineconsent").val(), pregnant: $("#pregnant").val(), conceivenextsixmonths: $("#conceivenextsixmonths").val(), signature: $("#signature").val()},
+							data: { membername: $("#membername").val(), memberid: $("#memberid").val(), nric: $("#nric").val(), division: $("#division").val(), position: $("#position").val(), rhq: $("#rhq").val(), zone: $("#zone").val(), chapter: $("#chapter").val(), district: $("#district").val(), tel: $("#tel").val(), mobile: $("#mobile").val(), email: $("#email").val(), dateofbirth: $("#dateofbirth").val(), occupation: $("#occupation").val(), nationality: $("#nationality").val(), countryofbirth: $("#countryofbirth").val(), address: $("#address").val(), buildingname: $("#buildingname").val(), unitno: $("#unitno").val(), postalcode: $("#postalcode").val(), height: $("#height").val(), emergencyname: $("#emergencyname").val(), emergencyrelationship: $("#emergencyrelationship").val(), emergencymobile: $("#emergencymobile").val(), danceexperience: $("#danceexperience").val(), dancetype: $("#dancetype").val(), check1: $("#check1").val(), commitwedsat: $("#commitwedsat").val(), travelperiod: $("#travelperiod").val(), goodhealth: $("#goodhealth").val(), hypertension: $("#hypertension").val(), heartdisease: $("#heartdisease").val(), longtermmedication: $("#longtermmedication").val(), asthmahistory: $("#asthmahistory").val(), drugallergy: $("#drugallergy").val(), vaccinewillingtake: $("#vaccinewillingtake").val(), vaccinetaken: $("#vaccinetaken").val(), vaccineschedule: $("#vaccineschedule").val(), vaccinefirstdose: $("#vaccinefirstdose").val(), vaccineseconddose: $("#vaccineseconddose").val(), vaccinethirddose: $("#vaccinethirddose").val(), vaccineotherpast: $("#vaccineotherpast").val(), vaccineotherdate: $("#vaccineotherdate").val(), vaccineseverlyimmunocompromised: $("#vaccineseverlyimmunocompromised").val(), vaccinehistoryofanaphylaxissevereallergise: $("#vaccinehistoryofanaphylaxissevereallergise").val(), vaccineconsent: $("#vaccineconsent").val(), pregnant: $("#pregnant").val(), conceivenextsixmonths: $("#conceivenextsixmonths").val(), signature: $("#signature").val()},
 							dataType: 'json',
 							statusCode: { 
 								200:function(){
@@ -1518,6 +1534,7 @@
 									$("#height").val("");
 									$("#vaccinefirstdose").val("");
 									$("#vaccineseconddose").val("");
+									$("#vaccinethirddose").val("");
 									$("#vaccineotherdate").val("");
 									$("#emergencyname").val("");
 									$("#emergencymobile").val("");

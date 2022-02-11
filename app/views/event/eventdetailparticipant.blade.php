@@ -814,7 +814,15 @@
 											</div>
 										</div>
 										<div class="form-group">
-											{{ Form::label('dancetype', 'Dance Type:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											{{ Form::label('check1', 'Drum Experience:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-9">
+												<div class="clearfix">
+													{{ Form::checkbox('check1', 'false', $result->check1, array('id' => 'check1'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('dancetype', 'Dance/Drum Type:', array('class' => 'control-label col-xs-12 col-sm-3 no-padding-right')); }}
 											<div class="col-xs-12 col-sm-9">
 												<div class="clearfix">
 													{{ Form::textarea('dancetype', $result->dancetype, array('class' => 'col-xs-12 col-sm-9', 'rows' => '2'));}}
@@ -1149,6 +1157,14 @@
 											<div class="col-xs-12 col-sm-7">
 												<div class="clearfix">
 													{{ Form::text('vaccineseconddose', $result->vaccineseconddose, array('class' => 'col-xs-12 col-sm-9'));}}
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											{{ Form::label('vaccinethirddose', 'Booster Vaccine Date (yyyy-mm-dd):', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													{{ Form::text('vaccinethirddose', $result->vaccinethirddose, array('class' => 'col-xs-12 col-sm-9'));}}
 												</div>
 											</div>
 										</div>
@@ -1674,6 +1690,7 @@
 			if ($("#asthmahistory").is(':checked')) { $("#asthmahistory").val('1'); } else {$("#asthmahistory").val('0'); }
 			if ($("#goodhealth").is(':checked')) { $("#goodhealth").val('1'); } else {$("#goodhealth").val('0'); }
 			if ($("#commitwedsat").is(':checked')) { $("#commitwedsat").val('1'); } else {$("#commitwedsat").val('0'); }
+			if ($("#check1").is(':checked')) { $("#check1").val('1'); } else {$("#check1").val('0'); }
 			if ($("#subscriptionst").is(':checked')) { $("#subscriptionst").val('1'); } else {$("#subscriptionst").val('0'); }
 			if ($("#subscriptioncl").is(':checked')) { $("#subscriptioncl").val('1'); } else {$("#subscriptioncl").val('0'); }
 			if ($("#pdpa").is(':checked')) { $("#pdpa").val('1'); } else {$("#pdpa").val('0'); }
@@ -1745,6 +1762,7 @@
 		        	vaccineschedule: $('#vaccineschedule').val(), 
 					vaccinefirstdose: $('#vaccinefirstdose').val(), 
 					vaccineseconddose: $('#vaccineseconddose').val(), 
+					vaccinethirddose: $('#vaccinethirddose').val(), 
 		        	vaccineotherpast: $('#vaccineotherpast').val(), 
 					vaccineotherdate: $('#vaccineotherdate').val(), 
 		        	vaccineseverlyimmunocompromised: $('#vaccineseverlyimmunocompromised').val(),
@@ -1755,6 +1773,7 @@
 		        	travelperiod: $('#travelperiod').val(), 
 					danceexperience: $('#danceexperience').val(),
 		        	dancetype: $('#dancetype').val(), 
+					check1: $('#check1').val(),
 
 		        	introducername: $('#introducername').val(), 
 		        	introducermobile: $('#introducermobile').val(),
