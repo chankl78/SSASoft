@@ -600,6 +600,7 @@ class EventMemRegistrationController extends BaseController {
 				$post->longtermmedication = Input::get('longtermmedication');
 				$post->asthmahistory = Input::get('asthmahistory');
 				$post->goodhealth = Input::get('goodhealth');
+				$post->medicalhistory = Input::get('medicalhistory');
 
 				$post->vaccinewillingtake = Input::get('vaccinewillingtake');
 				$post->vaccinetaken = Input::get('vaccinetaken');
