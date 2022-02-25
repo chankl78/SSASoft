@@ -181,7 +181,7 @@
 																						</ul>
 																						<h3 class="green">Others</h3>
 																						<ul>
-																							<li>Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings from 26 March 2022 onwards.</li>
+																							<li>Able to commit to trainings (both virtual and physical) every Wednesday and Saturday, and Participant Meetings from 29 March 2022 onwards.</li>
 																							<li>To undergo Antigen Rapid Test (ART) or Pre-Event Testing (PET) every trainings and rehearsals.</li>
 																						</ul>
 																						<h3 class="green">Consent for usage of your personal data</h3>
@@ -709,7 +709,7 @@
 																							{{ Form::label('drugallergy', 'Pls State Clearly any DRUG ALLERGY if you may have:', array('class' => 'control-label col-xs-12 col-sm-5 no-padding-right')); }}
 																							<div class="col-xs-12 col-sm-7">
 																								<div class="clearfix">
-																									{{ Form::textarea('drugallergy', '', array('class' => 'col-xs-12 col-sm-11', 'rows' => '2', 'id' => 'drugallergy', 'placeholder' => 'Please put "NA" if you do not have any drug allegary '));}}
+																									{{ Form::textarea('drugallergy', '', array('class' => 'col-xs-12 col-sm-11', 'rows' => '2', 'id' => 'drugallergy', 'placeholder' => 'Please put "NA" if you do not have any drug allergy.'));}}
 																								</div>
 																							</div>
 																						</div>
