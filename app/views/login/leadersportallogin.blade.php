@@ -233,8 +233,7 @@
 							</div><!-- /position-relative -->
 							<div class="position-relative">
 								<div class="center">
-									<h6 class="white">With effect from 1 September, please verify your login through the <span class="green">Re-Verification</span> button for first-time login using this new format.</h6>
-									<h6 class="white">Enhanced changes will also be made and informed subsequently.</h6>
+									<h6 class="white">We will be moving to https://boeportal.sokasingapore.org on 21st March 2022!</h6>
 									<h6 class="white">We seek your understanding for any inconvenience caused and thank you for the great support.</h6>
 								</div>
 							</div><!-- /position-relative -->

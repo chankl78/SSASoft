@@ -445,7 +445,7 @@
 						</div>
 					</div>
 				</div> <!-- Study Exam -->
-				<div class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
+				<div hidden class="col-xs-12 col-sm-6  widget-container-span ui-sortable">
 					<div class="widget-box widget-color-green">
 						<div class="widget-header">
 							<h5 class="widget-title">Ever Victorious Daimoku Campagin (By Hour)</h5>
@@ -502,6 +502,31 @@
 										</div>
 									</div>
 								</div>
+						</div>
+					</div>
+				</div><!-- MD Daimokukai -->
+				<div class="col-xs-12 col-sm-12  widget-container-span ui-sortable">
+					<div class="widget-box widget-color-green">
+						<div class="widget-header">
+							<h5 class="widget-title">We are shifting to new domain!</h5>
+							<div class="widget-toolbar">
+								<a href="#" data-action="fullscreen" class="orange2">
+									<i class="ace-icon fa fa-expand"></i>
+								</a>
+								<a href="#" data-action="reload" onClick=reloaddt()>
+									<i class="fa fa-refresh"></i>
+								</a>
+							</div>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<div class="well well-lg">
+									<center>
+										<h2> We will be moving to <a href="https://boeportal.sokasingapore.org" target="_blank">https://boeportal.sokasingapore.org</a> on the <b>21st March 2022</b>!</h2>
+										<h3> See you there!</h3>
+									</center>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div><!-- MD Daimokukai -->
