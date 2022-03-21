@@ -500,6 +500,7 @@ Route::post('/Members/putMember/{id}', 'MemberController@putMember');
 Route::get('/Members/convert', 'MemberController@getConvert');
 Route::post('/Members/postConvert', 'MemberController@postConvert');
 Route::post('/Members/postUListing', 'MemberController@postDecryptUser');
+Route::post('/Members/postMListing', 'MemberController@postDecryptMember');
 Route::post('/Members/posttransfermmsboe', 'MemberController@posttransfermmsboe');
 Route::post('/Members/posttransfermmsboedesc', 'MemberController@posttransfermmsboedesc');
 Route::post('/Members/postConvertAuto', 'MemberController@postConvertAuto');

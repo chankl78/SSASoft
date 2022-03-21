@@ -106,6 +106,15 @@
 						</div>
 					</fieldset>
 				{{ Form::close() }}
+				{{ Form::open(array('action' => 'MemberController@postDecryptMember', 'id' => 'resourceMListing', 'class' => 'form-horizontal')) }}
+					<fieldset>
+						<div class="form-group">
+							<div class=col-sm-12>
+								{{ Form::button('<i class="icon-plus Add"></i> Members Listing', array('type' => 'submit', 'class' => 'btn btn-xs btn-yellow bigger' )); }}
+							</div>
+						</div>
+					</fieldset>
+				{{ Form::close() }}
 				{{ Form::open(array('action' => 'MemberController@postConvertNricHash', 'id' => 'resourceadd', 'class' => 'form-horizontal')) }}
 					<fieldset>
 						<div class="form-group">
@@ -429,6 +438,38 @@
 			});
 			$.ajax({
 		        url: 'postUListing',
+		        type: 'POST',
+		        dataType: 'json',
+		        statusCode: { 
+		        	200:function(){
+		        		noty({
+							layout: 'topRight', type: 'success', text: 'Users Listing Updated!!',
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	},
+		        	400:function(data){ 
+		        		noty({
+							layout: 'topRight', type: 'error', text: 'Failed to Update!! ' + txtMessage,
+							animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 
+								},
+							timeout: 4000
+						}); 
+		        	}
+		        }
+		    });
+		    e.preventDefault();
+	    });
+
+		$('#resourceMListing').submit(function(e){
+	    	noty({
+				layout: 'topRight', type: 'warning', text: 'Members Updating Record ...',
+				animation: { open: {height: 'toggle'}, close: {height: 'toggle'}, easing: 'swing', speed: 500 },
+				timeout: 4000
+			});
+			$.ajax({
+		        url: 'postMListing',
 		        type: 'POST',
 		        dataType: 'json',
 		        statusCode: { 

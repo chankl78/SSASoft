@@ -778,6 +778,86 @@ class MemberController extends BaseController
 		return Response::json(array('info' => 'Success'), 200);
 	}
 
+	public function postDecryptMember()
+	{
+		$userlist = MembersmSSA::get();
+		foreach($userlist as $userlist)
+		{
+			try
+			{
+				$post = new MembersmSSADup;
+				$post->uniquecode = $userlist['uniquecode'];
+				$post->id = $userlist['id'];
+				$post->personid = $userlist['personid'];
+				$post->searchcode = $userlist['searchcode'];
+				$post->mmsuuid = $userlist['mmsuuid'];
+				$post->name = $userlist['name'];
+				$post->chinesename = $userlist['chinesename'];
+				$post->alias = $userlist['alias'];
+				$post->dateofbirth = $userlist['dateofbirth'];
+				$post->currentage = $userlist['currentage'];
+				$post->converted_on = $userlist['converted_on'];
+				$post->rhq = $userlist['rhq'];
+				$post->zone = $userlist['zone'];
+				$post->chapter = $userlist['chapter'];
+				$post->district = $userlist['district'];
+				$post->division = $userlist['division'];
+				$post->position = $userlist['position'];
+				$post->positionlevel = $userlist['positionlevel'];
+				$post->nric = $userlist['nric'];
+				$post->tel = $userlist['tel'];
+				$post->mobile = $userlist['mobile'];
+				$post->email = $userlist['email'];
+				$post->address = $userlist['address'];
+				$post->buildingname = $userlist['buildingname'];
+				$post->unitno = $userlist['unitno'];
+				$post->postalcode = $userlist['postalcode'];
+				$post->postaldistrict = $userlist['postaldistrict'];
+				$post->postalsector = $userlist['postalsector'];
+				$post->lengthofpractise = $userlist['lengthofpractise'];
+				$post->language = $userlist['language'];
+				$post->occupation = $userlist['occupation'];
+				$post->countryofbirth = $userlist['countryofbirth'];
+				$post->nationality = $userlist['nationality'];
+				$post->nationality = $userlist['nationality'];
+				$post->race = $userlist['race'];
+				$post->bloodgroup = $userlist['bloodgroup'];
+				$post->nodrugallergy = $userlist['nodrugallergy'];
+				$post->drugallergy = $userlist['drugallergy'];
+				$post->introducerid = $userlist['introducerid'];
+				$post->introducer = $userlist['introducer'];
+				$post->introducermobile = $userlist['introducermobile'];
+				$post->emergencyname = $userlist['emergencyname'];
+				$post->emergencyrelationship = $userlist['emergencyrelationship'];
+				$post->emergencytel = $userlist['emergencytel'];
+				$post->emergencymobile = $userlist['emergencymobile'];
+				$post->gender = $userlist['gender'];
+				$post->classification = $userlist['classification'];
+				$post->status = $userlist['status'];
+				$post->source = $userlist['source'];
+				$post->resourcefromid = $userlist['resourcefromid'];
+				$post->resourcefromdetailid = $userlist['resourcefromdetailid'];
+				$post->pdpa = $userlist['pdpa'];
+				$post->believersigned = $userlist['believersigned'];
+				$post->memsigned = $userlist['memsigned'];
+				$post->belsigned = $userlist['belsigned'];
+				$post->chanting = $userlist['chanting'];
+				$post->dmpostaldistrict = $userlist['dmpostaldistrict'];
+				$post->dmpostalsector = $userlist['dmpostalsector'];
+				$post->created_at = $userlist['created_at'];
+				$post->updated_at = $userlist['updated_at'];
+				$post->deleted_at = $userlist['deleted_at'];
+				$post->save();
+			}
+			catch(\Exception $e)
+			{
+				
+			}
+		}
+		LogsfLogs::postLogs('Update', 39, 0, ' - Members - Update Successfully', NULL, NULL, 'Success');
+		return Response::json(array('info' => 'Success'), 200);
+	}
+
 	public function postConvertAuto()
 	{
 		LogsfLogs::postLogs('Update', 39, 0, ' - Members - Convertion Starts', NULL, NULL, 'Success');
