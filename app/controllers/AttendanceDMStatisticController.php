@@ -72,6 +72,11 @@ class AttendanceDMStatisticController extends BaseController
 				$default = zz2021members::RHQStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
+			else if ($id == 2022)
+			{
+				$default = zz2022members::RHQStats($id, $divisiontype)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
 		}
 		catch(\Exception $e)
 		{
@@ -108,6 +113,11 @@ class AttendanceDMStatisticController extends BaseController
 				$default = zz2021members::RHQAgeGroupStats($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
+			else if ($id == 2022)
+			{
+				$default = zz2022members::RHQAgeGroupStats($id, $divisiontype)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
 		}
 		catch(\Exception $e)
 		{
@@ -142,6 +152,11 @@ class AttendanceDMStatisticController extends BaseController
 			else if ($id == 2021)
 			{
 				$default = zz2021members::NameList($id, $divisiontype)->get()->toarray();
+				return Response::json(array('data' => $default));
+			}
+			else if ($id == 2022)
+			{
+				$default = zz2022members::NameList($id, $divisiontype)->get()->toarray();
 				return Response::json(array('data' => $default));
 			}
 		}
