@@ -104,6 +104,9 @@ class EventDetailParticipantController extends BaseController
 						$post->vaccinewillingtake = Input::get('vaccinewillingtake');
 						$post->vaccinetaken = Input::get('vaccinetaken');
 						$post->vaccineschedule = Input::get('vaccineschedule');
+						$post->vaccinefirstdose = Input::get('vaccinefirstdose');
+						$post->vaccineseconddose = Input::get('vaccineseconddose');
+						$post->vaccinethirddose = Input::get('vaccinethirddose');
 						$post->vaccineotherpast = Input::get('vaccineotherpast');
 						$post->vaccineotherdate = Input::get('vaccineotherdate');
 						$post->vaccineseverlyimmunocompromised = Input::get('vaccineseverlyimmunocompromised');
@@ -255,6 +258,7 @@ class EventDetailParticipantController extends BaseController
 					$post->vaccineschedule = Input::get('vaccineschedule');
 					$post->vaccinefirstdose = Input::get('vaccinefirstdose');
 					$post->vaccineseconddose = Input::get('vaccineseconddose');
+					$post->vaccinethirddose = Input::get('vaccinethirddose');
 					$post->vaccineotherpast = Input::get('vaccineotherpast');
 					$post->vaccineotherdate = Input::get('vaccineotherdate');
 					$post->vaccineseverlyimmunocompromised = Input::get('vaccineseverlyimmunocompromised');
